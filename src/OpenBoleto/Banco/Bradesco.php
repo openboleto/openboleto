@@ -2,7 +2,7 @@
 /**
  * OpenBoleto - Geração de boletos bancários em PHP
  *
- * Classe boleto BRB - Banco de Brasília
+ * Classe boleto Bradesco S/A
  *
  * LICENSE: The MIT License (MIT)
  *
@@ -35,43 +35,48 @@
 namespace OpenBoleto\Banco;
 use OpenBoleto\BoletoAbstract;
 
-class Brb extends BoletoAbstract
+class Bradesco extends BoletoAbstract
 {
     /**
      * Código do banco
      * @var string
      */
-    protected $codigoBanco = '070';
+    protected $codigoBanco = '237';
 
     /**
      * Localização do logotipo do banco, referente ao diretório de imagens
      * @var string
      */
-    protected $logoBanco = 'brb.png';
+    protected $logoBanco = 'bradesco.jpg';
 
     /**
      * Nome do arquivo de template a ser usado
      * @var string
      */
-    protected $layout = 'default.phtml';
+    protected $layout = 'bradesco.phtml';
 
     /**
-     * Linha de local de pagamento
+     * De acordo com o ramo de atividade, poderão ser utilizadas uma das siglas: DM-
+     * Duplicata Mercantil, NP-Nota Promissória, NS-Nota de Seguro, CS-Cobrança
+     * Seriada, REC-Recibo, LC-Letras de Câmbio, ND-Nota de Débito, DS-Duplicata de
+     * Serviços, Outros
      * @var string
      */
-    protected $localPagamento = 'Até o vencimento pagar em qualquer Banco, depois só no BRB';
+    protected $especieDoc = 'DM';
 
     /**
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array('01', '02');
+    protected $carteiras = array('03', '06', '09');
 
     /**
-     * Define os nomes das carteiras para exibição no boleto
-     * @var array
+     * Trata-se de código utilizado para identificar mensagens especificas ao cedente, sendo
+     * que o mesmo consta no cadastro do Banco, quando não houver código cadastrado preencher
+     * com zeros "000".
+     * @var int
      */
-    protected $carteirasNomes = array('01' => 'COB', '02' => 'COB');
+    protected $cip;
 
     /**
      * Método para gerar o código da posição de 20 a 44
@@ -80,42 +85,42 @@ class Brb extends BoletoAbstract
      */
     public function getChaveAsbace()
     {
-        $nossoNumero = static::zeroFill($this->getNossoNumero(), 6);
-        $nossoNumero = array(
-            '1-3' => substr($nossoNumero, 0, 3),
-            '4-9' => substr($nossoNumero, 3),
-        );
-
-        $chave = $nossoNumero['1-3'] . static::zeroFill($this->getAgencia(), 3) . static::zeroFill($this->getConta(), 7) . $this->getCarteira() . $nossoNumero['4-9'] . $this->getCodigoBanco();
-        $d1 = static::modulo10($chave);
-
-        CalculaD2:
-        $modulo = static::modulo11($chave . $d1, 7);
-
-        if ($modulo['resto'] == 0) {
-            $d2 = 0;
-        } else if ($modulo['resto'] > 1) {
-            $d2 = 11 - $modulo['resto'];
-        } else if ($modulo['resto'] == 1) {
-            $d1 = $d1 + 1;
-            if ($d1 == 10) {
-                $d1 = 0;
-            }
-            goto CalculaD2;
-        }
-
-        return $chave . $d1 . $d2;
+        return static::zeroFill($this->getAgencia(), 4) .
+            static::zeroFill($this->getCarteira(), 2) .
+            static::zeroFill($this->getNossoNumero(), 11) .
+            static::zeroFill($this->getConta(), 7) .
+            '0';
     }
 
     /**
-     * Define nomes de campos específicos do boleto do BRB
+     * Define o campo CIP do boleto
+     *
+     * @param int $cip
+     */
+    public function setCip($cip)
+    {
+        $this->cip = $cip;
+    }
+
+    /**
+     * Retorna o campo CIP do boleto
+     *
+     * @return int
+     */
+    public function getCip()
+    {
+        return $this->cip;
+    }
+
+    /**
+     * Define nomes de campos específicos do boleto do Bradesco
      *
      * @return array
      */
     public function getViewVars()
     {
         return array(
-            'agencia_codigo_cedente' => '000 - ' . $this->getAgencia() . ' - ' . $this->getConta(),
+            'cip' => self::zeroFill($this->getCip(), 3),
         );
     }
 }

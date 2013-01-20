@@ -2,15 +2,15 @@
 
 require '../src/OpenBoleto/BoletoAbstract.php';
 require '../src/OpenBoleto/Agente.php';
-require '../src/OpenBoleto/Banco/Brb.php';
+require '../src/OpenBoleto/Banco/Bradesco.php';
 
-use OpenBoleto\Banco\Brb;
+use OpenBoleto\Banco\Bradesco;
 use OpenBoleto\Agente;
 
 $sacado = new Agente('Fernando Maia', '023.434.234-34', 'ABC 302 Bloco N', '72000-000', 'Brasília', 'DF');
 $cedente = new Agente('Empresa de cosméticos LTDA', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF');
 
-$boleto = new Brb(array(
+$boleto = new Bradesco(array(
     // Parâmetros obrigatórios
     'dataVencimento' => new DateTime('2013-01-24'),
     'valor' => 23.00,
@@ -18,7 +18,7 @@ $boleto = new Brb(array(
     'sacado' => $sacado,
     'cedente' => $cedente,
     'agencia' => '1172',
-    'carteira' => '01',
+    'carteira' => 6,
     'conta' => '0403005',
 
     // Parâmetros recomendáveis
@@ -37,7 +37,8 @@ $boleto = new Brb(array(
     ),
 
     // Parâmetros opcionais
-    //'moeda' => Brb::MOEDA_REAL,
+    //'cip' => '000', // Apenas para o Bradesco
+    //'moeda' => Bradesco::MOEDA_REAL,
     //'dataDocumento' => new DateTime(),
     //'dataProcessamento' => new DateTime(),
     //'contraApresentacao' => true,

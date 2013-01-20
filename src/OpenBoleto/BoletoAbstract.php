@@ -34,6 +34,7 @@
 
 namespace OpenBoleto;
 use DateTime;
+use Exception;
 use OpenBoleto\Agente;
 
 abstract class BoletoAbstract
@@ -69,6 +70,12 @@ abstract class BoletoAbstract
     protected $valor;
 
     /**
+     * Valor para pagamento mínimo em boletos de contra apresentação
+     * @var float
+     */
+    protected $pagamentoMinimo;
+
+    /**
      * Data do documento
      * @var \DateTime
      */
@@ -87,6 +94,12 @@ abstract class BoletoAbstract
     protected $dataVencimento;
 
     /**
+     * Define se o boleto é para contra-apresentação
+     * @var bool
+     */
+    protected $contraApresentacao = false;
+
+    /**
      * Campo de aceite
      * @var string
      */
@@ -99,10 +112,28 @@ abstract class BoletoAbstract
     protected $especieDoc;
 
     /**
-     * Agência
+     * Número do documento
+     * @var int
+     */
+    protected $numeroDocumento;
+
+    /**
+     * Campo de uso do banco no boleto
      * @var string
      */
+    protected $usoBanco;
+
+    /**
+     * Agência
+     * @var int
+     */
     protected $agencia;
+
+    /**
+     * Dígito da agência
+     * @var string|int
+     */
+    protected $agenciaDv;
 
     /**
      * Conta
@@ -123,6 +154,18 @@ abstract class BoletoAbstract
     protected $carteira;
 
     /**
+     * Define as carteiras disponíveis para cada banco
+     * @var array
+     */
+    protected $carteiras = array();
+
+    /**
+     * Define as carteiras disponíveis para cada banco
+     * @var array
+     */
+    protected $carteirasNomes = array();
+
+    /**
      * Identificador único do boleto
      * @var int
      */
@@ -139,6 +182,12 @@ abstract class BoletoAbstract
      * @var \OpenBoleto\Agente
      */
     protected $sacado;
+
+    /**
+     * Entidade sacador avalista
+     * @var \OpenBoleto\Agente
+     */
+    protected $sacadorAvalista;
 
     /**
      * Array com as linhas do demonstrativo (descrição do pagamento)
@@ -162,7 +211,7 @@ abstract class BoletoAbstract
      * Nome do arquivo de template a ser usado
      * @var string
      */
-    protected $viewName = 'default.phtml';
+    protected $layout = 'default.phtml';
 
     /**
      * Pasta de localização de views
@@ -221,7 +270,7 @@ abstract class BoletoAbstract
     /**
      * Define a agência
      *
-     * @param string $agencia
+     * @param int $agencia
      */
     public function setAgencia($agencia)
     {
@@ -231,7 +280,7 @@ abstract class BoletoAbstract
     /**
      * Retorna a agência
      *
-     * @return string
+     * @return int
      */
     public function getAgencia()
     {
@@ -239,12 +288,37 @@ abstract class BoletoAbstract
     }
 
     /**
+     * Define o dígito da agência
+     *
+     * @param string|int $agenciaDv
+     */
+    public function setAgenciaDv($agenciaDv)
+    {
+        $this->agenciaDv = $agenciaDv;
+    }
+
+    /**
+     * Retorna o dígito da agência
+     *
+     * @return string|int
+     */
+    public function getAgenciaDv()
+    {
+        return $this->agenciaDv;
+    }
+
+    /**
      * Define o código da carteira (Com ou sem registro)
      *
      * @param string $carteira
+     * @throws \Exception
      */
     public function setCarteira($carteira)
     {
+        if (!in_array($carteira, $this->getCarteiras())) {
+            throw new Exception("Carteira não disponível!");
+        }
+
         $this->carteira = $carteira;
     }
 
@@ -256,6 +330,16 @@ abstract class BoletoAbstract
     public function getCarteira()
     {
         return $this->carteira;
+    }
+
+    /**
+     * Retorna as carteiras disponíveis para este banco
+     *
+     * @return array
+     */
+    public function getCarteiras()
+    {
+        return $this->carteiras;
     }
 
     /**
@@ -349,6 +433,27 @@ abstract class BoletoAbstract
     }
 
     /**
+     * Define se o boleto é Contra-apresentação, ou seja, a data de vencimento e o valor são deixados em branco
+     * É sugerido que se use o campo pagamento mínimo ($this->setPagamentoMinimo())
+     *
+     * @param boolean $contraApresentacao
+     */
+    public function setContraApresentacao($contraApresentacao)
+    {
+        $this->contraApresentacao = $contraApresentacao;
+    }
+
+    /**
+     * Retorna se o boleto é Contra-apresentação, ou seja, a data de vencimento é indefinida
+     *
+     * @return boolean
+     */
+    public function getContraApresentacao()
+    {
+        return $this->contraApresentacao;
+    }
+
+    /**
      * Define a data do documento
      *
      * @param \DateTime $dataDocumento
@@ -409,6 +514,46 @@ abstract class BoletoAbstract
     }
 
     /**
+     * Define o campo Número do documento
+     *
+     * @param int $numeroDocumento
+     */
+    public function setNumeroDocumento($numeroDocumento)
+    {
+        $this->numeroDocumento = $numeroDocumento;
+    }
+
+    /**
+     * Retorna o campo Número do documento
+     *
+     * @return int
+     */
+    public function getNumeroDocumento()
+    {
+        return $this->numeroDocumento;
+    }
+
+    /**
+     * Define o campo Uso do banco
+     *
+     * @param string $usoBanco
+     */
+    public function setUsoBanco($usoBanco)
+    {
+        $this->usoBanco = $usoBanco;
+    }
+
+    /**
+     * Retorna o campo Uso do banco
+     *
+     * @return string
+     */
+    public function getUsoBanco()
+    {
+        return $this->usoBanco;
+    }
+
+    /**
      * Define a data de geração do boleto
      *
      * @param \DateTime $dataProcessamento
@@ -449,7 +594,7 @@ abstract class BoletoAbstract
     }
 
     /**
-     * Define um array com instruções (máximo 3) para pagamento
+     * Define um array com instruções (máximo 8) para pagamento
      *
      * @param array $instrucoes
      */
@@ -459,7 +604,7 @@ abstract class BoletoAbstract
     }
 
     /**
-     * Retorna um array com instruções (máximo 3) para pagamento
+     * Retorna um array com instruções (máximo 8) para pagamento
      *
      * @return array
      */
@@ -469,7 +614,7 @@ abstract class BoletoAbstract
     }
 
     /**
-     * Define um array com a descrição do demonstrativo (máximo 4)
+     * Define um array com a descrição do demonstrativo (máximo 5)
      *
      * @param array $descricaoDemonstrativo
      */
@@ -479,7 +624,7 @@ abstract class BoletoAbstract
     }
 
     /**
-     * Retorna um array com a descrição do demonstrativo (máximo 4)
+     * Retorna um array com a descrição do demonstrativo (máximo 5)
      *
      * @return array
      */
@@ -569,6 +714,26 @@ abstract class BoletoAbstract
     }
 
     /**
+     * Define o objeto sacador avalista do boleto
+     *
+     * @param \OpenBoleto\Agente $sacadorAvalista
+     */
+    public function setSacadorAvalista(Agente $sacadorAvalista)
+    {
+        $this->sacadorAvalista = $sacadorAvalista;
+    }
+
+    /**
+     * Retorna o objeto sacador avalista do boleto
+     *
+     * @return \OpenBoleto\Agente
+     */
+    public function getSacadorAvalista()
+    {
+        return $this->sacadorAvalista;
+    }
+
+    /**
      * Define o valor total do boleto (incluindo taxas)
      *
      * @param float $valor
@@ -585,17 +750,39 @@ abstract class BoletoAbstract
      */
     public function getValor()
     {
-        return $this->valor;
+        return $this->getContraApresentacao() ? 0.00 : $this->valor;
+    }
+
+    /**
+     * Define valor para pagamento mínimo em boletos de contra apresentação.
+     * Quando definido, remove o valor normal do boleto.
+     *
+     * @param float $pagamentoMinimo
+     */
+    public function setPagamentoMinimo($pagamentoMinimo)
+    {
+        $this->pagamentoMinimo = $pagamentoMinimo;
+        $this->setContraApresentacao(true);
+    }
+
+    /**
+     * Retorna o valor para pagamento mínimo em boletos de contra apresentação.
+     *
+     * @return float
+     */
+    public function getPagamentoMinimo()
+    {
+        return $this->pagamentoMinimo;
     }
 
     /**
      * Define o nome da atual arquivo de view (template)
      *
-     * @param string $viewName
+     * @param string $layout
      */
-    public function setViewName($viewName)
+    public function setLayout($layout)
     {
-        $this->viewName = $viewName;
+        $this->layout = $layout;
     }
 
     /**
@@ -603,9 +790,9 @@ abstract class BoletoAbstract
      *
      * @return string
      */
-    public function getViewName()
+    public function getLayout()
     {
-        return $this->viewName;
+        return $this->layout;
     }
 
     /**
@@ -705,6 +892,10 @@ abstract class BoletoAbstract
      * </code>
      * Mostrará SR no campo "Carteira" do boleto.
      *
+     * Mas também permite utilizar campos personalizados, por exemplo, caso exista
+     * o campo ABC no boleto, você pode definí-lo na classe do banco, retornar o
+     * valor dele através deste método e mostrá-lo na view correspondente.
+     *
      *
      * @return array
      */
@@ -719,49 +910,43 @@ abstract class BoletoAbstract
     {
         ob_start();
 
-        $demonstrativo = (array) $this->getDescricaoDemonstrativo() + array(null, null, null);
-        $instrucoes = (array) $this->getInstrucoes() + array(null, null, null, null);
-
         extract(array(
-            'title' => $this->getCedente()->getNome(),
             'linha_digitavel' => $this->getLinhaDigitavel(),
-            'cpf_cnpj' => $this->getCedente()->getDocumento(),
-            'endereco' => $this->getCedente()->getEndereco(),
-            'cidade_uf' => $this->getCedente()->getCepCidadeUf(),
-            'bank_logo_path' => $this->getLogoBanco(),
-            'merchant_logo' => $this->getLogoPath(),
+            'cedente' => $this->getCedente()->getNome(),
+            'cedente_cpf_cnpj' => $this->getCedente()->getDocumento(),
+            'cedente_endereco1' => $this->getCedente()->getEndereco(),
+            'cedente_endereco2' => $this->getCedente()->getCepCidadeUf(),
+            'logo_banco' => $this->getLogoBanco(),
+            'logotipo' => $this->getLogoPath(),
             'images' => $this->getImagePath(),
             'codigo_banco_com_dv' => $this->getCodigoBancoComDv(),
-            'cedente' => $this->getCedente()->getNome(),
             'especie' => static::$especie[$this->getMoeda()],
             'quantidade' => $this->get('quantidade'),
-            'data_vencimento' => $this->getDataVencimento()->format('d/m/Y'),
+            'data_vencimento' => $this->getContraApresentacao() ? 'Contra Apresenta&ccedil;&atilde;o' : $this->getDataVencimento()->format('d/m/Y'),
             'data_processamento'  => $this->getDataProcessamento()->format('d/m/Y'),
             'data_documento' => $this->getDataDocumento()->format('d/m/Y'),
-            'valor_boleto' => static::formataDinheiro($this->getValor(), true),
+            'pagamento_minimo' => static::formataDinheiro($this->getPagamentoMinimo()),
+            'valor_documento' => static::formataDinheiro($this->getValor()),
             'desconto_abatimento' => static::formataDinheiro($this->get('descontosAbatimentos')),
             'outras_deducoes' => static::formataDinheiro($this->get('outrasDeducoes')),
             'mora_multa' => static::formataDinheiro($this->get('moraMulta')),
             'outros_acrescimos' => static::formataDinheiro($this->get('outrosAcrescimos')),
             'valor_cobrado' => static::formataDinheiro($this->get('valorCobrado')),
+            'valor_unitario' => static::formataDinheiro($this->get('valorUnitario')),
+            'sacador_avalista' => $this->getSacadorAvalista() ? $this->getSacadorAvalista()->getNomeDocumento() : null,
             'sacado' => $this->getSacado()->getNome(),
-            'demonstrativo1' => $demonstrativo[0],
-            'demonstrativo2' => $demonstrativo[1],
-            'demonstrativo3' => $demonstrativo[2],
+            'sacado_endereco1' => $this->getSacado()->getEndereco(),
+            'sacado_endereco2' => $this->getSacado()->getCepCidadeUf(),
+            'demonstrativo' => (array) $this->getDescricaoDemonstrativo() + array(null, null, null, null, null), // Max: 5 linhas
+            'instrucoes' => (array) $this->getInstrucoes() + array(null, null, null, null, null, null, null, null), // Max: 8 linhas
             'local_pagamento' => $this->getLocalPagamento(),
-            'numero_documento' => $this->get('numeroDocumento'),
+            'numero_documento' => $this->getNumeroDocumento(),
             'agencia_codigo_cedente'=> $this->getAgenciaCodigoCedente(),
             'nosso_numero' => $this->getNossoNumero(),
             'especie_doc' => $this->getEspecieDoc(),
             'aceite' => $this->getAceite(),
-            'carteira' => $this->getCarteira(),
-            'valor_unitario' => $this->get('valorUnitario'),
-            'instrucoes1' => $instrucoes[0],
-            'instrucoes2' => $instrucoes[1],
-            'instrucoes3' => $instrucoes[2],
-            'instrucoes4' => $instrucoes[3],
-            'endereco1' => $this->getSacado()->getEndereco(),
-            'endereco2' => $this->getSacado()->getCepCidadeUf(),
+            'carteira' => $this->getCarteiraNome(),
+            'uso_banco' => $this->getUsoBanco(),
             'avalista' => $this->get('avalista'),
             'codigo_barras' => $this->getImagemCodigoDeBarras(),
         ));
@@ -769,7 +954,7 @@ abstract class BoletoAbstract
         // Override view variables when rendering
         extract($this->getViewVars());
 
-        include $this->getViewPath() . '/' . $this->getViewName();
+        include $this->getViewPath() . '/' . $this->getLayout();
 
         return ob_get_clean();
     }
@@ -781,7 +966,24 @@ abstract class BoletoAbstract
      */
     public function getAgenciaCodigoCedente()
     {
-        return $this->getAgencia() .' / ' . $this->getConta() . '-' . $this->getContaDv();
+        $agencia = $this->getAgenciaDv() ? $this->getAgencia() . '-' . $this->getAgenciaDv() : $this->getAgencia();
+        $conta = $this->getContaDv() ? $this->getConta() . '-' . $this->getContaDv() : $this->getConta();
+        return $agencia . ' / ' . $conta;
+    }
+
+    /**
+     * Retorna o nome da carteira para impressão no boleto
+     *
+     * Caso o nome da carteira a ser impresso no boleto seja diferente do número
+     * Então crie uma variável na classe do banco correspondente $carteirasNomes
+     * sendo uma array cujos índices sejam os números das carteiras e os valores
+     * seus respectivos nomes
+     *
+     * @return string
+     */
+    public function getCarteiraNome()
+    {
+        return isset($this->carteirasNomes[$this->getCarteira()]) ? $this->carteirasNomes[$this->getCarteira()] : self::zeroFill($this->getCarteira(), 2);
     }
 
     /**
@@ -791,7 +993,7 @@ abstract class BoletoAbstract
      */
     public function getNumeroFebraban()
     {
-        return self::zeroFill($this->getCodigoBanco(), 4) . $this->getMoeda() . $this->getDigitoVerificador() . $this->getFatorVencimento() . $this->getValorZeroFill() . $this->getChaveAsbace();
+        return self::zeroFill($this->getCodigoBanco(), 3) . $this->getMoeda() . $this->getDigitoVerificador() . $this->getFatorVencimento() . $this->getValorZeroFill() . $this->getChaveAsbace();
     }
 
     /**
@@ -949,9 +1151,9 @@ abstract class BoletoAbstract
      */
     protected function getFatorVencimento()
     {
-        if ($this->dataVencimento) {
+        if (!$this->getContraApresentacao()) {
             $date = new DateTime('1997-10-07');
-            return $date->diff($this->dataVencimento)->days;
+            return $date->diff($this->getDataVencimento())->days;
         } else {
             return '0000';
         }
@@ -966,11 +1168,11 @@ abstract class BoletoAbstract
     {
         $num = self::zeroFill($this->getCodigoBanco(), 4) . $this->getMoeda() . $this->getFatorVencimento() . $this->getValorZeroFill() . $this->getChaveAsbace();
 
-        $modulo = $this->modulo11($num, 9);
-        if ($modulo['digito'] == 0 || $modulo['digito'] == 1 || $modulo['digito'] == 10) {
+        $modulo = $this->modulo11($num);
+        if ($modulo['resto'] == 0 || $modulo['resto'] == 1 || $modulo['resto'] == 10) {
             $dv = 1;
         } else {
-            $dv = 11 - $modulo['digito'];
+            $dv = 11 - $modulo['resto'];
         }
 
         return $dv;

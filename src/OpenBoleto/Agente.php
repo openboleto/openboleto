@@ -69,21 +69,21 @@ class Agente
     /**
      * Construtor
      *
-     * @param $nome
-     * @param $endereco
-     * @param $cep
-     * @param $cidade
-     * @param $uf
-     * @param $documento
+     * @param string $nome
+     * @param string $documento
+     * @param string $endereco
+     * @param string $cep
+     * @param string $cidade
+     * @param string $uf
      */
-    public function __construct($nome, $endereco, $cep, $cidade, $uf, $documento)
+    public function __construct($nome, $documento, $endereco = null, $cep = null, $cidade = null, $uf = null)
     {
         $this->setNome($nome);
-        $this->setEndereco($endereco);
-        $this->setCep($cep);
-        $this->setCidade($cidade);
-        $this->setUf($uf);
         $this->setDocumento($documento);
+        $endereco and $this->setEndereco($endereco);
+        $cep and $this->setCep($cep);
+        $cidade and $this->setCidade($cidade);
+        $uf and $this->setUf($uf);
     }
 
     /**
@@ -204,6 +204,38 @@ class Agente
     public function getUf()
     {
         return $this->uf;
+    }
+
+    /**
+     * Retorna o nome e o documento formatados
+     *
+     * @return string
+     */
+    public function getNomeDocumento()
+    {
+        if (!$this->getDocumento()) {
+            return $this->getNome();
+        } else {
+            return $this->getNome() . ' / ' . $this->getTipoDocumento() . ': ' . $this->getDocumento();
+        }
+    }
+
+    /**
+     * Retorna se o tipo do documento é CPF ou CNPJ ou Documento
+     *
+     * @return string
+     */
+    public function getTipoDocumento()
+    {
+        $documento = trim($this->getDocumento());
+
+        if (preg_match('/^[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}$/', $documento)) {
+            return 'CPF';
+        } else if (preg_match('#^[0-9]{2}\.[0-9]{3}\.[0-9]{3}/[0-9]{4}-[0-9]{2}$#', $documento)) {
+            return 'CNPJ';
+        }
+
+        return 'Documento';
     }
 
     /**
