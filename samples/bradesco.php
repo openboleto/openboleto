@@ -50,6 +50,13 @@ $boleto = new Bradesco(array(
     //'layout' => 'layout.phtml',
     //'logoPath' => 'http://boletophp.com.br/img/opensource-55x48-t.png',
     //'sacadorAvalista' => new Agente('Antônio da Silva', '02.123.123/0001-11'),
+    //'descontosAbatimentos' => 123.12,
+    //'moraMulta' => 123.12,
+    //'outrasDeducoes' => 123.12,
+    //'outrosAcrescimos' => 123.12,
+    //'valorCobrado' => 123.12,
+    //'valorUnitario' => 123.12,
+    //'quantidade' => 1,
 ));
 
 echo $boleto->getOutput();

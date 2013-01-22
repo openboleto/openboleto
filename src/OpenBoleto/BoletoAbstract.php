@@ -76,6 +76,48 @@ abstract class BoletoAbstract
     protected $pagamentoMinimo;
 
     /**
+     * Valor de descontos e abatimentos
+     * @var float
+     */
+    protected $descontosAbatimentos;
+
+    /**
+     * Valor para outras deduções
+     * @var float
+     */
+    protected $outrasDeducoes;
+
+    /**
+     * Valor para mora e multa
+     * @var float
+     */
+    protected $moraMulta;
+
+    /**
+     * Valor para outros acréscimos
+     * @var float
+     */
+    protected $outrosAcrescimos;
+
+    /**
+     * Valor cobrado
+     * @var
+     */
+    protected $valorCobrado;
+
+    /**
+     * Campo valor do boleto
+     * @var
+     */
+    protected $valorUnitario;
+
+    /**
+     * Campo quantidade
+     * @var
+     */
+    protected $quantidade;
+
+    /**
      * Data do documento
      * @var \DateTime
      */
@@ -754,6 +796,146 @@ abstract class BoletoAbstract
     }
 
     /**
+     * Define o campo Descontos / Abatimentos
+     *
+     * @param float $descontosAbatimentos
+     */
+    public function setDescontosAbatimentos($descontosAbatimentos)
+    {
+        $this->descontosAbatimentos = $descontosAbatimentos;
+    }
+
+    /**
+     * Retorna o campo Descontos / Abatimentos
+     *
+     * @return float
+     */
+    public function getDescontosAbatimentos()
+    {
+        return $this->descontosAbatimentos;
+    }
+
+    /**
+     * Retorna o campo Mora / Multa do boleto
+     *
+     * @param float $moraMulta
+     */
+    public function setMoraMulta($moraMulta)
+    {
+        $this->moraMulta = $moraMulta;
+    }
+
+    /**
+     * Retorna o campo Mora / Multa do boleto
+     *
+     * @return float
+     */
+    public function getMoraMulta()
+    {
+        return $this->moraMulta;
+    }
+
+    /**
+     * Define o campo outras deduções do boleto
+     *
+     * @param float $outrasDeducoes
+     */
+    public function setOutrasDeducoes($outrasDeducoes)
+    {
+        $this->outrasDeducoes = $outrasDeducoes;
+    }
+
+    /**
+     * Retorna o campo outras deduções do boleto
+     *
+     * @return float
+     */
+    public function getOutrasDeducoes()
+    {
+        return $this->outrasDeducoes;
+    }
+
+    /**
+     * Define o campo outros acréscimos do boleto
+     *
+     * @param float $outrosAcrescimos
+     */
+    public function setOutrosAcrescimos($outrosAcrescimos)
+    {
+        $this->outrosAcrescimos = $outrosAcrescimos;
+    }
+
+    /**
+     * Retorna o campo outros acréscimos do boleto
+     *
+     * @return float
+     */
+    public function getOutrosAcrescimos()
+    {
+        return $this->outrosAcrescimos;
+    }
+
+    /**
+     * Define o campo quantidade do boleto
+     *
+     * @param  $quantidade
+     */
+    public function setQuantidade($quantidade)
+    {
+        $this->quantidade = $quantidade;
+    }
+
+    /**
+     * Retorna o campo quantidade do boleto
+     *
+     * @return
+     */
+    public function getQuantidade()
+    {
+        return $this->quantidade;
+    }
+
+    /**
+     * Define o campo valor cobrado do boleto
+     *
+     * @param  $valorCobrado
+     */
+    public function setValorCobrado($valorCobrado)
+    {
+        $this->valorCobrado = $valorCobrado;
+    }
+
+    /**
+     * Retorna o campo valor cobrado do boleto
+     *
+     * @return
+     */
+    public function getValorCobrado()
+    {
+        return $this->valorCobrado;
+    }
+
+    /**
+     * Define o campo "valor" do boleto
+     *
+     * @param  $valorUnitario
+     */
+    public function setValorUnitario($valorUnitario)
+    {
+        $this->valorUnitario = $valorUnitario;
+    }
+
+    /**
+     * Retorna o campo "valor" do boleto
+     *
+     * @return
+     */
+    public function getValorUnitario()
+    {
+        return $this->valorUnitario;
+    }
+
+    /**
      * Define valor para pagamento mínimo em boletos de contra apresentação.
      * Quando definido, remove o valor normal do boleto.
      *
@@ -858,20 +1040,6 @@ abstract class BoletoAbstract
     }
 
     /**
-     * Método mágico para obter algum parâmetro opcional. Por exemplo, vamos supor que o banco X
-     * tenha um campo de avalista. Crie os métodos setAvalista e getAvalista e a propriedade avalista
-     * na classe do banco, e você poderá usar este método $boleto->get('avalista');
-     *
-     *
-     * @param string $param
-     * @return mixed
-     */
-    public function get($param)
-    {
-        return method_exists($this, 'get' . $param) ? $this->{'get' . $param}() : null;
-    }
-
-    /**
      * Método onde qualquer boleto deve extender para gerar o código da posição de 20 a 44
      *
      * @return string
@@ -921,18 +1089,18 @@ abstract class BoletoAbstract
             'images' => $this->getImagePath(),
             'codigo_banco_com_dv' => $this->getCodigoBancoComDv(),
             'especie' => static::$especie[$this->getMoeda()],
-            'quantidade' => $this->get('quantidade'),
+            'quantidade' => $this->getQuantidade(),
             'data_vencimento' => $this->getContraApresentacao() ? 'Contra Apresenta&ccedil;&atilde;o' : $this->getDataVencimento()->format('d/m/Y'),
             'data_processamento'  => $this->getDataProcessamento()->format('d/m/Y'),
             'data_documento' => $this->getDataDocumento()->format('d/m/Y'),
             'pagamento_minimo' => static::formataDinheiro($this->getPagamentoMinimo()),
             'valor_documento' => static::formataDinheiro($this->getValor()),
-            'desconto_abatimento' => static::formataDinheiro($this->get('descontosAbatimentos')),
-            'outras_deducoes' => static::formataDinheiro($this->get('outrasDeducoes')),
-            'mora_multa' => static::formataDinheiro($this->get('moraMulta')),
-            'outros_acrescimos' => static::formataDinheiro($this->get('outrosAcrescimos')),
-            'valor_cobrado' => static::formataDinheiro($this->get('valorCobrado')),
-            'valor_unitario' => static::formataDinheiro($this->get('valorUnitario')),
+            'desconto_abatimento' => static::formataDinheiro($this->getDescontosAbatimentos()),
+            'outras_deducoes' => static::formataDinheiro($this->getOutrasDeducoes()),
+            'mora_multa' => static::formataDinheiro($this->getMoraMulta()),
+            'outros_acrescimos' => static::formataDinheiro($this->getOutrosAcrescimos()),
+            'valor_cobrado' => static::formataDinheiro($this->getValorCobrado()),
+            'valor_unitario' => static::formataDinheiro($this->getValorUnitario()),
             'sacador_avalista' => $this->getSacadorAvalista() ? $this->getSacadorAvalista()->getNomeDocumento() : null,
             'sacado' => $this->getSacado()->getNome(),
             'sacado_endereco1' => $this->getSacado()->getEndereco(),
@@ -947,7 +1115,6 @@ abstract class BoletoAbstract
             'aceite' => $this->getAceite(),
             'carteira' => $this->getCarteiraNome(),
             'uso_banco' => $this->getUsoBanco(),
-            'avalista' => $this->get('avalista'),
             'codigo_barras' => $this->getImagemCodigoDeBarras(),
         ));
 
