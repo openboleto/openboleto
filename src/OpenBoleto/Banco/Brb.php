@@ -80,13 +80,7 @@ class Brb extends BoletoAbstract
      */
     public function getChaveAsbace()
     {
-        $nossoNumero = static::zeroFill($this->getNossoNumero(), 6);
-        $nossoNumero = array(
-            '1-3' => substr($nossoNumero, 0, 3),
-            '4-9' => substr($nossoNumero, 3),
-        );
-
-        $chave = $nossoNumero['1-3'] . static::zeroFill($this->getAgencia(), 3) . static::zeroFill($this->getConta(), 7) . $this->getCarteira() . $nossoNumero['4-9'] . $this->getCodigoBanco();
+        $chave = '000' . static::zeroFill($this->getAgencia(), 3) . static::zeroFill($this->getConta(), 7) . $this->getCarteira() . static::zeroFill($this->getNossoNumero(), 6) . $this->getCodigoBanco();
         $d1 = static::modulo10($chave);
 
         CalculaD2:
