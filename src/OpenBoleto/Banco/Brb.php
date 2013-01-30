@@ -65,13 +65,14 @@ class Brb extends BoletoAbstract
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array('01', '02');
+    protected $carteiras = array('1', '2', '3');
 
     /**
      * Define os nomes das carteiras para exibição no boleto
      * @var array
      */
-    protected $carteirasNomes = array('01' => 'COB', '02' => 'COB');
+    // TODO: Descobrir os nomes corretos para os números das carteiras.
+    protected $carteirasNomes = array('1' => 'COB', '2' => 'COB', '3' => 'COB');
 
     /**
      * Método para gerar o código da posição de 20 a 44
