@@ -81,7 +81,11 @@ class Brb extends BoletoAbstract
      */
     public function getChaveAsbace()
     {
-        $chave = '000' . static::zeroFill($this->getAgencia(), 3) . static::zeroFill($this->getConta(), 7) . $this->getCarteira() . static::zeroFill($this->getNossoNumero(), 6) . $this->getCodigoBanco();
+        $chave = '000' . static::zeroFill($this->getAgencia(), 3) . 
+                 static::zeroFill($this->getConta(), 7) . 
+                 $this->getCarteira() . 
+                 static::zeroFill($this->getNossoNumero(), 6) . 
+                 $this->getCodigoBanco();
         $d1 = static::modulo10($chave);
 
         CalculaD2:
@@ -109,8 +113,11 @@ class Brb extends BoletoAbstract
      */
     public function getViewVars()
     {
+        $chaveAsbace = $this->getChaveAsbace();
+
         return array(
             'agencia_codigo_cedente' => '000 - ' . $this->getAgencia() . ' - ' . $this->getConta(),
+            'nosso_numero' => substr($chaveAsbace, 13),
         );
     }
 }

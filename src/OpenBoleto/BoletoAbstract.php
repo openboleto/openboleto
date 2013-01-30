@@ -1307,7 +1307,7 @@ abstract class BoletoAbstract
      */
     protected function getValorZeroFill()
     {
-        return str_pad(str_replace(array(',', '.'), '', (string) $this->getValor()), 10, '0', STR_PAD_LEFT);
+        return str_pad(str_replace(array(',', '.'), '', number_format($this->getValor(), 2, '', '')), 10, '0', STR_PAD_LEFT);
     }
 
     /**

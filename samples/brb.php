@@ -17,8 +17,8 @@ $boleto = new Brb(array(
     'nossoNumero' => '75896452',
     'sacado' => $sacado,
     'cedente' => $cedente,
-    'agencia' => '1172',
-    'carteira' => '01',
+    'agencia' => '172',
+    'carteira' => '1',
     'conta' => '0403005',
 
     // Parâmetros recomendáveis
