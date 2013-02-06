@@ -152,7 +152,7 @@ class BancoDoBrasil extends BoletoAbstract
     }
 
     /**
-     * Define nomes de campos específicos do boleto do BRB
+     * Define nomes de campos específicos do boleto do Banco do Brasil
      *
      * @return array
      */
