@@ -1,8 +1,8 @@
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
-         bootstrap="../samples/bootstrap.php"
+         bootstrap="bootstrap_phpunit.php"
          cacheTokens="true"
-         colors="false"
+         colors="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
@@ -10,9 +10,9 @@
          stopOnFailure="false"
          syntaxCheck="false"
          verbose="false">
-    <filter>
-        <whitelist>
-            <directory>../src/OpenBoleto</directory>
-        </whitelist>
-    </filter>
+    <testsuites>
+        <testsuite name="core">
+            <directory suffix=".php">tests</directory>
+        </testsuite>
+    </testsuites>
 </phpunit>

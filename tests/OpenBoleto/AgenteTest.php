@@ -7,7 +7,7 @@ class AgenteTest extends \PHPUnit_Framework_TestCase
 {
     public function testInstantiationWithoutArgumentsShouldWork()
     {
-        $instance = new \OpenBoleto\Agente('nome','dcumento');
+        $instance = new Agente('nome','123.456.789-01');
         $this->assertInstanceOf('OpenBoleto\Agente', $instance);
     }
 }
