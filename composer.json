@@ -2,7 +2,7 @@
     "name": "kriansa/openboleto",
     "type": "library",
     "description": "Biblioteca para geração de boletos bancários.",
-    "keywords": ["boleto", "boleto bancário"],
+    "keywords": ["boleto", "boleto bancario"],
     "homepage": "http://github.com/kriansa/openboleto",
     "license": "MIT",
     "authors": [
