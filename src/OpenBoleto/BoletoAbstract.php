@@ -34,7 +34,7 @@
 
 namespace OpenBoleto;
 use DateTime;
-use Exception;
+use OpenBoleto\Exception;
 use OpenBoleto\Agente;
 
 abstract class BoletoAbstract
@@ -313,10 +313,12 @@ abstract class BoletoAbstract
      * Define a agência
      *
      * @param int $agencia
+     * @return $this
      */
     public function setAgencia($agencia)
     {
         $this->agencia = $agencia;
+        return $this;
     }
 
     /**
@@ -353,7 +355,8 @@ abstract class BoletoAbstract
      * Define o código da carteira (Com ou sem registro)
      *
      * @param string $carteira
-     * @throws \Exception
+     * @return $this
+     * @throws \OpenBoleto\Exception
      */
     public function setCarteira($carteira)
     {
@@ -362,6 +365,7 @@ abstract class BoletoAbstract
         }
 
         $this->carteira = $carteira;
+        return $this;
     }
 
     /**
@@ -388,10 +392,12 @@ abstract class BoletoAbstract
      * Define a entidade cedente
      *
      * @param \OpenBoleto\Agente $cedente
+     * @return $this
      */
     public function setCedente(Agente $cedente)
     {
         $this->cedente = $cedente;
+        return $this;
     }
 
     /**
@@ -418,10 +424,12 @@ abstract class BoletoAbstract
      * Define o número da conta
      *
      * @param int $conta
+     * @return $this
      */
     public function setConta($conta)
     {
         $this->conta = $conta;
+        return $this;
     }
 
     /**
@@ -438,10 +446,12 @@ abstract class BoletoAbstract
      * Define o dígito verificador da conta
      *
      * @param int $contaDv
+     * @return $this
      */
     public function setContaDv($contaDv)
     {
         $this->contaDv = $contaDv;
+        return $this;
     }
 
     /**
@@ -458,10 +468,12 @@ abstract class BoletoAbstract
      * Define a data de vencimento
      *
      * @param \DateTime $dataVencimento
+     * @return $this
      */
     public function setDataVencimento(DateTime $dataVencimento)
     {
         $this->dataVencimento = $dataVencimento;
+        return $this;
     }
 
     /**
@@ -479,10 +491,12 @@ abstract class BoletoAbstract
      * É sugerido que se use o campo pagamento mínimo ($this->setPagamentoMinimo())
      *
      * @param boolean $contraApresentacao
+     * @return $this
      */
     public function setContraApresentacao($contraApresentacao)
     {
         $this->contraApresentacao = $contraApresentacao;
+        return $this;
     }
 
     /**
@@ -499,10 +513,12 @@ abstract class BoletoAbstract
      * Define a data do documento
      *
      * @param \DateTime $dataDocumento
+     * @return $this
      */
     public function setDataDocumento(DateTime $dataDocumento)
     {
         $this->dataDocumento = $dataDocumento;
+        return $this;
     }
 
     /**
@@ -519,10 +535,12 @@ abstract class BoletoAbstract
      * Define o campo aceite
      *
      * @param string $aceite
+     * @return $this
      */
     public function setAceite($aceite)
     {
         $this->aceite = $aceite;
+        return $this;
     }
 
     /**
@@ -539,10 +557,12 @@ abstract class BoletoAbstract
      * Define o campo Espécie Doc, geralmente DM (Duplicata Mercantil)
      *
      * @param string $especieDoc
+     * @return $this
      */
     public function setEspecieDoc($especieDoc)
     {
         $this->especieDoc = $especieDoc;
+        return $this;
     }
 
     /**
@@ -559,10 +579,12 @@ abstract class BoletoAbstract
      * Define o campo Número do documento
      *
      * @param int $numeroDocumento
+     * @return $this
      */
     public function setNumeroDocumento($numeroDocumento)
     {
         $this->numeroDocumento = $numeroDocumento;
+        return $this;
     }
 
     /**
@@ -579,10 +601,12 @@ abstract class BoletoAbstract
      * Define o campo Uso do banco
      *
      * @param string $usoBanco
+     * @return $this
      */
     public function setUsoBanco($usoBanco)
     {
         $this->usoBanco = $usoBanco;
+        return $this;
     }
 
     /**
@@ -599,10 +623,12 @@ abstract class BoletoAbstract
      * Define a data de geração do boleto
      *
      * @param \DateTime $dataProcessamento
+     * @return $this
      */
     public function setDataProcessamento(DateTime $dataProcessamento)
     {
         $this->dataProcessamento = $dataProcessamento;
+        return $this;
     }
 
     /**
@@ -619,10 +645,12 @@ abstract class BoletoAbstract
      * Define a localização da pasta de imagens
      *
      * @param string $imagePath
+     * @return $this
      */
     public function setImagePath($imagePath)
     {
         $this->imagePath = $imagePath;
+        return $this;
     }
 
     /**
@@ -639,10 +667,12 @@ abstract class BoletoAbstract
      * Define um array com instruções (máximo 8) para pagamento
      *
      * @param array $instrucoes
+     * @return $this
      */
     public function setInstrucoes($instrucoes)
     {
         $this->instrucoes = $instrucoes;
+        return $this;
     }
 
     /**
@@ -659,10 +689,12 @@ abstract class BoletoAbstract
      * Define um array com a descrição do demonstrativo (máximo 5)
      *
      * @param array $descricaoDemonstrativo
+     * @return $this
      */
     public function setDescricaoDemonstrativo($descricaoDemonstrativo)
     {
         $this->descricaoDemonstrativo = $descricaoDemonstrativo;
+        return $this;
     }
 
     /**
@@ -679,10 +711,12 @@ abstract class BoletoAbstract
      * Define o local de pagamento do boleto
      *
      * @param string $localPagamento
+     * @return $this
      */
     public function setLocalPagamento($localPagamento)
     {
         $this->localPagamento = $localPagamento;
+        return $this;
     }
 
     /**
@@ -699,10 +733,12 @@ abstract class BoletoAbstract
      * Define a moeda utilizada pelo boleto
      *
      * @param int $moeda
+     * @return $this
      */
     public function setMoeda($moeda)
     {
         $this->moeda = $moeda;
+        return $this;
     }
 
     /**
@@ -719,10 +755,12 @@ abstract class BoletoAbstract
      * Define o valor do Nosso Número (identificador único do boleto)
      *
      * @param int $nossoNumero
+     * @return $this
      */
     public function setNossoNumero($nossoNumero)
     {
         $this->nossoNumero = $nossoNumero;
+        return $this;
     }
 
     /**
@@ -739,10 +777,12 @@ abstract class BoletoAbstract
      * Define o objeto do sacado
      *
      * @param \OpenBoleto\Agente $sacado
+     * @return $this
      */
     public function setSacado(Agente $sacado)
     {
         $this->sacado = $sacado;
+        return $this;
     }
 
     /**
@@ -759,10 +799,12 @@ abstract class BoletoAbstract
      * Define o objeto sacador avalista do boleto
      *
      * @param \OpenBoleto\Agente $sacadorAvalista
+     * @return $this
      */
     public function setSacadorAvalista(Agente $sacadorAvalista)
     {
         $this->sacadorAvalista = $sacadorAvalista;
+        return $this;
     }
 
     /**
@@ -779,10 +821,12 @@ abstract class BoletoAbstract
      * Define o valor total do boleto (incluindo taxas)
      *
      * @param float $valor
+     * @return $this
      */
     public function setValor($valor)
     {
         $this->valor = $valor;
+        return $this;
     }
 
     /**
@@ -799,10 +843,12 @@ abstract class BoletoAbstract
      * Define o campo Descontos / Abatimentos
      *
      * @param float $descontosAbatimentos
+     * @return $this
      */
     public function setDescontosAbatimentos($descontosAbatimentos)
     {
         $this->descontosAbatimentos = $descontosAbatimentos;
+        return $this;
     }
 
     /**
@@ -819,10 +865,12 @@ abstract class BoletoAbstract
      * Retorna o campo Mora / Multa do boleto
      *
      * @param float $moraMulta
+     * @return $this
      */
     public function setMoraMulta($moraMulta)
     {
         $this->moraMulta = $moraMulta;
+        return $this;
     }
 
     /**
@@ -839,10 +887,12 @@ abstract class BoletoAbstract
      * Define o campo outras deduções do boleto
      *
      * @param float $outrasDeducoes
+     * @return $this
      */
     public function setOutrasDeducoes($outrasDeducoes)
     {
         $this->outrasDeducoes = $outrasDeducoes;
+        return $this;
     }
 
     /**
@@ -859,10 +909,12 @@ abstract class BoletoAbstract
      * Define o campo outros acréscimos do boleto
      *
      * @param float $outrosAcrescimos
+     * @return $this
      */
     public function setOutrosAcrescimos($outrosAcrescimos)
     {
         $this->outrosAcrescimos = $outrosAcrescimos;
+        return $this;
     }
 
     /**
@@ -879,10 +931,12 @@ abstract class BoletoAbstract
      * Define o campo quantidade do boleto
      *
      * @param  $quantidade
+     * @return $this
      */
     public function setQuantidade($quantidade)
     {
         $this->quantidade = $quantidade;
+        return $this;
     }
 
     /**
@@ -899,10 +953,12 @@ abstract class BoletoAbstract
      * Define o campo valor cobrado do boleto
      *
      * @param  $valorCobrado
+     * @return $this
      */
     public function setValorCobrado($valorCobrado)
     {
         $this->valorCobrado = $valorCobrado;
+        return $this;
     }
 
     /**
@@ -919,10 +975,12 @@ abstract class BoletoAbstract
      * Define o campo "valor" do boleto
      *
      * @param  $valorUnitario
+     * @return $this
      */
     public function setValorUnitario($valorUnitario)
     {
         $this->valorUnitario = $valorUnitario;
+        return $this;
     }
 
     /**
@@ -940,11 +998,13 @@ abstract class BoletoAbstract
      * Quando definido, remove o valor normal do boleto.
      *
      * @param float $pagamentoMinimo
+     * @return $this
      */
     public function setPagamentoMinimo($pagamentoMinimo)
     {
         $this->pagamentoMinimo = $pagamentoMinimo;
         $this->setContraApresentacao(true);
+        return $this;
     }
 
     /**
@@ -961,10 +1021,12 @@ abstract class BoletoAbstract
      * Define o nome da atual arquivo de view (template)
      *
      * @param string $layout
+     * @return $this
      */
     public function setLayout($layout)
     {
         $this->layout = $layout;
+        return $this;
     }
 
     /**
@@ -981,10 +1043,12 @@ abstract class BoletoAbstract
      * Retorna a localização da pasta de views
      *
      * @param string $viewPath
+     * @return $this
      */
     public function setViewPath($viewPath)
     {
         $this->viewPath = $viewPath;
+        return $this;
     }
 
     /**
@@ -1001,10 +1065,12 @@ abstract class BoletoAbstract
      * Define a localização do logotipo do banco relativo à pasta de imagens
      *
      * @param string $logoBanco
+     * @return $this
      */
     public function setLogoBanco($logoBanco)
     {
         $this->logoBanco = $logoBanco;
+        return $this;
     }
 
     /**
@@ -1022,10 +1088,12 @@ abstract class BoletoAbstract
      * Note que este não é relativo à pasta de imagens
      *
      * @param string $logoPath
+     * @return $this
      */
     public function setLogoPath($logoPath)
     {
         $this->logoPath = $logoPath;
+        return $this;
     }
 
     /**
@@ -1044,7 +1112,7 @@ abstract class BoletoAbstract
      *
      * @return string
      */
-    protected abstract function getChaveAsbace();
+    public abstract function getCampoLivre();
 
     /**
      * Em alguns bancos, a visualização de alguns campos do boleto são diferentes.
@@ -1160,7 +1228,7 @@ abstract class BoletoAbstract
      */
     public function getNumeroFebraban()
     {
-        return self::zeroFill($this->getCodigoBanco(), 3) . $this->getMoeda() . $this->getDigitoVerificador() . $this->getFatorVencimento() . $this->getValorZeroFill() . $this->getChaveAsbace();
+        return self::zeroFill($this->getCodigoBanco(), 3) . $this->getMoeda() . $this->getDigitoVerificador() . $this->getFatorVencimento() . $this->getValorZeroFill() . $this->getCampoLivre();
     }
 
     /**
@@ -1183,7 +1251,7 @@ abstract class BoletoAbstract
      */
     public function getLinhaDigitavel()
     {
-        $chave = $this->getChaveAsbace();
+        $chave = $this->getCampoLivre();
 
         // Break down febraban positions 20 to 44 into 3 blocks of 5, 10 and 10
         // characters each.
@@ -1270,7 +1338,7 @@ abstract class BoletoAbstract
         // Draw dos dados
         while (strlen($codigo) > 0) {
 
-            $i = round(self::caracteresEsquerda($codigo, 2));
+            $i = (int) round(self::caracteresEsquerda($codigo, 2));
             $codigo = self::caracteresDireita($codigo, strlen($codigo) - 2);
             $f = $barcodes[$i];
 
@@ -1307,7 +1375,7 @@ abstract class BoletoAbstract
      */
     protected function getValorZeroFill()
     {
-        return str_pad(str_replace(array(',', '.'), '', number_format($this->getValor(), 2, '', '')), 10, '0', STR_PAD_LEFT);
+        return str_pad(number_format($this->getValor(), 2, '', ''), 10, '0', STR_PAD_LEFT);
     }
 
     /**
@@ -1333,7 +1401,7 @@ abstract class BoletoAbstract
      */
     protected function getDigitoVerificador()
     {
-        $num = self::zeroFill($this->getCodigoBanco(), 4) . $this->getMoeda() . $this->getFatorVencimento() . $this->getValorZeroFill() . $this->getChaveAsbace();
+        $num = self::zeroFill($this->getCodigoBanco(), 4) . $this->getMoeda() . $this->getFatorVencimento() . $this->getValorZeroFill() . $this->getCampoLivre();
 
         $modulo = $this->modulo11($num);
         if ($modulo['resto'] == 0 || $modulo['resto'] == 1 || $modulo['resto'] == 10) {
@@ -1346,14 +1414,20 @@ abstract class BoletoAbstract
     }
 
     /**
-     * Helper para Zerofill (0 à esqueda)
+     * Helper para Zerofill (0 à esqueda).
+     * O valor não deve ter mais caracteres do que o número de dígitos especificados
      *
      * @param int $valor
      * @param int $digitos
      * @return string
+     * @throws \OpenBoleto\Exception
      */
     protected static function zeroFill($valor, $digitos)
     {
+        if (strlen($valor) > $digitos) {
+            throw new Exception("O valor {$valor} possui mais de {$digitos} dígitos!");
+        }
+
         return str_pad($valor, $digitos, '0', STR_PAD_LEFT);
     }
 

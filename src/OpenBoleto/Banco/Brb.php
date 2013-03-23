@@ -34,6 +34,7 @@
 
 namespace OpenBoleto\Banco;
 use OpenBoleto\BoletoAbstract;
+use OpenBoleto\Exception;
 
 class Brb extends BoletoAbstract
 {
@@ -65,26 +66,31 @@ class Brb extends BoletoAbstract
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array('1', '2', '3');
+    protected $carteiras = array('1', '2');
 
     /**
      * Define os nomes das carteiras para exibição no boleto
      * @var array
      */
-    // TODO: Descobrir os nomes corretos para os números das carteiras.
-    protected $carteirasNomes = array('1' => 'COB', '2' => 'COB', '3' => 'COB');
+    protected $carteirasNomes = array('1' => 'COB', '2' => 'COB');
+
+    /**
+     * Define o "nosso número", pois o BRB chama o número único do cliente de sequencial
+     * @var string
+     */
+    protected $sequencial;
 
     /**
      * Método para gerar o código da posição de 20 a 44
      *
      * @return string
      */
-    public function getChaveAsbace()
+    public function getCampoLivre()
     {
         $chave = '000' . static::zeroFill($this->getAgencia(), 3) . 
                  static::zeroFill($this->getConta(), 7) . 
                  $this->getCarteira() . 
-                 static::zeroFill($this->getNossoNumero(), 6) . 
+                 static::zeroFill($this->getSequencial(), 6) .
                  $this->getCodigoBanco();
         $d1 = static::modulo10($chave);
 
@@ -107,17 +113,64 @@ class Brb extends BoletoAbstract
     }
 
     /**
+     * Define o valor do Nosso Número (identificador único do boleto)
+     * => No Banco BRB, o nosso número não é modificado pelo usuário
+     * => Caso deseje alterar o número sequencial único, use o
+     * => Brb::setSequencial(). O BRB utiliza uma nomenclatura diferente
+     *
+     * @see Documentação BRB, arquivo "Leiaute Cobranca BRB 2012.pdf", página 4
+     *
+     * @param int $nossoNumero
+     * @return $this|void
+     * @throws \OpenBoleto\Exception
+     */
+    public function setNossoNumero($nossoNumero)
+    {
+        throw new Exception('Não é possível definir o nosso número do BRB diretamente! Utilize o método Brb::setSequencial()');
+    }
+
+    /**
+     * Retorna o valor do Nosso Número (identificador único do boleto)
+     *
+     * @return int
+     */
+    public function getNossoNumero()
+    {
+        $campoLivre = $this->getCampoLivre();
+        return substr($campoLivre, 13);
+    }
+
+    /**
+     * Define o campo sequencial (nosso número, em outras palavras)
+     *
+     * @param string $sequencial
+     * @return $this
+     */
+    public function setSequencial($sequencial)
+    {
+        $this->sequencial = $sequencial;
+        return $this;
+    }
+
+    /**
+     * Retorna o campo sequencial (nosso número, em outras palavras)
+     *
+     * @return string
+     */
+    public function getSequencial()
+    {
+        return $this->sequencial;
+    }
+
+    /**
      * Define nomes de campos específicos do boleto do BRB
      *
      * @return array
      */
     public function getViewVars()
     {
-        $chaveAsbace = $this->getChaveAsbace();
-
         return array(
             'agencia_codigo_cedente' => '000 - ' . $this->getAgencia() . ' - ' . $this->getConta(),
-            'nosso_numero' => substr($chaveAsbace, 13),
         );
     }
 }

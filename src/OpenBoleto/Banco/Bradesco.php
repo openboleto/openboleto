@@ -68,7 +68,7 @@ class Bradesco extends BoletoAbstract
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array('03', '06', '09');
+    protected $carteiras = array('3', '6', '9');
 
     /**
      * Trata-se de código utilizado para identificar mensagens especificas ao cedente, sendo
@@ -83,7 +83,7 @@ class Bradesco extends BoletoAbstract
      *
      * @return string
      */
-    public function getChaveAsbace()
+    public function getCampoLivre()
     {
         return static::zeroFill($this->getAgencia(), 4) .
             static::zeroFill($this->getCarteira(), 2) .
@@ -96,10 +96,12 @@ class Bradesco extends BoletoAbstract
      * Define o campo CIP do boleto
      *
      * @param int $cip
+     * @return $this
      */
     public function setCip($cip)
     {
         $this->cip = $cip;
+        return $this;
     }
 
     /**

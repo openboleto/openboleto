@@ -1,6 +1,7 @@
 <?php
 
 require '../src/OpenBoleto/BoletoAbstract.php';
+require '../src/OpenBoleto/Exception.php';
 require '../src/OpenBoleto/Agente.php';
 require '../src/OpenBoleto/Banco/Brb.php';
 
@@ -14,19 +15,19 @@ $boleto = new Brb(array(
     // Parâmetros obrigatórios
     'dataVencimento' => new DateTime('2013-01-24'),
     'valor' => 23.00,
-    'nossoNumero' => '75896452',
+    'sequencial' => 758964, // Até 6 dígitos
     'sacado' => $sacado,
     'cedente' => $cedente,
-    'agencia' => '172',
-    'carteira' => '1',
-    'conta' => '0403005',
+    'agencia' => 172, // Até 3 dígitos
+    'carteira' => 1, // 1 ou 2
+    'conta' => 0403005, // Até 7 dígitos
 
     // Parâmetros recomendáveis
     //'logoPath' => 'http://empresa.com.br/logo.jpg', // Logo da sua empresa
     'viewPath' => '../resources/views',
     'imagePath' => '../resources/images',
-    'contaDv' => '2',
-    'agenciaDv' => '1',
+    'contaDv' => 2,
+    'agenciaDv' => 1,
     'descricaoDemonstrativo' => array( // Até 5
         'Compra de materiais cosméticos',
         'Compra de alicate',

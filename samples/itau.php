@@ -1,6 +1,7 @@
 <?php
 
 require '../src/OpenBoleto/BoletoAbstract.php';
+require '../src/OpenBoleto/Exception.php';
 require '../src/OpenBoleto/Agente.php';
 require '../src/OpenBoleto/Banco/Itau.php';
 
@@ -14,24 +15,24 @@ $boleto = new Itau(array(
     // Parâmetros obrigatórios
     'dataVencimento' => new DateTime('2013-01-24'),
     'valor' => 23.00,
-    'nossoNumero' => '12345678', // 8 dígitos
+    'nossoNumero' => 12345678, // 8 dígitos
     'sacado' => $sacado,
     'cedente' => $cedente,
-    'agencia' => '1724', // 4 dígitos
-    'carteira' => '112', // 3 dígitos
-    'conta' => '12345', // 5 dígitos
+    'agencia' => 1724, // 4 dígitos
+    'carteira' => 112, // 3 dígitos
+    'conta' => 12345, // 5 dígitos
     
     // Parâmetro obrigatório somente se a carteira for
     // 107, 122, 142, 143, 196 ou 198
-    'codigoCliente' => '12345', // 5 dígitos
-    'numeroDocumento' => '1234567', // 7 dígitos
+    'codigoCliente' => 12345, // 5 dígitos
+    'numeroDocumento' => 1234567, // 7 dígitos
 
     // Parâmetros recomendáveis
     //'logoPath' => 'http://empresa.com.br/logo.jpg', // Logo da sua empresa
     'viewPath' => '../resources/views',
     'imagePath' => '../resources/images',
-    'contaDv' => '2',
-    'agenciaDv' => '1',
+    'contaDv' => 2,
+    'agenciaDv' => 1,
     'descricaoDemonstrativo' => array( // Até 5
         'Compra de materiais cosméticos',
         'Compra de alicate',

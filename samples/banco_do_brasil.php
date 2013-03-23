@@ -1,6 +1,7 @@
 <?php
 
 require '../src/OpenBoleto/BoletoAbstract.php';
+require '../src/OpenBoleto/Exception.php';
 require '../src/OpenBoleto/Agente.php';
 require '../src/OpenBoleto/Banco/BancoDoBrasil.php';
 
@@ -14,20 +15,25 @@ $boleto = new BancoDoBrasil(array(
     // Parâmetros obrigatórios
     'dataVencimento' => new DateTime('2013-01-24'),
     'valor' => 23.00,
-    'nossoNumero' => '75896452',
+    'sequencial' => 1234567,
     'sacado' => $sacado,
     'cedente' => $cedente,
-    'agencia' => '1724',
-    'carteira' => '18',
-    'conta' => '10403005',
-    'convenio' => '1234', // 4, 6 ou 7 dígitos
+    'agencia' => 1724, // Até 4 dígitos
+    'carteira' => 18,
+    'conta' => 10403005, // Até 8 dígitos
+    'convenio' => 1234, // 4, 6 ou 7 dígitos
+
+    // Caso queira um número sequencial de 17 dígitos, a cobrança deverá:
+    // - Ser sem registro (Carteiras 16 ou 17)
+    // - Convênio com 6 dígitos
+    // Para isso, defina a carteira como 21 (mesmo sabendo que ela é 16 ou 17, isso é uma regra do banco)
 
     // Parâmetros recomendáveis
     //'logoPath' => 'http://empresa.com.br/logo.jpg', // Logo da sua empresa
     'viewPath' => '../resources/views',
     'imagePath' => '../resources/images',
-    'contaDv' => '2',
-    'agenciaDv' => '1',
+    'contaDv' => 2,
+    'agenciaDv' => 1,
     'descricaoDemonstrativo' => array( // Até 5
         'Compra de materiais cosméticos',
         'Compra de alicate',

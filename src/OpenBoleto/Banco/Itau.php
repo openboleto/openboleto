@@ -88,10 +88,12 @@ class Itau extends BoletoAbstract
      * Define o código do cliente
      *
      * @param int $codigoCliente
+     * @return $this
      */
     public function setCodigoCliente($codigoCliente)
     {
         $this->codigoCliente = $codigoCliente;
+        return $this;
     }
 
     /**
@@ -110,7 +112,7 @@ class Itau extends BoletoAbstract
      * @return string
      * @throws \OpenBoleto\Exception
      */
-    public function getChaveAsbace()
+    public function getCampoLivre()
     {
         $nossoNumero = self::zeroFill($this->getNossoNumero(), 8);
         $carteira = self::zeroFill($this->getCarteira(), 3);
