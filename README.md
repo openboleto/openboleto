@@ -4,6 +4,10 @@
 
 Projeto baseado no BoletoPHP e no Boleto Library PHP, porém com orientação a objetos.
 
+## Como usar
+
+Veja um tutorial em http://garajau.com.br/blog/2013/03/openboleto-biblioteca-de-geracao-de-boletos-bancarios/
+
 ## Instalação
 
 Apenas fazer download do projeto e colocar a pasta **src** no seu diretório de bibliotecas e configurar o autoloader.
