@@ -215,7 +215,10 @@ class BancoDoBrasil extends BoletoAbstract
                 // Nosso número (11) + Agencia (4) + Conta (8) + Carteira (2)
                 return $nossoNumero . self::zeroFill($this->getAgencia(), 4) . self::zeroFill($this->getConta(), 8) . self::zeroFill($this->getCarteira(), 2);
             case 7:
-                return '000000' . self::zeroFill($this->getConvenio(), 7) . self::zeroFill($nossoNumero, 10) . self::zeroFill($this->getCarteira(), 2);
+                return '000000' . 
+                        // self::zeroFill($this->getConvenio(), 7) . //número de convênio já concatenado em $nossoNumero em getNossoNumero()
+                        self::zeroFill($nossoNumero, 17) . //para carteira com 7 dígitos, são 17 número para nossoNumero 
+                        self::zeroFill($this->getCarteira(), 2);
         }
 
         throw new Exception('O código do convênio precisa ter 4, 6 ou 7 dígitos!');
