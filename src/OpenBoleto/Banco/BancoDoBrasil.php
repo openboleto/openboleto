@@ -51,12 +51,6 @@ class BancoDoBrasil extends BoletoAbstract
     protected $logoBanco = 'bb.jpg';
 
     /**
-     * Nome do arquivo de template a ser usado
-     * @var string
-     */
-    protected $layout = 'default.phtml';
-
-    /**
      * Linha de local de pagamento
      * @var string
      */

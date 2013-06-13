@@ -24,8 +24,6 @@ $boleto = new Brb(array(
 
     // Parâmetros recomendáveis
     //'logoPath' => 'http://empresa.com.br/logo.jpg', // Logo da sua empresa
-    'viewPath' => '../resources/views',
-    'imagePath' => '../resources/images',
     'contaDv' => 2,
     'agenciaDv' => 1,
     'descricaoDemonstrativo' => array( // Até 5
@@ -38,6 +36,7 @@ $boleto = new Brb(array(
     ),
 
     // Parâmetros opcionais
+    //'resourcePath' => '../resources',
     //'moeda' => Brb::MOEDA_REAL,
     //'dataDocumento' => new DateTime(),
     //'dataProcessamento' => new DateTime(),

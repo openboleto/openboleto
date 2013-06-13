@@ -51,12 +51,6 @@ class Brb extends BoletoAbstract
     protected $logoBanco = 'brb.png';
 
     /**
-     * Nome do arquivo de template a ser usado
-     * @var string
-     */
-    protected $layout = 'default.phtml';
-
-    /**
      * Linha de local de pagamento
      * @var string
      */

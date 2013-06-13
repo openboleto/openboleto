@@ -51,12 +51,6 @@ class Itau extends BoletoAbstract
     protected $logoBanco = 'itau.jpg';
 
     /**
-     * Nome do arquivo de template a ser usado
-     * @var string
-     */
-    protected $layout = 'default.phtml';
-
-    /**
      * Linha de local de pagamento
      * @var string
      */

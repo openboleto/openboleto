@@ -256,16 +256,10 @@ abstract class BoletoAbstract
     protected $layout = 'default.phtml';
 
     /**
-     * Pasta de localização de views
+     * Pasta de localização de resources (imagens, css e views)
      * @var string
      */
-    protected $viewPath = '../resources/views';
-
-    /**
-     * Pasta de localização das imagens, pode ser na web, ex: http://seusite.com/imagens
-     * @var string
-     */
-    protected $imagePath = './images';
+    protected $resourcePath = '../resources';
 
     /**
      * Localização do logotipo da empresa
@@ -639,28 +633,6 @@ abstract class BoletoAbstract
     public function getDataProcessamento()
     {
         return $this->dataProcessamento;
-    }
-
-    /**
-     * Define a localização da pasta de imagens
-     *
-     * @param string $imagePath
-     * @return $this
-     */
-    public function setImagePath($imagePath)
-    {
-        $this->imagePath = $imagePath;
-        return $this;
-    }
-
-    /**
-     * Retorna a localização da pasta de imagens
-     *
-     * @return string
-     */
-    public function getImagePath()
-    {
-        return $this->imagePath;
     }
 
     /**
@@ -1040,25 +1012,25 @@ abstract class BoletoAbstract
     }
 
     /**
-     * Retorna a localização da pasta de views
+     * Retorna a localização da pasta de resources
      *
-     * @param string $viewPath
+     * @param string $resourcePath
      * @return $this
      */
-    public function setViewPath($viewPath)
+    public function setResourcePath($resourcePath)
     {
-        $this->viewPath = $viewPath;
+        $this->resourcePath = $resourcePath;
         return $this;
     }
 
     /**
-     * Define a localização da pasta de views
+     * Define a localização da pasta de resources
      *
      * @return string
      */
-    public function getViewPath()
+    public function getResourcePath()
     {
-        return $this->viewPath;
+        return $this->resourcePath;
     }
 
     /**
@@ -1081,6 +1053,19 @@ abstract class BoletoAbstract
     public function getLogoBanco()
     {
         return $this->logoBanco;
+    }
+
+    /**
+     * Retorna o logotipo do banco em Base64, pronto para ser inserido na página
+     *
+     * @return string
+     */
+    public function getLogoBancoBase64()
+    {
+        static $logoData;
+        $logoData or $logoData = 'data:image/' . pathinfo($this->getLogoBanco(), PATHINFO_EXTENSION) . ';base64,' . base64_encode(file_get_contents($this->getResourcePath() . '/images/' . $this->getLogoBanco()));
+
+        return $logoData;
     }
 
     /**
@@ -1135,7 +1120,10 @@ abstract class BoletoAbstract
      *
      * @return array
      */
-    public function getViewVars() {}
+    public function getViewVars()
+    {
+        return array();
+    }
 
     /**
      * Retorna o HTML do boleto gerado
@@ -1152,9 +1140,8 @@ abstract class BoletoAbstract
             'cedente_cpf_cnpj' => $this->getCedente()->getDocumento(),
             'cedente_endereco1' => $this->getCedente()->getEndereco(),
             'cedente_endereco2' => $this->getCedente()->getCepCidadeUf(),
-            'logo_banco' => $this->getLogoBanco(),
+            'logo_banco' => $this->getLogoBancoBase64(),
             'logotipo' => $this->getLogoPath(),
-            'images' => $this->getImagePath(),
             'codigo_banco_com_dv' => $this->getCodigoBancoComDv(),
             'especie' => static::$especie[$this->getMoeda()],
             'quantidade' => $this->getQuantidade(),
@@ -1184,12 +1171,14 @@ abstract class BoletoAbstract
             'carteira' => $this->getCarteiraNome(),
             'uso_banco' => $this->getUsoBanco(),
             'codigo_barras' => $this->getImagemCodigoDeBarras(),
+            'resource_path' => $this->getResourcePath(),
         ));
 
         // Override view variables when rendering
         extract($this->getViewVars());
 
-        include $this->getViewPath() . '/' . $this->getLayout();
+        // Ignore errors inside the template
+        @include $this->getResourcePath() . '/views/' . $this->getLayout();
 
         return ob_get_clean();
     }
@@ -1218,7 +1207,7 @@ abstract class BoletoAbstract
      */
     public function getCarteiraNome()
     {
-        return isset($this->carteirasNomes[$this->getCarteira()]) ? $this->carteirasNomes[$this->getCarteira()] : self::zeroFill($this->getCarteira(), 2);
+        return isset($this->carteirasNomes[$this->getCarteira()]) ? $this->carteirasNomes[$this->getCarteira()] : $this->getCarteira();
     }
 
     /**
@@ -1303,11 +1292,7 @@ abstract class BoletoAbstract
      */
     public function getImagemCodigoDeBarras()
     {
-        $fino = 1;
-        $largo = 3;
-        $altura = 50;
         $codigo = $this->getNumeroFebraban();
-        $imagePath = $this->getImagePath();
 
         $barcodes = array('00110', '10001', '01001', '11000', '00101', '10100', '01100', '00011', '10010', '01010');
 
@@ -1326,10 +1311,11 @@ abstract class BoletoAbstract
         }
 
         // Guarda inicial
-        $retorno = "<img src='{$imagePath}/p.png' width='{$fino}' height='{$altura}' border='0'>"
-            . "<img src='{$imagePath}/b.png' width='{$fino}' height='{$altura}' border='0'>"
-            . "<img src='{$imagePath}/p.png' width='{$fino}' height='{$altura}' border='0'>"
-            . "<img src='{$imagePath}/b.png' width='{$fino}' height='{$altura}' border='0'>";
+        $retorno = '<div class="barcode">' .
+        '<div class="black thin"></div>' .
+        '<div class="white thin"></div>' .
+        '<div class="black thin"></div>' .
+        '<div class="white thin"></div>';
 
         if (strlen($codigo) % 2 != 0) {
             $codigo = "0" . $codigo;
@@ -1345,27 +1331,28 @@ abstract class BoletoAbstract
             for ($i = 1; $i < 11; $i += 2) {
 
                 if (substr($f, ($i - 1), 1) == "0") {
-                    $f1 = $fino;
+                    $f1 = 'thin';
                 } else {
-                    $f1 = $largo;
+                    $f1 = 'large';
                 }
 
-                $retorno .= "<img src='{$imagePath}/p.png' width='{$f1}' height='{$altura}' border='0'>";
+                $retorno .= "<div class='black {$f1}'></div>";
 
                 if (substr($f, $i, 1) == "0") {
-                    $f2 = $fino;
+                    $f2 = 'thin';
                 } else {
-                    $f2 = $largo;
+                    $f2 = 'large';
                 }
 
-                $retorno .= "<img src='{$imagePath}/b.png' width='{$f2}' height='{$altura}' border='0'>";
+                $retorno .= "<div class='white {$f2}'></div>";
             }
         }
 
-        // Draw guarda final
-        return $retorno . "<img src='{$imagePath}/p.png' width='{$largo}' height='{$altura}' border='0'>"
-            . "<img src='{$imagePath}/b.png' width='{$fino}' height='{$altura}' border='0'>"
-            . "<img src='{$imagePath}/p.png' width='{$fino}' height='{$altura}' border='0'>";
+        // Final
+        return $retorno . '<div class="black large"></div>' .
+        '<div class="white thin"></div>' .
+        '<div class="black thin"></div>' .
+        '</div>';
     }
 
     /**
@@ -1424,6 +1411,7 @@ abstract class BoletoAbstract
      */
     protected static function zeroFill($valor, $digitos)
     {
+        // TODO: Retirar isso daqui, e criar um método para validar os dados
         if (strlen($valor) > $digitos) {
             throw new Exception("O valor {$valor} possui mais de {$digitos} dígitos!");
         }
