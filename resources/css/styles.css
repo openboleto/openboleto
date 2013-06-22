@@ -156,17 +156,27 @@ body{
 }
 
 .barcode .black {
-    background: #000;
+    border-color: #000;
+    border-left-style: solid;
+    width: 0px;
 }
 
 .barcode .white {
     background: #fff;
 }
 
-.barcode .thin {
+.barcode .thin.black {
+    border-left-width: 1px;
+}
+
+.barcode .large.black {
+    border-left-width: 3px;
+}
+
+.barcode .thin.white {
     width: 1px;
 }
 
-.barcode .large {
+.barcode .large.white {
     width: 3px;
 }

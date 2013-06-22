@@ -51,12 +51,6 @@ class Santander extends BoletoAbstract
     protected $logoBanco = 'santander.jpg';
 
     /**
-     * Nome do arquivo de template a ser usado
-     * @var string
-     */
-    protected $layout = 'default-carne.phtml';
-
-    /**
      * Linha de local de pagamento
      * @var string
      */
