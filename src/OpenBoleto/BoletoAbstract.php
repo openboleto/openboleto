@@ -259,7 +259,7 @@ abstract class BoletoAbstract
      * Pasta de localização de resources (imagens, css e views)
      * @var string
      */
-    protected $resourcePath = '../resources';
+    protected $resourcePath;
 
     /**
      * Localização do logotipo da empresa
@@ -280,6 +280,8 @@ abstract class BoletoAbstract
      */
     public function  __construct($params = array())
     {
+        $this->resourcePath = __DIR__ . '/../../resources';
+
         foreach ($params as $param => $value)
         {
             if (method_exists($this, 'set' . $param)) {
