@@ -304,6 +304,36 @@ abstract class BoletoAbstract
     }
 
     /**
+     * Retorna a instância de um Banco através do código
+     *
+     * @param int|string $codBanco Código do Banco
+     * @param array $params Parâmetros iniciais para construção do objeto
+     * @return BoletoAbstract
+     * @throws \OpenBoleto\Exception Quando o banco não é suportado
+     */
+    public static function load($codBanco, $params = array())
+    {
+        static $classMap = array(
+            1 => 'BancoDoBrasil',
+            33 => 'Santander',
+            70 => 'Brb',
+            90 => 'Unicred',
+            184 => 'Itau',
+            237 => 'Bradesco',
+        );
+
+        $codBanco = (int) $codBanco;
+
+        if (! isset($classMap[$codBanco])) {
+            throw new Exception(sprintf('O banco de código "%s" não é surportado.', $codBanco));
+        }
+
+        $class = __NAMESPACE__ . '\\Banco\\' . $classMap[$codBanco];
+
+        return new $class($params);
+    }
+
+    /**
      * Define a agência
      *
      * @param int $agencia
