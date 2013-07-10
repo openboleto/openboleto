@@ -318,8 +318,8 @@ abstract class BoletoAbstract
             33 => 'Santander',
             70 => 'Brb',
             90 => 'Unicred',
-            184 => 'Itau',
             237 => 'Bradesco',
+            341 => 'Itau',
         );
 
         $codBanco = (int) $codBanco;
