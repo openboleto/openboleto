@@ -7,6 +7,7 @@ date_default_timezone_set('America/Sao_Paulo');
 /* Include path */
 set_include_path(implode(PATH_SEPARATOR, array(
     __DIR__ . DIRECTORY_SEPARATOR . 'src',
+    __DIR__ . DIRECTORY_SEPARATOR . 'tests',
     get_include_path(),
 )));
 
