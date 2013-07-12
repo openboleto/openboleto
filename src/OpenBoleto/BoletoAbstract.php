@@ -259,7 +259,7 @@ abstract class BoletoAbstract
      * Pasta de localização de resources (imagens, css e views)
      * @var string
      */
-    protected $resourcePath = '../resources';
+    protected $resourcePath;
 
     /**
      * Localização do logotipo da empresa
@@ -300,6 +300,11 @@ abstract class BoletoAbstract
         // Marca a data de vencimento para daqui a 5 dias, caso não especificada
         if (!$this->getDataVencimento()) {
             $this->setDataVencimento(new DateTime(date('Y-m-d', strtotime('+5 days'))));
+        }
+
+        // Marca a pasta de resources padrão, caso não seja especificado
+        if (!$this->getResourcePath()) {
+            $this->setResourcePath(__DIR__ . '/../../resources');
         }
     }
 
