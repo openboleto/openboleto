@@ -33,6 +33,7 @@
  */
 
 namespace OpenBoleto;
+
 use DateTime;
 use OpenBoleto\Exception;
 use OpenBoleto\Agente;
@@ -301,36 +302,6 @@ abstract class BoletoAbstract
         if (!$this->getDataVencimento()) {
             $this->setDataVencimento(new DateTime(date('Y-m-d', strtotime('+5 days'))));
         }
-    }
-
-    /**
-     * Retorna a instância de um Banco através do código
-     *
-     * @param int|string $codBanco Código do Banco
-     * @param array $params Parâmetros iniciais para construção do objeto
-     * @return BoletoAbstract
-     * @throws \OpenBoleto\Exception Quando o banco não é suportado
-     */
-    public static function load($codBanco, $params = array())
-    {
-        static $classMap = array(
-            1 => 'BancoDoBrasil',
-            33 => 'Santander',
-            70 => 'Brb',
-            90 => 'Unicred',
-            237 => 'Bradesco',
-            341 => 'Itau',
-        );
-
-        $codBanco = (int) $codBanco;
-
-        if (! isset($classMap[$codBanco])) {
-            throw new Exception(sprintf('O banco de código "%s" não é surportado.', $codBanco));
-        }
-
-        $class = __NAMESPACE__ . '\\Banco\\' . $classMap[$codBanco];
-
-        return new $class($params);
     }
 
     /**
