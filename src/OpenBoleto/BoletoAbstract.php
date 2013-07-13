@@ -33,6 +33,7 @@
  */
 
 namespace OpenBoleto;
+
 use DateTime;
 use OpenBoleto\Exception;
 use OpenBoleto\Agente;
