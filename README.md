@@ -1,4 +1,4 @@
-# OpenBoleto
+# OpenBoleto [![Stories in Ready](http://badge.waffle.io/kriansa/openboleto.png)](http://waffle.io/kriansa/openboleto) 
 
 ## O projeto
 
