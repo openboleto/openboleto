@@ -1,8 +1,6 @@
 <?php
-/**
+/*
  * OpenBoleto - Geração de boletos bancários em PHP
- *
- * Classe boleto Itaú S/A
  *
  * LICENSE: The MIT License (MIT)
  *
@@ -24,6 +22,16 @@
  * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+namespace OpenBoleto\Banco;
+
+use OpenBoleto\Utils\Modulo;
+use OpenBoleto\BoletoAbstract;
+use OpenBoleto\Exception;
+
+/**
+ * Classe boleto Itaú S/A
  *
  * @package    OpenBoleto
  * @author     Daniel Garajau <http://github.com/kriansa>
@@ -31,11 +39,6 @@
  * @license    MIT License
  * @version    0.1
  */
-
-namespace OpenBoleto\Banco;
-use OpenBoleto\BoletoAbstract;
-use OpenBoleto\Exception;
-
 class Itau extends BoletoAbstract
 {
     /**
@@ -100,6 +103,18 @@ class Itau extends BoletoAbstract
         return $this->codigoCliente;
     }
 
+    public function getNossoNumero($incluirDv = true)
+    {
+        $this->getCampoLivre(); // <- Força o calculo do DV.
+        $numero = self::zeroFill($this->getCarteira(), 3) . '/' . self::zeroFill($this->getSequencial(), 8);
+
+        if ($incluirDv) {
+            $numero .= '-' . $this->carteiraDv;
+        }
+
+        return $numero;
+    }
+
     /**
      * Método para gerar o código da posição de 20 a 44
      *
@@ -108,20 +123,25 @@ class Itau extends BoletoAbstract
      */
     public function getCampoLivre()
     {
-        $nossoNumero = self::zeroFill($this->getNossoNumero(), 8);
+        static $campolivre; // Cache do campo livre para evitar gerar várias vezes.
+
+        if ($campolivre) {
+            return $campolivre;
+        }
+
+        $sequencial = self::zeroFill($this->getSequencial(), 8);
         $carteira = self::zeroFill($this->getCarteira(), 3);
         $agencia = self::zeroFill($this->getAgencia(), 4);
         $conta = self::zeroFill($this->getConta(), 5);
 
         // Carteira 198 - (Nosso Número com 15 posições) - Anexo 5 do manual
         if (in_array($this->getCarteira(), array('107', '122', '142', '143', '196', '198'))) {
-            $codigo = $carteira .
-                $nossoNumero .
+            $codigo = $carteira . $sequencial .
                 self::zeroFill($this->getNumeroDocumento(), 7) .
                 self::zeroFill($this->getCodigoCliente(), 5);
 
             // Define o DV da carteira para a view
-            $this->carteiraDv = $modulo = self::modulo10($codigo);
+            $this->carteiraDv = $modulo = Modulo::dez($codigo);
 
             return $codigo . $modulo . '0';
         }
@@ -129,16 +149,16 @@ class Itau extends BoletoAbstract
         // Geração do DAC - Anexo 4 do manual
         if (!in_array($this->getCarteira(), array('126', '131', '146', '150', '168'))) {
             // Define o DV da carteira para a view
-            $this->carteiraDv = $dvAgContaCarteira = self::modulo10($agencia . $conta . $carteira . $nossoNumero);
+            $this->carteiraDv = $dvAgContaCarteira = Modulo::dez($agencia . $conta . $carteira . $sequencial);
         } else {
             // Define o DV da carteira para a view
-            $this->carteiraDv = $dvAgContaCarteira = self::modulo10($carteira . $nossoNumero);
+            $this->carteiraDv = $dvAgContaCarteira = Modulo::dez($carteira . $sequencial);
         }
 
         // Módulo 10 Agência/Conta
-        $dvAgConta = self::modulo10($agencia . $conta);
+        $dvAgConta = Modulo::dez($agencia . $conta);
 
-        return $carteira . $nossoNumero . $dvAgContaCarteira . $agencia . $conta . $dvAgConta . '000';
+        return $campolivre = $carteira . $sequencial . $dvAgContaCarteira . $agencia . $conta . $dvAgConta . '000';
     }
 
     /**
@@ -150,7 +170,6 @@ class Itau extends BoletoAbstract
     {
         return array(
             'carteira' => null, // Campo não utilizado pelo Itaú
-            'nosso_numero' => self::zeroFill($this->getCarteira(), 3) . '/' . self::zeroFill($this->getNossoNumero(), 8) . '-' . $this->carteiraDv,
         );
     }
 }

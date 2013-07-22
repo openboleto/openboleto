@@ -1,5 +1,6 @@
 <?php
 
+require '../src/OpenBoleto/Utils/Modulo.php';
 require '../src/OpenBoleto/BoletoAbstract.php';
 require '../src/OpenBoleto/Exception.php';
 require '../src/OpenBoleto/Agente.php';

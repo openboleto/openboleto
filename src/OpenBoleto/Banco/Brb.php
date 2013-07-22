@@ -1,8 +1,7 @@
 <?php
-/**
+
+/*
  * OpenBoleto - Geração de boletos bancários em PHP
- *
- * Classe boleto BRB - Banco de Brasília
  *
  * LICENSE: The MIT License (MIT)
  *
@@ -24,6 +23,16 @@
  * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+namespace OpenBoleto\Banco;
+
+use OpenBoleto\Utils\Modulo;
+use OpenBoleto\BoletoAbstract;
+use OpenBoleto\Exception;
+
+/**
+ * Classe boleto BRB - Banco de Brasília.
  *
  * @package    OpenBoleto
  * @author     Daniel Garajau <http://github.com/kriansa>
@@ -31,11 +40,6 @@
  * @license    MIT License
  * @version    0.1
  */
-
-namespace OpenBoleto\Banco;
-use OpenBoleto\BoletoAbstract;
-use OpenBoleto\Exception;
-
 class Brb extends BoletoAbstract
 {
     /**
@@ -68,11 +72,12 @@ class Brb extends BoletoAbstract
      */
     protected $carteirasNomes = array('1' => 'COB', '2' => 'COB');
 
-    /**
-     * Define o "nosso número", pois o BRB chama o número único do cliente de sequencial
-     * @var string
-     */
-    protected $sequencial;
+    public function getNossoNumero($incluirDv = true)
+    {
+        $campoLivre = $this->getCampoLivre();
+
+        return substr($campoLivre, 13);
+    }
 
     /**
      * Método para gerar o código da posição de 20 a 44
@@ -86,10 +91,10 @@ class Brb extends BoletoAbstract
                  $this->getCarteira() . 
                  static::zeroFill($this->getSequencial(), 6) .
                  $this->getCodigoBanco();
-        $d1 = static::modulo10($chave);
+        $d1 = Modulo::dez($chave);
 
         CalculaD2:
-        $modulo = static::modulo11($chave . $d1, 7);
+        $modulo = Modulo::onze($chave . $d1, 7);
 
         if ($modulo['resto'] == 0) {
             $d2 = 0;
@@ -104,56 +109,6 @@ class Brb extends BoletoAbstract
         }
 
         return $chave . $d1 . $d2;
-    }
-
-    /**
-     * Define o valor do Nosso Número (identificador único do boleto)
-     * => No Banco BRB, o nosso número não é modificado pelo usuário
-     * => Caso deseje alterar o número sequencial único, use o
-     * => Brb::setSequencial(). O BRB utiliza uma nomenclatura diferente
-     *
-     * @see Documentação BRB, arquivo "Leiaute Cobranca BRB 2012.pdf", página 4
-     *
-     * @param int $nossoNumero
-     * @return $this|void
-     * @throws \OpenBoleto\Exception
-     */
-    public function setNossoNumero($nossoNumero)
-    {
-        throw new Exception('Não é possível definir o nosso número do BRB diretamente! Utilize o método Brb::setSequencial()');
-    }
-
-    /**
-     * Retorna o valor do Nosso Número (identificador único do boleto)
-     *
-     * @return int
-     */
-    public function getNossoNumero()
-    {
-        $campoLivre = $this->getCampoLivre();
-        return substr($campoLivre, 13);
-    }
-
-    /**
-     * Define o campo sequencial (nosso número, em outras palavras)
-     *
-     * @param string $sequencial
-     * @return $this
-     */
-    public function setSequencial($sequencial)
-    {
-        $this->sequencial = $sequencial;
-        return $this;
-    }
-
-    /**
-     * Retorna o campo sequencial (nosso número, em outras palavras)
-     *
-     * @return string
-     */
-    public function getSequencial()
-    {
-        return $this->sequencial;
     }
 
     /**
