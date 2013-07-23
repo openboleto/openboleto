@@ -48,13 +48,7 @@ class Unicred extends BoletoAbstract
      * Localização do logotipo do banco, referente ao diretório de imagens
      * @var string
      */
-    protected $logoBanco = 'unicred.gif';
-
-    /**
-     * Linha de local de pagamento
-     * @var string
-     */
-    protected $localPagamento = 'Pagável em qualquer Banco até o vencimento';
+    protected $logoBanco = 'unicred.jpg';
 
     /**
      * Define as carteiras disponíveis para este banco
