@@ -1,4 +1,4 @@
-0.2 (22/07/2013)
+1.0
 ===================
 
 * Número Sequencial é obrigatório e Nosso Número é somente leitura.
