@@ -36,6 +36,11 @@ use OpenBoleto\BoletoAbstract;
 
 class BancoMock extends BoletoAbstract
 {
+    public function getNossoNumero($incluirDv = true)
+    {
+
+    }
+
 	public function getCampoLivre ()
 	{
 
