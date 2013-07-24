@@ -36,7 +36,7 @@ use OpenBoleto\Exception;
  * @author     Daniel Garajau <http://github.com/kriansa>
  * @copyright  Copyright (c) 2013 Estrada Virtual (http://www.estradavirtual.com.br)
  * @license    MIT License
- * @version    0.1
+ * @version    1.0
  */
 class Itau extends BoletoAbstract
 {
@@ -102,13 +102,22 @@ class Itau extends BoletoAbstract
         return $this->codigoCliente;
     }
 
-    public function getNossoNumero($incluirDv = true)
+    /**
+     * Retorna o Nosso Número calculado
+     *
+     * @param bool $incluirFormatacao Incluir formatação ou não (pontuação, espaços e barras)
+     * @return string
+     */
+    public function getNossoNumero($incluirFormatacao = true)
     {
         $this->getCampoLivre(); // <- Força o calculo do DV.
         $numero = self::zeroFill($this->getCarteira(), 3) . '/' . self::zeroFill($this->getSequencial(), 8);
 
-        if ($incluirDv) {
-            $numero .= '-' . $this->carteiraDv;
+        $numero .= '-' . $this->carteiraDv;
+
+        // Remove a formatação, caso especificado
+        if (!$incluirFormatacao) {
+            $numero = static::limparFormatacao($numero);
         }
 
         return $numero;

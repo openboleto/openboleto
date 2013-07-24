@@ -37,7 +37,7 @@ use OpenBoleto\Exception;
  * @author     Daniel Garajau <http://github.com/kriansa>
  * @copyright  Copyright (c) 2013 Estrada Virtual (http://www.estradavirtual.com.br)
  * @license    MIT License
- * @version    0.1
+ * @version    1.0
  */
 class BancoDoBrasil extends BoletoAbstract
 {
@@ -93,7 +93,14 @@ class BancoDoBrasil extends BoletoAbstract
         return $this->convenio;
     }
 
-    public function getNossoNumero($incluirDv = true)
+    /**
+     * Retorna o Nosso Número calculado
+     *
+     * @param bool $incluirFormatacao Incluir formatação ou não (pontuação, espaços e barras)
+     * @return string
+     * @throws Exception
+     */
+    public function getNossoNumero($incluirFormatacao = true)
     {
         $convenio = $this->getConvenio();
         $sequencial = $this->getSequencial();
@@ -119,13 +126,18 @@ class BancoDoBrasil extends BoletoAbstract
             case 7:
                 $numero = self::zeroFill($convenio, 7) . self::zeroFill($sequencial, 10);
                 break;
+
+            // Não é com 4, 6 ou 7 dígitos? Não existe.
             default:
                 throw new Exception('O código do convênio precisa ter 4, 6 ou 7 dígitos!');
         }
 
-        if ($incluirDv) {
-            $modulo = static::modulo11($numero);
-            $numero .= '-' . $modulo['digito'];
+        $modulo = static::modulo11($numero);
+        $numero .= '-' . $modulo['digito'];
+
+        // Remove a formatação, caso especificado
+        if (!$incluirFormatacao) {
+            $numero = static::limparFormatacao($numero);
         }
 
         return $numero;
@@ -140,7 +152,7 @@ class BancoDoBrasil extends BoletoAbstract
     public function getCampoLivre()
     {
         $length = strlen($this->getConvenio());
-        $nossoNumero = $this->getNossoNumero(false);
+        $nossoNumero = substr($this->getNossoNumero(false), 0, -1); // Nosso número sem o DV
 
         // Sequencial do cliente com 17 dígitos
         // Apenas para convênio com 6 dígitos, modalidade sem registro - carteira 16 e 18 (definida para 21)

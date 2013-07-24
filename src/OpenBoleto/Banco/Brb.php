@@ -36,7 +36,7 @@ use OpenBoleto\BoletoAbstract;
  * @author     Daniel Garajau <http://github.com/kriansa>
  * @copyright  Copyright (c) 2013 Estrada Virtual (http://www.estradavirtual.com.br)
  * @license    MIT License
- * @version    0.1
+ * @version    1.0
  */
 class Brb extends BoletoAbstract
 {
@@ -70,11 +70,15 @@ class Brb extends BoletoAbstract
      */
     protected $carteirasNomes = array('1' => 'COB', '2' => 'COB');
 
-    public function getNossoNumero($incluirDv = true)
+    /**
+     * Retorna o Nosso Número calculado
+     *
+     * @param bool $incluirFormatacao Incluir formatação ou não (pontuação, espaços e barras)
+     * @return string
+     */
+    public function getNossoNumero($incluirFormatacao = true)
     {
-        $campoLivre = $this->getCampoLivre();
-
-        return substr($campoLivre, 13);
+        return substr($this->getCampoLivre(), 13);
     }
 
     /**
@@ -110,14 +114,12 @@ class Brb extends BoletoAbstract
     }
 
     /**
-     * Define nomes de campos específicos do boleto do BRB
+     * Retorna o campo Agência/Cedente do boleto
      *
-     * @return array
+     * @return string
      */
-    public function getViewVars()
+    public function getAgenciaCodigoCedente()
     {
-        return array(
-            'agencia_codigo_cedente' => '000 - ' . $this->getAgencia() . ' - ' . $this->getConta(),
-        );
+        return '000 - ' . $this->getAgencia() . ' - ' . $this->getConta();
     }
 }

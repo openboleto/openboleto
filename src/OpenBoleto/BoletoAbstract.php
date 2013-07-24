@@ -36,7 +36,7 @@ use DateTime;
  * @author     Daniel Garajau <http://github.com/kriansa>
  * @copyright  Copyright (c) 2013 Estrada Virtual (http://www.estradavirtual.com.br)
  * @license    MIT License
- * @version    0.1
+ * @version    1.0
  */
 abstract class BoletoAbstract
 {
@@ -610,7 +610,6 @@ abstract class BoletoAbstract
     public function setSequencial($sequencial)
     {
         $this->sequencial = $sequencial;
-
         return $this;
     }
 
@@ -1107,12 +1106,22 @@ abstract class BoletoAbstract
     }
 
     /**
-     * Retorna o Nosso Número cálculado
+     * Mostra exception ao erroneamente tentar setar o nosso número
      *
-     * @param bool $incluirDv Incluir Dígito Verificador
+     * @throws Exception
+     */
+    public final function setNossoNumero()
+    {
+        throw new Exception('Não é possível definir o nosso número diretamente. Utilize o método setSequencial.');
+    }
+
+    /**
+     * Retorna o Nosso Número calculado
+     *
+     * @param bool $incluirFormatacao Incluir formatação ou não (pontuação, espaços e barras)
      * @return string
      */
-    public abstract function getNossoNumero($incluirDv = true);
+    public abstract function getNossoNumero($incluirFormatacao = true);
 
     /**
      * Método onde qualquer boleto deve extender para gerar o código da posição de 20 a 44
@@ -1250,7 +1259,7 @@ abstract class BoletoAbstract
     public function getCodigoBancoComDv()
     {
         $codigoBanco = $this->getCodigoBanco();
-        $digitoVerificador = $this->modulo11($codigoBanco);
+        $digitoVerificador = static::modulo11($codigoBanco);
 
         return $codigoBanco . '-' . $digitoVerificador['digito'];
     }
@@ -1274,7 +1283,7 @@ abstract class BoletoAbstract
 
         // Concatenates bankCode + currencyCode + first block of 5 characters and
         // calculates its check digit for part1.
-        $check_digit = $this->modulo10($this->getCodigoBanco() . $this->getMoeda() . $blocks['20-24']);
+        $check_digit = static::modulo10($this->getCodigoBanco() . $this->getMoeda() . $blocks['20-24']);
 
         // Shift in a dot on block 20-24 (5 characters) at its 2nd position.
         $blocks['20-24'] = substr_replace($blocks['20-24'], '.', 1, 0);
@@ -1284,14 +1293,14 @@ abstract class BoletoAbstract
         $part1 = $this->getCodigoBanco(). $this->getMoeda() . $blocks['20-24'] . $check_digit;
 
         // Calculates part2 check digit from 2nd block of 10 characters.
-        $check_digit = $this->modulo10($blocks['25-34']);
+        $check_digit = static::modulo10($blocks['25-34']);
 
         $part2 = $blocks['25-34'] . $check_digit;
         // Shift in a dot at its 6th position.
         $part2 = substr_replace($part2, '.', 5, 0);
 
         // Calculates part3 check digit from 3rd block of 10 characters.
-        $check_digit = $this->modulo10($blocks['35-44']);
+        $check_digit = static::modulo10($blocks['35-44']);
 
         // As part2, we do the same process again for part3.
         $part3 = $blocks['35-44'] . $check_digit;
@@ -1412,7 +1421,7 @@ abstract class BoletoAbstract
     {
         $num = self::zeroFill($this->getCodigoBanco(), 4) . $this->getMoeda() . $this->getFatorVencimento() . $this->getValorZeroFill() . $this->getCampoLivre();
 
-        $modulo = $this->modulo11($num);
+        $modulo = static::modulo11($num);
         if ($modulo['resto'] == 0 || $modulo['resto'] == 1 || $modulo['resto'] == 10) {
             $dv = 1;
         } else {
@@ -1420,6 +1429,17 @@ abstract class BoletoAbstract
         }
 
         return $dv;
+    }
+
+    /**
+     * Remove pontos, traços, espaços e barras de uma string
+     *
+     * @param string $string
+     * @return string
+     */
+    protected static function limparFormatacao($string)
+    {
+        return str_replace(array('.', '/', ' ', '-'), '', $string);
     }
 
     /**

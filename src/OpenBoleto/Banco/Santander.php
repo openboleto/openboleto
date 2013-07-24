@@ -37,7 +37,7 @@ use OpenBoleto\Exception;
  * @author     Daniel Garajau <http://github.com/kriansa>
  * @copyright  Copyright (c) 2013 Estrada Virtual (http://www.estradavirtual.com.br)
  * @license    MIT License
- * @version    0.1
+ * @version    1.0
  */
 class Santander extends BoletoAbstract
 {
@@ -97,9 +97,15 @@ class Santander extends BoletoAbstract
         return $this->ios;
     }
 
-    public function getNossoNumero($incluirDv = true)
+    /**
+     * Retorna o Nosso Número calculado
+     *
+     * @param bool $incluirFormatacao Incluir formatação ou não (pontuação, espaços e barras)
+     * @return string
+     */
+    public function getNossoNumero($incluirFormatacao = true)
     {
-        return self::zeroFill($this->sequencial, 13);
+        return self::zeroFill($this->getSequencial(), 13);
     }
 
     /**

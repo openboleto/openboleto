@@ -37,7 +37,7 @@ use OpenBoleto\Exception;
  * @author     Daniel Garajau <http://github.com/kriansa>
  * @copyright  Copyright (c) 2013 Estrada Virtual (http://www.estradavirtual.com.br)
  * @license    MIT License
- * @version    0.1
+ * @version    1.0
  */
 class Unicred extends BoletoAbstract
 {
@@ -59,9 +59,24 @@ class Unicred extends BoletoAbstract
      */
     protected $carteiras = array('11', '21', '31', '41', '51');
 
-    public function getNossoNumero($incluirDv = true)
+    /**
+     * Retorna o Nosso Número calculado
+     *
+     * @param bool $incluirFormatacao Incluir formatação ou não (pontuação, espaços e barras)
+     * @return string
+     */
+    public function getNossoNumero($incluirFormatacao = true)
     {
-        return $this->getCarteira() . '/' . self::zeroFill($this->sequencial, 12);
+        $numero = self::zeroFill($this->getSequencial(), 10);
+        $dv = static::modulo11($numero);
+        $numero .= '-' . $dv['digito'];
+
+        // Remove a formatação, caso especificado
+        if (!$incluirFormatacao) {
+            $numero = static::limparFormatacao($numero);
+        }
+
+        return $numero;
     }
 
     /**
@@ -72,8 +87,16 @@ class Unicred extends BoletoAbstract
      */
     public function getCampoLivre()
     {
-        $sequencial = self::zeroFill($this->sequencial, 12);
+        return self::zeroFill($this->getAgencia(), 4) . self::zeroFill($this->getConta(), 10) . self::zeroFill($this->getNossoNumero(false), 11);
+    }
 
-        return self::zeroFill($this->getAgencia(), 4) . self::zeroFill($this->getConta(), 10) . str_replace('-', '', $sequencial);
+    /**
+     * Retorna o campo Agência/Cedente do boleto
+     *
+     * @return string
+     */
+    public function getAgenciaCodigoCedente()
+    {
+        return static::zeroFill($this->getAgencia(), 4) . ' / ' . static::zeroFill($this->getConta(), 10);
     }
 }

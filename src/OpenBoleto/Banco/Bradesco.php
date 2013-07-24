@@ -36,7 +36,7 @@ use OpenBoleto\BoletoAbstract;
  * @author     Daniel Garajau <http://github.com/kriansa>
  * @copyright  Copyright (c) 2013 Estrada Virtual (http://www.estradavirtual.com.br)
  * @license    MIT License
- * @version    0.1
+ * @version    1.0
  */
 class Bradesco extends BoletoAbstract
 {
@@ -76,9 +76,15 @@ class Bradesco extends BoletoAbstract
      */
     protected $cip = '000';
 
-    public function getNossoNumero($incluirDv = true)
+    /**
+     * Retorna o Nosso Número calculado
+     *
+     * @param bool $incluirFormatacao Incluir formatação ou não (pontuação, espaços e barras)
+     * @return string
+     */
+    public function getNossoNumero($incluirFormatacao = true)
     {
-        return $this->sequencial;
+        return $this->getSequencial();
     }
 
     /**
