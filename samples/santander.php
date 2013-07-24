@@ -15,7 +15,7 @@ $boleto = new Santander(array(
     // Parâmetros obrigatórios
     'dataVencimento' => new DateTime('2013-01-24'),
     'valor' => 23.00,
-    'nossoNumero' => 12345678901, // Até 11 dígitos
+    'sequencial' => 12345678901, // Até 13 dígitos
     'sacado' => $sacado,
     'cedente' => $cedente,
     'agencia' => 1234, // Até 4 dígitos

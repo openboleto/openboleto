@@ -1,8 +1,7 @@
 <?php
-/**
+
+/*
  * OpenBoleto - Geração de boletos bancários em PHP
- *
- * Classe boleto Bradesco S/A
  *
  * LICENSE: The MIT License (MIT)
  *
@@ -24,6 +23,14 @@
  * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+namespace OpenBoleto\Banco;
+
+use OpenBoleto\BoletoAbstract;
+
+/**
+ * Classe boleto Bradesco S/A.
  *
  * @package    OpenBoleto
  * @author     Daniel Garajau <http://github.com/kriansa>
@@ -31,10 +38,6 @@
  * @license    MIT License
  * @version    0.1
  */
-
-namespace OpenBoleto\Banco;
-use OpenBoleto\BoletoAbstract;
-
 class Bradesco extends BoletoAbstract
 {
     /**
@@ -68,9 +71,15 @@ class Bradesco extends BoletoAbstract
      * Trata-se de código utilizado para identificar mensagens especificas ao cedente, sendo
      * que o mesmo consta no cadastro do Banco, quando não houver código cadastrado preencher
      * com zeros "000".
+     *
      * @var int
      */
     protected $cip = '000';
+
+    public function getNossoNumero($incluirDv = true)
+    {
+        return $this->sequencial;
+    }
 
     /**
      * Método para gerar o código da posição de 20 a 44
@@ -90,7 +99,7 @@ class Bradesco extends BoletoAbstract
      * Define o campo CIP do boleto
      *
      * @param int $cip
-     * @return $this
+     * @return Bradesco
      */
     public function setCip($cip)
     {
