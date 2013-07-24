@@ -20,7 +20,7 @@ $boleto = new Unicred(array(
     'agencia' => 3302, // Até 4 dígitos
     'carteira' => 51,
     'conta' => 2259, // Até 8 dígitos
-    'nossoNumero' => '1395-1',
+    'sequencial' => '1395-1',
 
     // Caso queira um número sequencial de 17 dígitos, a cobrança deverá:
     // - Ser sem registro (Carteiras 16 ou 17)

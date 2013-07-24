@@ -1,8 +1,7 @@
 <?php
-/**
+
+/*
  * OpenBoleto - Geração de boletos bancários em PHP
- *
- * Classe de agente usuário do boleto
  *
  * LICENSE: The MIT License (MIT)
  *
@@ -24,6 +23,12 @@
  * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+namespace OpenBoleto;
+
+/**
+ * Classe de agente usuário do boleto
  *
  * @package    OpenBoleto
  * @author     Daniel Garajau <http://github.com/kriansa>
@@ -31,9 +36,6 @@
  * @license    MIT License
  * @version    0.1
  */
-
-namespace OpenBoleto;
-
 class Agente
 {
     /**
