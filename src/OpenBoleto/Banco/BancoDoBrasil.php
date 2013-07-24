@@ -27,7 +27,6 @@
 
 namespace OpenBoleto\Banco;
 
-use OpenBoleto\Utils\Modulo;
 use OpenBoleto\BoletoAbstract;
 use OpenBoleto\Exception;
 
@@ -125,7 +124,7 @@ class BancoDoBrasil extends BoletoAbstract
         }
 
         if ($incluirDv) {
-            $modulo = Modulo::onze($numero);
+            $modulo = static::modulo11($numero);
             $numero .= '-' . $modulo['digito'];
         }
 

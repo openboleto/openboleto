@@ -26,7 +26,6 @@
 
 namespace OpenBoleto\Banco;
 
-use OpenBoleto\Utils\Modulo;
 use OpenBoleto\BoletoAbstract;
 use OpenBoleto\Exception;
 
@@ -141,7 +140,7 @@ class Itau extends BoletoAbstract
                 self::zeroFill($this->getCodigoCliente(), 5);
 
             // Define o DV da carteira para a view
-            $this->carteiraDv = $modulo = Modulo::dez($codigo);
+            $this->carteiraDv = $modulo = static::modulo10($codigo);
 
             return $codigo . $modulo . '0';
         }
@@ -149,14 +148,14 @@ class Itau extends BoletoAbstract
         // Geração do DAC - Anexo 4 do manual
         if (!in_array($this->getCarteira(), array('126', '131', '146', '150', '168'))) {
             // Define o DV da carteira para a view
-            $this->carteiraDv = $dvAgContaCarteira = Modulo::dez($agencia . $conta . $carteira . $sequencial);
+            $this->carteiraDv = $dvAgContaCarteira = static::modulo10($agencia . $conta . $carteira . $sequencial);
         } else {
             // Define o DV da carteira para a view
-            $this->carteiraDv = $dvAgContaCarteira = Modulo::dez($carteira . $sequencial);
+            $this->carteiraDv = $dvAgContaCarteira = static::modulo10($carteira . $sequencial);
         }
 
         // Módulo 10 Agência/Conta
-        $dvAgConta = Modulo::dez($agencia . $conta);
+        $dvAgConta = static::modulo10($agencia . $conta);
 
         return $campolivre = $carteira . $sequencial . $dvAgContaCarteira . $agencia . $conta . $dvAgConta . '000';
     }

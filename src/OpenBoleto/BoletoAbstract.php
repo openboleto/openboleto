@@ -27,7 +27,6 @@
 
 namespace OpenBoleto;
 
-use OpenBoleto\Utils\Modulo;
 use DateTime;
 
 /**
@@ -1251,7 +1250,7 @@ abstract class BoletoAbstract
     public function getCodigoBancoComDv()
     {
         $codigoBanco = $this->getCodigoBanco();
-        $digitoVerificador = Modulo::onze($codigoBanco);
+        $digitoVerificador = $this->modulo11($codigoBanco);
 
         return $codigoBanco . '-' . $digitoVerificador['digito'];
     }
@@ -1275,7 +1274,7 @@ abstract class BoletoAbstract
 
         // Concatenates bankCode + currencyCode + first block of 5 characters and
         // calculates its check digit for part1.
-        $check_digit = Modulo::dez($this->getCodigoBanco() . $this->getMoeda() . $blocks['20-24']);
+        $check_digit = $this->modulo10($this->getCodigoBanco() . $this->getMoeda() . $blocks['20-24']);
 
         // Shift in a dot on block 20-24 (5 characters) at its 2nd position.
         $blocks['20-24'] = substr_replace($blocks['20-24'], '.', 1, 0);
@@ -1285,14 +1284,14 @@ abstract class BoletoAbstract
         $part1 = $this->getCodigoBanco(). $this->getMoeda() . $blocks['20-24'] . $check_digit;
 
         // Calculates part2 check digit from 2nd block of 10 characters.
-        $check_digit = Modulo::dez($blocks['25-34']);
+        $check_digit = $this->modulo10($blocks['25-34']);
 
         $part2 = $blocks['25-34'] . $check_digit;
         // Shift in a dot at its 6th position.
         $part2 = substr_replace($part2, '.', 5, 0);
 
         // Calculates part3 check digit from 3rd block of 10 characters.
-        $check_digit = Modulo::dez($blocks['35-44']);
+        $check_digit = $this->modulo10($blocks['35-44']);
 
         // As part2, we do the same process again for part3.
         $part3 = $blocks['35-44'] . $check_digit;
@@ -1413,7 +1412,7 @@ abstract class BoletoAbstract
     {
         $num = self::zeroFill($this->getCodigoBanco(), 4) . $this->getMoeda() . $this->getFatorVencimento() . $this->getValorZeroFill() . $this->getCampoLivre();
 
-        $modulo = Modulo::onze($num);
+        $modulo = $this->modulo11($num);
         if ($modulo['resto'] == 0 || $modulo['resto'] == 1 || $modulo['resto'] == 10) {
             $dv = 1;
         } else {
@@ -1476,5 +1475,84 @@ abstract class BoletoAbstract
     protected static function caracteresDireita($string, $num)
     {
         return substr($string, strlen($string)-$num, $num);
+    }
+
+    /**
+     * Calcula e retorna o dígito verificador usando o algoritmo Modulo 10
+     *
+     * @param string $num
+     * @see Documentação em http://www.febraban.org.br/Acervo1.asp?id_texto=195&id_pagina=173&palavra=
+     * @return int
+     */
+    protected static function modulo10($num)
+    {
+        $numtotal10 = 0;
+        $fator = 2;
+
+        //  Separacao dos numeros.
+        for ($i = strlen($num); $i > 0; $i--) {
+            //  Pega cada numero isoladamente.
+            $numeros[$i] = substr($num,$i-1,1);
+            //  Efetua multiplicacao do numero pelo (falor 10).
+            $temp = $numeros[$i] * $fator;
+            $temp0=0;
+            foreach (preg_split('// ',$temp,-1,PREG_SPLIT_NO_EMPTY) as $v){ $temp0+=$v; }
+            $parcial10[$i] = $temp0; // $numeros[$i] * $fator;
+            //  Monta sequencia para soma dos digitos no (modulo 10).
+            $numtotal10 += $parcial10[$i];
+            if ($fator == 2) {
+                $fator = 1;
+            }
+            else {
+                // Intercala fator de multiplicacao (modulo 10).
+                $fator = 2;
+            }
+        }
+
+        $remainder  = $numtotal10 % 10;
+        $digito = 10 - $remainder;
+
+        // Make it zero if check digit is 10.
+        $digito = ($digito == 10) ? 0 : $digito;
+
+        return $digito;
+    }
+
+    /**
+     * Calcula e retorna o dígito verificador usando o algoritmo Modulo 11
+     *
+     * @param string $num
+     * @param int $base
+     * @see Documentação em http://www.febraban.org.br/Acervo1.asp?id_texto=195&id_pagina=173&palavra=
+     * @return array Retorna um array com as chaves 'digito' e 'resto'
+     */
+    protected static function modulo11($num, $base=9)
+    {
+        $fator = 2;
+
+        $soma  = 0;
+        // Separacao dos numeros.
+        for ($i = strlen($num); $i > 0; $i--) {
+            //  Pega cada numero isoladamente.
+            $numeros[$i] = substr($num,$i-1,1);
+            //  Efetua multiplicacao do numero pelo falor.
+            $parcial[$i] = $numeros[$i] * $fator;
+            //  Soma dos digitos.
+            $soma += $parcial[$i];
+            if ($fator == $base) {
+                //  Restaura fator de multiplicacao para 2.
+                $fator = 1;
+            }
+            $fator++;
+        }
+        $result = array(
+            'digito' => ($soma * 10) % 11,
+            // Remainder.
+            'resto'  => $soma % 11,
+        );
+        if ($result['digito'] == 10){
+            $result['digito'] = 0;
+        }
+        return $result;
     }
 }

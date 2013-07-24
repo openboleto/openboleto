@@ -27,9 +27,7 @@
 
 namespace OpenBoleto\Banco;
 
-use OpenBoleto\Utils\Modulo;
 use OpenBoleto\BoletoAbstract;
-use OpenBoleto\Exception;
 
 /**
  * Classe boleto BRB - Banco de Brasília.
@@ -91,10 +89,10 @@ class Brb extends BoletoAbstract
                  $this->getCarteira() . 
                  static::zeroFill($this->getSequencial(), 6) .
                  $this->getCodigoBanco();
-        $d1 = Modulo::dez($chave);
+        $d1 = static::modulo10($chave);
 
         CalculaD2:
-        $modulo = Modulo::onze($chave . $d1, 7);
+        $modulo = static::modulo11($chave . $d1, 7);
 
         if ($modulo['resto'] == 0) {
             $d2 = 0;
