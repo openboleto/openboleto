@@ -7,7 +7,7 @@ O OpenBoleto é uma biblioteca de código aberto para geração de boletos banc�
 Se você já conhece o **Composer** (o que é extremamente recomendado), simplesmente adicione a dependência abaixo à diretiva *"require"* seu **composer.json**:
 
 ```
-"kriansa/openboleto": "dev-master"
+"kriansa/openboleto": "dev-wip-1.0"
 ```
 
 ###PSR-0 autoloader
@@ -55,9 +55,9 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
 
 Toda contribuição é bem vinda. Se você deseja adaptar o OpenBoleto a algum outro banco, fique à vontade para explorar o código, veja como é bastante simples integrar qualquer banco à biblioteca.
 
-## Atenção
+## Aviso
 
-Esta ainda é uma versão alpha. Sua API pode mudar. Estamos trabalhando para criar a primeira versão stable, confira o branch *"wip-1.0"*.
+Este é o branch WIP (work in progress) da primeira versão stable. Todas as alterações aqui terão *feature freeze* logo após o primeiro release.
 
 ## Licença
 
