@@ -81,6 +81,13 @@ class Itau extends BoletoAbstract
     protected $carteiraDv;
 
     /**
+     * Cache do campo livre para evitar processamento desnecessário.
+     *
+     * @var string
+     */
+    protected $campoLivre;
+
+    /**
      * Define o código do cliente
      *
      * @param int $codigoCliente
@@ -124,10 +131,8 @@ class Itau extends BoletoAbstract
      */
     public function getCampoLivre()
     {
-        static $campolivre; // Cache do campo livre para evitar gerar várias vezes.
-
-        if ($campolivre) {
-            return $campolivre;
+        if ($this->campoLivre) {
+            return $this->campoLivre;
         }
 
         $sequencial = self::zeroFill($this->getSequencial(), 8);
@@ -144,7 +149,7 @@ class Itau extends BoletoAbstract
             // Define o DV da carteira para a view
             $this->carteiraDv = $modulo = static::modulo10($codigo);
 
-            return $codigo . $modulo . '0';
+            return $this->campoLivre = $codigo . $modulo . '0';
         }
 
         // Geração do DAC - Anexo 4 do manual
@@ -159,7 +164,7 @@ class Itau extends BoletoAbstract
         // Módulo 10 Agência/Conta
         $dvAgConta = static::modulo10($agencia . $conta);
 
-        return $campolivre = $carteira . $sequencial . $dvAgContaCarteira . $agencia . $conta . $dvAgConta . '000';
+        return $this->campoLivre = $carteira . $sequencial . $dvAgContaCarteira . $agencia . $conta . $dvAgConta . '000';
     }
 
     /**
