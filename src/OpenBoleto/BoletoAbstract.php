@@ -1116,12 +1116,29 @@ abstract class BoletoAbstract
     }
 
     /**
-     * Retorna o Nosso Número calculado
+     * Retorna o Nosso Número calculado.
      *
      * @param bool $incluirFormatacao Incluir formatação ou não (pontuação, espaços e barras)
      * @return string
      */
-    public abstract function getNossoNumero($incluirFormatacao = true);
+    public function getNossoNumero($incluirFormatacao = true)
+    {
+        $numero = $this->gerarNossoNumero();
+
+        // Remove a formatação, caso especificado
+        if (! $incluirFormatacao) {
+            $numero = static::limparFormatacao($numero);
+        }
+
+        return $numero;
+    }
+
+    /**
+     * Método onde o Boleto deverá gerar o Nosso Número.
+     *
+     * @return string
+     */
+    protected abstract function gerarNossoNumero();
 
     /**
      * Método onde qualquer boleto deve extender para gerar o código da posição de 20 a 44

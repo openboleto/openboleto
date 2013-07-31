@@ -94,13 +94,12 @@ class BancoDoBrasil extends BoletoAbstract
     }
 
     /**
-     * Retorna o Nosso Número calculado
+     * Gera o Nosso Número.
      *
-     * @param bool $incluirFormatacao Incluir formatação ou não (pontuação, espaços e barras)
-     * @return string
      * @throws Exception
+     * @return string
      */
-    public function getNossoNumero($incluirFormatacao = true)
+    protected function gerarNossoNumero()
     {
         $convenio = $this->getConvenio();
         $sequencial = $this->getSequencial();
@@ -134,11 +133,6 @@ class BancoDoBrasil extends BoletoAbstract
 
         $modulo = static::modulo11($numero);
         $numero .= '-' . $modulo['digito'];
-
-        // Remove a formatação, caso especificado
-        if (!$incluirFormatacao) {
-            $numero = static::limparFormatacao($numero);
-        }
 
         return $numero;
     }

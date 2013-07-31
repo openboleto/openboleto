@@ -71,12 +71,11 @@ class Brb extends BoletoAbstract
     protected $carteirasNomes = array('1' => 'COB', '2' => 'COB');
 
     /**
-     * Retorna o Nosso Número calculado
+     * Gera o Nosso Número.
      *
-     * @param bool $incluirFormatacao Incluir formatação ou não (pontuação, espaços e barras)
      * @return string
      */
-    public function getNossoNumero($incluirFormatacao = true)
+    protected function gerarNossoNumero()
     {
         return substr($this->getCampoLivre(), 13);
     }

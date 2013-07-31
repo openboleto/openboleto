@@ -77,12 +77,11 @@ class Bradesco extends BoletoAbstract
     protected $cip = '000';
 
     /**
-     * Retorna o Nosso Número calculado
+     * Gera o Nosso Número.
      *
-     * @param bool $incluirFormatacao Incluir formatação ou não (pontuação, espaços e barras)
      * @return string
      */
-    public function getNossoNumero($incluirFormatacao = true)
+    protected function gerarNossoNumero()
     {
         return $this->getSequencial();
     }
