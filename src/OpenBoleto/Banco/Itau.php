@@ -103,22 +103,15 @@ class Itau extends BoletoAbstract
     }
 
     /**
-     * Retorna o Nosso Número calculado
+     * Gera o Nosso Número.
      *
-     * @param bool $incluirFormatacao Incluir formatação ou não (pontuação, espaços e barras)
      * @return string
      */
-    public function getNossoNumero($incluirFormatacao = true)
+    protected function gerarNossoNumero()
     {
-        $this->getCampoLivre(); // <- Força o calculo do DV.
+        $this->getCampoLivre(); // Força o calculo do DV.
         $numero = self::zeroFill($this->getCarteira(), 3) . '/' . self::zeroFill($this->getSequencial(), 8);
-
         $numero .= '-' . $this->carteiraDv;
-
-        // Remove a formatação, caso especificado
-        if (!$incluirFormatacao) {
-            $numero = static::limparFormatacao($numero);
-        }
 
         return $numero;
     }
