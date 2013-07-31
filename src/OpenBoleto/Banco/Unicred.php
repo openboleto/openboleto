@@ -60,21 +60,15 @@ class Unicred extends BoletoAbstract
     protected $carteiras = array('11', '21', '31', '41', '51');
 
     /**
-     * Retorna o Nosso Número calculado
+     * Gera o Nosso Número.
      *
-     * @param bool $incluirFormatacao Incluir formatação ou não (pontuação, espaços e barras)
      * @return string
      */
-    public function getNossoNumero($incluirFormatacao = true)
+    protected function gerarNossoNumero()
     {
         $numero = self::zeroFill($this->getSequencial(), 10);
         $dv = static::modulo11($numero);
         $numero .= '-' . $dv['digito'];
-
-        // Remove a formatação, caso especificado
-        if (!$incluirFormatacao) {
-            $numero = static::limparFormatacao($numero);
-        }
 
         return $numero;
     }

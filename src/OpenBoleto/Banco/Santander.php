@@ -98,12 +98,11 @@ class Santander extends BoletoAbstract
     }
 
     /**
-     * Retorna o Nosso Número calculado
+     * Gera o Nosso Número.
      *
-     * @param bool $incluirFormatacao Incluir formatação ou não (pontuação, espaços e barras)
      * @return string
      */
-    public function getNossoNumero($incluirFormatacao = true)
+    protected function gerarNossoNumero()
     {
         return self::zeroFill($this->getSequencial(), 13);
     }
