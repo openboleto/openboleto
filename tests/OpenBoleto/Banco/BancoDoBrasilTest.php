@@ -38,7 +38,7 @@ class BancoDoBrasilTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('OpenBoleto\\Banco\\BancoDoBrasil', $instance);
         $this->assertEquals('00190.00009 01234.567004 00000.001180 7 55650000001050', $instance->getLinhaDigitavel());
-        $this->assertEquals('12345670000000001', $instance->getNossoNumero());
+        $this->assertSame('12345670000000001', (string) $instance->getNossoNumero());
     }
 
     public function testInstantiateWithConvenio6LengthShouldWork()
@@ -82,7 +82,7 @@ class BancoDoBrasilTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('OpenBoleto\\Banco\\BancoDoBrasil', $instance);
         $this->assertEquals('00191.23454 61234.567891 01234.567210 6 55650000001050', $instance->getLinhaDigitavel());
-        $this->assertEquals('12345678901234567', $instance->getNossoNumero());
+        $this->assertSame('12345678901234567', (string) $instance->getNossoNumero());
     }
 
     public function testInstantiateWithConvenio4LengthShouldWork()
@@ -109,6 +109,6 @@ class BancoDoBrasilTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('OpenBoleto\\Banco\\BancoDoBrasil', $instance);
         $this->assertEquals('00191.23405 00000.115451 10403.005183 5 55650000001050', $instance->getLinhaDigitavel());
-        $this->assertEquals('12340000001-1', $instance->getNossoNumero());
+        $this->assertSame('12340000001-1', (string) $instance->getNossoNumero());
     }
 }
