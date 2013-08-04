@@ -1125,9 +1125,11 @@ abstract class BoletoAbstract
     {
         $numero = $this->gerarNossoNumero();
 
+        // TODO: Fazer cache do nosso número para evitar múltiplas chamadas
+
         // Remove a formatação, caso especificado
-        if (! $incluirFormatacao) {
-            $numero = static::limparFormatacao($numero);
+        if (!$incluirFormatacao) {
+            return str_replace(array('.', '/', ' ', '-'), '', $numero);
         }
 
         return $numero;
@@ -1446,17 +1448,6 @@ abstract class BoletoAbstract
         }
 
         return $dv;
-    }
-
-    /**
-     * Remove pontos, traços, espaços e barras de uma string
-     *
-     * @param string $string
-     * @return string
-     */
-    protected static function limparFormatacao($string)
-    {
-        return str_replace(array('.', '/', ' ', '-'), '', $string);
     }
 
     /**
