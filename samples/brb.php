@@ -1,9 +1,6 @@
 <?php
 
-require '../src/OpenBoleto/BoletoAbstract.php';
-require '../src/OpenBoleto/Exception.php';
-require '../src/OpenBoleto/Agente.php';
-require '../src/OpenBoleto/Banco/Brb.php';
+require '../autoloader.php';
 
 use OpenBoleto\Banco\Brb;
 use OpenBoleto\Agente;
