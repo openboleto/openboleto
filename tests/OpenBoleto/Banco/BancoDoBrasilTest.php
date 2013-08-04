@@ -1,19 +1,10 @@
 <?php
 
 namespace Tests\OpenBoleto\Banco;
-use OpenBoleto\Agente;
 use OpenBoleto\Banco\BancoDoBrasil;
 
 class BancoDoBrasilTest extends \PHPUnit_Framework_TestCase
 {
-    protected static function getAgentes()
-    {
-        return array(
-            new Agente('Fernando Maia', '023.434.234-34', 'ABC 302 Bloco N', '72000-000', 'Brasília', 'DF'),
-            new Agente('Empresa de cosméticos LTDA', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF')
-        );
-    }
-
     public function testInstantiateWithoutArgumentsShouldWork()
     {
         $this->assertInstanceOf('OpenBoleto\\Banco\\BancoDoBrasil', new BancoDoBrasil());
@@ -21,15 +12,11 @@ class BancoDoBrasilTest extends \PHPUnit_Framework_TestCase
 
     public function testInstantiateWithConvenio7LengthShouldWork()
     {
-        list($sacado, $cedente) = static::getAgentes();
-
         $instance = new BancoDoBrasil(array(
             // Parâmetros obrigatórios
             'dataVencimento' => new \DateTime('2013-01-01'),
             'valor' => 10.50,
             'sequencial' => 1,
-            'sacado' => $sacado,
-            'cedente' => $cedente,
             'agencia' => 1545, // Até 4 dígitos
             'carteira' => 18,
             'conta' => 10403005, // Até 8 dígitos
@@ -43,15 +30,11 @@ class BancoDoBrasilTest extends \PHPUnit_Framework_TestCase
 
     public function testInstantiateWithConvenio6LengthShouldWork()
     {
-        list($sacado, $cedente) = static::getAgentes();
-
         $instance = new BancoDoBrasil(array(
             // Parâmetros obrigatórios
             'dataVencimento' => new \DateTime('2013-01-01'),
             'valor' => 10.50,
             'sequencial' => 1,
-            'sacado' => $sacado,
-            'cedente' => $cedente,
             'agencia' => 1545, // Até 4 dígitos
             'carteira' => 18,
             'conta' => 10403005, // Até 8 dígitos
@@ -65,15 +48,11 @@ class BancoDoBrasilTest extends \PHPUnit_Framework_TestCase
 
     public function testInstantiateWithConvenio6LengthAndCarteira21ShouldWork()
     {
-        list($sacado, $cedente) = static::getAgentes();
-
         $instance = new BancoDoBrasil(array(
             // Parâmetros obrigatórios
             'dataVencimento' => new \DateTime('2013-01-01'),
             'valor' => 10.50,
             'sequencial' => 12345678901234567, // 17 dígitos
-            'sacado' => $sacado,
-            'cedente' => $cedente,
             'agencia' => 1545, // Até 4 dígitos
             'carteira' => 21, // Carteira especial para sequencial com 17 dígitos, porém equivalente a carteira 18 ou 18
             'conta' => 10403005, // Até 8 dígitos
@@ -87,15 +66,11 @@ class BancoDoBrasilTest extends \PHPUnit_Framework_TestCase
 
     public function testInstantiateWithConvenio4LengthShouldWork()
     {
-        list($sacado, $cedente) = static::getAgentes();
-
         $instance = new BancoDoBrasil(array(
             // Parâmetros obrigatórios
             'dataVencimento' => new \DateTime('2013-01-01'),
             'valor' => 10.50,
             'sequencial' => 1,
-            'sacado' => $sacado,
-            'cedente' => $cedente,
             'agencia' => 1545, // Até 4 dígitos
             'carteira' => 18,
             'conta' => 10403005, // Até 8 dígitos
