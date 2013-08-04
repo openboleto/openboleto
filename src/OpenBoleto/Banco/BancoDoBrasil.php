@@ -63,7 +63,7 @@ class BancoDoBrasil extends BoletoAbstract
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array('31', '11', '16', '17', '18', '12', '51');
+    protected $carteiras = array('31', '11', '16', '17', '18', '12', '51', '21');
 
     /**
      * Define o número do convênio (4, 6 ou 7 caracteres)
@@ -131,8 +131,11 @@ class BancoDoBrasil extends BoletoAbstract
                 throw new Exception('O código do convênio precisa ter 4, 6 ou 7 dígitos!');
         }
 
-        $modulo = static::modulo11($numero);
-        $numero .= '-' . $modulo['digito'];
+        // Quando o nosso número tiver menos de 17 dígitos, colocar o dígito
+        if (strlen($numero) < 17) {
+            $modulo = static::modulo11($numero);
+            $numero .= '-' . $modulo['digito'];
+        }
 
         return $numero;
     }
@@ -146,7 +149,10 @@ class BancoDoBrasil extends BoletoAbstract
     public function getCampoLivre()
     {
         $length = strlen($this->getConvenio());
-        $nossoNumero = substr($this->getNossoNumero(false), 0, -1); // Nosso número sem o DV
+        $nossoNumero = $this->gerarNossoNumero();
+        // Nosso número sem o DV - repare que ele só vem com DV quando o mesmo é menor que 17 caracteres
+        // Então removemos o dígito (e o traço) apenas quando seu tamanho for menor que 17 caracteres
+        strlen($this->getNossoNumero()) < 17 and $nossoNumero = substr($nossoNumero, 0, -2);
 
         // Sequencial do cliente com 17 dígitos
         // Apenas para convênio com 6 dígitos, modalidade sem registro - carteira 16 e 18 (definida para 21)
