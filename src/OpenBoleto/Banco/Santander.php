@@ -1,8 +1,7 @@
 <?php
-/**
+
+/*
  * OpenBoleto - Geração de boletos bancários em PHP
- *
- * Classe boleto Santander
  *
  * LICENSE: The MIT License (MIT)
  *
@@ -24,18 +23,22 @@
  * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+namespace OpenBoleto\Banco;
+
+use OpenBoleto\BoletoAbstract;
+use OpenBoleto\Exception;
+
+/**
+ * Classe boleto Santander
  *
  * @package    OpenBoleto
  * @author     Daniel Garajau <http://github.com/kriansa>
  * @copyright  Copyright (c) 2013 Estrada Virtual (http://www.estradavirtual.com.br)
  * @license    MIT License
- * @version    0.1
+ * @version    1.0
  */
-
-namespace OpenBoleto\Banco;
-use OpenBoleto\BoletoAbstract;
-use OpenBoleto\Exception;
-
 class Santander extends BoletoAbstract
 {
     /**
@@ -95,6 +98,16 @@ class Santander extends BoletoAbstract
     }
 
     /**
+     * Gera o Nosso Número.
+     *
+     * @return string
+     */
+    protected function gerarNossoNumero()
+    {
+        return self::zeroFill($this->getSequencial(), 13);
+    }
+
+    /**
      * Método para gerar o código da posição de 20 a 44
      *
      * @return string
@@ -103,7 +116,7 @@ class Santander extends BoletoAbstract
     public function getCampoLivre()
     {
         return '9' . self::zeroFill($this->getConta(), 7) .
-            self::zeroFill($this->getNossoNumero(), 13) .
+            $this->getNossoNumero() .
             self::zeroFill($this->getIos(), 1) .
             self::zeroFill($this->getCarteira(), 3);
     }

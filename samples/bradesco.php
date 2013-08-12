@@ -1,9 +1,6 @@
 <?php
 
-require '../src/OpenBoleto/BoletoAbstract.php';
-require '../src/OpenBoleto/Exception.php';
-require '../src/OpenBoleto/Agente.php';
-require '../src/OpenBoleto/Banco/Bradesco.php';
+require '../autoloader.php';
 
 use OpenBoleto\Banco\Bradesco;
 use OpenBoleto\Agente;
@@ -15,7 +12,7 @@ $boleto = new Bradesco(array(
     // Parâmetros obrigatórios
     'dataVencimento' => new DateTime('2013-01-24'),
     'valor' => 23.00,
-    'nossoNumero' => 75896452, // Até 11 dígitos
+    'sequencial' => 75896452, // Até 11 dígitos
     'sacado' => $sacado,
     'cedente' => $cedente,
     'agencia' => 1172, // Até 4 dígitos

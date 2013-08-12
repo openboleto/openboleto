@@ -1,13 +1,17 @@
-# OpenBoleto [![Stories in Ready](http://badge.waffle.io/kriansa/openboleto.png)](http://waffle.io/kriansa/openboleto) 
+# OpenBoleto [![Stories in Ready](http://badge.waffle.io/kriansa/openboleto.png)](http://waffle.io/kriansa/openboleto) [![Build Status](https://api.travis-ci.org/kriansa/openboleto.png)](https://travis-ci.org/kriansa/openboleto) 
 
 O OpenBoleto é uma biblioteca de código aberto para geração de boletos bancários, um meio de pagamento muito comum no Brasil. O foco é ser simples e ter uma arquitetura compatível com os recursos mais modernos do PHP.
 
 ## Instalação
 ### Composer
 Se você já conhece o **Composer** (o que é extremamente recomendado), simplesmente adicione a dependência abaixo à diretiva *"require"* seu **composer.json**:
-
 ```
 "kriansa/openboleto": "dev-master"
+```
+
+Ou, caso você deseje usar o release v1.0 (12/08/2013)
+```
+"kriansa/openboleto": "v1.0"
 ```
 
 ###PSR-0 autoloader
@@ -54,10 +58,6 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
 * Unicred
 
 Toda contribuição é bem vinda. Se você deseja adaptar o OpenBoleto a algum outro banco, fique à vontade para explorar o código, veja como é bastante simples integrar qualquer banco à biblioteca.
-
-## Atenção
-
-Esta ainda é uma versão alpha. Sua API pode mudar. Estamos trabalhando para criar a primeira versão stable, confira o branch *"wip-1.0"*.
 
 ## Licença
 

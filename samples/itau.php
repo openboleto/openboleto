@@ -1,9 +1,6 @@
 <?php
 
-require '../src/OpenBoleto/BoletoAbstract.php';
-require '../src/OpenBoleto/Exception.php';
-require '../src/OpenBoleto/Agente.php';
-require '../src/OpenBoleto/Banco/Itau.php';
+require '../autoloader.php';
 
 use OpenBoleto\Banco\Itau;
 use OpenBoleto\Agente;
@@ -15,7 +12,7 @@ $boleto = new Itau(array(
     // Parâmetros obrigatórios
     'dataVencimento' => new DateTime('2013-01-24'),
     'valor' => 23.00,
-    'nossoNumero' => 12345678, // 8 dígitos
+    'sequencial' => 12345678, // 8 dígitos
     'sacado' => $sacado,
     'cedente' => $cedente,
     'agencia' => 1724, // 4 dígitos

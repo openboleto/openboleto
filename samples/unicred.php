@@ -1,9 +1,6 @@
 <?php
 
-require '../src/OpenBoleto/BoletoAbstract.php';
-require '../src/OpenBoleto/Exception.php';
-require '../src/OpenBoleto/Agente.php';
-require '../src/OpenBoleto/Banco/Unicred.php';
+require '../autoloader.php';
 
 use OpenBoleto\Banco\Unicred;
 use OpenBoleto\Agente;
@@ -18,14 +15,9 @@ $boleto = new Unicred(array(
     'sacado' => $sacado,
     'cedente' => $cedente,
     'agencia' => 3302, // Até 4 dígitos
-    'carteira' => 51,
-    'conta' => 2259, // Até 8 dígitos
-    'nossoNumero' => '1395-1',
-
-    // Caso queira um número sequencial de 17 dígitos, a cobrança deverá:
-    // - Ser sem registro (Carteiras 16 ou 17)
-    // - Convênio com 6 dígitos
-    // Para isso, defina a carteira como 21 (mesmo sabendo que ela é 16 ou 17, isso é uma regra do banco)
+    'carteira' => 51, // 11, 21, 31, 41 ou 51
+    'conta' => 2259, // Até 10 dígitos
+    'sequencial' => '13951', // Até 10 dígitos
 
     // Parâmetros recomendáveis
     //'logoPath' => 'http://empresa.com.br/logo.jpg', // Logo da sua empresa
