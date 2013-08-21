@@ -1208,6 +1208,7 @@ abstract class BoletoAbstract
             'valor_unitario' => static::formataDinheiro($this->getValorUnitario()),
             'sacador_avalista' => $this->getSacadorAvalista() ? $this->getSacadorAvalista()->getNomeDocumento() : null,
             'sacado' => $this->getSacado()->getNome(),
+            'sacado_documento' => $this->getSacado()->getDocumento(),
             'sacado_endereco1' => $this->getSacado()->getEndereco(),
             'sacado_endereco2' => $this->getSacado()->getCepCidadeUf(),
             'demonstrativo' => (array) $this->getDescricaoDemonstrativo() + array(null, null, null, null, null), // Max: 5 linhas
