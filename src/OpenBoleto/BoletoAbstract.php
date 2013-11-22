@@ -1241,8 +1241,8 @@ abstract class BoletoAbstract
      */
     public function getAgenciaCodigoCedente()
     {
-        $agencia = $this->getAgenciaDv() ? $this->getAgencia() . '-' . $this->getAgenciaDv() : $this->getAgencia();
-        $conta = $this->getContaDv() ? $this->getConta() . '-' . $this->getContaDv() : $this->getConta();
+        $agencia = $this->getAgenciaDv() !== null ? $this->getAgencia() . '-' . $this->getAgenciaDv() : $this->getAgencia();
+        $conta = $this->getContaDv() !== null ? $this->getConta() . '-' . $this->getContaDv() : $this->getConta();
         return $agencia . ' / ' . $conta;
     }
 
