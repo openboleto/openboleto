@@ -50,6 +50,7 @@ class BoletoFactory
         33 => 'Santander',
         70 => 'Brb',
         90 => 'Unicred',
+        104 => 'Caixa',
         237 => 'Bradesco',
         341 => 'Itau',
     );
