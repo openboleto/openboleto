@@ -53,6 +53,7 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
 * Banco de Brasília (BRB)
 * Banco do Brasil
 * Bradesco
+* Caixa (SIGCB)
 * Itaú
 * Santander
 * Unicred
