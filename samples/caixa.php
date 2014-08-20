@@ -5,8 +5,8 @@ require '../autoloader.php';
 use OpenBoleto\Banco\Caixa;
 use OpenBoleto\Agente;
 
-$sacado = new Agente('Lucas Zardo', '021.271.270-56', 'Av Presidente Vargas 2043 AP 302', '97015-513', 'Santa Maria', 'RS');
-$cedente = new Agente('DELIVERY MUCH ONLINE LTDA', '14.490.065/0001-77', 'Av Roraima 1000 - ITSM Sala 10', '97105-900', 'Santa Maria', 'RS');
+$sacado = new Agente('Fernando Maia', '023.434.234-34', 'ABC 302 Bloco N', '72000-000', 'Brasília', 'DF');
+$cedente = new Agente('Empresa de cosméticos LTDA', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF');
 
 $boleto = new Caixa(array(
     // Parâmetros obrigatórios
