@@ -23,7 +23,7 @@ class CaixaTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('OpenBoleto\\Banco\\Caixa', $instance);
         $this->assertEquals('10494.33756 65000.200546 00000.006106 8 60060000081094', $instance->getLinhaDigitavel());
-        $this->assertSame('24000005000000061-2', (string) $instance->getNossoNumero());
+        $this->assertSame('240000050000000612', (string) $instance->getNossoNumero());
     }
 
 }
