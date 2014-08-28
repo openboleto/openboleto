@@ -116,7 +116,7 @@ class Caixa extends BoletoAbstract
 
         // As 15 próximas posições no nosso número são a critério do beneficiário, utilizando o sequencial
         // Depois, calcula-se o código verificador por módulo 11
-        $modulo = self::modulo11($numero);
+        $modulo = self::modulo11($numero.self::zeroFill($sequencial, 15));
         $numero .= self::zeroFill($sequencial, 15) . '-' . $modulo['digito'];
 
         return $numero;
