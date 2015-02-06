@@ -56,7 +56,7 @@ class Brb extends BoletoAbstract
      * Linha de local de pagamento
      * @var string
      */
-    protected $localPagamento = 'Até o vencimento pagar em qualquer Banco, depois só no BRB';
+    protected $localPagamento = 'Pagar preferencialmente em conveniencia BRB';
 
     /**
      * Define as carteiras disponíveis para este banco
