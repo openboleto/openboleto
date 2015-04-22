@@ -52,7 +52,7 @@ class Caixa extends BoletoAbstract
      * Localização do logotipo do banco, referente ao diretório de imagens
      * @var string
      */
-    protected $logoBanco = 'caixa.png'; 
+    protected $logoBanco = 'caixa.png';
 
     /**
      * Linha de local de pagamento
