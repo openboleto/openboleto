@@ -23,6 +23,7 @@ $boleto = new Caixa(array(
     //'logoPath' => 'http://empresa.com.br/logo.jpg', // Logo da sua empresa
     'contaDv' => 2,
     'agenciaDv' => 1,
+    'codigoCedente' => '123654', //Até 6 dígitos
     'descricaoDemonstrativo' => array( // Até 5
         'Compra de materiais cosméticos',
         'Compra de alicate',
