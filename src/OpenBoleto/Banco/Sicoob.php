@@ -208,7 +208,9 @@ class Sicoob extends BoletoAbstract
      */
     public function getCampoLivre()
     {
-        return $this->getCarteira() . self::zeroFill($this->getAgencia(), 4) . '01' . self::zeroFill($this->getConvenio(), 7) . self::zeroFill($this->getSequencial(), 8) . $this->getNumeroParcela();
+        $nosso_numero = str_replace('-', '', $this->getNossoNumero());
+
+        return $this->getCarteira() . self::zeroFill($this->getAgencia(), 4) . '01' . self::zeroFill($this->getConvenio(), 7) . $nosso_numero . $this->getNumeroParcela();
     }
 
     /**
