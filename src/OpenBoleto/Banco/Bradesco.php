@@ -143,11 +143,8 @@ class Bradesco extends BoletoAbstract
     public function getDigitoVerificadorNossoNumero()
     {
         $numero = static::zeroFill($this->getCarteira(), 2) . static::zeroFill($this->getSequencial(), 11);
-        error_log($numero);
         $modulo = static::modulo11($numero, 7);
         $digito = 11 - $modulo['resto'];
-
-        error_log(print_r($modulo, true));
 
         if ($digito == 10) {
             $digito = "P";
