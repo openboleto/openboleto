@@ -49,10 +49,16 @@ class Caixa extends BoletoAbstract
     protected $codigoBanco = '104';
 
     /**
+     * Nome do banco
+     * @var string
+     */
+    protected $nomeBanco = 'Caixa Econômica Federal';
+
+    /**
      * Localização do logotipo do banco, referente ao diretório de imagens
      * @var string
      */
-    protected $logoBanco = 'caixa.png';
+    protected $logoBanco = 'caixa.png'; 
 
     /**
      * Linha de local de pagamento
@@ -218,8 +224,19 @@ class Caixa extends BoletoAbstract
     public function getAgenciaCodigoCedente()
     {
         $agencia = $this->getAgenciaDv() !== null ? $this->getAgencia() . '-' . $this->getAgenciaDv() : $this->getAgencia();
-        $conta = $this->getCodigoCedente() !== null ? $this->getCodigoCedente() : ($this->getContaDv() !== null ? $this->getConta() . '-' . $this->getContaDv() : $this->getConta());
+
+        //Calcula-se o dígito verificados pelo módulo 11
+        if($this->getCodigoCedente() !== null){
+            $dv = self::modulo11($this->codigoCedente);
+            $dv = 11 - (int)$dv['resto'];
+
+            $conta = $this->getCodigoCedente() . '-' . ($dv > 9 ? 0 : $dv);
+        }else if($this->getContaDv() !== null){
+            $conta = $this->getConta() . '-' . $this->getContaDv();
+        }else{
+            $conta = $this->getConta();
+        }
         
-        return $agencia . ' / ' . $conta;
+        return $agencia . '/' . $conta;
     }
 }
