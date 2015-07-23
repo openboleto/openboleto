@@ -43,6 +43,13 @@ use OpenBoleto\Agente;
 class Caixa extends BoletoAbstract
 {
     /**
+     * @var array Nome espécie das moedas
+     */
+    protected static $especie = array(
+        self::MOEDA_REAL => 'R$'
+    );
+
+    /**
      * Código do banco
      * @var string
      */
@@ -212,6 +219,16 @@ class Caixa extends BoletoAbstract
     public function getCodigoCedente()
     {
         return $this->codigoCedente;
+    }
+
+    /**
+     * Retorna o Nome do Banco
+     *
+     * @return string
+     */ 
+    public function getNomeBanco()
+    {
+        return $this->nomeBanco;
     }
 
     /**
