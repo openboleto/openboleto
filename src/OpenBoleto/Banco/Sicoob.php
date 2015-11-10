@@ -75,7 +75,7 @@ class Sicoob extends BoletoAbstract
      * Convênio utilizado pelo Sacado
      * @var integer
      */
-    protected $convenio = '53414';
+    protected $convenio = '12345';
     
     /**
      * Número de parcelas usadas no boleto ou carnê
@@ -159,6 +159,18 @@ class Sicoob extends BoletoAbstract
         }
 
         $this->modalidade = $modalidade;
+        
+        return $this;
+    }
+    
+    /**
+     * seta o convênio a ser utilizado pelo Sacado
+     * 
+     * @param integer $convenio Convẽnio do sacado
+     * @return \OpenBoleto\Banco\Sicoob
+     */
+    public function setConvenio($convenio) {
+        $this->convenio = $convenio;
         
         return $this;
     }

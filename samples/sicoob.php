@@ -18,6 +18,7 @@ $boleto = new Sicoob(array(
     'carteira' => '1', // 1, 2 e 3
     'modalidade' => '02', // 01, 02 e 05
     'conta' => 28037, // Até 10 dígitos
+    'convenio' => 12345, // Até 5 dígitos
     'sequencial' => '2002', // Até 10 dígitos
 
     // Parâmetros recomendáveis
