@@ -15,9 +15,10 @@ $boleto = new Caixa(array(
     'sequencial' => 1234567,
     'sacado' => $sacado,
     'cedente' => $cedente,
-    'agencia' => '0501', // Até 4 dígitos
+    'agencia' => '1131', // Até 4 dígitos
     'carteira' => 'SR', // SR => Sem Registro ou RG => Registrada
-    'conta' => '433756', // Até 6 dígitos
+    'conta' => '3298', // Até 6 dígitos
+    'codigoCedente' => '362755',
 
     // Parâmetros recomendáveis
     //'logoPath' => 'http://empresa.com.br/logo.jpg', // Logo da sua empresa
