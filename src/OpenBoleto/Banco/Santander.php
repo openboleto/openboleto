@@ -77,6 +77,8 @@ class Santander extends BoletoAbstract
      */
     protected $ios;
 
+    protected $carteiraDv;
+
     /**
      * Define o valor do IOS
      *
@@ -104,7 +106,7 @@ class Santander extends BoletoAbstract
      */
     protected function gerarNossoNumero()
     {
-        return self::zeroFill($this->getSequencial(), 13);
+        return self::zeroFill($this->getSequencial(), 13) . '-' . self::zeroFill($this->getCarteiraDv(), 1);
     }
 
     /**
@@ -116,9 +118,25 @@ class Santander extends BoletoAbstract
     public function getCampoLivre()
     {
         return '9' . self::zeroFill($this->getConta(), 7) .
-            $this->getNossoNumero() .
+            self::zeroFill($this->getSequencial(), 13) .
             self::zeroFill($this->getIos(), 1) .
             self::zeroFill($this->getCarteira(), 3);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCarteiraDv()
+    {
+        return $this->carteiraDv;
+    }
+
+    /**
+     * @param mixed $carteiraDv
+     */
+    public function setCarteiraDv($carteiraDv)
+    {
+        $this->carteiraDv = $carteiraDv;
     }
 
     /**
@@ -130,6 +148,7 @@ class Santander extends BoletoAbstract
     {
         return array(
             'esconde_uso_banco' => true,
+            'carteiraDv' => self::zeroFill($this->getCarteiraDv(), 1),
         );
     }
 }
