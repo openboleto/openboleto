@@ -81,9 +81,12 @@ class Bradesco extends BoletoAbstract
      *
      * @return string
      */
+
+    protected $carteiraDv;
+
     protected function gerarNossoNumero()
     {
-        return $this->getSequencial();
+        return self::zeroFill($this->getCarteira(), 2) . '/' . self::zeroFill($this->getSequencial(), 11) . '-' . self::zeroFill($this->getCarteiraDv(), 1);
     }
 
     /**
@@ -95,7 +98,7 @@ class Bradesco extends BoletoAbstract
     {
         return static::zeroFill($this->getAgencia(), 4) .
             static::zeroFill($this->getCarteira(), 2) .
-            static::zeroFill($this->getNossoNumero(), 11) .
+            static::zeroFill($this->getSequencial(), 11) .
             static::zeroFill($this->getConta(), 7) .
             '0';
     }
@@ -123,6 +126,22 @@ class Bradesco extends BoletoAbstract
     }
 
     /**
+     * @return mixed
+     */
+    public function getCarteiraDv()
+    {
+        return $this->carteiraDv;
+    }
+
+    /**
+     * @param mixed $carteiraDv
+     */
+    public function setCarteiraDv($carteiraDv)
+    {
+        $this->carteiraDv = $carteiraDv;
+    }
+
+    /**
      * Define nomes de campos específicos do boleto do Bradesco
      *
      * @return array
@@ -132,6 +151,7 @@ class Bradesco extends BoletoAbstract
         return array(
             'cip' => self::zeroFill($this->getCip(), 3),
             'mostra_cip' => true,
+            'carteiraDv' => self::zeroFill($this->getCarteiraDv(), 1),
         );
     }
 }
