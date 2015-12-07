@@ -174,4 +174,5 @@ class Caixa extends BoletoAbstract
 
        return $campoLivre;
     }
+
 }
