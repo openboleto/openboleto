@@ -151,11 +151,11 @@ class Sicoob extends BoletoAbstract
     protected function gerarNossoNumero()
     {
     	$agencia = self::zeroFill($this->getAgencia(), 4);
-    	$conta = self::zeroFill($this->getConta(), 10);
+    	$convenio = self::zeroFill($this->getConvenio(), 10);
         $numero = self::zeroFill($this->getSequencial(), 7);
         $sequencia_constante = str_split('319731973197319731973');
-        $fullfill = str_split($agencia . $conta . $numero);
-        
+        $fullfill = str_split($agencia . $convenio . $numero);
+
         $result = 0;
         for ($i=0; $i < count($fullfill); $i++) { 
         	$result += $fullfill[$i] * $sequencia_constante[$i];
