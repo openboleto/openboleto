@@ -167,16 +167,4 @@ class Itau extends BoletoAbstract
 
         return $this->campoLivre = $carteira . $sequencial . $dvAgContaCarteira . $agencia . $conta . $dvAgConta . '000';
     }
-
-    /**
-     * Define nomes de campos específicos do boleto do Itaú
-     *
-     * @return array
-     */
-    public function getViewVars()
-    {
-        return array(
-            'carteira' => null, // Campo não utilizado pelo Itaú
-        );
-    }
 }
