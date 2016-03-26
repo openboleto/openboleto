@@ -1175,6 +1175,19 @@ abstract class BoletoAbstract
         return array();
     }
 
+	/**
+	 * Retorna a base HTML para carne
+	 *
+	 * @return string
+	 */
+	public function getHtmlBase(){
+		ob_start();
+		$resource_path = $this->getResourcePath();
+		@include $this->getResourcePath() . '/views/partials/base-html-carne-pdf.phtml';
+
+		return ob_get_clean();
+	}
+
     /**
      * Retorna o HTML do boleto gerado
      *
@@ -1335,7 +1348,7 @@ abstract class BoletoAbstract
         // Now put everything together.
         return "$part1 $part2 $part3 $cd $part4";
     }
-
+    
     /**
      * Retorna a string contendo as imagens do código de barras, segundo o padrão Febraban
      *
@@ -1345,65 +1358,9 @@ abstract class BoletoAbstract
     {
         $codigo = $this->getNumeroFebraban();
 
-        $barcodes = array('00110', '10001', '01001', '11000', '00101', '10100', '01100', '00011', '10010', '01010');
-
-        for ($f1 = 9; $f1 >= 0; $f1--) {
-            for ($f2 = 9; $f2 >= 0; $f2--) {
-
-                $f = ($f1 * 10) + $f2;
-                $texto = '';
-
-                for ($i = 1; $i < 6; $i++) {
-                    $texto .= substr($barcodes[$f1], ($i - 1), 1) . substr($barcodes[$f2], ($i - 1), 1);
-                }
-
-                $barcodes[$f] = $texto;
-            }
-        }
-
-        // Guarda inicial
-        $retorno = '<div class="barcode">' .
-        '<div class="black thin"></div>' .
-        '<div class="white thin"></div>' .
-        '<div class="black thin"></div>' .
-        '<div class="white thin"></div>';
-
-        if (strlen($codigo) % 2 != 0) {
-            $codigo = "0" . $codigo;
-        }
-
-        // Draw dos dados
-        while (strlen($codigo) > 0) {
-
-            $i = (int) round(self::caracteresEsquerda($codigo, 2));
-            $codigo = self::caracteresDireita($codigo, strlen($codigo) - 2);
-            $f = $barcodes[$i];
-
-            for ($i = 1; $i < 11; $i += 2) {
-
-                if (substr($f, ($i - 1), 1) == "0") {
-                    $f1 = 'thin';
-                } else {
-                    $f1 = 'large';
-                }
-
-                $retorno .= "<div class='black {$f1}'></div>";
-
-                if (substr($f, $i, 1) == "0") {
-                    $f2 = 'thin';
-                } else {
-                    $f2 = 'large';
-                }
-
-                $retorno .= "<div class='white {$f2}'></div>";
-            }
-        }
-
-        // Final
-        return $retorno . '<div class="black large"></div>' .
-        '<div class="white thin"></div>' .
-        '<div class="black thin"></div>' .
-        '</div>';
+        $barcode = new barCodeGenerator($codigo,0,'ber.gif');
+		
+		$retorno = $barcode->get_data64();
     }
 
     /**
