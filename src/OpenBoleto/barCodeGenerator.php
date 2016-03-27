@@ -56,9 +56,9 @@ class barCodeGenerator{
 		$cl_white = imagecolorallocate($this->img, 255, 255, 255); 
 
 		imagefilledrectangle($this->img, 1,5,1,65,$cl_black); 
-		imagefilledrectangle($this->img, 2,5,2,65,$cl_white); 
+		//imagefilledrectangle($this->img, 2,5,2,65,$cl_white); 
 		imagefilledrectangle($this->img, 3,5,3,65,$cl_black); 
-		imagefilledrectangle($this->img, 4,5,4,65,$cl_white); 
+		//imagefilledrectangle($this->img, 4,5,4,65,$cl_white); 
 		$thin = 1 ; 
 		if(substr_count(strtoupper($_SERVER['SERVER_SOFTWARE']),"WIN32")){ 
 			$wide = 3; 
@@ -90,14 +90,14 @@ class barCodeGenerator{
 				}else{ 
 					$f2 = $wide ; 
 				} 
-				imagefilledrectangle($this->img, $pos,5,$pos-1+$f2,65,$cl_white) ; 
+				//imagefilledrectangle($this->img, $pos,5,$pos-1+$f2,65,$cl_white) ; 
 				$pos = $pos + $f2 ; 
 			} 
 		} 
 		imagefilledrectangle($this->img, $pos,5,$pos-1+$wide,65,$cl_black); 
 		$pos=$pos+$wide; 
 
-		imagefilledrectangle($this->img, $pos,5,$pos-1+$thin,65,$cl_white); 
+		//imagefilledrectangle($this->img, $pos,5,$pos-1+$thin,65,$cl_white); 
 		$pos=$pos+$thin; 
 
 
