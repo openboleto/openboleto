@@ -1,5 +1,5 @@
 <!--
-* OpenBoleto - Geração de boletos bancários em PHP
+* OpenBoleto - GeraÃ§Ã£o de boletos bancÃ¡rios em PHP
 *
 * LICENSE: The MIT License (MIT)
 *
@@ -35,11 +35,11 @@
 			</td>
 		</tr>
 		<tr>
-			<td width="150" colspan="7">
+			<td  colspan="7">
 				<div class="titulo">Local de pagamento</div>
 				<div class="conteudo"><?php echo $local_pagamento ?></div>
 			</td>
-			<td width="70">
+			<td width="100">
 				<div class="titulo">Vencimento</div>
 				<div class="conteudo rtl"><?php echo $data_vencimento ?></div>
 			</td>
@@ -50,33 +50,33 @@
 				<div class="conteudo"><?php echo $cedente ?></div>
 			</td>
 			<td>
-				<div class="titulo">Agência/Código cedente</div>
+				<div class="titulo">AgÃªncia/CÃ³digo cedente</div>
 				<div class="conteudo rtl"><?php echo $agencia_codigo_cedente ?></div>
 			</td>
 		</tr>
 		<tr>
-			<td width="60" colspan="2">
+			<td  colspan="2">
 				<div class="titulo">Data do documento</div>
 				<div class="conteudo"><?php echo $data_documento ?></div>
 			</td>
-			<td width="60" colspan="2">
-				<div class="titulo">Nº documento</div>
+			<td  colspan="2">
+				<div class="titulo">NÂº documento</div>
 				<div class="conteudo"><?php echo $numero_documento ?></div>
 			</td>
-			<td width="30">
-				<div class="titulo">Espécie doc.</div>
+			<td >
+				<div class="titulo">EspÃ©cie doc.</div>
 				<div class="conteudo"><?php echo $especie_doc ?></div>
 			</td>
 			<td>
 				<div class="titulo">Aceite</div>
 				<div class="conteudo"><?php echo $aceite ?></div>
 			</td>
-			<td width="50">
+			<td >
 				<div class="titulo">Data processamento</div>
 				<div class="conteudo"><?php echo $data_processamento ?></div>
 			</td>
 			<td>
-				<div class="titulo">Nosso número</div>
+				<div class="titulo">Nosso nÃºmero</div>
 				<div class="conteudo rtl"><?php echo $nosso_numero ?></div>
 			</td>
 		</tr>
@@ -101,7 +101,7 @@
 				<div class="conteudo"><?php echo $carteira ?></div>
 			</td>
 			<td width="20">
-				<div class="titulo">Espécie</div>
+				<div class="titulo">EspÃ©cie</div>
 				<div class="conteudo"><?php echo $especie ?></div>
 			</td>
 			<td colspan="2">
@@ -119,7 +119,7 @@
 		</tr>
 		<tr>
 			<td colspan="7">
-				<div class="titulo">Instruções (Texto de responsabilidade do cedente)</div>
+				<div class="titulo">InstruÃ§Ãµes (Texto de responsabilidade do cedente)</div>
 			</td>
 			<td>
 				<div class="titulo">(-) Descontos / Abatimentos</div>
@@ -132,7 +132,7 @@
 				<div class="conteudo"><?php echo $instrucoes[1]; ?></div>
 			</td>
 			<td>
-				<div class="titulo">(-) Outras deduções</div>
+				<div class="titulo">(-) Outras deduÃ§Ãµes</div>
 				<div class="conteudo rtl"><?php echo $outras_deducoes ?></div>
 			</td>
 		</tr>
@@ -152,7 +152,7 @@
 				<div class="conteudo"><?php echo $instrucoes[5]; ?></div>
 			</td>
 			<td>
-				<div class="titulo">(+) Outros acréscimos</div>
+				<div class="titulo">(+) Outros acrÃ©scimos</div>
 				<div class="conteudo rtl"><?php echo $outros_acrescimos ?></div>
 			</td>
 		</tr>
@@ -175,7 +175,7 @@
 
 			</td>
 			<td class="noleftborder">
-				<div class="titulo" style="margin-top: 50px">Cód. Baixa</div>
+				<div class="titulo" style="margin-top: 50px">CÃ³d. Baixa</div>
 			</td>
 		</tr>
 
@@ -184,14 +184,14 @@
 				<div class="titulo">Sacador/Avalista <div class="conteudo sacador"><?php echo $sacador_avalista; ?></div></div>
 			</td>
 			<td colspan="2" class="norightborder noleftborder">
-				<div class="conteudo noborder rtl">Autenticação mecânica - Ficha de Compensação</div>
+				<div class="conteudo noborder rtl">AutenticaÃ§Ã£o mecÃ¢nica - Ficha de CompensaÃ§Ã£o</div>
 			</td>
 		</tr>
 
 		<tr>
 			<td colspan="8" class="noborder">
 				<div class="barcode">
-					<?php echo '<img src="'. $codigo_barras.'" alt="codigo de barras">'; ?>
+					<img src="<?php echo $codigo_barras; ?>" alt="codigo de barras"> 
 				</div>
 			</td>
 		</tr>
