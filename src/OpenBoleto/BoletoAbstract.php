@@ -1237,7 +1237,7 @@ abstract class BoletoAbstract
             'codigo_barras' => $this->getImagemCodigoDeBarras(),
             'resource_path' => $this->getResourcePath(),
         ));
-
+	$bageBreak = (is_int($counter/3))?"page-break-after:always;":""; // adiciona suporte a css page-break
         // Override view variables when rendering
         extract($this->getViewVars());
 
