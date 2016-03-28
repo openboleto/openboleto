@@ -1,5 +1,5 @@
 /**
- * OpenBoleto - Geração de boletos bancários em PHP
+ * OpenBoleto - GeraÃ§Ã£o de boletos bancÃ¡rios em PHP
  *
  * LICENSE: The MIT License (MIT)
  *
@@ -38,7 +38,7 @@ body{
 
 .table-boleto {
 	font: 8px Arial;
-	width: 590px;
+	width: 96%;
 	
 }
 
@@ -167,4 +167,12 @@ body{
 .barcode div {
 	display: inline-block;
 	height: 100%;
+}
+.ficha-de-compensacao {
+	float: left; 
+	margin-left: 160px;
+	width: 0px;
+}
+.ficha-de-compensacao .table-boleto{
+	width: 590px;
 }
