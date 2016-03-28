@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
- * OpenBoleto - Geração de boletos bancários em PHP
+ * OpenBoleto - GeraÃ§Ã£o de boletos bancÃ¡rios em PHP
  *
  * LICENSE: The MIT License (MIT)
  *
@@ -47,7 +47,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" width="180">
+				<td colspan="2" width="200">
 					<div class="titulo">Cedente</div>
 					<div class="conteudo"><?php echo $cedente ?></div>
 				</td>
@@ -56,10 +56,10 @@
 					<div class="conteudo"><?php echo $cedente_cpf_cnpj ?></div>
 				</td>
 				<td width="100">
-					<div class="titulo">Agência/Código do Cedente</div>
+					<div class="titulo">AgÃªncia/CÃ³digo do Cedente</div>
 					<div class="conteudo rtl"><?php echo $agencia_codigo_cedente ?></div>
 				</td>
-				<td width="80">
+				<td width="90">
 					<div class="titulo">Vencimento</div>
 					<div class="conteudo rtl"><?php echo $data_vencimento ?></div>
 				</td>
@@ -70,17 +70,17 @@
 					<div class="conteudo"><?php echo $sacado ?></div>
 				</td>
 				<td>
-					<div class="titulo">Nº documento</div>
+					<div class="titulo">NÂº documento</div>
 					<div class="conteudo rtl"><?php echo $numero_documento ?></div>
 				</td>
 				<td>
-					<div class="titulo">Nosso número</div>
+					<div class="titulo">Nosso nÃºmero</div>
 					<div class="conteudo rtl"><?php echo $nosso_numero ?></div>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<div class="titulo">Espécie</div>
+					<div class="titulo">EspÃ©cie</div>
 					<div class="conteudo"><?php echo $especie ?></div>
 				</td>
 				<td>
@@ -106,11 +106,11 @@
 					<div class="titulo">Demonstrativo</div>
 				</td>
 				<td>
-					<div class="titulo">(-) Outras deduções</div>
+					<div class="titulo">(-) Outras deduÃ§Ãµes</div>
 					<div class="conteudo"><?php echo $outras_deducoes ?></div>
 				</td>
 				<td>
-					<div class="titulo">(+) Outros acréscimos</div>
+					<div class="titulo">(+) Outros acrÃ©scimos</div>
 					<div class="conteudo rtl"><?php echo $outros_acrescimos ?></div>
 				</td>
 				<td>
@@ -120,7 +120,7 @@
 			</tr>
 			<tr>
 				<td colspan="4"><div style="margin-top: 10px" class="conteudo"><?php echo $demonstrativo[0] ?></div></td>
-				<td class="noleftborder"><div class="titulo">Autenticação mecânica</div></td>
+				<td class="noleftborder"><div class="titulo">AutenticaÃ§Ã£o mecÃ¢nica</div></td>
 			</tr>
 			<tr>
 				<td colspan="5" class="notopborder"><div class="conteudo"><?php echo $demonstrativo[1] ?></div></td>
@@ -140,7 +140,7 @@
 		<div class="linha-pontilhada">Corte na linha pontilhada</div>
 		<br>
 
-		<!-- Ficha de compensação -->
+		<!-- Ficha de compensaÃ§Ã£o -->
 		<?php include('partials/ficha-de-compensacao-pdf.phtml') ?>
 	</div>
 </body>
