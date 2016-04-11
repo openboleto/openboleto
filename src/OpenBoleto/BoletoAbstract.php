@@ -1559,21 +1559,15 @@ abstract class BoletoAbstract
     {
         $fator = 2;
 
-        $soma  = 0;
-        // Separacao dos numeros.
-        for ($i = strlen($num); $i > 0; $i--) {
-            //  Pega cada numero isoladamente.
-            $numeros[$i] = substr($num,$i-1,1);
-            //  Efetua multiplicacao do numero pelo falor.
-            $parcial[$i] = $numeros[$i] * $fator;
-            //  Soma dos digitos.
-            $soma += $parcial[$i];
-            if ($fator == $base) {
-                //  Restaura fator de multiplicacao para 2.
-                $fator = 1;
-            }
-            $fator++;
+        $soma = 0;
+        // Reverte e separa os numeros
+        foreach(str_split(strrev($num)) as $numero){
+            // Efetua multiplicacao do numero pelo falor.
+            $soma += $numero * $fator;
+            //  Restaura fator de multiplicacao para 2 caso o fator seja igual a base.
+            $fator = ($fator == $base)? 2 : $fator + 1;
         }
+
         $result = array(
             'digito' => ($soma * 10) % 11,
             // Remainder.
