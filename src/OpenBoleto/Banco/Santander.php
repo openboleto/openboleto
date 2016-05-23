@@ -106,7 +106,8 @@ class Santander extends BoletoAbstract
      */
     protected function gerarNossoNumero()
     {
-        return self::zeroFill($this->getSequencial(), 13) . '-' . self::zeroFill($this->getCarteiraDv(), 1);
+        $sequencial = substr($this->getSequencial(),0,-1);
+        return self::zeroFill($sequencial, 12) . '-' . self::zeroFill($this->getCarteiraDv(), 1);
     }
 
     /**
