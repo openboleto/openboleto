@@ -61,6 +61,43 @@ class Itau extends BoletoAbstract
     /**
      * Define as carteiras disponíveis para este banco
      * @var array
+     *
+     * 102 - Sem Registro Com Emissão Integral - Carnê
+     * 103 - Sem Registro Com Emissão/Entrega - Carnê
+     * 104 - Escritural Eletrônica - Carnê
+     * 105 - Escritural Eletrônica - Dólar - Carnê
+     * 106 - S/Registro C/Emissão/Entrega-15 dígitos-Carnê
+     * 107 - S/Registro C/Emissão Integral-15 Posições-Carnê
+     * 108 - Direta Eletrônica Emissão Integral - Carnê
+     * 109 - Direta Eletrônica Sem Emissão - Simples
+     * 110 - Direta Eletrônica Sem Emissão - Simples
+     * 111 - Direta Eletrônica Sem Emissão - Simples
+     * 112 - Escritural Eletrônica - simples / contratual
+     * 113 - Escritural Eletrônica - TR - Carnê
+     * 114 - Escritural Eletrônica - Seguros
+     * 115 - Carteira 115
+     * 120 - S/Registro Emissão Integral C/IOF 2% - Carnê
+     * 121 - Direta Eletrônica Emissão Parcial - Simples/Contra
+     * 122 - S/Registro S/Emissão 15 Dígitos C/IOF 2%
+     * 126 - Direta Eletrônica Sem Emissão - Seguros
+     * 129 - S/Registro Emissão Parcial Seguros C/IOF 2%
+     * 131 - Direta Eletrônica c/ Valor em Aberto
+     * 139 - S/Registro Emissão Parcial Seguros C/IOF 4%
+     * 140 - S/Registro Emissão Integral C/IOF 4% - Carnê
+     * 141 - S/Registro Emissão Integral C/IOF 7% - Carnê
+     * 142 - S/Registro S/Emissão 15 DÍGITOS C/IOF 4%
+     * 143 - S/Registro S/Emissão 15 DÍGITOS C/IOF 7%
+     * 146 - Descrição Não Disponível
+     * 147 - Escritural Eletrônica - Dólar
+     * 150 - Direta Eletrônica Sem Emissão - Dólar
+     * 166 - Escritural Eletrônica - TR
+     * 168 - Direta Eletrônica Sem Emissão - TR
+     * 169 - S/Registro Emissão Parcial Seguros C/IOF 7%
+     * 172 - Sem Registro Com Emissão Integral
+     * 173 - Sem Registro Com Emissão/Entrega
+     * 174 - Sem Registro Emissão Parcial Com Protesto Borderô
+     * 175 - Sem Registro Sem Emissão
+     * 
      */
     protected $carteiras = array(
         '148', '149', '153', '108', '180', '121', '150', '109', '191', '116', '117', '119',
