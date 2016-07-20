@@ -1177,10 +1177,13 @@ abstract class BoletoAbstract
 
     /**
      * Retorna o HTML do boleto gerado
+     * D: send to the browser and force a file download with the name given by $filename.
+     * F: save to a local file with the name given by $filename (may include a path).
+     * S: return the document as a string. $filename is ignored.
      *
      * @return string
      */
-    public function getOutput()
+    public function getOutput($dest = 'S', $filename = '')
     {
         ob_start();
 
@@ -1231,7 +1234,49 @@ abstract class BoletoAbstract
         // Ignore errors inside the template
         @include $this->getResourcePath() . '/views/' . $this->getLayout();
 
-        return ob_get_clean();
+        $html = ob_get_clean();
+
+        if(empty($dest)) {
+            if(empty($filename)) {
+                $filename='boleto.html';
+                $dest='S';
+            }
+            else { $filename='F'; }
+        }
+        switch($dest) {
+            case 'D':
+                //Download file
+                header('Content-Description: File Transfer');
+                header('Content-Transfer-Encoding: binary');
+                header('Cache-Control: public, must-revalidate, max-age=0');
+                header('Pragma: public');
+                header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
+                header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
+                header('Content-Type: application/force-download');
+                header('Content-Type: application/octet-stream', false);
+                header('Content-Type: application/download', false);
+                header('Content-Type: application/pdf', false);
+                if (!isset($_SERVER['HTTP_ACCEPT_ENCODING']) OR empty($_SERVER['HTTP_ACCEPT_ENCODING'])) {
+                    // don't use length if server using compression
+                    header('Content-Length: '.strlen($html));
+                }
+                header('Content-disposition: attachment; filename="'.$filename.'"');
+                echo $html;
+                break;
+            case 'F':
+                //Save to local file
+                $f=fopen($filename,'wb');
+                if(!$f) echo 'Unable to create output file: '.$filename;
+                fwrite($f,$html,strlen($html));
+                fclose($f);
+                break;
+            case 'S':
+            default:
+                //Return as a string
+                return $html;
+        }
+        return true;
+
     }
 
     /**
