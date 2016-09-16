@@ -27,7 +27,8 @@
 	}
 }
 @page {
-	  margin-left: 0.4cm;
+      margin-left: 0.4cm;
+	  margin-right: 0.4cm;
 	  margin-top: 0.2cm;
 	  margin-bottom: 0px;
 	}
@@ -45,6 +46,7 @@ body{
 .table-boleto td {
 	border-left: 1px solid #000;
 	border-top: 1px solid #000;
+    width: 40px;
 }
 
 .table-boleto td:last-child {
@@ -170,9 +172,9 @@ body{
 }
 .ficha-de-compensacao {
 	float: left; 
-	margin-left: 160px;
+	margin-left: 150px;
 	width: 0px;
 }
 .ficha-de-compensacao .table-boleto{
-	width: 590px;
+/*	width: 600px;*/
 }
