@@ -1,9 +1,9 @@
 {
-    "name": "nandodutra/openboleto",
+    "name": "kriansa/openboleto",
     "type": "library",
     "description": "Biblioteca para geração de boletos bancários.",
     "keywords": ["boleto", "boleto bancario"],
-    "homepage": "http://github.com/nandodutra/openboleto",
+    "homepage": "http://github.com/kriansa/openboleto",
     "license": "MIT",
     "authors": [
         {
