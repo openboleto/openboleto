@@ -33,9 +33,10 @@ use OpenBoleto\Exception;
 /**
  * Classe boleto Sicoob.
  *
+ *
  * @package    OpenBoleto
  * @author     Fernando Dutra Neres <http://github.com/nandodutra>
- * @copyright  Copyright (c) 2013 Estrada Virtual (http://www.estradavirtual.com.br)
+ * @author     Victor Feitoza <http://github.com/vfeitoza>
  * @license    MIT License
  * @version    1.0
  */
@@ -51,83 +52,49 @@ class Sicoob extends BoletoAbstract
      * Localização do logotipo do banco, referente ao diretório de imagens
      * @var string
      */
-    protected $logoBanco = 'sicoob.png';
+    protected $logoBanco = 'sicoob.jpg';
 
     /**
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array('1');
+    protected $carteiras = array('1', '2', '5');
+    
+    /**
+     * Modalidades disponíveis para as carteiras
+     * @var array
+     */
+    protected $modalidades = array('01', '02', '05');
+    
+    /**
+     * Modalidade utilizada pela carteira
+     * @var string
+     */
+    protected $modalidade = null;
 
     /**
-     * Número da parcela a qual o boleto se refere
-     * @var int
+     * Convênio utilizado pelo Sacado
+     * @var integer
      */
-    protected $numeroParcela;
-
+    protected $convenio = '12345';
+    
     /**
-     * Convênio
-     * @var int
+     * Número de parcelas usadas no boleto ou carnê
+     * @var string
      */
-    protected $convenio;
-
-    /**
-     * Definie o número da parcela
-     * 
-     * @param  int $numeroParcela
-     * @return Sicoob
-     */
-    public function setNumeroParcela($numeroParcela)
-    {
-    	$this->numeroParcela = $numeroParcela;
-
-    	return $this;
-    }
-
-    /**
-     * Retorna o número da parcela
-     * 		
-     * @return int
-     */
-    public function getNumeroParcela()
-    {
-    	return $this->numeroParcela;
-    }
-
-    /**
-     * Define o número do convênio
-     * 
-     * @param  int $convenio
-     * @return Sicoob
-     */
-    public function setConvenio($convenio)
-    {
-    	$this->convenio = $convenio;
-
-    	return $this;
-    }
-
-    /**
-     * Retorna o número do convênio
-     * 
-     * @return int
-     */
-    public function getConvenio() 
-    {
-    	return $this->convenio;
-    }
+    protected $numParcelas = '001';
 
     /**
      * Gera o Nosso Número.
-     * 
+     *
      * Para o cálculo do dígito verificador do nosso número, deverá ser utilizada a fórmula abaixo:
-	 * Número da Cooperativa    9(4) – vide planilha "Capa" deste arquivo 
+	 * Número da Cooperativa    9(4) – vide planilha "Capa" deste arquivo
 	 * Código do Cliente   9(10) – vide planilha "Capa" deste arquivo
 	 * Nosso Número   9(7) – Iniciado em 1
 	 *
 	 * Constante para cálculo  = 3197
 	 *
-	 * a) Concatenar na seqüência completando com zero à esquerda. 
+	 * a) Concatenar na seqüência completando com zero à esquerda.
 	 *      Ex.:Número da Cooperativa  = 0001
 	 *            Número do Cliente  = 1-9
 	 *            Nosso Número  = 21
@@ -144,73 +111,55 @@ class Sicoob extends BoletoAbstract
 	 *      Ex.: 36/11 = 3, resto = 3
 	 *
 	 * e) O resto da divisão deverá ser subtraído de 11 achando assim o DV (Se o Resto for igual a 0 ou 1 então o DV é igual a 0).
-	 *      Ex.: 11 – 3 = 8, então Nosso Número + DV = 21-8	
+	 *      Ex.: 11 – 3 = 8, então Nosso Número + DV = 21-8
      *
      * @return string
      */
     protected function gerarNossoNumero()
     {
-    	$agencia = self::zeroFill($this->getAgencia(), 4);
-    	$convenio = self::zeroFill($this->getConvenio(), 10);
         $numero = self::zeroFill($this->getSequencial(), 7);
-        $sequencia_constante = str_split('319731973197319731973');
-        $fullfill = str_split($agencia . $convenio . $numero);
-
-        $result = 0;
-        for ($i=0; $i < count($fullfill); $i++) { 
-        	$result += $fullfill[$i] * $sequencia_constante[$i];
+        $sequencia = $this->getAgencia() . self::zeroFill($this->getConvenio(), 10) . $numero;
+        
+        $cont=0;
+        $calculoDv = '';
+        for ($num = 0; $num <= strlen($sequencia); $num++) {
+            $cont++;
+            if ($cont == 1) {
+                // constante fixa Sicoob » 3197 
+                $constante = 3;
+            }
+            if ($cont == 2) {
+                $constante = 1;
+            }
+            if ($cont == 3) {
+                $constante = 9;
+            }
+            if ($cont == 4) {
+                $constante = 7;
+                $cont = 0;
+            }
+            $calculoDv = $calculoDv + (substr($sequencia, $num, 1) * $constante);
+        }
+        
+        $resto = $calculoDv % 11;
+        $dv = 11 - $resto;
+        if (($dv == 0) || ($dv == 1) || ($dv == 9)) { 
+            $dv = 0;
         }
 
-       	$resto = $result % 11;
-       	
-       	if($resto == 0 || $resto == 1) {
-       		$dv = 0;
-       	} else {
-       		$dv = 11 - $resto;
-       	}
-
-        return $numero . '-' . $dv;
-    }
-
-    /**
-     * O fator de vencimento do título é definido pela diferença da data de vencimento do título 
-     * e a data base (03/07/2000), acrescido de 1000. Caso o titulo não tenha data de vencimento o fator 
-     * será preenchido com zeros.
-	 * fator de vencimento = (data de vencimento) - (03/07/2000) + 1000
-     *
-     * @return string
-     */
-    protected function getFatorVencimento()
-    {
-        if (!$this->getContraApresentacao()) {
-            $date = new \DateTime('2000-07-03');
-            return $date->diff($this->getDataVencimento())->days + 1000;
-        } else {
-            return '0000';
-        }
+        return $numero .'-'. $dv;
     }
 
     /**
      * Método para gerar o código da posição de 20 a 44
      *
-     * Composição do Campo Livre no Sicoob:
-     * 
-     * Posição     Tamanho     Conteúdo
-     * 20 a 20      01			Código da carteira de cobrança
-     * 21 a 24      04			Código da agência/cooperativa
-     * 25 a 26      02			Código da modalidade
-     * 27 a 33      07			Código do associado/cliente (convênio)
-     * 34 a 41      08			Nosso número do boleto
-     * 41 a 44      03			Número da parcela a que o boleto se refere - "001" se parcela única
-     * 
      * @return string
      * @throws \OpenBoleto\Exception
      */
     public function getCampoLivre()
     {
-        $nosso_numero = str_replace('-', '', $this->getNossoNumero());
-
-        return $this->getCarteira() . self::zeroFill($this->getAgencia(), 4) . '01' . self::zeroFill($this->getConvenio(), 7) . $nosso_numero . $this->getNumeroParcela();
+        return $this->getCarteira(). $this->getAgencia() . $this->getModalidade() . self::zeroFill($this->getConvenio(), 7) . 
+               $this->getNossoNumero(false) . $this->getNumParcelas();
     }
 
     /**
@@ -220,6 +169,76 @@ class Sicoob extends BoletoAbstract
      */
     public function getAgenciaCodigoCedente()
     {
-        return static::zeroFill($this->getAgencia(), 4) . ' / ' . static::zeroFill($this->getConvenio(), 10);
+        return static::zeroFill($this->getAgencia(), 4) . ' / ' . $this->getConvenio();
+    }
+    
+    /**
+     * Define a modalidade da carteira
+     * 
+     * @param type $modalidade
+     * @return \OpenBoleto\Banco\Sicoob
+     * @throws Exception
+     */
+    public function setModalidade($modalidade) 
+    {
+        if (!in_array($modalidade, $this->getModalidades())) {
+            throw new Exception("Modalidade não disponível!");
+        }
+
+        $this->modalidade = $modalidade;
+        
+        return $this;
+    }
+    
+    /**
+     * seta o convênio a ser utilizado pelo Sacado
+     * 
+     * @param integer $convenio Convẽnio do sacado
+     * @return \OpenBoleto\Banco\Sicoob
+     */
+    public function setConvenio($convenio) {
+        $this->convenio = $convenio;
+        
+        return $this;
+    }
+    
+    /**
+     * Retorna a modalidade da carteira
+     * 
+     * @return string
+     */
+    public function getModalidade()
+    {
+        return $this->modalidade;
+    }
+    
+    /**
+     * Retorna todas as modalidades disponíveis
+     * 
+     * @return array
+     */
+    public function getModalidades()
+    {
+        return $this->modalidades;
+    }
+    
+    /**
+     * Retorna o número de parcelas
+     * 
+     * @return string
+     */
+    public function getNumParcelas() 
+    {
+        return $this->numParcelas;
+    }
+    
+    /**
+     * Retorna o convênio do Sacado
+     * 
+     * @return integer
+     */
+    public function getConvenio() 
+    {
+        return $this->convenio;
     }
 }
