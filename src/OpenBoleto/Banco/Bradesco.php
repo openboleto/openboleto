@@ -83,10 +83,7 @@ class Bradesco extends BoletoAbstract
      */
     protected function gerarNossoNumero()
     {
-        $carteira = str_pad($this->getCarteira(), 2, 0, STR_PAD_LEFT);
-        $numero =  $carteira . str_pad($this->getSequencial(), 11, 0, STR_PAD_LEFT);
-        $dv = $this->getDigitoVerificadorNossoNumero($numero);
-        return substr($numero,0,2).'/'.substr($numero,2).'-'.$dv;
+        return static::zeroFill($this->getCarteira(), 2) . ' / ' . static::zeroFill($this->getSequencial(), 11) . '-' . $this->getDigitoVerificadorNossoNumero();
     }
 
     /**
@@ -139,24 +136,23 @@ class Bradesco extends BoletoAbstract
     }
 
     /**
-     * Calcúlo do dígito verificador do nosso Número
-     * 
-     * @param  string $numero
-     * @return int
+     * Calcula o digito verificador do nosso numero
+     *
+     * @return string|int
      */
-    static function getDigitoVerificadorNossoNumero($numero) {
-        $modulo = self::modulo11($numero, 7);
-
+    public function getDigitoVerificadorNossoNumero()
+    {
+        $numero = static::zeroFill($this->getCarteira(), 2) . static::zeroFill($this->getSequencial(), 11);
+        $modulo = static::modulo11($numero, 7);
         $digito = 11 - $modulo['resto'];
-        
+
         if ($digito == 10) {
-            $dv = "P";
+            $digito = "P";
         } elseif($digito == 11) {
-            $dv = 0;
-        } else {
-            $dv = $digito;
+            $digito = 0;
         }
 
-        return $dv;
+        return $digito;
     }
+
 }
