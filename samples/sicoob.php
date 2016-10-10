@@ -9,18 +9,17 @@ $sacado = new Agente('Fernando Maia', '023.434.234-34', 'ABC 302 Bloco N', '7200
 $cedente = new Agente('Empresa de cosméticos LTDA', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF');
 
 $boleto = new Sicoob(array(
-
-    // Parâmetros obrigatórios
-    'dataVencimento' => new DateTime('2015-10-06'),
-    'valor' => 3.00,
+    // Parâmetros obrigatórios 01/04/2014
+    'dataVencimento' => new DateTime('2014-04-01'),
+    'valor' => 10.00,
     'sacado' => $sacado,
     'cedente' => $cedente,
-    'agencia' => 4480, // Até 4 dígitos
-    'carteira' => '1', // 1, 2 e 3
-    'modalidade' => '02', // 01, 02 e 05
-    'conta' => 28037, // Até 10 dígitos
-    'convenio' => 12345, // Até 5 dígitos
-    'sequencial' => '2002', // Até 10 dígitos
+    'agencia' => '3231', // Até 4 dígitos
+    'carteira' => '1', // 1
+    'conta' => '50237', // Até 10 dígitos
+    'convenio' => '4847', // Até 7 dígiots
+    'numeroParcela' => '001', // Caso não haja parcela preencher com 001
+    'sequencial' => '9', // Até 10 dígitos
 
     // Parâmetros recomendáveis
     //'logoPath' => 'http://empresa.com.br/logo.jpg', // Logo da sua empresa
@@ -30,8 +29,6 @@ $boleto = new Sicoob(array(
         'Compra de materiais cosméticos',
         'Compra de alicate',
     ),
-
-
     'instrucoes' => array( // Até 8
         'Após o dia 30/11 cobrar 2% de mora e 1% de juros ao dia.',
         'Não receber após o vencimento.',
@@ -44,9 +41,9 @@ $boleto = new Sicoob(array(
     //'dataProcessamento' => new DateTime(),
     //'contraApresentacao' => true,
     //'pagamentoMinimo' => 23.00,
-    //'aceite' => 'N',
-    //'especieDoc' => 'ABC',
-    //'numeroDocumento' => '123.456.789',
+    'aceite' => 'N',
+    'especieDoc' => 'DS',
+    'numeroDocumento' => '1',
     //'usoBanco' => 'Uso banco',
     //'layout' => 'layout.phtml',
     //'logoPath' => 'http://boletophp.com.br/img/opensource-55x48-t.png',
