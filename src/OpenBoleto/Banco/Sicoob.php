@@ -116,7 +116,7 @@ class Sicoob extends BoletoAbstract
         
         $resto = $calculoDv % 11;
         $dv = 11 - $resto;
-        if (($dv == 0) || ($dv == 1) || ($dv == 9)) { 
+        if (($dv == 0) || ($dv == 1) || ($dv > 9)) { 
             $dv = 0;
         }
 
