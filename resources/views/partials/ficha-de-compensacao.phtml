@@ -63,7 +63,7 @@
             <div class="titulo">Nº documento</div>
             <div class="conteudo"><?php echo $numero_documento ?></div>
         </td>
-        <td width="60">
+        <td width="80">
             <div class="titulo">Espécie doc.</div>
             <div class="conteudo"><?php echo $especie_doc ?></div>
         </td>
@@ -82,7 +82,7 @@
     </tr>
     <tr>
         <?php if (!$esconde_uso_banco) : ?>
-            <td<?php if (!$mostra_cip) : ?> colspan="2"<?php endif ?>>
+            <td<?php if ($mostra_cip) : ?> colspan="2"<?php endif ?>>
                 <div class="titulo">Uso do banco</div>
                 <div class="conteudo"><?php echo $uso_banco ?></div>
             </td>
@@ -96,15 +96,15 @@
             </td>
         <?php endif ?>
 
-        <td<?php if ($esconde_uso_banco) : ?> colspan="3"<?php endif; ?>>
+        <td<?php if ($esconde_uso_banco && !$mostra_cip) : ?> colspan="4"<?php else : ?> <?php if ($esconde_uso_banco ) : ?> colspan="3"<?php else : ?> colspan="2" <?php endif; ?><?php endif; ?>>
             <div class="titulo">Carteira</div>
             <div class="conteudo"><?php echo $carteira ?></div>
         </td>
-        <td width="35">
+        <td>
             <div class="titulo">Espécie</div>
             <div class="conteudo"><?php echo $especie ?></div>
         </td>
-        <td colspan="2">
+        <td>
             <div class="titulo">Quantidade</div>
             <div class="conteudo"><?php echo $quantidade ?></div>
         </td>
@@ -175,7 +175,7 @@
 
         </td>
         <td class="noleftborder">
-            <div class="titulo" style="margin-top: 50px">Cód. Baixa</div>
+            <div class="titulo" style="margin-top: 35px">Cód. Baixa</div>
         </td>
     </tr>
 
