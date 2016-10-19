@@ -56,7 +56,7 @@ class Itau extends BoletoAbstract
      * Linha de local de pagamento
      * @var string
      */
-    protected $localPagamento = 'Até o vencimento, pague preferencialmente no Itaú. Após o vencimento pague somente no Itaú';
+//    protected $localPagamento = 'Até o vencimento, pague preferencialmente no Itaú. Após o vencimento pague somente no Itaú';
 
     /**
      * Define as carteiras disponíveis para este banco

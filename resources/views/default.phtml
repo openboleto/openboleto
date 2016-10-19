@@ -80,14 +80,14 @@
             <tr>
                 <td colspan="2" width="250">
                     <div class="titulo">Cedente</div>
-                    <div class="conteudo"><?php echo $cedente ?></div>
+                    <div class="conteudo" style="width: 250px; white-space: nowrap; overflow: hidden;"><?php echo $cedente ?></div>
                 </td>
                 <td>
                     <div class="titulo">CPF/CNPJ</div>
                     <div class="conteudo"><?php echo $cedente_cpf_cnpj ?></div>
                 </td>
                 <td width="120">
-                    <div class="titulo">Agência/Código do Cedente</div>
+                    <div class="titulo">Agência/Código Cedente</div>
                     <div class="conteudo rtl"><?php echo $agencia_codigo_cedente ?></div>
                 </td>
                 <td width="110">
@@ -123,7 +123,7 @@
                     <div class="conteudo rtl"><?php echo $valor_unitario ?></div>
                 </td>
                 <td>
-                    <div class="titulo">(-) Descontos / Abatimentos</div>
+                    <div class="titulo">(-) Desconto/Abatimentos</div>
                     <div class="conteudo rtl"><?php echo $desconto_abatimento ?></div>
                 </td>
                 <td>
@@ -168,7 +168,7 @@
             </tbody>
         </table>
         <br>
-        <div class="linha-pontilhada">Corte na linha pontilhada</div>
+        <div class="linha-pontilhada"><i class="fa fa-scissors fa-flip-horizontal"></i></div>
         <br>
 
         <!-- Ficha de compensação -->
