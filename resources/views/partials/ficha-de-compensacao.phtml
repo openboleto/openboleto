@@ -27,7 +27,7 @@
         <td valign="bottom" colspan="8" class="noborder nopadding">
             <div class="logocontainer">
                 <div class="logobanco">
-                    <img src="<?php echo $logo_banco; ?>" alt="logotipo do banco"/>
+                    <img src="<?php echo $logo_banco; ?>" alt="logotipo do banco">
                 </div>
                 <div class="codbanco"><?php echo $codigo_banco_com_dv ?></div>
             </div>
@@ -46,11 +46,11 @@
     </tr>
     <tr>
         <td colspan="7">
-            <div class="titulo">Beneficiário</div>
+            <div class="titulo">Cedente</div>
             <div class="conteudo"><?php echo $cedente ?></div>
         </td>
         <td>
-            <div class="titulo">Agência/Código beneficiário</div>
+            <div class="titulo">Agência/Código cedente</div>
             <div class="conteudo rtl"><?php echo $agencia_codigo_cedente ?></div>
         </td>
     </tr>
@@ -119,7 +119,7 @@
     </tr>
     <tr>
         <td colspan="7">
-            <div class="titulo">Instruções (Texto de responsabilidade do beneficiário)</div>
+            <div class="titulo">Instruções (Texto de responsabilidade do cedente)</div>
         </td>
         <td>
             <div class="titulo">(-) Descontos / Abatimentos</div>
@@ -168,7 +168,7 @@
     </tr>
     <tr>
         <td colspan="7">
-            <div class="titulo">Pagador</div>
+            <div class="titulo">Sacado</div>
             <div class="conteudo"><?php echo $sacado ?></div>
             <div class="conteudo"><?php echo $sacado_endereco1 ?></div>
             <div class="conteudo"><?php echo $sacado_endereco2 ?></div>
@@ -181,7 +181,7 @@
 
     <tr>
         <td colspan="6" class="noleftborder">
-            <div class="titulo">Pagador/Avalista <div class="conteudo sacador"><?php echo $sacador_avalista; ?></div></div>
+            <div class="titulo">Sacador/Avalista <div class="conteudo sacador"><?php echo $sacador_avalista; ?></div></div>
         </td>
         <td colspan="2" class="norightborder noleftborder">
             <div class="conteudo noborder rtl">Autenticação mecânica - Ficha de Compensação</div>
@@ -190,7 +190,7 @@
 
     <tr>
         <td colspan="8" class="noborder">
-            <?php //echo $codigo_barras ?>
+            <?php echo $codigo_barras ?>
         </td>
     </tr>
 
