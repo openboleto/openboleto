@@ -54,9 +54,10 @@ body{
     color: #000033;
     font: 9px Arial;
     width: 100%;
-    border-bottom: 1px dashed #000;
+    border-bottom: 1px solid #000;
     text-align: right;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    margin-top: 5px;
 }
 
 .table-boleto .conteudo {
@@ -103,12 +104,15 @@ body{
 }
 
 .table-boleto .logocontainer {
-    width: 257px;
+    width: 224px;
+    height: 25px;
     display: inline-block;
 }
 
 .table-boleto .logobanco img {
     margin-bottom: -5px;
+    max-height: 24px;
+    max-width: 131px;
 }
 
 .table-boleto .codbanco {
@@ -117,14 +121,14 @@ body{
     display: inline;
     border-left: 2px solid #000;
     border-right: 2px solid #000;
-    width: 51px;
-    margin-left: 25px;
+    width: 66px;
+    margin-left: 10px;
 }
 
 .table-boleto .linha-digitavel {
-    font: bold 14px Arial;
-    display: inline-block;
-    width: 406px;
+    width: 439px;
+    font: bold 12px Arial;
+    white-space: nowrap;
     text-align: right;
 }
 
@@ -184,4 +188,9 @@ body{
 
 .barcode .large.white {
     width: 3px;
+}
+ul.unstyled,
+ol.unstyled {
+    list-style: none outside none;
+    margin-left: 0;
 }
