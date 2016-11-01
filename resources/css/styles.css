@@ -104,7 +104,7 @@ body{
 }
 
 .table-boleto .logocontainer {
-    width: 224px;
+    width: 210px;
     height: 25px;
     display: inline-block;
 }
@@ -126,8 +126,9 @@ body{
 }
 
 .table-boleto .linha-digitavel {
-    width: 439px;
-    font: bold 12px Arial;
+    width: 453px;
+    display: inline-block;
+    font: bold 12.3px Arial;
     white-space: nowrap;
     text-align: right;
 }
