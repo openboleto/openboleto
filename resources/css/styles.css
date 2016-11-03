@@ -56,7 +56,7 @@ body{
     width: 100%;
     border-bottom: 1px solid #000;
     text-align: right;
-    margin-bottom: 15px;
+    margin-bottom: 14px;
     margin-top: 5px;
 }
 
@@ -128,7 +128,7 @@ body{
 .table-boleto .linha-digitavel {
     width: 453px;
     display: inline-block;
-    font: bold 12.3px Arial;
+    font: bold 14px Arial;
     white-space: nowrap;
     text-align: right;
 }
