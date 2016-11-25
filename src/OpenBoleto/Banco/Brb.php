@@ -94,22 +94,20 @@ class Brb extends BoletoAbstract
                  $this->getCodigoBanco();
         $d1 = static::modulo10($chave);
 
-        $calculaD2 = true;
-
         do {
+            $calculaD2 = false;
             $modulo    = static::modulo11($chave . $d1, 7);
 
             if ($modulo['resto'] == 0) {
                 $d2        = 0;
-                $calculaD2 = false;
             } else if ($modulo['resto'] > 1) {
                 $d2        = 11 - $modulo['resto'];
-                $calculaD2 = false;
             } else if ($modulo['resto'] == 1) {
                 $d1 = $d1 + 1;
                 if ($d1 == 10) {
                     $d1 = 0;
                 }
+                $calculaD2 = true;
             }
         } while ($calculaD2);
 
