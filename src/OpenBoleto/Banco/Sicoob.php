@@ -169,7 +169,7 @@ class Sicoob extends BoletoAbstract
        		$dv = 11 - $resto;
        	}
 
-        return $numero . '-' . $dv;
+        return ($numero+0) . '-' . $dv;
     }
 
     /**
@@ -220,6 +220,6 @@ class Sicoob extends BoletoAbstract
      */
     public function getAgenciaCodigoCedente()
     {
-        return static::zeroFill($this->getAgencia(), 4) . ' / ' . static::zeroFill($this->getConvenio(), 10);
+        return static::zeroFill($this->getAgencia(), 4) . ' / ' . $this->getConvenio();
     }
 }
