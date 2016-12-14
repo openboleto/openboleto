@@ -96,7 +96,7 @@
             </td>
         <?php endif ?>
 
-        <td<?php if ($esconde_uso_banco && !$mostra_cip) : ?> colspan="4"<?php else : ?> <?php if (!$esconde_uso_banco || $mostra_cip) : ?> colspan="3"<?php else : ?> colspan="2" <?php endif; ?><?php endif; ?>>
+        <td<?php if ($esconde_uso_banco && !$mostra_cip) : ?> colspan="4"<?php else : ?> <?php if ($esconde_uso_banco && $mostra_cip) : ?> colspan="1"<?php else : ?> colspan="3" <?php endif; ?><?php endif; ?>>
             <div class="titulo">Carteira</div>
             <div class="conteudo"><?php echo $carteira ?></div>
         </td>
