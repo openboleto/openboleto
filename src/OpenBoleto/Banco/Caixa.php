@@ -218,8 +218,14 @@ class Caixa extends BoletoAbstract
     public function getAgenciaCodigoCedente()
     {
         $agencia = $this->getAgenciaDv() !== null ? $this->getAgencia() . '-' . $this->getAgenciaDv() : $this->getAgencia();
-        $conta = $this->getCodigoCedente() !== null ? $this->getCodigoCedente() : ($this->getContaDv() !== null ? $this->getConta() . '-' . $this->getContaDv() : $this->getConta());
-        
+        if ($this->getCodigoCedente() !== null) {
+            $modulo = self::modulo11($this->getCodigoCedente());
+            $conta = $this->getCodigoCedente() . '-' . . $modulo['digito'];
+        }
+        else {
+            $conta = $this->getContaDv() !== null ? $this->getConta() . '-' . $this->getContaDv() : $this->getConta();
+        }
+
         return $agencia . ' / ' . $conta;
     }
 }
