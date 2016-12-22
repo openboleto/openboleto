@@ -65,7 +65,7 @@ class Bradesco extends BoletoAbstract
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array('3', '6', '9');
+    protected $carteiras = array('3', '6', '9', '21', '22', '25', '26');
 
     /**
      * Trata-se de código utilizado para identificar mensagens especificas ao cedente, sendo
