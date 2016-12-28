@@ -282,6 +282,8 @@ abstract class BoletoAbstract
      */
     public function  __construct($params = array())
     {
+        $this->resourcePath = __DIR__ . '/../../resources';
+
         foreach ($params as $param => $value)
         {
             if (method_exists($this, 'set' . $param)) {
