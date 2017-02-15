@@ -65,6 +65,15 @@ body{
     height: 13px;
 }
 
+.table-boleto .conteudo-carne {
+    font: bold 10px Arial;
+    height: 15px;
+}
+
+.direita {
+    text-align: right;
+}
+
 .table-boleto .sacador {
     display: inline;
     margin-left: 5px;
