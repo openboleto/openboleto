@@ -1,4 +1,4 @@
-# OpenBoleto [![Stories in Ready](http://badge.waffle.io/kriansa/openboleto.png)](http://waffle.io/kriansa/openboleto) [![Build Status](https://api.travis-ci.org/kriansa/openboleto.png)](https://travis-ci.org/kriansa/openboleto) 
+# JasperPHP - OpenBoleto 
 
 O OpenBoleto é uma biblioteca de código aberto para geração de boletos bancários, um meio de pagamento muito comum no Brasil. O foco é ser simples e ter uma arquitetura compatível com os recursos mais modernos do PHP.
 
@@ -59,6 +59,20 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
 * Unicred
 
 Toda contribuição é bem vinda. Se você deseja adaptar o OpenBoleto a algum outro banco, fique à vontade para explorar o código, veja como é bastante simples integrar qualquer banco à biblioteca.
+
+## QuilhaSoft/JasperPHP
+Biblioteca que gera boletos em PDF atravez de layouts preconstruidos atravez do editor JasperSoft Studio, biblioteca contruida inteiramente em php sem a necessidade de adicionar um servidor JAVA
+Um exemplo de utilização esta no arquivo https://github.com/QuilhaSoft/JasperPHP-openboleto/blob/master/samples/itauJasper.php
+Amostra de pdf
+<img src="https://cloud.githubusercontent.com/assets/17881422/19604441/09b452f4-9794-11e6-836a-397b75947e51.png">
+Tela do editor
+<img src="https://cloud.githubusercontent.com/assets/17881422/19604460/195d01a6-9794-11e6-8d82-6aac6c8647ff.png">
+
+Para editar o layout do boleto instale o JasperSoft Studio e abra os arquivos .xlmr na pasta https://github.com/QuilhaSoft/JasperPHP-openboleto/tree/master/samples/app.jrxml/bol01Files
+## Homologação
+Os layouts produzidos nesse exemplo estão Homologados para os bancos Caixa e Itau
+
+Para usar instale as duas bibliotecas
 
 ## Licença
 
