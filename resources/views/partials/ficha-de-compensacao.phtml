@@ -169,7 +169,7 @@
     <tr>
         <td colspan="7">
             <div class="titulo">Sacado</div>
-            <div class="conteudo"><?php echo $sacado ?></div>
+            <div class="conteudo"><?php echo $sacado; echo (isset($sacado_documento)) ? ' - ' . $sacado_documento : ''; ?></div>
             <div class="conteudo"><?php echo $sacado_endereco1 ?></div>
             <div class="conteudo"><?php echo $sacado_endereco2 ?></div>
 
