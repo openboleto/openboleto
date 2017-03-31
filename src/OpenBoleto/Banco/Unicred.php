@@ -45,7 +45,7 @@ class Unicred extends BoletoAbstract
      * Código do banco
      * @var string
      */
-    protected $codigoBanco = '090';
+    protected $codigoBanco = '136';
 
     /**
      * Localização do logotipo do banco, referente ao diretório de imagens
