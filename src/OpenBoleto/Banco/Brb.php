@@ -56,7 +56,7 @@ class Brb extends BoletoAbstract
      * Linha de local de pagamento
      * @var string
      */
-    protected $localPagamento = 'Até o vencimento pagar em qualquer Banco, depois só no BRB';
+    protected $localPagamento = 'Pagar preferencialmente em conveniencia BRB';
 
     /**
      * Define as carteiras disponíveis para este banco
@@ -87,9 +87,9 @@ class Brb extends BoletoAbstract
      */
     public function getCampoLivre()
     {
-        $chave = '000' . static::zeroFill($this->getAgencia(), 3) . 
-                 static::zeroFill($this->getConta(), 7) . 
-                 $this->getCarteira() . 
+        $chave = '000' . static::zeroFill($this->getAgencia(), 3) .
+                 static::zeroFill($this->getConta() . $this->getContaDv(), 7) .
+                 $this->getCarteira() .
                  static::zeroFill($this->getSequencial(), 6) .
                  $this->getCodigoBanco();
         $d1 = static::modulo10($chave);
@@ -119,6 +119,6 @@ class Brb extends BoletoAbstract
      */
     public function getAgenciaCodigoCedente()
     {
-        return '000 - ' . $this->getAgencia() . ' - ' . $this->getConta();
+        return '000 - ' . $this->getAgencia() . ' - ' . $this->getConta() . ' - ' . $this->getContaDv();
     }
 }
