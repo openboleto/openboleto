@@ -176,7 +176,7 @@ class Itau extends BoletoAbstract
     public function getViewVars()
     {
         return array(
-            'carteira' => null, // Campo não utilizado pelo Itaú
+            'carteira' => $this->getCarteira(), // Campo não utilizado pelo Itaú
         );
     }
 }
