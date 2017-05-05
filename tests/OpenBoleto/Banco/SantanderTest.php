@@ -19,7 +19,7 @@ class SantanderTest extends \PHPUnit_Framework_TestCase
             'sequencial' => 12345678901, // Até 13 dígitos
             'agencia' => 1234, // Até 4 dígitos
             'carteira' => 102, // 101, 102 ou 201
-            'conta' => 1234567, // Código do cedente: Até 7 dígitos
+            'conta' => 12345678, // Código do cedente: Até 8 dígitos
             // IOS – Seguradoras (Se 7% informar 7. Limitado a 9%)
             // Demais clientes usar 0 (zero)
             'ios' => '0', // Apenas para o Santander
