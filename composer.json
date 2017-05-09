@@ -1,6 +1,6 @@
 {
     "name": "compufour/openboleto",
-    "type": "library",
+    "minimum-stability": "stable",
     "description": "Biblioteca para geração de boletos bancários.",
     "keywords": ["boleto", "boleto bancario"],
     "homepage": "http://github.com/compufour/openboleto",
