@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Biblioteca para geração de boletos bancários.",
     "keywords": ["boleto", "boleto bancario"],
-    "homepage": "http://github.com/compufour/openboleto",
+    "homepage": "http://github.com/compufour/open-boleto",
     "license": "MIT",
     "authors": [
         {
