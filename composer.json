@@ -1,5 +1,5 @@
 {
-    "name": "compufour/openboleto",
+    "name": "compufour/open-boleto",
     "type": "library",
     "description": "Biblioteca para geração de boletos bancários.",
     "keywords": ["boleto", "boleto bancario"],
