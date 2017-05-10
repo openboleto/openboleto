@@ -20,7 +20,7 @@ body{
 
 .barcode div {
     display: inline-block;
-    height: 5%;
+    height: 50px;
 }
 
 .float_left {

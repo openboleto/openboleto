@@ -9,18 +9,21 @@ $sacado = new Agente('Fernando Maia', '023.434.234-34', 'ABC 302 Bloco N', '7200
 $cedente = new Agente('Empresa de cosméticos LTDA', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF');
 
 $boleto = new Sicredi(array(
-    // Parâmetros obrigatórios    
-    'valor' => 27.00,
-    'sequencial' => 12345, // 5 dígitos
+    // Parâmetros obrigatórios
+    'dataVencimento' => new DateTime('2016-03-15'),
+    'valor' => 15.99,
     'sacado' => $sacado,
     'cedente' => $cedente,
-    'agencia' => 718, // 4 dígitos
-    'carteira' => 'A', // 3 dígitos
-    'conta' => 10295, // 5 dígitos
-    'contaDv' => 3,
-    'numeroDocumento' => 12345, // 7 dígitos    
+    'agencia' => 1234, // Até 4 dígitos
+    'carteira' => 51, // 11, 21, 31, 41 ou 51
+    'conta' => 1234, // Até 10 dígitos
+    'posto' => '01',
+    'sequencial' => '99', // Até 5 dígitos
+
     // Parâmetros recomendáveis
-    //'logoPath' => 'http://empresa.com.br/logo.jpg', // Logo da sua empresa        
+    //'logoPath' => 'http://empresa.com.br/logo.jpg', // Logo da sua empresa
+    // 'contaDv' => 2,
+    // 'agenciaDv' => 1,
     'descricaoDemonstrativo' => array( // Até 5
         'Compra de materiais cosméticos',
         'Compra de alicate',
@@ -32,13 +35,14 @@ $boleto = new Sicredi(array(
 
     // Parâmetros opcionais
     //'resourcePath' => '../resources',
-    //'moeda' => Sicredi::MOEDA_REAL,
+    //'moeda' => BancoDoBrasil::MOEDA_REAL,
     //'dataDocumento' => new DateTime(),
     //'dataProcessamento' => new DateTime(),
     //'contraApresentacao' => true,
     //'pagamentoMinimo' => 23.00,
     //'aceite' => 'N',
     //'especieDoc' => 'ABC',
+    //'numeroDocumento' => '123.456.789',
     //'usoBanco' => 'Uso banco',
     //'layout' => 'layout.phtml',
     //'logoPath' => 'http://boletophp.com.br/img/opensource-55x48-t.png',
