@@ -58,13 +58,13 @@ class Sicoob extends BoletoAbstract
      * @var array
      */
     protected $carteiras = array('1', '2', '5');
-    
+
     /**
      * Modalidades disponíveis para as carteiras
      * @var array
      */
     protected $modalidades = array('01', '02', '05');
-    
+
     /**
      * Modalidade utilizada pela carteira
      * @var string
@@ -76,7 +76,7 @@ class Sicoob extends BoletoAbstract
      * @var integer
      */
     protected $convenio = '12345';
-    
+
     /**
      * Número de parcelas usadas no boleto ou carnê
      * @var string
@@ -92,13 +92,13 @@ class Sicoob extends BoletoAbstract
     {
         $numero = self::zeroFill($this->getSequencial(), 7);
         $sequencia = $this->getAgencia() . self::zeroFill($this->getConvenio(), 10) . $numero;
-        
-        $cont=0;
-        $calculoDv = '';
+
+        $cont = 0;
+        $calculoDv = 0;
         for ($num = 0; $num <= strlen($sequencia); $num++) {
             $cont++;
             if ($cont == 1) {
-                // constante fixa Sicoob » 3197 
+                // constante fixa Sicoob » 3197
                 $constante = 3;
             }
             if ($cont == 2) {
@@ -111,12 +111,13 @@ class Sicoob extends BoletoAbstract
                 $constante = 7;
                 $cont = 0;
             }
-            $calculoDv = $calculoDv + (substr($sequencia, $num, 1) * $constante);
+            $seqNumeric = (int) substr($sequencia, $num, 1);
+            $calculoDv = $calculoDv + ($seqNumeric * $constante);
         }
-        
+
         $resto = $calculoDv % 11;
         $dv = 11 - $resto;
-        if (($dv == 0) || ($dv == 1) || ($dv == 9)) { 
+        if (($dv == 0) || ($dv == 1) || ($dv == 9)) {
             $dv = 0;
         }
 
@@ -131,7 +132,7 @@ class Sicoob extends BoletoAbstract
      */
     public function getCampoLivre()
     {
-        return $this->getCarteira(). $this->getAgencia() . $this->getModalidade() . self::zeroFill($this->getConvenio(), 7) . 
+        return $this->getCarteira(). $this->getAgencia() . $this->getModalidade() . self::zeroFill($this->getConvenio(), 7) .
                $this->getNossoNumero(false) . $this->getNumParcelas();
     }
 
@@ -144,73 +145,73 @@ class Sicoob extends BoletoAbstract
     {
         return static::zeroFill($this->getAgencia(), 4) . ' / ' . $this->getConvenio();
     }
-    
+
     /**
      * Define a modalidade da carteira
-     * 
+     *
      * @param type $modalidade
      * @return \OpenBoleto\Banco\Sicoob
      * @throws Exception
      */
-    public function setModalidade($modalidade) 
+    public function setModalidade($modalidade)
     {
         if (!in_array($modalidade, $this->getModalidades())) {
             throw new Exception("Modalidade não disponível!");
         }
 
         $this->modalidade = $modalidade;
-        
+
         return $this;
     }
-    
+
     /**
      * seta o convênio a ser utilizado pelo Sacado
-     * 
+     *
      * @param integer $convenio Convẽnio do sacado
      * @return \OpenBoleto\Banco\Sicoob
      */
     public function setConvenio($convenio) {
         $this->convenio = $convenio;
-        
+
         return $this;
     }
-    
+
     /**
      * Retorna a modalidade da carteira
-     * 
+     *
      * @return string
      */
     public function getModalidade()
     {
         return $this->modalidade;
     }
-    
+
     /**
      * Retorna todas as modalidades disponíveis
-     * 
+     *
      * @return array
      */
     public function getModalidades()
     {
         return $this->modalidades;
     }
-    
+
     /**
      * Retorna o número de parcelas
-     * 
+     *
      * @return string
      */
-    public function getNumParcelas() 
+    public function getNumParcelas()
     {
         return $this->numParcelas;
     }
-    
+
     /**
      * Retorna o convênio do Sacado
-     * 
+     *
      * @return integer
      */
-    public function getConvenio() 
+    public function getConvenio()
     {
         return $this->convenio;
     }

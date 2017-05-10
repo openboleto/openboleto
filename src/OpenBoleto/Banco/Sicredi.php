@@ -61,6 +61,8 @@ class Sicredi extends BoletoAbstract
      */
     protected $carteiras = array('11', '21', '31', '41', '51');
 
+    protected $posto;
+
     /**
      * Gera o Nosso Número.
      *
