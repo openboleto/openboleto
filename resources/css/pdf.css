@@ -1,0 +1,34 @@
+.noprint {
+    display:none;
+}
+body{
+    font-family: Arial;
+    background-color: #ffffff;
+    margin-right: 0;
+}
+
+.table-boleto {
+    font: 9px Arial;
+    width: 100% !important;
+}
+
+.barcode {
+    height: 10px;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.barcode div {
+    display: inline-block;
+    height: 5%;
+}
+
+.float_left {
+    display: inline-block;
+    width: 75%;
+}
+
+.conteudo.cpf_cnpj {
+    display: inline-block;
+    width:24%;
+}
