@@ -1,9 +1,10 @@
 <?php
 
-namespace Tests\OpenBoleto;
+namespace OpenBoletoTest;
+
 use OpenBoleto\Agente;
 
-class AgenteTest extends \PHPUnit_Framework_TestCase
+class AgenteTest extends \PHPUnit\Framework\TestCase
 {
     public function testInstantiationWithoutArgumentsShouldWork()
     {

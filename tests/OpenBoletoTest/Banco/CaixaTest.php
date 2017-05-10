@@ -1,9 +1,10 @@
 <?php
 
-namespace Tests\OpenBoleto\Banco;
+namespace OpenBoletoTest\Banco;
+
 use OpenBoleto\Banco\Caixa;
 
-class CaixaTest extends \PHPUnit_Framework_TestCase
+class CaixaTest extends \PHPUnit\Framework\TestCase
 {
     public function testInstantiateWithoutArgumentsShouldWork()
     {

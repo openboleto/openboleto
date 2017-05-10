@@ -220,7 +220,7 @@ abstract class BoletoAbstract
      * @var Agente
      */
     protected $cedente;
-    
+
     /**
      * Entidade sacada (de quem se cobra o boleto)
      * @var Agente

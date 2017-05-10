@@ -23,6 +23,7 @@ $boleto = new Bradesco(array(
     //'logoPath' => 'http://empresa.com.br/logo.jpg', // Logo da sua empresa
     'contaDv' => 2,
     'agenciaDv' => 1,
+    'carteiraDv' => 1,
     'descricaoDemonstrativo' => array( // Até 5
         'Compra de materiais cosméticos',
         'Compra de alicate',

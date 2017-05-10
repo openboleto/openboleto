@@ -1,9 +1,10 @@
 <?php
 
-namespace Tests\OpenBoleto\Banco;
+namespace OpenBoletoTest\Banco;
+
 use OpenBoleto\Banco\Unicred;
 
-class UnicredTest extends \PHPUnit_Framework_TestCase
+class UnicredTest extends \PHPUnit\Framework\TestCase
 {
     public function testInstantiateWithoutArgumentsShouldWork()
     {
@@ -23,7 +24,7 @@ class UnicredTest extends \PHPUnit_Framework_TestCase
         ));
 
         $this->assertInstanceOf('OpenBoleto\\Banco\\Unicred', $instance);
-        $this->assertEquals('13693.30201 00000.225904 00001.395136 9 55650000001050', $instance->getLinhaDigitavel());
+        $this->assertEquals('13693.30202 00000.225904 00001.395136 9 55650000001050', $instance->getLinhaDigitavel());
         $this->assertSame('0000013951-3', (string) $instance->getNossoNumero());
     }
 }

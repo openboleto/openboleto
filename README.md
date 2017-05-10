@@ -1,4 +1,4 @@
-# OpenBoleto [![Stories in Ready](http://badge.waffle.io/kriansa/openboleto.png)](http://waffle.io/kriansa/openboleto) [![Build Status](https://api.travis-ci.org/kriansa/openboleto.png)](https://travis-ci.org/kriansa/openboleto) 
+# OpenBoleto
 
 O OpenBoleto é uma biblioteca de código aberto para geração de boletos bancários, um meio de pagamento muito comum no Brasil. O foco é ser simples e ter uma arquitetura compatível com os recursos mais modernos do PHP.
 
@@ -6,19 +6,13 @@ O OpenBoleto é uma biblioteca de código aberto para geração de boletos banc�
 ### Composer
 Se você já conhece o **Composer** (o que é extremamente recomendado), simplesmente adicione a dependência abaixo à diretiva *"require"* seu **composer.json**:
 ```
-"kriansa/openboleto": "dev-master"
+"compufour/openboleto": "dev-master"
 ```
+### PSR-4 autoloader
+Hoje praticamente qualquer framework utiliza deste padrão, então você deve [baixar](https://github.com/compufour/openboleto/archive/master.zip) o OpenBoleto, colocar em uma pasta específica (geralmente *lib* ou *vendor*) e procurar na documentação do seu framework para fazer com que o seu autoloader aponte o namespace **OpenBoleto** para a pasta **src** do OpenBoleto.
 
-Ou, caso você deseje usar o release v1.0 (12/08/2013)
-```
-"kriansa/openboleto": "v1.0"
-```
-
-###PSR-0 autoloader
-Hoje praticamente qualquer framework utiliza deste padrão, então você deve [baixar](https://github.com/kriansa/openboleto/archive/master.zip) o OpenBoleto, colocar em uma pasta específica (geralmente *lib* ou *vendor*) e procurar na documentação do seu framework para fazer com que o seu autoloader aponte o namespace **OpenBoleto** para a pasta **src** do OpenBoleto.
-
-###Stand-alone library
-Se você quer simplesmente baixar e dar um include, também é muito simples. Primeiro [baixe](https://github.com/kriansa/openboleto/archive/master.zip) (ou dê clone no repositório), e coloque em uma pasta específica. Depois, dê um include no arquivo **autoloader.php** e voilá!
+### Stand-alone library
+Se você quer simplesmente baixar e dar um include, também é muito simples. Primeiro [baixe](https://github.com/compufour/openboleto/archive/master.zip) (ou dê clone no repositório), e coloque em uma pasta específica. Depois, dê um include no arquivo **autoloader.php** e voilá!
 
 ## Gerando boletos
 Essa é a melhor parte. Não poderia ser mais simples, veja um exemplo básico:
@@ -54,9 +48,14 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
 * Banco do Brasil
 * Bradesco
 * Caixa (SIGCB)
+* Cecred
 * Itaú
 * Santander
+* Sicoob
+* Sicred
 * Unicred
+* Viacredi
+
 
 Toda contribuição é bem vinda. Se você deseja adaptar o OpenBoleto a algum outro banco, fique à vontade para explorar o código, veja como é bastante simples integrar qualquer banco à biblioteca.
 

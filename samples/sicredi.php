@@ -2,31 +2,28 @@
 
 require '../autoloader.php';
 
-use OpenBoleto\Banco\Santander;
+use OpenBoleto\Banco\Sicredi;
 use OpenBoleto\Agente;
 
 $sacado = new Agente('Fernando Maia', '023.434.234-34', 'ABC 302 Bloco N', '72000-000', 'Brasília', 'DF');
 $cedente = new Agente('Empresa de cosméticos LTDA', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF');
 
-$boleto = new Santander(array(
+$boleto = new Sicredi(array(
     // Parâmetros obrigatórios
-    'dataVencimento' => new DateTime('2013-01-24'),
-    'valor' => 23.00,
-    'sequencial' => 12345678901, // Até 13 dígitos
+    'dataVencimento' => new DateTime('2016-03-15'),
+    'valor' => 15.99,
     'sacado' => $sacado,
     'cedente' => $cedente,
     'agencia' => 1234, // Até 4 dígitos
-    'carteira' => 102, // 101, 102 ou 201
-    'conta' => 1234567, // Código do cedente: Até 7 dígitos
-     // IOS – Seguradoras (Se 7% informar 7. Limitado a 9%)
-     // Demais clientes usar 0 (zero)
-    'ios' => '0', // Apenas para o Santander
+    'carteira' => 51, // 11, 21, 31, 41 ou 51
+    'conta' => 1234, // Até 10 dígitos
+    'posto' => '01',
+    'sequencial' => '99', // Até 5 dígitos
 
     // Parâmetros recomendáveis
     //'logoPath' => 'http://empresa.com.br/logo.jpg', // Logo da sua empresa
-    'contaDv' => 2,
-    'agenciaDv' => 1,
-    'carteiraDv' => 1,
+    // 'contaDv' => 2,
+    // 'agenciaDv' => 1,
     'descricaoDemonstrativo' => array( // Até 5
         'Compra de materiais cosméticos',
         'Compra de alicate',
@@ -38,7 +35,7 @@ $boleto = new Santander(array(
 
     // Parâmetros opcionais
     //'resourcePath' => '../resources',
-    //'moeda' => Santander::MOEDA_REAL,
+    //'moeda' => BancoDoBrasil::MOEDA_REAL,
     //'dataDocumento' => new DateTime(),
     //'dataProcessamento' => new DateTime(),
     //'contraApresentacao' => true,

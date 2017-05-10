@@ -1,9 +1,10 @@
 <?php
 
-namespace Tests\OpenBoleto\Banco;
+namespace OpenBoletoTest\Banco;
+
 use OpenBoleto\Banco\Santander;
 
-class SantanderTest extends \PHPUnit_Framework_TestCase
+class SantanderTest extends \PHPUnit\Framework\TestCase
 {
     public function testInstantiateWithoutArgumentsShouldWork()
     {
@@ -19,7 +20,7 @@ class SantanderTest extends \PHPUnit_Framework_TestCase
             'sequencial' => 12345678901, // Até 13 dígitos
             'agencia' => 1234, // Até 4 dígitos
             'carteira' => 102, // 101, 102 ou 201
-            'conta' => 1234567, // Código do cedente: Até 7 dígitos
+            'conta' => 12345678, // Código do cedente: Até 8 dígitos
             // IOS – Seguradoras (Se 7% informar 7. Limitado a 9%)
             // Demais clientes usar 0 (zero)
             'ios' => '0', // Apenas para o Santander
@@ -27,6 +28,6 @@ class SantanderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('OpenBoleto\\Banco\\Santander', $instance);
         $this->assertEquals('03399.12347 56700.123450 67890.101024 6 55650000002300', $instance->getLinhaDigitavel());
-        $this->assertSame('0012345678901', (string) $instance->getNossoNumero());
+        $this->assertSame('001234567890-0', (string) $instance->getNossoNumero());
     }
 }
