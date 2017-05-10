@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\OpenBoleto;
+namespace OpenBoletoTest;
 
 use OpenBoleto\BoletoAbstract;
 
