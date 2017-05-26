@@ -1235,6 +1235,19 @@ abstract class BoletoAbstract
     }
 
     /**
+     * @param $nomeArquivo
+     * @param bool $download
+     */
+    public function getPDF( $nomeArquivo , $download=false ){
+
+        $gerador = new GeradorPdf();
+        if($download)
+            $gerador->gerar($this)->Output($nomeArquivo, "D");
+        else
+            $gerador->gerar($this)->Output($nomeArquivo, "F");
+    }
+
+    /**
      * Retorna o campo Agência/Cedente do boleto
      *
      * @return string
