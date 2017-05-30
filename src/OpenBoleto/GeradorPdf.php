@@ -78,7 +78,7 @@ class GeradorPdf
         $PDF->Cell(40, 3, utf8_decode('Carteira/Nosso número'), '', 1, 'L');
 
         $PDF->SetFont('Arial', '', 7);
-        $PDF->Cell(85, 5, utf8_decode($boleto->getSacado()->getNome()), 'BLR', 0, 'L');
+        $PDF->Cell(85, 5, utf8_decode($boleto->getCedente()->getNome()), 'BLR', 0, 'L');
         $PDF->Cell(
             30,
             5,
