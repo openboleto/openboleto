@@ -47,7 +47,7 @@ class GeradorPdf
 
         $PDF->Ln();
         $PDF->SetFont('Arial', 'B', 6);
-        $PDF->Cell(190, 2, 'Recibo do Sacado', '', 1, 'R');
+        $PDF->Cell(190, 2, 'Recibo do Pagador', '', 1, 'R');
         $PDF->SetFont('Arial', '', 12);
         $PDF->Cell(
             190,
@@ -63,7 +63,7 @@ class GeradorPdf
         $PDF->SetFont('Arial', '', 9);
 
         $PDF->Cell(50, 10, '', 'B', 0, 'L');
-        $PDF->Image(self::getDirImages() . $boleto->getLogoBanco(), 10, 43, 40, 10);
+        $PDF->Image(self::getDirImages() . $boleto->getLogoBanco(), 10, 44, 40, 10);
         $PDF->SetFont('Arial', 'B', 14);
         $PDF->Cell(20, 10, $boleto->getCodigoBancoComDv(), 'LBR', 0, 'C');
 
@@ -71,8 +71,8 @@ class GeradorPdf
         $PDF->Cell(120, 10, $boleto->getLinhaDigitavel(), 'B', 1, 'R');
 
         $PDF->SetFont('Arial', '', 6);
-        $PDF->Cell(85, 3, 'Cedente', 'LR', 0, 'L');
-        $PDF->Cell(30, 3, utf8_decode('Agência/Código do Cedente'), 'R', 0, 'L');
+        $PDF->Cell(85, 3, utf8_decode('Beneficiário'), 'LR', 0, 'L');
+        $PDF->Cell(30, 3, utf8_decode('Agência/Código do Beneficiário'), 'R', 0, 'L');
         $PDF->Cell(15, 3, utf8_decode('Espécie'), 'R', 0, 'L');
         $PDF->Cell(20, 3, 'Quantidade', 'R', 0, 'L');
         $PDF->Cell(40, 3, utf8_decode('Carteira/Nosso número'), '', 1, 'L');
@@ -82,14 +82,14 @@ class GeradorPdf
         $PDF->Cell(
             30,
             5,
-            $boleto->getAgencia() . "-" . $boleto->getAgenciaDv() . " / " . $boleto->getConta() . "-" . $boleto->getContaDv(),
+            $boleto->getAgencia() . "/" . $boleto->getConta() . "-" . $boleto->getContaDv(),
             'BR',
             0,
             'L'
         );
         $PDF->Cell(15, 5, $boleto->getEspecieDoc(), 'BR', 0, 'L');
         $PDF->Cell(20, 5, "001", 'BR', 0, 'L');
-        $PDF->Cell(40, 5, $boleto->getCarteira() . " / " . $boleto->getNossoNumero(), 'B', 1, 'R');
+        $PDF->Cell(40, 5, $boleto->getNossoNumero(), 'B', 1, 'R');
 
         $PDF->SetFont('Arial', '', 6);
         $PDF->Cell(60, 3, utf8_decode('Número do Documento'), 'LR', 0, 'L');
@@ -118,15 +118,15 @@ class GeradorPdf
         $PDF->Cell(60, 5, '', 'B', 1, 'R');
 
         $PDF->SetFont('Arial', '', 6);
-        $PDF->Cell(190, 3, 'Sacado', 'L', 1, 'L');
+        $PDF->Cell(190, 3, 'Pagador', 'L', 1, 'L');
 
         $PDF->SetFont('Arial', '', 7);
-        $PDF->Cell(190, 5, utf8_decode($boleto->getSacado()->getNome()), 'L', 1, 'L');
+        $PDF->Cell(190, 5, utf8_decode($boleto->getSacado()->getNome() . " - CNPJ/CPF: " . $boleto->getSacado()->getDocumento()), 'L', 1, 'L');
         $PDF->Cell(
             190,
             5,
             utf8_decode(
-                $boleto->getSacado()->getEndereco()
+                "Endereço: " . $boleto->getSacado()->getEndereco()
             ),
             'L',
             1,
@@ -139,11 +139,17 @@ class GeradorPdf
                 $boleto->getSacado()->getCidade() . " - " . $boleto->getSacado()->getUf(
                 ) . " - CEP: " . $boleto->getSacado()->getCep()
             ),
-            'BL',
+            'L',
             1,
             'L'
         );
 
+        $PDF->SetFont('Arial', '', 6);
+        $PDF->Cell(190, 3, 'Sacador Avalista', 'L', 1, 'L');
+
+        $PDF->SetFont('Arial', '', 7);
+        $PDF->Cell(190, 5, utf8_decode($boleto->getCedente()->getNome() . " - CNPJ/CPF: " . $boleto->getCedente()->getDocumento() . " - Endereço: " . $boleto->getCedente()->getEndereco() . " - " . $boleto->getCedente()->getCidade() . " - " . $boleto->getCedente()->getUf() . " - CEP: " . $boleto->getCedente()->getCep()), 'BL', 1, 'L');
+        
         $PDF->SetFont('Arial', '', 6);
         $PDF->Cell(170, 3, utf8_decode('Instruções'), '', 0, 'L');
         $PDF->Cell(20, 3, utf8_decode('Autênticação Mecânica'), '', 1, 'R');
@@ -171,7 +177,7 @@ class GeradorPdf
         $PDF->Ln(10);
 
         $PDF->Cell(50, 10, '', 'B', 0, 'L');
-        $PDF->Image(self::getDirImages() . $boleto->getLogoBanco(), 10, 130, 40, 10);
+        $PDF->Image(self::getDirImages() . $boleto->getLogoBanco(), 10, 137, 40, 10);
         $PDF->SetFont('Arial', 'B', 14);
         $PDF->Cell(20, 10, $boleto->getCodigoBancoComDv(), 'LBR', 0, 'C');
 
@@ -187,15 +193,15 @@ class GeradorPdf
         $PDF->Cell(60, 5, $boleto->getDataVencimento()->format('d/m/Y'), 'B', 1, 'R');
 
         $PDF->SetFont('Arial', '', 6);
-        $PDF->Cell(130, 3, 'Cedente', 'LR', 0, 'L');
-        $PDF->Cell(60, 3, utf8_decode('Agência/Código cedente'), '', 1, 'L');
+        $PDF->Cell(130, 3, utf8_decode('Beneficiário'), 'LR', 0, 'L');
+        $PDF->Cell(60, 3, utf8_decode('Agência/Código Beneficiário'), '', 1, 'L');
 
         $PDF->SetFont('Arial', '', 7);
         $PDF->Cell(130, 5, utf8_decode($boleto->getCedente()->getNome()), 'BLR', 0, 'L');
         $PDF->Cell(
             60,
             5,
-            $boleto->getAgencia() . "-" . $boleto->getAgenciaDv() . " / " . $boleto->getConta() . "-" . $boleto->getContaDv(),
+            $boleto->getAgencia() . "/" . $boleto->getConta() . "-" . $boleto->getContaDv(),
             'B',
             1,
             'R'
@@ -215,7 +221,7 @@ class GeradorPdf
         $PDF->Cell(20, 5, $boleto->getEspecieDoc(), 'BR', 0, 'L');
         $PDF->Cell(20, 5, "", 'BR', 0, 'L');
         $PDF->Cell(22, 5, $boleto->getDataProcessamento()->format('d/m/Y'), 'BR', 0, 'L');
-        $PDF->Cell(60, 5, $boleto->getCarteira() . " / " . $boleto->getNossoNumero(), 'B', 1, 'R');
+        $PDF->Cell(60, 5, $boleto->getNossoNumero(), 'B', 1, 'R');
 
         $PDF->SetFont('Arial', '', 6);
         $PDF->Cell(28, 3, 'Uso do Banco', 'LR', 0, 'L');
@@ -226,7 +232,7 @@ class GeradorPdf
         $PDF->Cell(60, 3, '(=)Valor Documento', 'L', 1, 'L');
 
         $PDF->SetFont('Arial', '', 7);
-        $PDF->Cell(28, 5, '05/05/2014', 'BLR', 0, 'L');
+        $PDF->Cell(28, 5, '', 'BLR', 0, 'L');
         $PDF->Cell(25, 5, $boleto->getCarteiraNome(), 'BR', 0, 'L');
         $PDF->Cell(15, 5, $boleto->getEspecieDoc(), 'BR', 0, 'L');
         $PDF->Cell(40, 5, "001", 'BR', 0, 'L');
@@ -279,10 +285,10 @@ class GeradorPdf
         $PDF->Cell(60, 5, '', 'LB', 1, 'R');
 
         $PDF->SetFont('Arial', '', 6);
-        $PDF->Cell(190, 3, 'Sacado', 'L', 1, 'L');
+        $PDF->Cell(190, 3, 'Pagador', 'L', 1, 'L');
 
         $PDF->SetFont('Arial', '', 7);
-        $PDF->Cell(190, 5, utf8_decode($boleto->getSacado()->getNome()), 'L', 1, 'L');
+        $PDF->Cell(190, 5, utf8_decode($boleto->getSacado()->getNome() . " - CNPJ/CPF: " . $boleto->getSacado()->getDocumento()), 'L', 1, 'L');
         $PDF->Cell(
             190,
             5,
@@ -301,13 +307,18 @@ class GeradorPdf
                 $boleto->getSacado()->getCidade() . " - " . $boleto->getSacado()->getUf(
                 ) . " - CEP: " . $boleto->getSacado()->getCep()
             ),
-            'BL',
+            'L',
             1,
             'L'
         );
 
+        $PDF->Cell(190, 3, 'Sacador Avalista', 'L', 1, 'L');
+
+        $PDF->SetFont('Arial', '', 7);
+        $PDF->Cell(190, 5, utf8_decode($boleto->getCedente()->getNome() . " - CNPJ/CPF: " . $boleto->getCedente()->getDocumento() . " - Endereço: " . $boleto->getCedente()->getEndereco() ." - ". $boleto->getCedente()->getCidade() . " - " . $boleto->getCedente()->getUf() . " - CEP: " . $boleto->getCedente()->getCep()), 'BL', 1, 'L');
+                        
         $PDF->SetFont('Arial', '', 6);
-        $PDF->Cell(170, 3, 'Sacador/Avalista', '', 0, 'L');
+        $PDF->Cell(170, 3, '', '', 0, 'L');
         $PDF->Cell(20, 3, utf8_decode('Autênticação Mecânica - Ficha de Compensação'), '', 1, 'R');
 
         $this->fbarcode($boleto->getNumeroFebraban(), $PDF);
