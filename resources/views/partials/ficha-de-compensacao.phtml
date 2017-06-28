@@ -59,6 +59,16 @@
         </td>
     </tr>
     <tr>
+        <td colspan="7">
+            <div class="titulo">Endereço do Beneficiário</div>
+            <div class="conteudo"><?php echo $cedente_endereco1 ?> - <?php echo $cedente_endereco2 ?></div>
+        </td>
+        <td>
+            <div class="titulo">Nosso número</div>
+            <div class="conteudo rtl"><?php echo $nosso_numero ?></div>
+        </td>
+    </tr>
+    <tr>
         <td width="110" colspan="2">
             <div class="titulo">Data do documento</div>
             <div class="conteudo"><?php echo $data_documento ?></div>
@@ -80,8 +90,8 @@
             <div class="conteudo"><?php echo $data_processamento ?></div>
         </td>
         <td>
-            <div class="titulo">Nosso número</div>
-            <div class="conteudo rtl"><?php echo $nosso_numero ?></div>
+            <div class="titulo">(=) Valor do Documento</div>
+            <div class="conteudo rtl"><?php echo $valor_documento ?></div>
         </td>
     </tr>
     <tr>
@@ -117,23 +127,13 @@
             <div class="conteudo"><?php echo $valor_unitario ?></div>
         </td>
         <td>
-            <div class="titulo">(=) Valor do Documento</div>
-            <div class="conteudo rtl"><?php echo $valor_documento ?></div>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="7">
-            <div class="titulo">Instruções (Texto de responsabilidade do beneficiário)</div>
-        </td>
-        <td>
             <div class="titulo">(-) Descontos / Abatimentos</div>
             <div class="conteudo rtl"><?php echo $desconto_abatimento ?></div>
         </td>
     </tr>
     <tr>
-        <td colspan="7" class="notopborder">
-            <div class="conteudo"><?php echo $instrucoes[0]; ?></div>
-            <div class="conteudo"><?php echo $instrucoes[1]; ?></div>
+        <td colspan="7">
+            <div class="titulo">Instruções (Texto de responsabilidade do beneficiário)</div>
         </td>
         <td>
             <div class="titulo">(-) Outras deduções</div>
@@ -142,8 +142,8 @@
     </tr>
     <tr>
         <td colspan="7" class="notopborder">
-            <div class="conteudo"><?php echo $instrucoes[2]; ?></div>
-            <div class="conteudo"><?php echo $instrucoes[3]; ?></div>
+            <div class="conteudo"><?php echo $instrucoes[0]; ?></div>
+            <div class="conteudo"><?php echo $instrucoes[1]; ?></div>
         </td>
         <td>
             <div class="titulo">(+) Mora / Multa</div>
@@ -152,8 +152,8 @@
     </tr>
     <tr>
         <td colspan="7" class="notopborder">
-            <div class="conteudo"><?php echo $instrucoes[4]; ?></div>
-            <div class="conteudo"><?php echo $instrucoes[5]; ?></div>
+            <div class="conteudo"><?php echo $instrucoes[2]; ?></div>
+            <div class="conteudo"><?php echo $instrucoes[3]; ?></div>
         </td>
         <td>
             <div class="titulo">(+) Outros acréscimos</div>
@@ -162,14 +162,20 @@
     </tr>
     <tr>
         <td colspan="7" class="notopborder">
-            <div class="conteudo"><?php echo $instrucoes[6]; ?></div>
-            <div class="conteudo"><?php echo $instrucoes[7]; ?></div>
+            <div class="conteudo"><?php echo $instrucoes[4]; ?></div>
+            <div class="conteudo"><?php echo $instrucoes[5]; ?></div>
         </td>
         <td>
             <div class="titulo">(=) Valor cobrado</div>
             <div class="conteudo rtl"><?php echo $valor_cobrado ?></div>
         </td>
     </tr>
+<!--    <tr>-->
+<!--        <td colspan="7" class="notopborder">-->
+<!--            <div class="conteudo">--><?php //echo $instrucoes[6]; ?><!--</div>-->
+<!--            <div class="conteudo">--><?php //echo $instrucoes[7]; ?><!--</div>-->
+<!--        </td>-->
+<!--    </tr>-->
     <tr>
         <td colspan="7">
             <div class="titulo">Pagador</div>
