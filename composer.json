@@ -1,9 +1,9 @@
 {
-    "name": "kriansa/openboleto",
+    "name": "lucioabrantes/openboleto",
     "type": "library",
-    "description": "Biblioteca para geração de boletos bancários.",
+    "description": "Forked da Biblioteca para geração de boletos bancários.",
     "keywords": ["boleto", "boleto bancario"],
-    "homepage": "http://github.com/kriansa/openboleto",
+    "homepage": "http://github.com/lucioabrantes/openboleto",
     "license": "MIT",
     "authors": [
         {

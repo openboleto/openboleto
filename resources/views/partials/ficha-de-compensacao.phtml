@@ -170,6 +170,9 @@
         <td colspan="7">
             <div class="titulo">Sacado</div>
             <div class="conteudo"><?php echo $sacado ?></div>
+            <?php if($carteira == 'CR'): ?>
+            <div class="conteudo">CPF/CNPJ: <?php echo $sacado_documento ?></div>
+            <?php endif;?>
             <div class="conteudo"><?php echo $sacado_endereco1 ?></div>
             <div class="conteudo"><?php echo $sacado_endereco2 ?></div>
 
