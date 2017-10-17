@@ -1229,6 +1229,7 @@ abstract class BoletoAbstract
             'uso_banco' => $this->getUsoBanco(),
             'codigo_barras' => $this->getImagemCodigoDeBarras(),
             'resource_path' => $this->getResourcePath(),
+            'numero_febraban' => $this->getNumeroFebraban(),
         );
         
         
