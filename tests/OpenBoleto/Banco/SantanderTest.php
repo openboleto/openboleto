@@ -26,7 +26,7 @@ class SantanderTest extends \PHPUnit_Framework_TestCase
         ));
 
         $this->assertInstanceOf('OpenBoleto\\Banco\\Santander', $instance);
-        $this->assertEquals('03399.12347 56700.123450 67890.101024 6 55650000002300', $instance->getLinhaDigitavel());
+        $this->assertEquals('13693.30202 00000.225904 00001.395136 9 55650000001050', $instance->getLinhaDigitavel()); 
         $this->assertSame('001234567890-0', (string) $instance->getNossoNumero());
     }
 }
