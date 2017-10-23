@@ -32,93 +32,111 @@
 </head>
 <body>
 
-    <div style="width: 863px" class="parcela">
-        <div style="float: left">
-            <table class="table-boleto" style="width: 180px" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                    <td>
-                        <div class="titulo">Vencimento</div>
-                        <div class="conteudo"><?php echo $data_vencimento ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">Agência/Código do Cedente</div>
-                        <div class="conteudo"><?php echo $agencia_codigo_cedente ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">Nosso número</div>
-                        <div class="conteudo"><?php echo $nosso_numero ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">Nº documento</div>
-                        <div class="conteudo"><?php echo $numero_documento ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">Espécie</div>
-                        <div class="conteudo"><?php echo $especie ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">Quantidade</div>
-                        <div class="conteudo"><?php echo $quantidade ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">(=) Valor Documento</div>
-                        <div class="conteudo"><?php echo $valor_documento ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">(-) Descontos / Abatimentos</div>
-                        <div class="conteudo"><?php echo $desconto_abatimento ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">(-) Outras deduções</div>
-                        <div class="conteudo"><?php echo $outras_deducoes ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">(+) Mora / Multa</div>
-                        <div class="conteudo"><?php echo $mora_multa ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">(+) Outros acréscimos</div>
-                        <div class="conteudo"><?php echo $outros_acrescimos ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="bottomborder">
-                        <div class="titulo">(=) Valor cobrado</div>
-                        <div class="conteudo"><?php echo $valor_cobrado ?></div>
-                    </td>
-                </tr>
-            </table>
-            <span class="header">Recibo do Pagador</span>
-        </div>
-        <div style="float: left; margin-left: 15px">
-            <!-- Ficha de compensação -->
-            <?php include('partials/ficha-de-compensacao.phtml') ?>
-        </div>
-        <div style="clear: both"></div>
-        <div class="linha-pontilhada">
-            <i class="fa fa-scissors fa-flip-horizontal"></i>
+<div style="width: 863px" class="parcela">
+    <div style="float: left">
+        <table class="table-boleto" style="width: 180px" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td colspan="2">
+                    <div class="titulo">Beneficiário</div>
+                    <div class="conteudo" style="height: 30px; overflow-y: hidden; font-size: 9px;line-height: 9px;">
+                        <?php echo $cedente ?> -
+                        <?php echo $cedente_cpf_cnpj ?> -
+                        <?php echo $cedente_endereco1 ?>
+                        <?php echo $cedente_endereco2 ?>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="titulo">Vencimento</div>
+                    <div class="conteudo-carne direita"><?php echo $data_vencimento ?></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="titulo">Agência/Código do Beneficiário</div>
+                    <div class="conteudo-carne direita"><?php echo $agencia_codigo_cedente ?></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="titulo">Nosso número</div>
+                    <div class="conteudo-carne direita"><?php echo $nosso_numero ?></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="titulo">Nº documento</div>
+                    <div class="conteudo-carne direita"><?php echo $numero_documento ?></div>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 50%">
+                    <div class="titulo">Espécie</div>
+                    <div class="conteudo-carne direita"><?php echo $especie ?></div>
+                </td>
+                <td>
+                    <div class="titulo">Quantidade</div>
+                    <div class="conteudo"><?php echo $quantidade ?></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="titulo">(=) Valor Documento</div>
+                    <div class="conteudo-carne direita"><?php echo $valor_documento ?></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="titulo">(-) Descontos / Abatimentos</div>
+                    <div class="conteudo"><?php echo $desconto_abatimento ?></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="titulo">(-) Outras deduções</div>
+                    <div class="conteudo-carne direita"><?php echo $outras_deducoes ?></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="titulo">(+) Mora / Multa</div>
+                    <div class="conteudo-carne direita"><?php echo $mora_multa ?></div>
+                </td>
+                <td>
+                    <div class="titulo">(+) Outros acrésc.</div>
+                    <div class="conteudo-carne direita"><?php echo $outros_acrescimos ?></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="titulo">(=) Valor cobrado</div>
+                    <div class="conteudo-carne direita"><?php echo $valor_cobrado ?></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="bottomborder" colspan="2">
+                    <div class="titulo">Pagador</div>
+                    <div class="conteudo" style="height: 30px; overflow-y: hidden; font-size: 9px; line-height: 9px;">
+                        <?php echo $sacado ?> -
+                        <?php echo $sacado_documento ?> -
+                        <?php echo $sacado_endereco1 ?> <?php echo $sacado_endereco2 ?>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="table-boleto" style="width: 100%;margin-bottom: -5px;">
+            <span class="titulo">Recibo do Pagador</span>
         </div>
     </div>
-
+    <div style="float: left; margin-left: 15px">
+        <!-- Ficha de compensação -->
+        <?php include('partials/ficha-de-compensacao.phtml') ?>
+    </div>
+    <div style="clear: both"></div>
+    <div class="linha-pontilhada">
+        <i class="fa fa-scissors fa-flip-horizontal"></i>
+    </div>
+</div>
 </body>
 </html>
