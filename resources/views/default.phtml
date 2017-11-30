@@ -79,15 +79,18 @@
             </tr>
             <tr>
                 <td colspan="2" width="250">
-                    <div class="titulo">Cedente</div>
-                    <div class="conteudo"><?php echo $cedente ?></div>
+                    <div class="titulo">Beneficiário</div>
+                    <div class="conteudo_beneficiario">
+                        <p><?php echo $cedente ?> - CPNJ: <?php echo $cedente_cpf_cnpj ?> - End:
+                            <?php echo $cedente_endereco1 ?></p>
+                    </div>
                 </td>
                 <td>
                     <div class="titulo">CPF/CNPJ</div>
                     <div class="conteudo"><?php echo $cedente_cpf_cnpj ?></div>
                 </td>
                 <td width="120">
-                    <div class="titulo">Agência/Código do Cedente</div>
+                    <div class="titulo">Agência/Código Beneficiário</div>
                     <div class="conteudo rtl"><?php echo $agencia_codigo_cedente ?></div>
                 </td>
                 <td width="110">
@@ -97,7 +100,7 @@
             </tr>
             <tr>
                 <td colspan="3">
-                    <div class="titulo">Sacado</div>
+                    <div class="titulo">Pagador</div>
                     <div class="conteudo"><?php echo $sacado ?></div>
                 </td>
                 <td>

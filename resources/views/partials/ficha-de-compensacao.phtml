@@ -46,11 +46,14 @@
     </tr>
     <tr>
         <td colspan="7">
-            <div class="titulo">Cedente</div>
-            <div class="conteudo"><?php echo $cedente ?></div>
+            <div class="titulo">Beneficiário</div>
+            <div class="conteudo_beneficiario">
+                <p><?php echo $cedente ?> - </br>CPNJ: <?php echo $cedente_cpf_cnpj ?> - End:
+                    <?php echo $cedente_endereco1 ?></p>
+            </div>
         </td>
         <td>
-            <div class="titulo">Agência/Código cedente</div>
+            <div class="titulo">Agência/Código Beneficiário</div>
             <div class="conteudo rtl"><?php echo $agencia_codigo_cedente ?></div>
         </td>
     </tr>
@@ -168,14 +171,19 @@
     </tr>
     <tr>
         <td colspan="7">
-            <div class="titulo">Sacado</div>
-            <div class="conteudo"><?php echo $sacado ?></div>
+            <div class="titulo">Pagador</div>
+            <div class="conteudo">
+                <?php echo $sacado ?>
+                CNPJ/CPF: <?php echo $sacado_documento ?>
+            </div>
             <div class="conteudo"><?php echo $sacado_endereco1 ?></div>
-            <div class="conteudo"><?php echo $sacado_endereco2 ?></div>
+            <div class="conteudo">
+                <?php echo $sacado_endereco2 ?>
+            </div>
 
         </td>
         <td class="noleftborder">
-            <div class="titulo" style="margin-top: 50px">Cód. Baixa</div>
+            <div class="titulo" style="margin-top: 50px">Cód. Baixa <?php echo substr(substr($nosso_numero, 2),0,-1); ?></div>
         </td>
     </tr>
 
