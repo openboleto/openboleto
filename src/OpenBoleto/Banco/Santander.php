@@ -115,7 +115,7 @@ class Santander extends BoletoAbstract
      */
     public function getCampoLivre()
     {
-        return '9' . self::zeroFill($this->getConta(), 7) .
+        return '9' . self::zeroFill($this->getConta(), 8) .
             $this->getNossoNumero() .
             self::zeroFill($this->getIos(), 1) .
             self::zeroFill($this->getCarteira(), 3);
