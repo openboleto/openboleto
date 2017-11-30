@@ -61,7 +61,7 @@ body{
 
 .table-boleto .conteudo {
     font: bold 10px Arial;
-    height: 13px;
+    min-height: 13px;
 }
 
 .table-boleto .sacador {
