@@ -77,6 +77,13 @@ class Bradesco extends BoletoAbstract
     protected $cip = '000';
 
     /**
+     * Digito de Auto Conferencia do Número Bancário.
+     * 1 posicao
+     * @var int
+    */
+    protected $digitoAutoConferencia;
+
+    /**
      * Gera o Nosso Número.
      *
      * @return string
@@ -132,6 +139,19 @@ class Bradesco extends BoletoAbstract
         return array(
             'cip' => self::zeroFill($this->getCip(), 3),
             'mostra_cip' => true,
+            'nosso_numero' =>
+                str_pad( $this->getCarteira(), 2, 0, STR_PAD_LEFT ) . '/' .
+                str_pad( $this->getNossoNumero(), 11, 0, STR_PAD_LEFT ) . '-' .
+                $this->digitoAutoConferencia
         );
     }
+
+    public function setSequencial( $sequencial )
+    {
+        $modulo11 = $this->modulo11( str_pad( $this->getCarteira(), 2, 0, STR_PAD_LEFT ) . str_pad( $sequencial, 11, 0, STR_PAD_LEFT ), 7 );
+        $this->digitoAutoConferencia = $modulo11['resto'] != 1 ? $modulo11['digito'] : 'P';
+        $this->sequencial = $sequencial;
+        return $this;
+    }
+
 }
