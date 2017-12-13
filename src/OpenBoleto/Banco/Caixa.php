@@ -43,16 +43,29 @@ use OpenBoleto\Agente;
 class Caixa extends BoletoAbstract
 {
     /**
+     * @var array Nome espécie das moedas
+     */
+    protected static $especie = array(
+        self::MOEDA_REAL => 'R$'
+    );
+
+    /**
      * Código do banco
      * @var string
      */
     protected $codigoBanco = '104';
 
     /**
+     * Nome do banco
+     * @var string
+     */
+    protected $nomeBanco = 'Caixa Econômica Federal';
+
+    /**
      * Localização do logotipo do banco, referente ao diretório de imagens
      * @var string
      */
-    protected $logoBanco = 'caixa.png';
+    protected $logoBanco = 'caixa.png'; 
 
     /**
      * Linha de local de pagamento
@@ -80,6 +93,12 @@ class Caixa extends BoletoAbstract
     protected $layout = 'caixa.phtml';
 
     /**
+     * Código do Cedente
+     * @var string
+     */
+    protected $codigoCedente = null;
+
+    /**
      * Define o número da conta
      *
      * Overrided porque o cedente da Caixa TEM QUE TER 6 posições, senão não é válido
@@ -94,14 +113,29 @@ class Caixa extends BoletoAbstract
     }
 
     /**
+     * Define o Código do Cedente
+     *
+     * Como a Caixa utiliza o código do cedente como conta, se o campo não for null, já define a conta com o número do cedente e a contaDv como null
+     *
+     * @param int $codigoCedente
+     * @return BoletoAbstract
+     */
+    public function setCodigoCedente($codigoCedente)
+    {
+        $this->codigoCedente = self::zeroFill($codigoCedente, 6);
+        return $this;
+    }
+
+    /**
      * Gera o Nosso Número.
+     * Overrided porque a caixa usa o código do cedente, não da conta
      *
      * @throws Exception
      * @return string
      */
     protected function gerarNossoNumero()
     {
-        $conta = $this->getConta();
+        $conta = $this->getCodigoCedente();
         $sequencial = $this->getSequencial();
 
         // Inicia o número de acordo com o tipo de cobrança, provavelmente só será usado Sem Registro, mas
@@ -128,6 +162,8 @@ class Caixa extends BoletoAbstract
      * O campo livre da Caixa é cheio de nove horas. Transcrição do manual:
      * O Campo Livre contém 25 posições dispostas da seguinte forma:  
      * 
+     * Overrided porque a caixa utiliza o código do cedente, não da conta.
+     * 
      * Descrição -------------------- Posição no Código de Barras --- Observação 
      * 
      * Código do Beneficiário ------- Posição: 20-25 
@@ -147,7 +183,7 @@ class Caixa extends BoletoAbstract
     public function getCampoLivre()
     {
         $nossoNumero = $this->gerarNossoNumero();
-        $beneficiario = $this->getConta();
+        $beneficiario = $this->getCodigoCedente();
 
         // Código do beneficiário + DV]
         $modulo = self::modulo11($beneficiario);
@@ -173,5 +209,51 @@ class Caixa extends BoletoAbstract
         $campoLivre .= $modulo['digito'];
 
        return $campoLivre;
+    }
+
+    /**
+     * Retorna o Número do Cedente
+     *
+     * @return int
+     */ 
+    public function getCodigoCedente()
+    {
+        return $this->codigoCedente;
+    }
+
+    /**
+     * Retorna o Nome do Banco
+     *
+     * @return string
+     */ 
+    public function getNomeBanco()
+    {
+        return $this->nomeBanco;
+    }
+
+    /**
+     * Retorna o campo Agência/Cedente do boleto
+     *
+     * Overrided porque a Caixa utiliza o Código do Cedente para a emissão do boleto, não o número da conta.
+     *
+     * @return string
+     */
+    public function getAgenciaCodigoCedente()
+    {
+        $agencia = $this->getAgenciaDv() !== null ? $this->getAgencia() . '-' . $this->getAgenciaDv() : $this->getAgencia();
+
+        //Calcula-se o dígito verificados pelo módulo 11
+        if($this->getCodigoCedente() !== null){
+            $dv = self::modulo11($this->codigoCedente);
+            $dv = 11 - (int)$dv['resto'];
+
+            $conta = $this->getCodigoCedente() . '-' . ($dv > 9 ? 0 : $dv);
+        }else if($this->getContaDv() !== null){
+            $conta = $this->getConta() . '-' . $this->getContaDv();
+        }else{
+            $conta = $this->getConta();
+        }
+        
+        return $agencia . '/' . $conta;
     }
 }

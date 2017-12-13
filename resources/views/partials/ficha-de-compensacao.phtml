@@ -46,8 +46,9 @@
     </tr>
     <tr>
         <td colspan="7">
-            <div class="titulo">Cedente</div>
-            <div class="conteudo"><?php echo $cedente ?></div>
+            <div class="titulo">Beneficiário</div>
+            <div class="conteudo float_left"><?php echo $cedente ?></div>
+            <div class="conteudo cpf_cnpj"><?php echo $cedente_cpf_cnpj ?></div>
         </td>
         <td>
             <div class="titulo">Agência/Código cedente</div>
@@ -100,12 +101,12 @@
             <div class="titulo">Carteira</div>
             <div class="conteudo"><?php echo $carteira ?></div>
         </td>
-        <td width="35">
-            <div class="titulo">Espécie</div>
+        <td width="70">
+            <div class="titulo">Espécie Moeda</div>
             <div class="conteudo"><?php echo $especie ?></div>
         </td>
         <td colspan="2">
-            <div class="titulo">Quantidade</div>
+            <div class="titulo">Qtde. Moeda</div>
             <div class="conteudo"><?php echo $quantidade ?></div>
         </td>
         <td width="110">
@@ -119,7 +120,7 @@
     </tr>
     <tr>
         <td colspan="7">
-            <div class="titulo">Instruções (Texto de responsabilidade do cedente)</div>
+            <div class="titulo">Instruções (Texto de responsabilidade do beneficiário)</div>
         </td>
         <td>
             <div class="titulo">(-) Descontos / Abatimentos</div>
@@ -142,7 +143,7 @@
             <div class="conteudo"><?php echo $instrucoes[3]; ?></div>
         </td>
         <td>
-            <div class="titulo">(+) Mora / Multa</div>
+            <div class="titulo">(+) Mora / Multa / Juros</div>
             <div class="conteudo rtl"><?php echo $mora_multa ?></div>
         </td>
     </tr>
@@ -168,20 +169,24 @@
     </tr>
     <tr>
         <td colspan="7">
-            <div class="titulo">Sacado</div>
+            <div class="titulo">Pagador</div>
             <div class="conteudo"><?php echo $sacado ?></div>
             <div class="conteudo"><?php echo $sacado_endereco1 ?></div>
             <div class="conteudo"><?php echo $sacado_endereco2 ?></div>
 
+            <div class="titulo">Sacador/Avalista: <?php echo $sacador_avalista; ?></div>
         </td>
         <td class="noleftborder">
-            <div class="titulo" style="margin-top: 50px">Cód. Baixa</div>
+            <div class="conteudo">CPF/CNPJ: <?php echo $sacado_documento; ?></div>
+            <div class="conteudo"></div><div class="conteudo"></div><div class="conteudo"></div>
+            <div class="conteudo">CPF/CNPJ: <?php echo $cpf_cnpj_sacador_avalista; ?></div>
+            <!--div class="titulo" style="margin-top: 50px">Cód. Baixa</div>-->
         </td>
     </tr>
 
     <tr>
         <td colspan="6" class="noleftborder">
-            <div class="titulo">Sacador/Avalista <div class="conteudo sacador"><?php echo $sacador_avalista; ?></div></div>
+            <!--<div class="titulo">Sacador/Avalista <div class="conteudo sacador"><?php echo $sacador_avalista; ?></div></div>-->
         </td>
         <td colspan="2" class="norightborder noleftborder">
             <div class="conteudo noborder rtl">Autenticação mecânica - Ficha de Compensação</div>
