@@ -48,7 +48,7 @@
         <span class="header">Linha Digitável: <?= $linha_digitavel; ?></span>
         <?php if ($valor_documento) : ?><span class="header">Valor: R$ <?= $valor_documento; ?></span><?php endif ?>
         <?php if ($pagamento_minimo) : ?><span class="header">Pagamento mínimo: R$ <?= $pagamento_minimo; ?></span><?php endif ?>
-        <div class="linha-pontilhada margem-b20">Recibo do sacado</div>
+        <div class="linha-pontilhada margem-b20">Recibo do pagador</div>
         <br />
     </div>
 
@@ -80,7 +80,7 @@
         <tbody>
         <tr>
             <td width="35%" colspan="2">
-                <span class="titulo">Cedente</span>
+                <span class="titulo">Beneficiário</span>
                 <span class="conteudo"><?= $cedente ?></span>
             </td>
             <td width="18%">
@@ -88,7 +88,7 @@
                 <span class="conteudo"><?= $cedente_cpf_cnpj ?></span>
             </td>
             <td width="26%">
-                <span class="titulo">Agência/Código do Cedente</span>
+                <span class="titulo">Agência/Código do Beneficiário</span>
                 <span class="conteudo direita"><?= $agencia_codigo_cedente ?></span>
             </td>
             <td width="21%">
@@ -98,7 +98,7 @@
         </tr>
         <tr>
             <td colspan="3">
-                <span class="titulo">Sacado</span>
+                <span class="titulo">Pagador</span>
                 <span class="conteudo"><?= $sacado ?></span>
             </td>
             <td>
