@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<!--
+<?php
+/**
  * OpenBoleto - Geração de boletos bancários em PHP
  *
  * LICENSE: The MIT License (MIT)
@@ -20,11 +20,14 @@
  * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
--->
+ */
+?>
+
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title><?php echo $cedente; ?></title>
+    <title><?= $cedente; ?></title>
     <style type="text/css">
         /* Embed the CSS content here */
         <?php include $resource_path . '/css/styles.css' ?>
@@ -32,147 +35,146 @@
 </head>
 <body>
 
-    <div style="width: 666px">
-        <div class="noprint info">
-            <h2>Instruções de Impressão</h2>
-            <ul>
-                <li>Imprima em impressora jato de tinta (ink jet) ou laser em qualidade normal ou alta (Não use modo econômico).</li>
-                <li>Utilize folha A4 (210 x 297 mm) ou Carta (216 x 279 mm) e margens mínimas à esquerda e à direita do formulário.</li>
-                <li>Corte na linha indicada. Não rasure, risque, fure ou dobre a região onde se encontra o código de barras.</li>
-                <li>Caso não apareça o código de barras no final, pressione F5 para atualizar esta tela.</li>
-                <li>Caso tenha problemas ao imprimir, copie a sequencia numérica abaixo e pague no caixa eletrônico ou no internet banking:</li>
-            </ul>
-            <span class="header">Linha Digitável: <?php echo $linha_digitavel; ?></span>
-            <?php if ($valor_documento) : ?><span class="header">Valor: R$ <?php echo $valor_documento; ?></span><?php endif ?>
-            <?php if ($pagamento_minimo) : ?><span class="header">Pagamento mínimo: R$ <?php echo $pagamento_minimo; ?></span><?php endif ?>
-            <br>
-            <div class="linha-pontilhada" style="margin-bottom: 20px;">Recibo do sacado</div>
-        </div>
-
-        <div class="info-empresa">
-            <?php if ($logotipo) : ?>
-            <div style="display: inline-block;">
-                <img alt="logotipo" src="<?php echo $logotipo; ?>" />
-            </div>
-            <?php endif ?>
-            <div style="display: inline-block; vertical-align: super;">
-                <div><strong><?php echo $cedente; ?></strong></div>
-                <div><?php echo $cedente_cpf_cnpj; ?></div>
-                <div><?php echo $cedente_endereco1; ?></div>
-                <div><?php echo $cedente_endereco2; ?></div>
-            </div>
-        </div>
-        <br>
-
-        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
-            <tbody>
-            <tr>
-                <td valign="bottom" colspan="8" class="noborder nopadding">
-                    <div class="logocontainer">
-                        <div class="logobanco">
-                            <img src="<?php echo $logo_banco; ?>" alt="logotipo do banco">
-                        </div>
-                        <div class="codbanco"><?php echo $codigo_banco_com_dv ?></div>
-                    </div>
-                    <div class="linha-digitavel"><?php echo $linha_digitavel ?></div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" width="250">
-                    <div class="titulo">Cedente</div>
-                    <div class="conteudo"><?php echo $cedente ?></div>
-                </td>
-                <td>
-                    <div class="titulo">CPF/CNPJ</div>
-                    <div class="conteudo"><?php echo $cedente_cpf_cnpj ?></div>
-                </td>
-                <td width="120">
-                    <div class="titulo">Agência/Código do Cedente</div>
-                    <div class="conteudo rtl"><?php echo $agencia_codigo_cedente ?></div>
-                </td>
-                <td width="110">
-                    <div class="titulo">Vencimento</div>
-                    <div class="conteudo rtl"><?php echo $data_vencimento ?></div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <div class="titulo">Sacado</div>
-                    <div class="conteudo"><?php echo $sacado ?></div>
-                </td>
-                <td>
-                    <div class="titulo">Nº documento</div>
-                    <div class="conteudo rtl"><?php echo $numero_documento ?></div>
-                </td>
-                <td>
-                    <div class="titulo">Nosso número</div>
-                    <div class="conteudo rtl"><?php echo $nosso_numero ?></div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="titulo">Espécie</div>
-                    <div class="conteudo"><?php echo $especie ?></div>
-                </td>
-                <td>
-                    <div class="titulo">Quantidade</div>
-                    <div class="conteudo rtl"><?php echo $quantidade ?></div>
-                </td>
-                <td>
-                    <div class="titulo">Valor</div>
-                    <div class="conteudo rtl"><?php echo $valor_unitario ?></div>
-                </td>
-                <td>
-                    <div class="titulo">(-) Descontos / Abatimentos</div>
-                    <div class="conteudo rtl"><?php echo $desconto_abatimento ?></div>
-                </td>
-                <td>
-                    <div class="titulo">(=) Valor Documento</div>
-                    <div class="conteudo rtl"><?php echo $valor_documento ?></div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <div class="conteudo"></div>
-                    <div class="titulo">Demonstrativo</div>
-                </td>
-                <td>
-                    <div class="titulo">(-) Outras deduções</div>
-                    <div class="conteudo"><?php echo $outras_deducoes ?></div>
-                </td>
-                <td>
-                    <div class="titulo">(+) Outros acréscimos</div>
-                    <div class="conteudo rtl"><?php echo $outros_acrescimos ?></div>
-                </td>
-                <td>
-                    <div class="titulo">(=) Valor cobrado</div>
-                    <div class="conteudo rtl"><?php echo $valor_cobrado ?></div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4"><div style="margin-top: 10px" class="conteudo"><?php echo $demonstrativo[0] ?></div></td>
-                <td class="noleftborder"><div class="titulo">Autenticação mecânica</div></td>
-            </tr>
-            <tr>
-                <td colspan="5" class="notopborder"><div class="conteudo"><?php echo $demonstrativo[1] ?></div></td>
-            </tr>
-            <tr>
-                <td colspan="5" class="notopborder"><div class="conteudo"><?php echo $demonstrativo[2] ?></div></td>
-            </tr>
-            <tr>
-                <td colspan="5" class="notopborder"><div class="conteudo"><?php echo $demonstrativo[3] ?></div></td>
-            </tr>
-            <tr>
-                <td colspan="5" class="notopborder bottomborder"><div style="margin-bottom: 10px;" class="conteudo"><?php echo $demonstrativo[4] ?></div></td>
-            </tr>
-            </tbody>
-        </table>
-        <br>
-        <div class="linha-pontilhada">Corte na linha pontilhada</div>
-        <br>
-
-        <!-- Ficha de compensação -->
-        <?php include('partials/ficha-de-compensacao.phtml') ?>
+<div class="page">
+    <div class="noprint info">
+        <h2>Instruções de Impressão</h2>
+        <ul>
+            <li>Imprima em impressora jato de tinta (ink jet) ou laser em qualidade normal ou alta (Não use modo econômico).</li>
+            <li>Utilize folha A4 (210 x 297 mm) ou Carta (216 x 279 mm) e margens mínimas à esquerda e à direita do formulário.</li>
+            <li>Corte na linha indicada. Não rasure, risque, fure ou dobre a região onde se encontra o código de barras.</li>
+            <li>Caso não apareça o código de barras no final, pressione F5 para atualizar esta tela.</li>
+            <li>Caso tenha problemas ao imprimir, copie a sequencia numérica abaixo e pague no caixa eletrônico ou no internet banking:</li>
+        </ul>
+        <span class="header">Linha Digitável: <?= $linha_digitavel; ?></span>
+        <?php if ($valor_documento) : ?><span class="header">Valor: R$ <?= $valor_documento; ?></span><?php endif ?>
+        <?php if ($pagamento_minimo) : ?><span class="header">Pagamento mínimo: R$ <?= $pagamento_minimo; ?></span><?php endif ?>
+        <div class="linha-pontilhada margem-b20">Recibo do sacado</div>
+        <br />
     </div>
+
+    <div class="info-empresa">
+        <?php if ($logotipo) : ?>
+            <div class="logo-empresa">
+                <img alt="logotipo" src="<?= $logotipo; ?>" />
+            </div>
+        <?php endif ?>
+        <div class="vsuper">
+            <div><strong><?= $cedente; ?></strong></div>
+            <div><?= $cedente_cpf_cnpj; ?></div>
+            <div><?= $cedente_endereco1; ?></div>
+            <div><?= $cedente_endereco2; ?></div>
+        </div>
+    </div>
+    <br />
+
+    <div class="boleto-header">
+        <div class="leftcontainer">
+            <img src="<?= $logo_banco; ?>" alt="logotipo do banco" />
+            <span class="codbanco"><?= $codigo_banco_com_dv ?></span>
+        </div>
+        <div class="rightcontainer">
+            <span class="linha-digitavel"><?= $linha_digitavel ?></span>
+        </div>
+    </div>
+    <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+        <tr>
+            <td width="35%" colspan="2">
+                <span class="titulo">Cedente</span>
+                <span class="conteudo"><?= $cedente ?></span>
+            </td>
+            <td width="18%">
+                <span class="titulo">CPF/CNPJ</span>
+                <span class="conteudo"><?= $cedente_cpf_cnpj ?></span>
+            </td>
+            <td width="26%">
+                <span class="titulo">Agência/Código do Cedente</span>
+                <span class="conteudo direita"><?= $agencia_codigo_cedente ?></span>
+            </td>
+            <td width="21%">
+                <span class="titulo">Vencimento</span>
+                <span class="conteudo direita"><?= $data_vencimento ?></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <span class="titulo">Sacado</span>
+                <span class="conteudo"><?= $sacado ?></span>
+            </td>
+            <td>
+                <span class="titulo">Nº documento</span>
+                <span class="conteudo direita"><?= $numero_documento ?></span>
+            </td>
+            <td>
+                <span class="titulo">Nosso número</span>
+                <span class="conteudo direita"><?= $nosso_numero ?></span>
+            </td>
+        </tr>
+        <tr>
+            <td width="18%">
+                <span class="titulo">Espécie</span>
+                <span class="conteudo"><?= $especie ?></span>
+            </td>
+            <td width="17%">
+                <span class="titulo">Quantidade</span>
+                <span class="conteudo direita"><?= $quantidade ?></span>
+            </td>
+            <td width="18%">
+                <span class="titulo">Valor</span>
+                <span class="conteudo direita"><?= $valor_unitario ?></span>
+            </td>
+            <td width="26%">
+                <span class="titulo">(-) Descontos / Abatimentos</span>
+                <span class="conteudo direita"><?= $desconto_abatimento ?></span>
+            </td>
+            <td width="21%">
+                <span class="titulo">(=) Valor Documento</span>
+                <span class="conteudo direita"><?= $valor_documento ?></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span class="conteudo"></span>
+                <span class="titulo">Demonstrativo</span>
+            </td>
+            <td>
+                <span class="titulo">(-) Outras deduções</span>
+                <span class="conteudo"><?= $outras_deducoes ?></span>
+            </td>
+            <td>
+                <span class="titulo">(+) Outros acréscimos</span>
+                <span class="conteudo direita"><?= $outros_acrescimos ?></span>
+            </td>
+            <td>
+                <span class="titulo">(=) Valor cobrado</span>
+                <span class="conteudo direita"><?= $valor_cobrado ?></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4"><span class="conteudo margem-t10"><?= $demonstrativo[0] ?></span></td>
+            <td class="noleftborder"><span class="titulo">Autenticação mecânica</span></td>
+        </tr>
+        <tr>
+            <td colspan="5" class="notopborder"><span class="conteudo"><?= $demonstrativo[1] ?></span></td>
+        </tr>
+        <tr>
+            <td colspan="5" class="notopborder"><span class="conteudo"><?= $demonstrativo[2] ?></span></td>
+        </tr>
+        <tr>
+            <td colspan="5" class="notopborder"><span class="conteudo"><?= $demonstrativo[3] ?></span></td>
+        </tr>
+        <tr>
+            <td colspan="5" class="notopborder bottomborder"><span class="conteudo margem-b10"><?= $demonstrativo[4] ?></span></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br />
+    <div class="linha-pontilhada">Corte na linha pontilhada</div>
+    <br />
+
+    <!-- Ficha de compensação -->
+    <?php include('partials/ficha-de-compensacao.phtml') ?>
+</div>
 </body>
 </html>

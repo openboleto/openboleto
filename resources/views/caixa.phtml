@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<!--
+<?php
+/**
  * OpenBoleto - Geração de boletos bancários em PHP
  *
  * LICENSE: The MIT License (MIT)
@@ -20,7 +20,10 @@
  * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
--->
+ */
+?>
+
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -32,7 +35,7 @@
 </head>
 <body>
 
-    <div style="width: 666px">
+    <div class="page">
         <div class="noprint info">
             <h2>Instruções de Impressão</h2>
             <ul>
@@ -45,127 +48,126 @@
             <span class="header">Linha Digitável: <?php echo $linha_digitavel; ?></span>
             <?php if ($valor_documento) : ?><span class="header">Valor: R$ <?php echo $valor_documento; ?></span><?php endif ?>
             <?php if ($pagamento_minimo) : ?><span class="header">Pagamento mínimo: R$ <?php echo $pagamento_minimo; ?></span><?php endif ?>
-            <br>
-            <div class="linha-pontilhada" style="margin-bottom: 20px;">Recibo do sacado</div>
+            <br />
+            <div class="linha-pontilhada margem-b20">Recibo do sacado</div>
         </div>
 
         <div class="info-empresa">
             <?php if ($logotipo) : ?>
-            <div style="display: inline-block;">
+            <div class="logo-empresa">
                 <img alt="logotipo" src="<?php echo $logotipo; ?>" />
             </div>
             <?php endif ?>
         </div>
-        <br>
+        <br />
 
+        <div class="boleto-header">
+            <div class="leftcontainer">
+                <img src="<?= $logo_banco; ?>" alt="logotipo do banco" />
+                <span class="codbanco"><?= $codigo_banco_com_dv ?></span>
+            </div>
+            <div class="rightcontainer">
+                <span class="linha-digitavel"><?= $linha_digitavel ?></span>
+            </div>
+        </div>
         <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
             <tbody>
             <tr>
-                <td valign="bottom" colspan="8" class="noborder nopadding">
-                    <div class="logocontainer">
-                        <div class="logobanco">
-                            <img src="<?php echo $logo_banco; ?>" alt="logotipo do banco">
-                        </div>
-                        <div class="codbanco"><?php echo $codigo_banco_com_dv ?></div>
-                    </div>
-                    <div class="linha-digitavel"><?php echo $linha_digitavel ?></div>
+                <td colspan="4">
+                    <span class="titulo">Pagador</span>
+                    <span class="conteudo"><?php echo $sacado ?></span>
+                </td>
+                <td width="26%">
+                    <span class="titulo">CPF/CNPJ do Pagador</span>
+                    <span class="conteudo direita"><?php echo $sacado_documento ?></span>
                 </td>
             </tr>
             <tr>
-                <td width="520" colspan="4">
-                    <div class="titulo">Pagador</div>
-                    <div class="conteudo"><?php echo $sacado ?></div>
+                <td>
+                    <span class="titulo">Nosso Número</span>
+                    <span class="conteudo"><?php echo $nosso_numero ?></span>
                 </td>
                 <td>
-                    <div class="titulo">CPF/CNPJ do Pagador</div>
-                    <div class="conteudo rtl"><?php echo $sacado_documento ?></div>
-                </td>
-            </tr>
-            <tr>
-                <td width="130">
-                    <div class="titulo">Nosso Número</div>
-                    <div class="conteudo"><?php echo $nosso_numero ?></div>
-                </td>
-                <td width="130">
-                    <div class="titulo">Nr. Documento</div>
-                    <div class="conteudo"><?php echo $numero_documento ?></div>
+                    <span class="titulo">Nr. Documento</span>
+                    <span class="conteudo"><?php echo $numero_documento ?></span>
                 </td>
                 <td colspan="2">
-                    <div class="titulo">Agência/Código do Beneficiário</div>
-                    <div class="conteudo"><?php echo $agencia_codigo_cedente ?></div>
+                    <span class="titulo">Agência/Código do Beneficiário</span>
+                    <span class="conteudo"><?php echo $agencia_codigo_cedente ?></span>
                 </td>
-                <td width="130" class="caixa-gray-bg">
-                    <div class="titulo">Vencimento</div>
-                    <div class="conteudo rtl"><?php echo $data_vencimento ?></div>
+                <td class="caixa-gray-bg">
+                    <span class="titulo">Vencimento</span>
+                    <span class="conteudo direita"><?php echo $data_vencimento ?></span>
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
-                    <div class="titulo">Beneficiário</div>
-                    <div class="conteudo"><?php echo $cedente ?></div>
+                    <span class="titulo">Beneficiário</span>
+                    <span class="conteudo"><?php echo $cedente ?></span>
                 </td>
                 <td colspan="2">
-                    <div class="titulo">CPF/CNPJ do Beneficiário</div>
-                    <div class="conteudo"><?php echo $cedente_cpf_cnpj ?></div>
+                    <span class="titulo">CPF/CNPJ do Beneficiário</span>
+                    <span class="conteudo"><?php echo $cedente_cpf_cnpj ?></span>
                 </td>
-                <td width="130" class="caixa-gray-bg">
-                    <div class="titulo">Valor do Documento</div>
-                    <div class="conteudo rtl"><?php echo $valor_documento ?></div>
+                <td class="caixa-gray-bg">
+                    <span class="titulo">Valor do Documento</span>
+                    <span class="conteudo direita"><?php echo $valor_documento ?></span>
                 </td>
             </tr>
             <tr>
                 <td colspan="4">
-                    <div class="titulo">Endereço do Beneficiário</div>
-                    <div class="conteudo"><?php echo $cedente_endereco1 ?> | <?php echo $cedente_endereco2 ?></div>
+                    <span class="titulo">Endereço do Beneficiário</span>
+                    <span class="conteudo"><?php echo $cedente_endereco1 ?> | <?php echo $cedente_endereco2 ?></span>
                 </td>
-                <td width="130">
-                    <div class="titulo">(-) Descontos / Abatimentos</div>
-                    <div class="conteudo rtl"><?php echo $desconto_abatimento ?></div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" rowspan="3" style="vertical-align: top;">
-                    <div class="titulo"><b>Demonstrativo</b></div>
-                    <div style="margin-top: 10px" class="conteudo"><?php echo $demonstrativo[0] ?></div>
-                    <div class="conteudo"><?php echo $demonstrativo[1] ?></div>
-                    <div class="conteudo"><?php echo $demonstrativo[2] ?></div>
-                    <div class="conteudo"><?php echo $demonstrativo[3] ?></div>
-                    <div style="margin-bottom: 10px;" class="conteudo"><?php echo $demonstrativo[4] ?></div>
-                </td>
-                <td width="130">
-                    <div class="titulo">(-) Outras deduções</div>
-                    <div class="conteudo rtl"><?php echo $outras_deducoes ?></div>
+                <td>
+                    <span class="titulo">(-) Descontos / Abatimentos</span>
+                    <span class="conteudo direita"><?php echo $desconto_abatimento ?></span>
                 </td>
             </tr>
             <tr>
-                <td width="130">
-                    <div class="titulo">(+) Outros acréscimos</div>
-                    <div class="conteudo rtl"><?php echo $outros_acrescimos ?></div>
+                <td colspan="4" rowspan="3" class="vtop">
+                    <span class="titulo"><b>Demonstrativo</b></span>
+                    <span class="conteudo margem-t10"><?php echo $demonstrativo[0] ?></span>
+                    <span class="conteudo"><?php echo $demonstrativo[1] ?></span>
+                    <span class="conteudo"><?php echo $demonstrativo[2] ?></span>
+                    <span class="conteudo"><?php echo $demonstrativo[3] ?></span>
+                    <span class="conteudo margem-b10"><?php echo $demonstrativo[4] ?></span>
+                </td>
+                <td>
+                    <span class="titulo">(-) Outras deduções</span>
+                    <span class="conteudo direita"><?php echo $outras_deducoes ?></span>
                 </td>
             </tr>
             <tr>
-                <td width="130">
-                    <div class="titulo">(=) Valor cobrado</div>
-                    <div class="conteudo rtl"><?php echo $valor_cobrado ?></div>
+                <td>
+                    <span class="titulo">(+) Outros acréscimos</span>
+                    <span class="conteudo direita"><?php echo $outros_acrescimos ?></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="titulo">(=) Valor cobrado</span>
+                    <span class="conteudo direita"><?php echo $valor_cobrado ?></span>
                 </td>
             </tr>
             <tr>
                 <td colspan="3" class="bottomborder">
-                    <b>SAC CAIXA</b>: 0800 726 0101 (informações, reclamações, sugestões e elogios) <br>
-                    <b>Para pessoas com deficiência auditiva ou de fala</b>: 0800 726 2492 <br>
-                    <b>Ouvidoria</b>: 0800 725 7474 <br>
+                    <b>SAC CAIXA</b>: 0800 726 0101 (informações, reclamações, sugestões e elogios) <br />
+                    <b>Para pessoas com deficiência auditiva ou de fala</b>: 0800 726 2492 <br />
+                    <b>Ouvidoria</b>: 0800 725 7474 <br />
                     <b>caixa.gov.br</b>
                 </td>
-                <td width="400" colspan="2" style="vertical-align: top;" class="bottomborder">
-                    <div class="titulo"><center>Autenticação Mecânica - <b>Recibo do Pagador</b></center></div>
-                    <div class="conteudo"></div>
+                <td colspan="2" class="bottomborder vtop">
+                    <span class="titulo centro">Autenticação Mecânica - <b>Recibo do Pagador</b></span>
+                    <span class="conteudo"></span>
                 </td>
             </tr>
             </tbody>
         </table>
-        <br>
+
+        <br />
         <div class="linha-pontilhada">Corte na linha pontilhada</div>
-        <br>
+        <br />
 
         <!-- Ficha de compensação -->
         <?php include('partials/ficha-de-compensacao.phtml') ?>

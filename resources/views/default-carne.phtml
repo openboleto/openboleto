@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<!--
+<?php
+/**
  * OpenBoleto - Geração de boletos bancários em PHP
  *
  * LICENSE: The MIT License (MIT)
@@ -20,11 +20,14 @@
  * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
--->
+ */
+?>
+
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title><?php echo $cedente; ?></title>
+    <title><?= $cedente; ?></title>
     <style type="text/css">
         /* Embed the CSS content here */
         <?php include $resource_path . '/css/styles.css' ?>
@@ -32,91 +35,90 @@
 </head>
 <body>
 
-    <div style="width: 863px">
-        <div style="float: left">
-            <table class="table-boleto" style="width: 180px" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                    <td>
-                        <div class="titulo">Vencimento</div>
-                        <div class="conteudo"><?php echo $data_vencimento ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">Agência/Código do Cedente</div>
-                        <div class="conteudo"><?php echo $agencia_codigo_cedente ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">Nosso número</div>
-                        <div class="conteudo"><?php echo $nosso_numero ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">Nº documento</div>
-                        <div class="conteudo"><?php echo $numero_documento ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">Espécie</div>
-                        <div class="conteudo"><?php echo $especie ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">Quantidade</div>
-                        <div class="conteudo"><?php echo $quantidade ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">(=) Valor Documento</div>
-                        <div class="conteudo"><?php echo $valor_documento ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">(-) Descontos / Abatimentos</div>
-                        <div class="conteudo"><?php echo $desconto_abatimento ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">(-) Outras deduções</div>
-                        <div class="conteudo"><?php echo $outras_deducoes ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">(+) Mora / Multa</div>
-                        <div class="conteudo"><?php echo $mora_multa ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="titulo">(+) Outros acréscimos</div>
-                        <div class="conteudo"><?php echo $outros_acrescimos ?></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="bottomborder">
-                        <div class="titulo">(=) Valor cobrado</div>
-                        <div class="conteudo"><?php echo $valor_cobrado ?></div>
-                    </td>
-                </tr>
-            </table>
+<div class="carne">
+    <div class="canhoto">
+        <table class="table-boleto" cellpadding="0" cellspacing="0">
+            <tr>
+                <td>
+                    <span class="titulo">Vencimento</span>
+                    <span class="conteudo"><?= $data_vencimento ?></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="titulo">Agência/Código do Cedente</span>
+                    <span class="conteudo"><?= $agencia_codigo_cedente ?></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="titulo">Nosso número</span>
+                    <span class="conteudo"><?= $nosso_numero ?></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="titulo">Nº documento</span>
+                    <span class="conteudo"><?= $numero_documento ?></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="titulo">Espécie</span>
+                    <span class="conteudo"><?= $especie ?></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="titulo">Quantidade</span>
+                    <span class="conteudo"><?= $quantidade ?></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="titulo">(=) Valor Documento</span>
+                    <span class="conteudo"><?= $valor_documento ?></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="titulo">(-) Descontos / Abatimentos</span>
+                    <span class="conteudo"><?= $desconto_abatimento ?></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="titulo">(-) Outras deduções</span>
+                    <span class="conteudo"><?= $outras_deducoes ?></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="titulo">(+) Mora / Multa</span>
+                    <span class="conteudo"><?= $mora_multa ?></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="titulo">(+) Outros acréscimos</span>
+                    <span class="conteudo"><?= $outros_acrescimos ?></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="bottomborder">
+                    <span class="titulo">(=) Valor cobrado</span>
+                    <span class="conteudo"><?= $valor_cobrado ?></span>
+                </td>
+            </tr>
+        </table>
         <span class="header">Recibo do Sacado</span>
-        </div>
-        <div style="float: left; margin-left: 15px">
-            <!-- Ficha de compensação -->
-            <?php include('partials/ficha-de-compensacao.phtml') ?>
-        </div>
-        <div style="clear: both"></div>
-        <div class="linha-pontilhada">Corte na linha pontilhada</div>
     </div>
+    <div class="ficha-cobranca">
+        <!-- Ficha de compensação -->
+        <?php include('partials/ficha-de-compensacao.phtml'); ?>
+    </div>
+    <div class="linha-pontilhada">Corte na linha pontilhada</div>
+</div>
 
 </body>
 </html>
