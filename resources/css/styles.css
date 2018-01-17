@@ -21,34 +21,159 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-@media print {
-    .noprint {
-        display:none;
-    }
+
+.page {
+    margin: 0 auto;
+    width: 700px;
 }
 
-body{
-    background-color: #ffffff;
-    margin-right: 0;
+
+/* CARNÊ */
+.carne {
+    margin: 0;
+    width: 900px;
+}
+.carne:after {
+    clear: both;
+}
+.carne .canhoto {
+    float: left;
+    width: 180px;
+}
+.carne .ficha-cobranca {
+    float: left;
+    padding-left: 20px;
+    width: 700px;
 }
 
+
+/* CORPO DO BOLETO */
 .table-boleto {
+    position: relative;
     font: 9px Arial;
-    width: 666px;
+    width: 100%;
 }
-
 .table-boleto td {
+    padding: 1px 4px;
     border-left: 1px solid #000;
     border-top: 1px solid #000;
 }
-
 .table-boleto td:last-child {
     border-right: 1px solid #000;
 }
-
 .table-boleto .titulo {
     color: #000033;
 }
+.table-boleto .conteudo {
+    font: bold 10px Arial;
+    height: 13px;
+}
+.table-boleto .sacador {
+    padding: 0 5px;
+}
+.table-boleto .noleftborder {
+    border-left: none !important;
+}
+.table-boleto .notopborder {
+    border-top: none !important;
+}
+.table-boleto .norightborder {
+    border-right: none !important;
+}
+.table-boleto .bottomborder {
+    border-bottom: 1px solid #000 !important;
+}
+.table-boleto .noborder {
+    border: none !important;
+}
+.table-boleto .nopadding {
+    padding: 0px !important;
+}
+.table-boleto .caixa-gray-bg {
+    font-weight: bold;
+    background: #ccc;
+}
+
+
+/* Logo + Código Banco + Linha Digitável */
+.boleto-header {
+    position: relative;
+    width: 100%;
+    min-height: 40px;
+}
+.boleto-header:after {
+    clear: both;
+}
+
+.boleto-header .leftcontainer {
+    position: relative;
+    float: left;
+    width: 253px;
+    height: 40px;
+}
+.boleto-header .leftcontainer img {
+    float: left;
+    max-width: 157px;
+}
+.boleto-header .codbanco {
+    position: absolute;
+    top: 14px;
+    right: 0;
+    font: bold 22px Arial;
+    text-align: center;
+    width: 68px;
+    padding: 1px 5px;
+    margin-left: 18px;
+    border-left: 2px solid #000;
+    border-right: 2px solid #000;
+}
+
+.boleto-header .rightcontainer {
+    position: relative;
+    float: right;
+    width: 440px;
+    height: 30px;
+}
+.boleto-header .linha-digitavel {
+    position: absolute;
+    font: bold 14px Arial;
+    right: 2px;
+    top: 22px;
+}
+
+
+/* CÓDIGO DE BARRAS */
+.barcode {
+    height: 50px;
+    margin-top: 0;
+}
+.barcode div {
+    display: inline-block;
+    height: 13mm;
+}
+.barcode .black {
+    border-color: #000;
+    border-left-style: solid;
+    width: 0px;
+}
+.barcode .white {
+    background: #fff;
+}
+.barcode .thin.black {
+    border-left-width: 1px;
+}
+.barcode .large.black {
+    border-left-width: 3px;
+}
+.barcode .thin.white {
+    width: 1px;
+}
+.barcode .large.white {
+    width: 3px;
+}
+
+
+/* PEQUENOS AJUSTES */
 
 .linha-pontilhada {
     color: #000033;
@@ -56,132 +181,82 @@ body{
     width: 100%;
     border-bottom: 1px dashed #000;
     text-align: right;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
-.table-boleto .conteudo {
-    font: bold 10px Arial;
-    height: 13px;
-}
-
-.table-boleto .sacador {
-    display: inline;
-    margin-left: 5px;
-}
-
-.table-boleto td {
-    padding: 1px 4px;
-}
-
-.table-boleto .noleftborder {
-    border-left: none !important;
-}
-
-.table-boleto .notopborder {
-    border-top: none !important;
-}
-
-.table-boleto .norightborder {
-    border-right: none !important;
-}
-
-.table-boleto .noborder {
-    border: none !important;
-}
-
-.table-boleto .bottomborder {
-    border-bottom: 1px solid #000 !important;
-}
-
-.table-boleto .rtl {
-    text-align: right;
-}
-
-.table-boleto .logobanco {
-    display: inline-block;
-    max-width: 150px;
-}
-
-.table-boleto .logocontainer {
-    width: 257px;
-    display: inline-block;
-}
-
-.table-boleto .logobanco img {
-    margin-bottom: -5px;
-}
-
-.table-boleto .codbanco {
-    font: bold 20px Arial;
-    padding: 1px 5px;
-    display: inline;
-    border-left: 2px solid #000;
-    border-right: 2px solid #000;
-    width: 51px;
-    margin-left: 25px;
-}
-
-.table-boleto .linha-digitavel {
-    font: bold 14px Arial;
-    display: inline-block;
-    width: 406px;
-    text-align: right;
-}
-
-.table-boleto .nopadding {
-    padding: 0px !important;
-}
-
-.table-boleto .caixa-gray-bg {
-    font-weight: bold;
-    background: #ccc;
-}
-
-.info {
-    font: 11px Arial;
-}
-
+.info,
 .info-empresa {
     font: 11px Arial;
 }
 
+.info-empresa > div {
+    display: inline-block;
+}
+
 .header {
-    font: bold 13px Arial;
     display: block;
+    font: bold 13px Arial;
     margin: 4px;
 }
 
-.barcode {
-    height: 50px;
+span.titulo,
+span.conteudo {
+    display: block;
 }
 
-.barcode div {
-    display: inline-block;
-    height: 100%;
+/* Alinhamento do Texto */
+.centro {
+    text-align: center;
+}
+.direita {
+    text-align: right;
 }
 
-.barcode .black {
-    border-color: #000;
-    border-left-style: solid;
-    width: 0px;
+/* Alinhamento Vertical */
+.vtop {
+    vertical-align: top;
+}
+.vsuper {
+    vertical-align: super;
 }
 
-.barcode .white {
-    background: #fff;
+/* Margens */
+.margem-t50 {
+    margin-top: 50px;
+}
+.margem-t10 {
+    margin-top: 10px;
 }
 
-.barcode .thin.black {
-    border-left-width: 1px;
+.margem-b20 {
+    margin-bottom: 20px;
+}
+.margem-b10 {
+    margin-bottom: 10px;
 }
 
-.barcode .large.black {
-    border-left-width: 3px;
+
+@media print,dompdf {
+    .noprint {
+        display:none;
+    }
+
+    .boleto-header .linha-digitavel {
+        font-size: 16px;
+    }
+
+    .barcode {
+        margin-top: 10px;
+    }
+
+    .carne {
+        display: table;
+    }
+    .carne .canhoto {
+        display: table-cell;
+    }
+    .carne .ficha-cobranca {
+        display: table-cell;
+    }
 }
 
-.barcode .thin.white {
-    width: 1px;
-}
-
-.barcode .large.white {
-    width: 3px;
-}
