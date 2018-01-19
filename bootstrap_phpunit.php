@@ -23,4 +23,3 @@ spl_autoload_register(function($className) {
     }
     return false;
 });
-require_once '/PHPUnit/Autoload.php';
