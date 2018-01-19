@@ -2,6 +2,7 @@
 
 namespace Tests\OpenBoleto;
 use OpenBoleto\Agente;
+use PHPUnit;
 
 class AgenteTest extends \PHPUnit_Framework_TestCase
 {
