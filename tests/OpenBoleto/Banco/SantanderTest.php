@@ -3,12 +3,6 @@
 namespace Tests\OpenBoleto\Banco;
 use OpenBoleto\Banco\Santander;
 
-// Alias the PHPUnit 6.0 ancestor if available, else fall back to legacy ancestor
-if (class_exists('\PHPUnit\Framework\TestCase', true)) {
-  class KernelTestCaseAncestor extends \PHPUnit\Framework\TestCase {}
-} else {
-  class KernelTestCaseAncestor extends \PHPUnit_Framework_TestCase {}
-}
 
 class SantanderTest extends KernelTestCaseAncestor
 {
