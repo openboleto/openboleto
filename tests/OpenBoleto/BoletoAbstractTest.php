@@ -19,7 +19,7 @@ class BoletoAbstractTest extends KernelTestCaseAncestor
 
     public function testInvalidCarteiraExceptionsShouldBeThrown()
     {
-        $this->expectedException('OpenBoleto\\Exception');
+        $this->expectException('OpenBoleto\\Exception');
         new BancoMock(array(
             'carteira' => 99,
         ));
