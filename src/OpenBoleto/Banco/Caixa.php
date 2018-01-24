@@ -64,7 +64,7 @@ class Caixa extends BoletoAbstract
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array('SR', 'RG');
+    protected $carteiras = array('SR','CR', 'RG');
 
     /**
      * Nome do arquivo de template a ser usado
