@@ -3,7 +3,7 @@
 namespace Tests\OpenBoleto;
 use OpenBoleto\BoletoFactory;
 
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class FactoryTest extends KernelTestCaseAncestor
 {
     public function testWhetherLoadByBankIdReturnsTheRightInstance()
     {

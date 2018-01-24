@@ -3,7 +3,9 @@
 namespace Tests\OpenBoleto\Banco;
 use OpenBoleto\Banco\CaixaSICOB;
 
-class CaixaSICOBTest extends \PHPUnit_Framework_TestCase
+
+
+class CaixaSICOBTest extends KernelTestCaseAncestor
 {
     public function testInstantiateWithoutArgumentsShouldWork()
     {

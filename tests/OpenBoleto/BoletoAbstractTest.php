@@ -2,7 +2,8 @@
 
 namespace Tests\OpenBoleto;
 
-class BoletoAbstractTest extends \PHPUnit_Framework_TestCase
+
+class BoletoAbstractTest extends KernelTestCaseAncestor
 {
     public function testInstantiateShouldSetDefaultResourcePath()
     {
@@ -18,7 +19,7 @@ class BoletoAbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidCarteiraExceptionsShouldBeThrown()
     {
-        $this->setExpectedException('OpenBoleto\\Exception');
+        $this->expectException('OpenBoleto\\Exception');
         new BancoMock(array(
             'carteira' => 99,
         ));

@@ -3,7 +3,7 @@
 namespace Tests\OpenBoleto\Banco;
 use OpenBoleto\Banco\Caixa;
 
-class CaixaTest extends \PHPUnit_Framework_TestCase
+class CaixaTest extends KernelTestCaseAncestor
 {
     public function testInstantiateWithoutArgumentsShouldWork()
     {

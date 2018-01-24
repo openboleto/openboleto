@@ -3,7 +3,8 @@
 namespace Tests\OpenBoleto\Banco;
 use OpenBoleto\Banco\Itau;
 
-class ItauTest extends \PHPUnit_Framework_TestCase
+
+class ItauTest extends KernelTestCaseAncestor
 {
     public function testInstantiateWithoutArgumentsShouldWork()
     {

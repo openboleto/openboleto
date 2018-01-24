@@ -274,6 +274,12 @@ abstract class BoletoAbstract
      * @var string
      */
     protected $logoBanco;
+    
+    /**
+    * Array que sera exportada pelo metodo getData
+    * @var array
+    */
+    protected $data;
 
     /**
      * Construtor
@@ -1184,7 +1190,7 @@ abstract class BoletoAbstract
     {
         ob_start();
 
-        extract(array(
+        $this->data = array(
             'linha_digitavel' => $this->getLinhaDigitavel(),
             'cedente' => $this->getCedente()->getNome(),
             'cedente_cpf_cnpj' => $this->getCedente()->getDocumento(),
@@ -1223,10 +1229,14 @@ abstract class BoletoAbstract
             'uso_banco' => $this->getUsoBanco(),
             'codigo_barras' => $this->getImagemCodigoDeBarras(),
             'resource_path' => $this->getResourcePath(),
-        ));
-
-        // Override view variables when rendering
-        extract($this->getViewVars());
+            'numero_febraban' => $this->getNumeroFebraban(),
+        );
+        
+        
+        
+        $this->data = array_merge($this->data,$this->getViewVars());
+        
+        extract($this->data);
 
         // Ignore errors inside the template
         @include $this->getResourcePath() . '/views/' . $this->getLayout();
@@ -1404,6 +1414,20 @@ abstract class BoletoAbstract
         '<div class="white thin"></div>' .
         '<div class="black thin"></div>' .
         '</div>';
+    }
+    
+    /**
+    * Retorna os dados do boleto em um array para ser usado externamente
+    *
+    * @return array
+    */
+    public function getData()
+    {
+        if(empty($this->data))
+        {
+            $this->getOutput();  
+        }  
+        return $this->data;               
     }
 
     /**

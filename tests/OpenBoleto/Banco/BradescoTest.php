@@ -3,7 +3,9 @@
 namespace Tests\OpenBoleto\Banco;
 use OpenBoleto\Banco\Bradesco;
 
-class BradescoTest extends \PHPUnit_Framework_TestCase
+
+
+class BradescoTest extends KernelTestCaseAncestor
 {
     public function testInstantiateWithoutArgumentsShouldWork()
     {
@@ -24,6 +26,6 @@ class BradescoTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('OpenBoleto\\Banco\\Bradesco', $instance);
         $this->assertEquals('23791.17209 60012.345678 89040.300504 8 55650000001050', $instance->getLinhaDigitavel());
-        $this->assertSame('06/00123456789-0', (string) $instance->getNossoNumero());
+        $this->assertSame('123456789', (string) $instance->getNossoNumero());
     }
 }

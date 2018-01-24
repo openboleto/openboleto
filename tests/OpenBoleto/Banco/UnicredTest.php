@@ -3,7 +3,7 @@
 namespace Tests\OpenBoleto\Banco;
 use OpenBoleto\Banco\Unicred;
 
-class UnicredTest extends \PHPUnit_Framework_TestCase
+class UnicredTest extends KernelTestCaseAncestor
 {
     public function testInstantiateWithoutArgumentsShouldWork()
     {
