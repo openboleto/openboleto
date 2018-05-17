@@ -82,15 +82,37 @@ class Bradesco extends BoletoAbstract
      * @var int
     */
     protected $digitoAutoConferencia;
+    
+    /**
+    * Linha de local de pagamento
+    * @var string
+    */
+    protected $localPagamento = 'Pagável preferencialmente nas agências do Banco Bradesco e Bradesco Expresso';
 
     /**
-     * Gera o Nosso Número.
-     *
-     * @return string
-     */
+    * Gera o Nosso Número.
+    *
+    * @return string
+    */
     protected function gerarNossoNumero()
     {
-        return $this->getSequencial();
+        $numero = static::zeroFill($this->sequencial, 11);
+        $cateira = static::zeroFill($this->carteira, 2);
+        $dv = $this->modulo11($cateira.$numero,7);
+        switch ($dv['resto']){
+            case 1 :
+                $this->digitoAutoConferencia = 'P';    
+                break;
+            case 0 :
+                $this->digitoAutoConferencia = "0";
+                break;
+            default:
+                $this->digitoAutoConferencia = $dv['digito'];
+        }
+
+        //$this->digitoAutoConferencia = $dv['digito'] <= 1 ? 'P': $dv['digito'];
+
+        return $numero;
     }
 
     /**
@@ -148,8 +170,6 @@ class Bradesco extends BoletoAbstract
 
     public function setSequencial( $sequencial )
     {
-        $modulo11 = $this->modulo11( str_pad( $this->getCarteira(), 2, 0, STR_PAD_LEFT ) . str_pad( $sequencial, 11, 0, STR_PAD_LEFT ), 7 );
-        $this->digitoAutoConferencia = $modulo11['resto'] != 1 ? $modulo11['digito'] : 'P';
         $this->sequencial = $sequencial;
         return $this;
     }

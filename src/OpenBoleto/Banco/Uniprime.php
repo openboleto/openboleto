@@ -88,7 +88,7 @@ class Uniprime extends BoletoAbstract
     * Linha de local de pagamento
     * @var string
     */
-    protected $localPagamento = 'Pagável preferencialmente na rede Bradesco ou Bradesco Expresso';
+    protected $localPagamento = 'Pagável preferencialmente nas agências do Banco Bradesco e Bradesco Expresso';
 
 
 
