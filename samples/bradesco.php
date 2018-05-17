@@ -10,9 +10,9 @@ $cedente = new Agente('Empresa de cosméticos LTDA', '02.123.123/0001-11', 'CLS 
 
 $boleto = new Bradesco(array(
     // Parâmetros obrigatórios
-    'dataVencimento' => new DateTime('2013-01-24'),
-    'valor' => 23.00,
-    'sequencial' => 75896452, // Até 11 dígitos
+    'dataVencimento' => new DateTime('2013-01-01'),
+    'valor' => 10.50,
+    'sequencial' => 123456789, // Até 11 dígitos
     'sacado' => $sacado,
     'cedente' => $cedente,
     'agencia' => 1172, // Até 4 dígitos
