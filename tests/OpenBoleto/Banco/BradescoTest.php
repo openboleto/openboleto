@@ -25,7 +25,7 @@ class BradescoTest extends KernelTestCaseAncestor
         ));
 
         $this->assertInstanceOf('OpenBoleto\\Banco\\Bradesco', $instance);
-        $this->assertEquals('23791.17209 60012.345678 89013.261303 1 55650000001050', $instance->getLinhaDigitavel());
+        $this->assertEquals('23791.17209 60012.345678 89040.300504 8 55650000001050', $instance->getLinhaDigitavel());
         
         $this->assertSame('123456789', (string) $instance->getNossoNumero());
     }
