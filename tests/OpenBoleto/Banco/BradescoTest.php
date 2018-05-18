@@ -16,7 +16,7 @@ class BradescoTest extends KernelTestCaseAncestor
             // Parâmetros obrigatórios
             'dataVencimento' => new \DateTime('2013-01-01'),
             'valor' => 10.50,
-            'sequencial' => 123456789, // Até 11 dígitos
+            'sequencial' => '123456789', // Até 11 dígitos
             'agencia' => 1172, // Até 4 dígitos
             'carteira' => 6, // 3, 6 ou 9
             'conta' => 403005, // Até 7 dígitos
