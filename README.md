@@ -54,7 +54,7 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
 * Itaú
 * Santander
 * Sicoob
-* Sicred
+* Sicredi
 * Unicred
 * Viacredi 
 
