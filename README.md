@@ -1,10 +1,4 @@
 
-# OpenBoleto [![Stories in Ready](http://badge.waffle.io/kriansa/openboleto.png)](http://waffle.io/kriansa/openboleto) [![Build Status](https://api.travis-ci.org/fredroo/openboleto.png)](https://travis-ci.org/fredroo/openboleto) 
-=======
-# Call for mantainers
-
-Este projeto está buscando por novos mantenedores. [Clique aqui](https://github.com/kriansa/openboleto/issues/96) para saber mais.
-
 # OpenBoleto [![Stories in Ready](http://badge.waffle.io/kriansa/openboleto.png)](http://waffle.io/kriansa/openboleto) [![Build Status](https://api.travis-ci.org/kriansa/openboleto.png)](https://travis-ci.org/kriansa/openboleto)
 
 
