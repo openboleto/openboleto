@@ -1,4 +1,14 @@
 <?php
+# @Author: Evaldo Prestes
+# @Date:   18/05/2018 09:14:27
+# @Email:  evaldoprestes@unimedchapeco.com.br
+# @Filename: Sicoob.php
+# @Last modified by:   Evaldo Prestes
+# @Last modified time: 18/05/2018 09:17:23
+# @Copyright: Unimed Chapeco
+
+
+
 
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
@@ -58,13 +68,13 @@ class Sicoob extends BoletoAbstract
      * @var array
      */
     protected $carteiras = array('1', '2', '5');
-    
+
     /**
      * Modalidades disponíveis para as carteiras
      * @var array
      */
     protected $modalidades = array('01', '02', '05');
-    
+
     /**
      * Modalidade utilizada pela carteira
      * @var string
@@ -76,7 +86,7 @@ class Sicoob extends BoletoAbstract
      * @var integer
      */
     protected $convenio = '12345';
-    
+
     /**
      * Número de parcelas usadas no boleto ou carnê
      * @var string
@@ -92,13 +102,15 @@ class Sicoob extends BoletoAbstract
     {
         $numero = self::zeroFill($this->getSequencial(), 7);
         $sequencia = $this->getAgencia() . self::zeroFill($this->getConvenio(), 10) . $numero;
-        
+
         $cont=0;
         $calculoDv = '';
+        // Constante para cálculo  = 3197
+        // c) Multiplicar cada componente da seqüência com o seu correspondente da constante e somar os resultados.
         for ($num = 0; $num <= strlen($sequencia); $num++) {
             $cont++;
             if ($cont == 1) {
-                // constante fixa Sicoob » 3197 
+                // constante fixa Sicoob » 3197
                 $constante = 3;
             }
             if ($cont == 2) {
@@ -113,11 +125,15 @@ class Sicoob extends BoletoAbstract
             }
             $calculoDv = $calculoDv + (substr($sequencia, $num, 1) * $constante);
         }
-        
+        // c) Multiplicar cada componente da seqüência com o seu correspondente da constante e somar os resultados.
         $resto = $calculoDv % 11;
+
+        // e) O resto da divisão deverá ser subtraído de 11 achando assim o DV (Se o Resto for igual a 0 ou 1 então o DV é igual a 0).
         $dv = 11 - $resto;
-        if (($dv == 0) || ($dv == 1) || ($dv == 9)) { 
+        if ( ($resto == 0) || ($resto == 1) ) {
             $dv = 0;
+        } else {
+            $dv = 11 - $resto;
         }
 
         return $numero .'-'. $dv;
@@ -131,7 +147,7 @@ class Sicoob extends BoletoAbstract
      */
     public function getCampoLivre()
     {
-        return $this->getCarteira(). $this->getAgencia() . $this->getModalidade() . self::zeroFill($this->getConvenio(), 7) . 
+        return $this->getCarteira(). $this->getAgencia() . $this->getModalidade() . self::zeroFill($this->getConvenio(), 7) .
                $this->getNossoNumero(false) . $this->getNumParcelas();
     }
 
@@ -144,73 +160,73 @@ class Sicoob extends BoletoAbstract
     {
         return static::zeroFill($this->getAgencia(), 4) . ' / ' . $this->getConvenio();
     }
-    
+
     /**
      * Define a modalidade da carteira
-     * 
+     *
      * @param type $modalidade
      * @return \OpenBoleto\Banco\Sicoob
      * @throws Exception
      */
-    public function setModalidade($modalidade) 
+    public function setModalidade($modalidade)
     {
         if (!in_array($modalidade, $this->getModalidades())) {
             throw new Exception("Modalidade não disponível!");
         }
 
         $this->modalidade = $modalidade;
-        
+
         return $this;
     }
-    
+
     /**
      * seta o convênio a ser utilizado pelo Sacado
-     * 
+     *
      * @param integer $convenio Convẽnio do sacado
      * @return \OpenBoleto\Banco\Sicoob
      */
     public function setConvenio($convenio) {
         $this->convenio = $convenio;
-        
+
         return $this;
     }
-    
+
     /**
      * Retorna a modalidade da carteira
-     * 
+     *
      * @return string
      */
     public function getModalidade()
     {
         return $this->modalidade;
     }
-    
+
     /**
      * Retorna todas as modalidades disponíveis
-     * 
+     *
      * @return array
      */
     public function getModalidades()
     {
         return $this->modalidades;
     }
-    
+
     /**
      * Retorna o número de parcelas
-     * 
+     *
      * @return string
      */
-    public function getNumParcelas() 
+    public function getNumParcelas()
     {
         return $this->numParcelas;
     }
-    
+
     /**
      * Retorna o convênio do Sacado
-     * 
+     *
      * @return integer
      */
-    public function getConvenio() 
+    public function getConvenio()
     {
         return $this->convenio;
     }
