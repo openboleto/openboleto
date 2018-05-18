@@ -117,8 +117,7 @@ class Sicoob extends BoletoAbstract
         // c) Multiplicar cada componente da seqüência com o seu correspondente da constante e somar os resultados.
         $resto = $calculoDv % 11;
 
-        // e) O resto da divisão deverá ser subtraído de 11 achando assim o DV (Se o Resto for igual a 0 ou 1 então o DV é igual a 0).
-        $dv = 11 - $resto;
+        // e) O resto da divisão deverá ser subtraído de 11 achando assim o DV (Se o Resto for igual a 0 ou 1 então o DV é igual a 0).        
         if ( ($resto == 0) || ($resto == 1) ) {
             $dv = 0;
         } else {
