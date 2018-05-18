@@ -1,15 +1,4 @@
 <?php
-# @Author: Evaldo Prestes
-# @Date:   18/05/2018 09:14:27
-# @Email:  evaldoprestes@unimedchapeco.com.br
-# @Filename: Sicoob.php
-# @Last modified by:   Evaldo Prestes
-# @Last modified time: 18/05/2018 09:17:23
-# @Copyright: Unimed Chapeco
-
-
-
-
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -123,7 +112,7 @@ class Sicoob extends BoletoAbstract
                 $constante = 7;
                 $cont = 0;
             }
-            $calculoDv = $calculoDv + (substr($sequencia, $num, 1) * $constante);
+            $calculoDv = (int)$calculoDv + ((int)substr($sequencia, $num, 1) * $constante);
         }
         // c) Multiplicar cada componente da seqüência com o seu correspondente da constante e somar os resultados.
         $resto = $calculoDv % 11;
@@ -137,6 +126,7 @@ class Sicoob extends BoletoAbstract
         }
 
         return $numero .'-'. $dv;
+        
     }
 
     /**
