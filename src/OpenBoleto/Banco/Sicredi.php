@@ -71,7 +71,7 @@ class Sicredi extends BoletoAbstract {
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array('11', '21', '31', '41', '51');
+    protected $carteiras = array('1', '11', '21', '31', '41', '51');
 
     /**
      * Dígito verificador da carteira/nosso número para impressão no boleto
