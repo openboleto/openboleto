@@ -59,6 +59,14 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
 * Unicred
 * Viacredi 
 
+## Integração com QuilhaSoft/JasperPHP
+
+QuilhaSoft/JasperPHP é uma biblioteca puro PHP, que gera o boleto no formato PDF sem conversão do HTML, o laytou do boleto pode ser editato com o JasperSoft Studio
+
+Para ver funcionando abra o exemplo em https://github.com/QuilhaSoft/JasperPHP-OpenBoleto
+
+Toda contribuição é bem vinda. Se você deseja adaptar o OpenBoleto a algum outro banco, fique à vontade para explorar o código, veja como é bastante simples integrar qualquer banco à biblioteca.
+
 
 Toda contribuição é bem vinda. Se você deseja adaptar o OpenBoleto a algum outro banco, fique à vontade para explorar o código, veja como é bastante simples integrar qualquer banco à biblioteca.
 
