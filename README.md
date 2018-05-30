@@ -51,7 +51,7 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
  <tr>
   <th>Banco</th>
   <th>Situação HTML</th>
-  <th>Situação JasperPHP</th>
+  <th>Situação JasperPHP(PDF)</th>
  </tr>
  <tr>
  <td>Banco de Brasília (BRB)</td>
