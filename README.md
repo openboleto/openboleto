@@ -50,50 +50,62 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
 <table>
  <tr>
   <th>Banco</th>
-  <th>Situação</th>
+  <th>Situação HTML</th>
+  <th>Situação JasperPHP</th>
  </tr>
  <tr>
  <td>Banco de Brasília (BRB)</td>
  <td>Beta</td>
+  <td>Beta</td>
  </tr>
  <tr>
  <td>Banco do Brasil</td>
  <td>Beta</td>
+  <td>Beta</td>
  </tr>
  <tr>
  <td>Bradesco</td>
+ <td>Beta</td>
  <td>Homologado</td>
  </tr>
 <tr>
  <td>Caixa (SIGCB)</td>
+ <td>Beta</td>
  <td>Homologado</td>
  </tr>
 <tr>
  <td>Cecred</td>
  <td>Beta</td>
+ <td>Beta</td>
  </tr>
 <tr>
  <td>Itaú</td>
+ <td>Beta</td>
  <td>Homologado</td>
  </tr>
 <tr>
  <td>Santander</td>
  <td>Beta</td>
+ <td>Beta</td>
  </tr>
 <tr>
  <td>Sicoob</td>
+ <td>Beta</td>
  <td>Beta</td>
  </tr>
 <tr>
  <td>Unicred</td>
  <td>Beta</td>
+ <td>Beta</td>
  </tr>
 <tr>
  <td>Viacredi</td>
  <td>Beta</td>
+ <td>Beta</td>
  </tr>
 <tr>
  <td>Sicredi</td>
+ <td>Beta</td>
  <td>Beta</td>
  </tr>
  </table>
