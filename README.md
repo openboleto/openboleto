@@ -47,18 +47,56 @@ Sim, só isso! Lembre-se de que cada banco possui alguma particularidade, mas em
 ## Bancos suportados
 Atualmente o OpenBoleto funciona com os bancos abaixo:
 
-* Banco de Brasília (BRB)
-* Banco do Brasil
-* Bradesco
-* Caixa (SIGCB)
-* Cecred
-* Itaú
-* Santander
-* Sicoob
-* Sicredi
-* Unicred
-* Viacredi 
-
+<table>
+ <th>
+  <td>Banco</td>
+  <td>Situação</td>
+ </th>
+ <tr>
+ <td>Banco de Brasília (BRB)</td>
+ <td>Beta</td>
+ </tr>
+ <tr>
+ <td>Banco do Brasil</td>
+ <td>Beta</td>
+ </tr>
+ <tr>
+ <td>Bradesco</td>
+ <td>Homologado</td>
+ </tr>
+<tr>
+ <td>Caixa (SIGCB)</td>
+ <td>Homologado</td>
+ </tr>
+<tr>
+ <td>Cecred</td>
+ <td>Beta</td>
+ </tr>
+<tr>
+ <td>Itaú</td>
+ <td>Homologado</td>
+ </tr>
+<tr>
+ <td>Santander</td>
+ <td>Beta</td>
+ </tr>
+<tr>
+ <td>Sicoob</td>
+ <td>Beta</td>
+ </tr>
+<tr>
+ <td>Unicred</td>
+ <td>Beta</td>
+ </tr>
+<tr>
+ <td>Viacredi</td>
+ <td>Beta</td>
+ </tr>
+<tr>
+ <td>Sicredi</td>
+ <td>Beta</td>
+ </tr>
+ </table>
 ## Integração com QuilhaSoft/JasperPHP
 
 QuilhaSoft/JasperPHP é uma biblioteca puro PHP, que gera o boleto no formato PDF sem conversão do HTML, o laytou do boleto pode ser editato com o JasperSoft Studio
