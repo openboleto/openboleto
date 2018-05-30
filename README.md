@@ -48,10 +48,10 @@ Sim, só isso! Lembre-se de que cada banco possui alguma particularidade, mas em
 Atualmente o OpenBoleto funciona com os bancos abaixo:
 
 <table>
- <th>
-  <td>Banco</td>
-  <td>Situação</td>
- </th>
+ <tr>
+  <th>Banco</th>
+  <th>Situação</th>
+ </tr>
  <tr>
  <td>Banco de Brasília (BRB)</td>
  <td>Beta</td>
