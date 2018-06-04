@@ -77,7 +77,6 @@ class Santander extends BoletoAbstract
      */
     protected $ios;
 
-    protected $carteiraDv;
 
     /**
      * Define o valor do IOS
@@ -124,21 +123,6 @@ class Santander extends BoletoAbstract
             self::zeroFill($this->getCarteira(), 3);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCarteiraDv()
-    {
-        return $this->carteiraDv;
-    }
-
-    /**
-     * @param mixed $carteiraDv
-     */
-    public function setCarteiraDv($carteiraDv)
-    {
-        $this->carteiraDv = $carteiraDv;
-    }
 
     /**
      * Define variáveis da view específicas do boleto do Santander
@@ -148,8 +132,7 @@ class Santander extends BoletoAbstract
     public function getViewVars()
     {
         return array(
-            'esconde_uso_banco' => true,
-            'carteiraDv' => self::zeroFill($this->getCarteiraDv(), 1),
+            'esconde_uso_banco' => true
         );
     }
 }
