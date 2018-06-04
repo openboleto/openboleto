@@ -282,6 +282,13 @@ abstract class BoletoAbstract
     protected $data;
 
     /**
+     * Imprime ou não as instruções de impressão
+     * @var array
+     */
+    protected $imprimeInstrucoesImpressao = true;
+    
+    
+    /**
      * Construtor
      *
      * @param array $params Parâmetros iniciais para construção do objeto
@@ -1048,6 +1055,28 @@ abstract class BoletoAbstract
     {
         return $this->resourcePath;
     }
+    
+    /**
+     * Define se imprime ou não as instruções de impressão
+     *
+     * @param bool $imprimeInstrucoesImpressao
+     * @return BoletoAbstract
+     */
+    public function setImprimeInstrucoesImpressao($imprimeInstrucoesImpressao)
+    {
+        $this->imprimeInstrucoesImpressao = $imprimeInstrucoesImpressao;
+        return $this;
+    }
+    
+    /**
+     * Retorna se imprime ou não as instruções de impressão
+     *
+     * @return bool
+     */
+    public function getImprimeInstrucoesImpressao()
+    {
+        return $this->imprimeInstrucoesImpressao;
+    }
 
     /**
      * Define a localização do logotipo do banco relativo à pasta de imagens
@@ -1230,6 +1259,7 @@ abstract class BoletoAbstract
             'codigo_barras' => $this->getImagemCodigoDeBarras(),
             'resource_path' => $this->getResourcePath(),
             'numero_febraban' => $this->getNumeroFebraban(),
+            'imprime_instrucoes_impressao' => $this->getImprimeInstrucoesImpressao()
         );
         
         
