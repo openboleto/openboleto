@@ -34,6 +34,7 @@
 <body>
 
     <div style="width: 666px">
+        <?php if ($imprime_instrucoes_impressao) :?>    
         <div class="noprint info">
             <h2>Instruções de Impressão</h2>
             <ul>
@@ -46,6 +47,7 @@
         </div>
         <span class="header">Linha digitável para ser utilizada em seu Internet Banking:</span>
         <span class="header" style="font-weight: normal;"><?php echo $linha_digitavel; ?></span>
+        <?php endif ?>
 
         <div class="info-empresa">
             <?php if ($logotipo) : ?>
