@@ -20,14 +20,14 @@ class SantanderTest extends KernelTestCaseAncestor
             'sequencial' => 12345678901, // Até 13 dígitos
             'agencia' => 1234, // Até 4 dígitos
             'carteira' => 102, // 101, 102 ou 201
-            'conta' => 12345678, // Código do cedente: Até 8 dígitos
+            'conta' => 1234567, // Código do cedente: Até 7 dígitos
             // IOS – Seguradoras (Se 7% informar 7. Limitado a 9%)
             // Demais clientes usar 0 (zero)
             'ios' => '0', // Apenas para o Santander
         ));
 
         $this->assertInstanceOf('OpenBoleto\\Banco\\Santander', $instance);
-        $this->assertEquals('03399.12347 56780.012342 56789.010107 6 55650000002300', $instance->getLinhaDigitavel()); 
-        $this->assertSame('001234567890-0', (string) $instance->getNossoNumero());
+        $this->assertEquals('03399.12347 56701.234561 78901.001020 2 55650000002300', $instance->getLinhaDigitavel()); 
+        $this->assertSame('012345678901-0', (string) $instance->getNossoNumero());
     }
 }
