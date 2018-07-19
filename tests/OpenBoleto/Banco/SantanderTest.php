@@ -27,7 +27,7 @@ class SantanderTest extends KernelTestCaseAncestor
         ));
 
         $this->assertInstanceOf('OpenBoleto\\Banco\\Santander', $instance);
-        $this->assertEquals('03399.12347 56780.012342 56789.010107 6 55650000002300', $instance->getLinhaDigitavel()); 
+        $this->assertEquals('03399.12347 56701.234561 78901.001020 2 55650000002300', $instance->getLinhaDigitavel()); 
         $this->assertSame('001234567890-0', (string) $instance->getNossoNumero());
     }
 }
