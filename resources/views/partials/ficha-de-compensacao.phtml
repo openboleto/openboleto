@@ -45,14 +45,22 @@
         </td>
     </tr>
     <tr>
-        <td colspan="7">
+        <td colspan="7" rowspan="2" valign="top">
             <div class="titulo">Beneficiário</div>
-            <div class="conteudo float_left"><?php echo $cedente ?></div>
+            <div class="conteudo float_left"><?php echo $cedente ?><br /><?=$cedente_endereco1;?><br /><?=$cedente_endereco2;?></div>
             <div class="conteudo cpf_cnpj"><?php echo $cedente_cpf_cnpj ?></div>
+            
+
         </td>
         <td>
             <div class="titulo">Agência/Código beneficiário</div>
             <div class="conteudo rtl"><?php echo $agencia_codigo_cedente ?></div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="titulo">Nosso número</div>
+            <div class="conteudo rtl"><?php echo $nosso_numero ?></div>
         </td>
     </tr>
     <tr>
@@ -77,8 +85,8 @@
             <div class="conteudo"><?php echo $data_processamento ?></div>
         </td>
         <td>
-            <div class="titulo">Nosso número</div>
-            <div class="conteudo rtl"><?php echo $nosso_numero ?></div>
+            <div class="titulo">(=) Valor do Documento</div>
+            <div class="conteudo rtl"><?php echo $valor_documento ?></div>
         </td>
     </tr>
     <tr>
@@ -114,23 +122,13 @@
             <div class="conteudo"><?php echo $valor_unitario ?></div>
         </td>
         <td>
-            <div class="titulo">(=) Valor do Documento</div>
-            <div class="conteudo rtl"><?php echo $valor_documento ?></div>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="7">
-            <div class="titulo">Instruções (Texto de responsabilidade do beneficiário)</div>
-        </td>
-        <td>
             <div class="titulo">(-) Descontos / Abatimentos</div>
             <div class="conteudo rtl"><?php echo $desconto_abatimento ?></div>
         </td>
     </tr>
     <tr>
-        <td colspan="7" class="notopborder">
-            <div class="conteudo"><?php echo $instrucoes[0]; ?></div>
-            <div class="conteudo"><?php echo $instrucoes[1]; ?></div>
+        <td colspan="7" valign="top">
+            <div class="titulo">Instruções (Texto de responsabilidade do beneficiário)</div>
         </td>
         <td>
             <div class="titulo">(-) Outras deduções</div>
@@ -138,9 +136,9 @@
         </td>
     </tr>
     <tr>
-        <td colspan="7" class="notopborder">
-            <div class="conteudo"><?php echo $instrucoes[2]; ?></div>
-            <div class="conteudo"><?php echo $instrucoes[3]; ?></div>
+        <td colspan="7" class="notopborder" valign="top">
+            <div class="conteudo"><?php echo $instrucoes[0]; ?></div>
+            <div class="conteudo"><?php echo $instrucoes[1]; ?></div>
         </td>
         <td>
             <div class="titulo">(+) Mora / Multa</div>
@@ -149,8 +147,8 @@
     </tr>
     <tr>
         <td colspan="7" class="notopborder">
-            <div class="conteudo"><?php echo $instrucoes[4]; ?></div>
-            <div class="conteudo"><?php echo $instrucoes[5]; ?></div>
+            <div class="conteudo"><?php echo $instrucoes[2]; ?></div>
+            <div class="conteudo"><?php echo $instrucoes[3]; ?></div>
         </td>
         <td>
             <div class="titulo">(+) Outros acréscimos</div>
@@ -159,8 +157,8 @@
     </tr>
     <tr>
         <td colspan="7" class="notopborder">
-            <div class="conteudo"><?php echo $instrucoes[6]; ?></div>
-            <div class="conteudo"><?php echo $instrucoes[7]; ?></div>
+            <div class="conteudo"><?php echo $instrucoes[4]; ?></div>
+            <div class="conteudo"><?php echo $instrucoes[5]; ?></div>
         </td>
         <td>
             <div class="titulo">(=) Valor cobrado</div>
@@ -168,12 +166,11 @@
         </td>
     </tr>
     <tr>
-        <td colspan="7">
+        <td colspan="7" valign="top">
             <div class="titulo">Pagador</div>
-            <div class="conteudo"><?php echo $sacado ?></div>
-            <div class="conteudo"><?php echo $sacado_endereco1 ?></div>
-            <div class="conteudo"><?php echo $sacado_endereco2 ?></div>
-
+            <div class="conteudo float_left"><?php echo $sacado ?><br />
+            <?=$sacado_endereco1;?><br /><?=$sacado_endereco2;?></div>
+            <div class="conteudo cpf_cnpj"><?php echo $sacado_documento; ?></div>
         </td>
         <td class="noleftborder">
             <div class="titulo" style="margin-top: 50px">Cód. Baixa</div>

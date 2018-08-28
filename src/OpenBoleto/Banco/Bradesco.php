@@ -87,7 +87,7 @@ class Bradesco extends BoletoAbstract
     * Linha de local de pagamento
     * @var string
     */
-    protected $localPagamento = 'Pagável preferencialmente nas agências do Banco Bradesco e Bradesco Expresso';
+    protected $localPagamento = 'Pagável preferencialmente na Rede Bradesco ou Bradesco Expresso';
 
     /**
     * Gera o Nosso Número.
