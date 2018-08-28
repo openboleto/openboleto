@@ -61,7 +61,7 @@ body{
 
 .table-boleto .conteudo {
     font: bold 10px Arial;
-    height: 13px;
+    height: 11.5px;
 }
 
 .table-boleto .sacador {
@@ -109,6 +109,7 @@ body{
 
 .table-boleto .logobanco img {
     margin-bottom: -5px;
+    height: 27px;
 }
 
 .table-boleto .codbanco {
