@@ -13,6 +13,10 @@
         {
             "name": "Daniel Garajau",
             "email": "daniel@garajau.com.br"
+        },
+        {
+            "name": "Rogerio Muniz",
+            "email": "rogerio@quilhasoft.com.br"
         }
     ],
     "require": {
