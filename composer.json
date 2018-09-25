@@ -1,14 +1,18 @@
 {
-    "name": "fredroo/openboleto",
+    "name": "openboleto/openboleto",
     "type": "library",
     "description": "Biblioteca para geração de boletos bancários.",
     "keywords": ["boleto", "boleto bancario"],
-    "homepage": "http://github.com/fredroo/openboleto",
+    "homepage": "http://github.com/openboleto/openboleto",
     "license": "MIT",
     "authors": [
         {
             "name": "José Frederico",
             "email": "contato@livetechtecnologia.com.br"
+        },
+        {
+            "name": "Daniel Garajau",
+            "email": "daniel@garajau.com.br"
         }
     ],
     "require": {
