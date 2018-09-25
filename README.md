@@ -14,7 +14,7 @@ O OpenBoleto é uma biblioteca de código aberto para geração de boletos banc�
 ### Composer
 Se você já conhece o **Composer** (o que é extremamente recomendado), simplesmente adicione a dependência abaixo à diretiva *"require"* seu **composer.json**:
 ```
-"fredroo/openboleto": "dev-master"
+"openboleto/openboleto": "dev-master"
 ```
 ###PSR-0 autoloader
 Hoje praticamente qualquer framework utiliza deste padrão, então você deve [baixar](https://github.com/fredroo/openboleto/archive/master.zip) o OpenBoleto, colocar em uma pasta específica (geralmente *lib* ou *vendor*) e procurar na documentação do seu framework para fazer com que o seu autoloader aponte o namespace **OpenBoleto** para a pasta **src** do OpenBoleto.
