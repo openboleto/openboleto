@@ -88,6 +88,18 @@ class Sicredi extends BoletoAbstract {
      */
     protected $posto;
 
+    /**
+     * Bytecode do boleto
+     * @var int
+     */
+    protected $bytecode = 2;
+
+    /**
+     * Tipo de cobrança
+     * @var int
+     */
+    protected $tipoCobranca = 3;
+
     public function setCodigoCliente($codigoCliente) {
         $this->codigoCliente = $codigoCliente;
         return $this;
@@ -114,12 +126,12 @@ class Sicredi extends BoletoAbstract {
                 self::zeroFill($this->getPosto(), 2) .
                 self::zeroFill($this->getConta(), 5) .
                 self::zeroFill($ano, 2) .
-                "2" .
+                $this->bytecode .
                 self::zeroFill($this->getSequencial(), 5);
 
         $dv = static::modulo11($numero);
 
-        return self::zeroFill($ano, 2) . '/' . '2' . self::zeroFill($this->getSequencial(), 5) . '-' . $dv['digito'];
+        return self::zeroFill($ano, 2) . '/' . $this->bytecode . self::zeroFill($this->getSequencial(), 5) . '-' . $dv['digito'];
     }
 
     /**
@@ -129,8 +141,7 @@ class Sicredi extends BoletoAbstract {
      * @throws \OpenBoleto\Exception
      */
     public function getCampoLivre() {
-       // echo 'oi';
-        $numero = '3' .
+        $numero = $this->tipoCobranca .
                 '1' .
                 self::zeroFill($this->getNossoNumero(false), 9) .
                 self::zeroFill($this->getAgencia(), 4) .
@@ -165,7 +176,7 @@ class Sicredi extends BoletoAbstract {
      * Define o campo Posto do boleto
      *
      * @param int $cip
-     * @return Bradesco
+     * @return Sicredi
      */
     public function setPosto($posto) {
         $this->posto = $posto;
@@ -179,6 +190,50 @@ class Sicredi extends BoletoAbstract {
      */
     public function getPosto() {
         return $this->posto;
+    }
+
+    /**
+     * Retorna o bytecode do boleto
+     * 
+     * @return int
+     */
+    public function getBytecode()
+    {
+        return $this->bytecode;
+    }
+
+    /**
+     * Define o bycode do boleto
+     * 
+     * @param int $bytecode
+     * @return Sicredi
+     */
+    public function setBytecode($bytecode)
+    {
+        $this->bytecode = $bytecode;
+        return $this;
+    }
+
+    /**
+     * Retorna o tipo de cobrança
+     * 
+     * @return int
+     */
+    public function getTipoCobranca()
+    {
+        return $this->tipoCobranca;
+    }
+
+    /**
+     * Define o tipo de cobrança
+     * 
+     * @param int $tipoCobranca
+     * @return Sicredi
+     */
+    public function setTipoCobranca($tipoCobranca)
+    {
+        $this->tipoCobranca = $tipoCobranca;
+        return $this;
     }
 
     public function getViewVars() {
