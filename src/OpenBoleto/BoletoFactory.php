@@ -48,6 +48,7 @@ class BoletoFactory
     protected static $classMap = array(
         1 => 'BancoDoBrasil',
         33 => 'Santander',
+        41 => 'Banrisul',
         70 => 'Brb',
         90 => 'Unicred',
         104 => 'Caixa',
