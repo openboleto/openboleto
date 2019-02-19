@@ -113,6 +113,11 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
  <td>Beta</td>
  <td>Beta</td>
  </tr>
+ <tr>
+ <td>Banrisul</td>
+ <td>Beta</td>
+ <td>Beta</td>
+ </tr>
  </table>
 ## Integração com QuilhaSoft/JasperPHP
 
