@@ -55,6 +55,7 @@ class BoletoFactory
         104 => 'Caixa',
         237 => 'Bradesco',
         341 => 'Itau',
+        399 => 'HSBC',
     );
 
     /**

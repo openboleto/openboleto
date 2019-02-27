@@ -88,6 +88,11 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
  <td>Beta</td>
  <td>Beta</td>
  </tr>
+ <tr>
+   <td>HSBC</td>
+   <td>Beta</td>
+   <td>Beta</td>
+ </tr>
 <tr>
  <td>Itaú</td>
  <td>Beta</td>
