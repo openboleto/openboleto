@@ -98,7 +98,7 @@ class HSBC extends BoletoAbstract
     {
         $numero = $this->sequencial;
         if ($semDv) {
-            return $numero;
+            return (int) $numero;
         }
 
         $venc = $this->dataVencimento->format('dmy');
