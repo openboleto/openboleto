@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!--
+ * OpenBoleto - Geração de boletos bancários em PHP
+ *
+ * LICENSE: The MIT License (MIT)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this
+ * software and associated documentation files (the "Software"), to deal in the Software
+ * without restriction, including without limitation the rights to use, copy, modify,
+ * merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following
+ * conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies
+ * or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title><?php echo $cedente; ?></title>
+    <style type="text/css">
+        /* Embed the CSS content here */
+        <?php include $resource_path . '/css/styles.css' ?>
+    </style>
+</head>
+<body>
+
+    <div style="width: 863px">
+        <div style="float: left">
+            <table class="table-boleto" style="width: 180px" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td style="background: #ccc">
+                        <div class="titulo">Vencimento</div>
+                        <div class="conteudo"><?php echo $data_vencimento ?></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="titulo">Coop. Contratante/Cod. Beneficiario</div>
+                        <div class="conteudo"><?php echo $agencia_codigo_cedente ?></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="titulo">Nosso número</div>
+                        <div class="conteudo"><?php echo $nosso_numero ?></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="titulo">Nº documento</div>
+                        <div class="conteudo"><?php echo $numero_documento ?></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="titulo">Espécie</div>
+                        <div class="conteudo"><?php echo $especie ?></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="titulo">Quantidade</div>
+                        <div class="conteudo"><?php echo $quantidade ?></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="titulo">(=) Valor Documento</div>
+                        <div class="conteudo"><?php echo $valor_documento ?></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="titulo">(-) Descontos / Abatimentos</div>
+                        <div class="conteudo"><?php echo $desconto_abatimento ?></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="titulo">(-) Outras deduções</div>
+                        <div class="conteudo"><?php echo $outras_deducoes ?></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="titulo">(+) Mora / Multa</div>
+                        <div class="conteudo"><?php echo $mora_multa ?></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="titulo">(+) Outros acréscimos</div>
+                        <div class="conteudo"><?php echo $outros_acrescimos ?></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bottomborder">
+                        <div class="titulo">(=) Valor cobrado</div>
+                        <div class="conteudo"><?php echo $valor_cobrado ?></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bottomborder">
+                        <div class="titulo">CNPJ do Beneficiário</div>
+                        <div class="conteudo"><?php echo $cedente_cpf_cnpj ?></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bottomborder">
+                        <div class="titulo">Endereço do Beneficiário</div>
+                        <div class="conteudo"><?php echo $cedente_endereco1 ?></div>
+                    </td>
+                </tr>
+            </table>
+        <span class="header">Recibo do Pagador</span>
+        </div>
+        <div style="float: left; margin-left: 15px">
+            <!-- Ficha de compensação -->
+            <?php include('partials/ficha-de-compensacao-sicoob.phtml') ?>
+        </div>
+        <div style="clear: both"></div>
+        <div class="linha-pontilhada">Corte na linha pontilhada</div>
+    </div>
+
+</body>
+</html>

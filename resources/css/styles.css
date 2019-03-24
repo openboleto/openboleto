@@ -191,6 +191,10 @@ body{
     float:left;
 }
 
+.center {
+    text-align: center;
+}
+
 .conteudo.cpf_cnpj{
     float:right;
     width:24%;
