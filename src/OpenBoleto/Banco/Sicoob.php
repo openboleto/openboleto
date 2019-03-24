@@ -59,18 +59,6 @@ class Sicoob extends BoletoAbstract
     protected $carteiras = array('1', '2', '5');
 
     /**
-     * Modalidades disponíveis para as carteiras
-     * @var array
-     */
-    protected $modalidades = array('01', '02', '05');
-
-    /**
-     * Modalidade utilizada pela carteira
-     * @var string
-     */
-    protected $modalidade = null;
-
-    /**
      * Convênio utilizado pelo Sacado
      * @var integer
      */
@@ -81,6 +69,12 @@ class Sicoob extends BoletoAbstract
      * @var string
      */
     protected $numParcelas = '001';
+
+    /**
+    * Linha de local de pagamento
+    * @var string
+    */
+    protected $localPagamento = 'Pagável preferencialmente no Sicoob';
 
     /**
      * Gera o Nosso Número.
@@ -136,8 +130,8 @@ class Sicoob extends BoletoAbstract
      */
     public function getCampoLivre()
     {
-        return $this->getCarteira(). $this->getAgencia() . $this->getModalidade() . self::zeroFill($this->getConvenio(), 7) .
-               $this->getNossoNumero(false) . $this->getNumParcelas();
+        return $this->getCarteira(). $this->getAgencia() . self::zeroFill($this->getCarteira(),2) . self::zeroFill($this->getConvenio(), 7) .
+               $this->getNossoNumero(false) . self::zeroFill($this->getNumParcelas(), 3);
     }
 
     /**

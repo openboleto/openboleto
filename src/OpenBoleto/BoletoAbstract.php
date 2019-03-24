@@ -161,6 +161,12 @@ abstract class BoletoAbstract
     protected $numeroDocumento;
 
     /**
+     * Número da parcelas
+     * @var int
+     */
+    protected $numParcelas;
+
+    /**
      * Define o número sequencial definido pelo cliente para compor o Nosso Número
      *
      * @var int
@@ -601,6 +607,19 @@ abstract class BoletoAbstract
     public function setNumeroDocumento($numeroDocumento)
     {
         $this->numeroDocumento = $numeroDocumento;
+        return $this;
+    }
+    
+    /**
+     * Define o Número da parcela
+     *
+     * @param int $numParcelas
+     * @return BoletoAbstract
+     */
+    public function setNumParcelas($numParcelas)
+    {
+        //echo $numParcelas;
+        $this->numParcelas = $numParcelas;
         return $this;
     }
 
