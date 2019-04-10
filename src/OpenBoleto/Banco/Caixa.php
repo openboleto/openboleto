@@ -80,6 +80,13 @@ class Caixa extends BoletoAbstract
     protected $layout = 'caixa.phtml';
 
     /**
+     * Define o código do cedente para que, tanto a conta como esse código possa serem usados no boleto
+     * @var string
+     */
+    protected $codigoCedente;
+
+
+    /**
      * Define o número da conta
      *
      * Overrided porque o cedente da Caixa TEM QUE TER 6 posições, senão não é válido
@@ -147,7 +154,7 @@ class Caixa extends BoletoAbstract
     public function getCampoLivre()
     {
         $nossoNumero = $this->gerarNossoNumero();
-        $beneficiario = $this->getConta();
+        $beneficiario = $this->getCodigoCedente();
 
         // Código do beneficiário + DV]
         $modulo = self::modulo11($beneficiario);
@@ -173,6 +180,35 @@ class Caixa extends BoletoAbstract
         $campoLivre .= $modulo['digito'];
 
        return $campoLivre;
+    }
+
+
+    /**
+     * Retorna o campo Agência/Cedente do boleto
+     *
+     * @return string
+     */
+    public function getAgenciaCodigoCedente()
+    {
+        $agencia = self::zeroFill($this->getAgencia(), 4);
+        $codigoCedente = $this->getCodigoCedente(true);
+        return $agencia . ' / ' . $codigoCedente;
+    }
+
+
+    protected function setCodigoCedente($codigoCedente)
+    {
+        $this->codigoCedente = $codigoCedente;
+    }
+
+    protected function getCodigoCedente($comDigitoVerificador = false)
+    {
+
+        if(!$comDigitoVerificador){
+            return $this->codigoCedente;
+        }
+        $modulo = self::modulo11($this->codigoCedente);
+        return $this->codigoCedente . "-" . $modulo['digito'];
     }
 
 }
