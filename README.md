@@ -1,5 +1,5 @@
 
-# OpenBoleto [![Stories in Ready](http://badge.waffle.io/fredroo/openboleto.png)](http://waffle.io/fredroo/openboleto) [![Build Status](https://travis-ci.org/fredroo/openboleto.png)](https://travis-ci.org/fredroo/openboleto)
+# OpenBoleto [![Build Status](https://travis-ci.org/openboleto/openboleto.png)](https://travis-ci.org/openboleto/openboleto)
 
 
 
