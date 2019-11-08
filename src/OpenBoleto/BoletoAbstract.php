@@ -69,6 +69,13 @@ abstract class BoletoAbstract
      * @var float
      */
     protected $valor;
+    
+    /**
+     * Imprime valor?
+     * @var float
+     */
+    protected $imprimeValor = true;
+    
 
     /**
      * Valor para pagamento mínimo em boletos de contra apresentação
@@ -1188,7 +1195,29 @@ abstract class BoletoAbstract
 
         return $numero;
     }
-
+    
+    /**
+     * Define se o layout deve imprimir o valor ou não
+     *
+     * @param bool $imprimeValor
+     * @return BoletoAbstract
+     */
+    public final function setImprimeValor($imprimeValor)
+    {
+    	$this->imprimeValor = $imprimeValor;
+    	return $this;
+    }
+    
+    /**
+     * Retorna se imprime o valor ou não
+     *
+     * @return bool
+     */
+    public function getImprimeValor()
+    {
+    	return $this->imprimeValor;
+    }    
+    
     /**
      * Método onde o Boleto deverá gerar o Nosso Número.
      *
@@ -1278,7 +1307,8 @@ abstract class BoletoAbstract
             'codigo_barras' => $this->getImagemCodigoDeBarras(),
             'resource_path' => $this->getResourcePath(),
             'numero_febraban' => $this->getNumeroFebraban(),
-            'imprime_instrucoes_impressao' => $this->getImprimeInstrucoesImpressao()
+            'imprime_instrucoes_impressao' => $this->getImprimeInstrucoesImpressao(),
+        	'imprime_valor' => $this->getImprimeValor()
         );
         
         
