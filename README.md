@@ -105,7 +105,7 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
  </tr>
 <tr>
  <td>Sicoob</td>
- <td>Homologado</td>
+ <td>Beta</td>
  <td>Beta</td>
  </tr>
 <tr>
