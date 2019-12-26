@@ -1288,7 +1288,9 @@ abstract class BoletoAbstract
         extract($this->data);
 
         // Ignore errors inside the template
-        @include $this->getResourcePath() . '/views/' . $this->getLayout();
+        if ($this->getLayout() != 'jasper.phtml') {
+            @include $this->getResourcePath() . '/views/' . $this->getLayout();
+        }
 
         return ob_get_clean();
     }
