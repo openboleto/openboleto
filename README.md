@@ -74,6 +74,11 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
    <td>Beta</td>
   </tr>
  <tr>
+ <td>Banese</td>
+ <td>Beta</td>
+ <td>Beta</td>
+ </tr>
+ <tr>
  <td>Bradesco</td>
  <td>Homologado</td>
  <td>Homologado</td>
