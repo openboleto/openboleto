@@ -95,7 +95,7 @@ class Banese extends BoletoAbstract
         $digito2 = 0;
         $pesos = '21212121212121212121212';
         $somatorio = 0;
-        for($indice = 0; $indice <= 23; $indice++) {
+        for($indice = 0; $indice < 23; $indice++) {
             $resultado = $chave[$indice] * $pesos[$indice];
             if($resultado > 9) {
                 $somatorio += ($resultado - 9);
