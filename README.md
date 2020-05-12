@@ -142,6 +142,10 @@ Para ver funcionando abra o exemplo em https://github.com/QuilhaSoft/JasperPHP-O
 
 Toda contribuição é bem vinda. Se você deseja adaptar o OpenBoleto a algum outro banco, fique à vontade para explorar o código, veja como é bastante simples integrar qualquer banco à biblioteca.
 
+## Remessa e Retorno
+
+https://github.com/QuilhaSoft/OpenCnabPHP
+
 ## Licença
 
 * MIT License
