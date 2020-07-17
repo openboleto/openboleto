@@ -57,7 +57,7 @@ class BancoDoBrasil extends BoletoAbstract
      * Linha de local de pagamento
      * @var string
      */
-    protected $localPagamento = 'Pagável em qualquer Banco até o vencimento';
+    protected $localPagamento = 'Pagável em qualquer banco';
 
     /**
      * Define as carteiras disponíveis para este banco
