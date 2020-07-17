@@ -72,6 +72,12 @@ class BancoDoBrasil extends BoletoAbstract
     protected $convenio;
 
     /**
+     * Altera layout para o exigido pelo banco
+     * @var string
+     */
+    protected $layout = 'bancodobrasil.phtml';
+
+    /**
      * Define o número do convênio. Sempre use string pois a quantidade de caracteres é validada.
      *
      * @param string $convenio
