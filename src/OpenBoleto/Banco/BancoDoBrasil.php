@@ -57,7 +57,7 @@ class BancoDoBrasil extends BoletoAbstract
      * Linha de local de pagamento
      * @var string
      */
-    protected $localPagamento = 'Pagável em qualquer Banco até o vencimento';
+    protected $localPagamento = 'Pagável em qualquer banco';
 
     /**
      * Define as carteiras disponíveis para este banco
@@ -70,6 +70,12 @@ class BancoDoBrasil extends BoletoAbstract
      * @var string
      */
     protected $convenio;
+
+    /**
+     * Altera layout para o exigido pelo banco
+     * @var string
+     */
+    protected $layout = 'bancodobrasil.phtml';
 
     /**
      * Define o número do convênio. Sempre use string pois a quantidade de caracteres é validada.
