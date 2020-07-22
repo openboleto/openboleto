@@ -52,6 +52,6 @@ class ItauTest extends KernelTestCaseAncestor
 
         $this->assertInstanceOf('OpenBoleto\\Banco\\Itau', $instance);
         $this->assertEquals('34191.07127 34567.812341 56766.677001 9 55650000001050', $instance->getLinhaDigitavel());
-        $this->assertSame('107/12345678-0', (string) $instance->getNossoNumero());
+        $this->assertSame('107/12345678-8', (string) $instance->getNossoNumero());
     }
 }
