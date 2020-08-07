@@ -134,6 +134,11 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
  <td>Beta</td>
  </tr>
  </table>
+
+### API Banco Inter
+
+O Banco Inter está disponibilizando uma API para emissão de boletos. O projeto [ctodobom/APInter-PHP](https://github.com/ctodobom/APInter-PHP) implementa funções para facilitar o acesso à essa API.
+
 ## Integração com QuilhaSoft/JasperPHP
 
 QuilhaSoft/JasperPHP é uma biblioteca puro PHP, que gera o boleto no formato PDF sem conversão do HTML, o layout do boleto pode ser editado com o JasperSoft Studio
