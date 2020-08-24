@@ -16,10 +16,10 @@ Se você já conhece o **Composer** (o que é extremamente recomendado), simples
 ```
 "openboleto/openboleto": "dev-master"
 ```
-###PSR-0 autoloader
+### PSR-0 autoloader
 Hoje praticamente qualquer framework utiliza deste padrão, então você deve [baixar](https://github.com/fredroo/openboleto/archive/master.zip) o OpenBoleto, colocar em uma pasta específica (geralmente *lib* ou *vendor*) e procurar na documentação do seu framework para fazer com que o seu autoloader aponte o namespace **OpenBoleto** para a pasta **src** do OpenBoleto.
 
-###Stand-alone library
+### Stand-alone library
 Se você quer simplesmente baixar e dar um include, também é muito simples. Primeiro [baixe](https://github.com/fredroo/openboleto/archive/master.zip) (ou dê clone no repositório), e coloque em uma pasta específica. Depois, dê um include no arquivo **autoloader.php** e voilá!
 
 ## Gerando boletos
