@@ -7,7 +7,7 @@ class UniprimeTest extends KernelTestCaseAncestor
 {
     public function testInstantiateWithoutArgumentsShouldWork()
     {
-        $this->assertInstanceOf('OpenBoleto\\Banco\\Bradesco', new Bradesco());
+        $this->assertInstanceOf('OpenBoleto\\Banco\\Uniprime', new Uniprime());
     }
 
     public function testInstantiateShouldWork()
