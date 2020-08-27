@@ -14,6 +14,7 @@ class FactoryTest extends KernelTestCaseAncestor
         $this->assertInstanceOf('OpenBoleto\Banco\Bradesco', BoletoFactory::loadByBankId(237));
         $this->assertInstanceOf('OpenBoleto\Banco\Itau', BoletoFactory::loadByBankId(341));
         $this->assertInstanceOf('OpenBoleto\Banco\Caixa', BoletoFactory::loadByBankId(104));
+        $this->assertInstanceOf('OpenBoleto\Banco\Uniprime', BoletoFactory::loadByBankId(84));
     }
 
     public function testWhetherLoadByBankNameReturnsTheRightInstance()
@@ -25,5 +26,6 @@ class FactoryTest extends KernelTestCaseAncestor
         $this->assertInstanceOf('OpenBoleto\Banco\Bradesco', BoletoFactory::loadByBankName('Bradesco'));
         $this->assertInstanceOf('OpenBoleto\Banco\Itau', BoletoFactory::loadByBankName('Itau'));
         $this->assertInstanceOf('OpenBoleto\Banco\Caixa', BoletoFactory::loadByBankName('Caixa'));
+        $this->assertInstanceOf('OpenBoleto\Banco\Uniprime', BoletoFactory::loadByBankName('Uniprime'));
     }
 }
