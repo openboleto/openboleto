@@ -22,7 +22,7 @@ class UniprimeTest extends KernelTestCaseAncestor
             'conta' => 403005, // Até 7 dígitos
             'contaDv' => 1,
             'agenciaDv' => 9,
-            'convenio' => 434608, // 4, 6 ou 7 dígitos
+            'convenio' => 1234567, // 4, 6 ou 7 dígitos
         ));
 
         $this->assertInstanceOf('OpenBoleto\\Banco\\Uniprime', $instance);

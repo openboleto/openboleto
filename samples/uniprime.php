@@ -20,7 +20,7 @@ $boleto = new Uniprime(array(
     'carteira' => 9,
     'conta' => 0403005, // Até 7 dígitos
     'contaDv' => 1,
-    'convenio' => 434608, // 4, 6 ou 7 dígitos
+    'convenio' => 1234567, // 4, 6 ou 7 dígitos
 
     // Parâmetros recomendáveis
     //'logoPath' => 'http://empresa.com.br/logo.jpg', // Logo da sua empresa
