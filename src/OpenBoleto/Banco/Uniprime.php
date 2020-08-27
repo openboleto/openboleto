@@ -45,13 +45,13 @@ class Uniprime extends BoletoAbstract
     * Código do banco
     * @var string
     */
-    protected $codigoBanco = '237';
+    protected $codigoBanco = '084';
 
     /**
     * Localização do logotipo do banco, referente ao diretório de imagens
     * @var string
     */
-    protected $logoBanco = 'bradesco.jpg';
+    protected $logoBanco = 'uniprime.png';
 
     /**
     * De acordo com o ramo de atividade, poderão ser utilizadas uma das siglas: DM-
@@ -66,7 +66,7 @@ class Uniprime extends BoletoAbstract
     * Define as carteiras disponíveis para este banco
     * @var array
     */
-    protected $carteiras = array('3', '6', '9');
+    protected $carteiras = array('9');
 
     /**
     * Trata-se de código utilizado para identificar mensagens especificas ao cedente, sendo
@@ -88,7 +88,7 @@ class Uniprime extends BoletoAbstract
     * Linha de local de pagamento
     * @var string
     */
-    protected $localPagamento = 'Pagável preferencialmente nas agências do Banco Bradesco e Bradesco Expresso';
+    protected $localPagamento = 'Pagável preferencialmente nas agências do Banco Uniprime';
 
 
 
@@ -167,11 +167,7 @@ class Uniprime extends BoletoAbstract
             'nosso_numero' =>
             str_pad( $this->getCarteira(), 2, 0, STR_PAD_LEFT ) . '/' .
             str_pad( $this->getNossoNumero(), 11, 0, STR_PAD_LEFT ) . '-' .
-            $this->digitoAutoConferencia,
-            'sacadorAvalista' =>$this->getSacadorAvalista()->getNome(),
-            'sacadorAvalista_cpf_cnpj' => $this->getSacadorAvalista()->getDocumento(),
-            'sacadorAvalista_endereco1' => $this->getSacadorAvalista()->getEndereco(),
-            'sacadorAvalista_endereco2' => $this->getSacadorAvalista()->getCepCidadeUf()
+            $this->digitoAutoConferencia
         );
     }
 
