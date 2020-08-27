@@ -26,7 +26,7 @@ class UniprimeTest extends KernelTestCaseAncestor
         ));
 
         $this->assertInstanceOf('OpenBoleto\\Banco\\Uniprime', $instance);
-        $this->assertEquals('23791.17209 60012.345678 89040.300504 8 55650000001050', $instance->getLinhaDigitavel());
+        $this->assertEquals('08491.17205 90012.345675 89040.300504 3 55650000001050', $instance->getLinhaDigitavel());
 
         $this->assertSame('00123456789', (string) $instance->getNossoNumero());
     }
