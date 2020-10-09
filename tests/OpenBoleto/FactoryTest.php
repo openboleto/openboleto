@@ -1,7 +1,7 @@
 <?php
 
 namespace Tests\OpenBoleto;
-use OpenBoleto\BoletoFactory;
+use Source\OpenBoleto\BoletoFactory;
 
 class FactoryTest extends KernelTestCaseAncestor
 {

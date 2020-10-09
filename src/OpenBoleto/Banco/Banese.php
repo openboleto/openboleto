@@ -25,10 +25,10 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace OpenBoleto\Banco;
+namespace Source\OpenBoleto\Banco;
 
-use OpenBoleto\BoletoAbstract;
-use OpenBoleto\Exception;
+use Source\OpenBoleto\BoletoAbstract;
+use Source\OpenBoleto\Exception;
 
 /**
  * Classe boleto Banese
@@ -124,7 +124,7 @@ class Banese extends BoletoAbstract
      * (BANESE_Manual_do_Bloqueto_BANESE_20061219.pdf - Página 6)
      *
      * @return string
-     * @throws \OpenBoleto\Exception
+     * @throws Exception
      */
     public function getCampoLivre() {
         $chave = self::caracteresDireita($this->getAgencia(), 2) .

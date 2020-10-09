@@ -25,11 +25,11 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace OpenBoleto\Banco;
+namespace Source\OpenBoleto\Banco;
 
-use OpenBoleto\BoletoAbstract;
-use OpenBoleto\Exception;
-use OpenBoleto\Agente;
+use Source\OpenBoleto\BoletoAbstract;
+use Source\OpenBoleto\Exception;
+use Source\OpenBoleto\Agente;
 
 /**
  * Classe boleto Caixa Economica Federal - Modelo SICOB.

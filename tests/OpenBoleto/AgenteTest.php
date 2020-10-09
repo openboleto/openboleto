@@ -1,9 +1,10 @@
 <?php
 
 namespace Tests\OpenBoleto;
-use OpenBoleto\Agente;
 
 // Alias the PHPUnit 6.0 ancestor if available, else fall back to legacy ancestor
+use Source\OpenBoleto\Agente;
+
 if (class_exists('\PHPUnit\Framework\TestCase', true)) {
   class KernelTestCaseAncestor extends \PHPUnit\Framework\TestCase {}
 } else {

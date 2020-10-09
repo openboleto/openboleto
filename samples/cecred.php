@@ -1,33 +1,32 @@
 <?php
 
-    require '../autoloader.php';
+use Source\OpenBoleto\Banco\Cecred;
+use Source\OpenBoleto\Agente;
 
-    use OpenBoleto\Banco\Cecred;
-    use OpenBoleto\Agente;
+$sacado = new Agente(
+    'Nome do Pagador',
+    '000.000.000-00',
+    'Endereço do Pagador',
+    '89000-000', // CEP
+    'Cidade do Pagador',
+    'UF do Pagador'
+);
 
-    $sacado = new Agente(
-        'Nome do Pagador',
-        '000.000.000-00',
-        'Endereço do Pagador',
-        '89000-000', // CEP
-        'Cidade do Pagador',
-        'UF do Pagador'
-    );
+$cedente = new Agente(
+    'Nome do Benefíciário',
+    '00.000.000/0001-01', // CPF ou CNPJ do beneficiário
+    'Endereço do Benefíciário',
+    '89000-000', // CEP
+    'Cidade do Benefíciário',
+    'UF do Benefíciário'
+);
 
-    $cedente = new Agente(
-        'Nome do Benefíciário',
-        '00.000.000/0001-01', // CPF ou CNPJ do beneficiário
-        'Endereço do Benefíciário',
-        '89000-000', // CEP
-        'Cidade do Benefíciário',
-        'UF do Benefíciário'
-    );
+// Vencimento para daqui a 5 dias
+$vencimento = new DateTime('now');
+$vencimento->add(new DateInterval('P5D'));
 
-    // Vencimento para daqui a 5 dias
-    $vencimento = new DateTime('now');
-    $vencimento->add(new DateInterval('P5D'));
-
-    $boleto = new Cecred(array(
+$boleto = new Cecred(
+    array(
         // Parâmetros obrigatórios
         'dataVencimento' => $vencimento,
         'valor' => 2.95,
@@ -77,6 +76,7 @@
         //'valorCobrado' => 123.12,
         //'valorUnitario' => 123.12,
         //'quantidade' => 1,
-    ));
+    )
+);
 
-    echo $boleto->getOutput();
+echo $boleto->getOutput();

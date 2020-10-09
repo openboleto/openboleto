@@ -25,11 +25,11 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace OpenBoleto\Banco;
+namespace Source\OpenBoleto\Banco;
 
-use OpenBoleto\BoletoAbstract;
-use OpenBoleto\Exception;
-use OpenBoleto\Agente;
+use Source\OpenBoleto\BoletoAbstract;
+use Source\OpenBoleto\Exception;
+use Source\OpenBoleto\Agente;
 
 /**
  * Classe boleto Caixa Economica Federal - Modelo SIGCB.
@@ -142,7 +142,7 @@ class Caixa extends BoletoAbstract
      * DV do Campo Livre ------------ Posição: 44-44 ---------------- Item 5.3.1 (abaixo) 
      * 
      * @return string
-     * @throws \OpenBoleto\Exception
+     * @throws Exception
      */
     public function getCampoLivre()
     {

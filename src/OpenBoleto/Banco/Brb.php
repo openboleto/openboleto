@@ -25,9 +25,9 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace OpenBoleto\Banco;
+namespace Source\OpenBoleto\Banco;
 
-use OpenBoleto\BoletoAbstract;
+use Source\OpenBoleto\BoletoAbstract;
 
 /**
  * Classe boleto BRB - Banco de Brasília.

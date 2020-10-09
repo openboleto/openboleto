@@ -25,10 +25,10 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace OpenBoleto\Banco;
+namespace Source\OpenBoleto\Banco;
 
-use OpenBoleto\BoletoAbstract;
-use OpenBoleto\Exception;
+use Source\OpenBoleto\BoletoAbstract;
+use Source\OpenBoleto\Exception;
 
 /**
  * Classe boleto Sicredi.
@@ -138,7 +138,7 @@ class Sicredi extends BoletoAbstract {
      * Método para gerar o código da posição de 20 a 44
      *
      * @return string
-     * @throws \OpenBoleto\Exception
+     * @throws Exception
      */
     public function getCampoLivre() {
         $numero = $this->tipoCobranca .

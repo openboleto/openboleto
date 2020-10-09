@@ -25,10 +25,10 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace OpenBoleto\Banco;
+namespace Source\OpenBoleto\Banco;
 
-use OpenBoleto\BoletoAbstract;
-use OpenBoleto\Exception;
+use Source\OpenBoleto\BoletoAbstract;
+use Source\OpenBoleto\Exception;
 
 /**
  * Classe boleto Cecred
@@ -89,7 +89,7 @@ class Cecred extends BoletoAbstract
      * Define o número do convênio. Sempre use string pois a quantidade de caracteres é validada.
      *
      * @param string $convenio
-     * @return BancoDoBrasil
+     * @return Cecred
      */
     public function setConvenio($convenio)
     {
@@ -133,7 +133,7 @@ class Cecred extends BoletoAbstract
      * Método para gerar o código da posição de 20 a 44
      *
      * @return string
-     * @throws \OpenBoleto\Exception
+     * @throws Exception
      */
     public function getCampoLivre()
     {

@@ -2,7 +2,7 @@
 
 namespace Tests\OpenBoleto;
 
-use OpenBoleto\BoletoAbstract;
+use Source\OpenBoleto\BoletoAbstract;
 
 class BancoMock extends BoletoAbstract
 {

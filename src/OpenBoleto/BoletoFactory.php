@@ -27,7 +27,7 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace OpenBoleto;
+namespace Source\OpenBoleto;
 
 /**
  * Classe Factory para criação de instâncias de Boletos

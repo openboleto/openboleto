@@ -25,7 +25,7 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace OpenBoleto;
+namespace Source\OpenBoleto;
 
 /**
  * Classe de agente usuário do boleto
