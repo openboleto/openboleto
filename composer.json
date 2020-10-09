@@ -1,5 +1,5 @@
 {
-    "name": "openboleto/openboleto",
+    "name": "melquespaiva/openboleto",
     "type": "library",
     "description": "Biblioteca para geração de boletos bancários.",
     "keywords": ["boleto", "boleto bancario"],
