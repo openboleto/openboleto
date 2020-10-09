@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__ . "/../vendor/autoload.php";
+
 use Source\OpenBoleto\Banco\Santander;
 use Source\OpenBoleto\Agente;
 

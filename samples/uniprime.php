@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__ . "/../vendor/autoload.php";
+
 use Source\OpenBoleto\Agente;
 use Source\OpenBoleto\Banco\Uniprime;
 
