@@ -288,6 +288,11 @@ abstract class BoletoAbstract
     protected $data;
 
     /**
+     * @var string
+     */
+    protected $assignorCode;
+
+    /**
      * Imprime ou não as instruções de impressão
      * @var array
      */
@@ -1160,6 +1165,22 @@ abstract class BoletoAbstract
     }
 
     /**
+     * @return string
+     */
+    public function getAssignorCode()
+    {
+        return $this->assignorCode;
+    }
+
+    /**
+     * @param string $assignorCode
+     */
+    public function setAssignorCode($assignorCode)
+    {
+        $this->assignorCode = $assignorCode;
+    }
+
+    /**
      * Mostra exception ao erroneamente tentar setar o nosso número
      *
      * @throws Exception
@@ -1303,7 +1324,7 @@ abstract class BoletoAbstract
     public function getAgenciaCodigoCedente()
     {
         $agencia = $this->getAgenciaDv() !== null ? $this->getAgencia() . '-' . $this->getAgenciaDv() : $this->getAgencia();
-        $conta = $this->getContaDv() !== null ? $this->getConta() . '-' . $this->getContaDv() : $this->getConta();
+        $conta = $this->getAssignorCode() !== null ? $this->getAssignorCode() : $this->getConta();
         return $agencia . ' / ' . $conta;
     }
 
