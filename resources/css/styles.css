@@ -21,6 +21,10 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+* {
+    font-family: sans-serif;
+}
+
 @media print {
     .noprint {
         display:none;
@@ -33,7 +37,7 @@ body{
 }
 
 .table-boleto {
-    font: 9px Arial;
+    font-size: 9px;
     width: 666px;
 }
 
@@ -52,7 +56,7 @@ body{
 
 .linha-pontilhada {
     color: #000033;
-    font: 9px Arial;
+    font-size: 9px;
     width: 100%;
     border-bottom: 1px dashed #000;
     text-align: right;
@@ -98,13 +102,16 @@ body{
 }
 
 .table-boleto .logobanco {
-    display: inline-block;
+    display: block;
     max-width: 150px;
+    float: left;
 }
 
 .table-boleto .logocontainer {
+    height: 27.55px;
+    line-height: 100%;
     width: 257px;
-    display: inline-block;
+    float: left;
 }
 
 .table-boleto .logobanco img {
@@ -113,24 +120,33 @@ body{
 }
 
 .table-boleto .codbanco {
-    font: bold 20px Arial;
-    padding: 1px 5px;
-    display: inline;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 5px 0 5px;
+    display: block;
     border-left: 2px solid #000;
     border-right: 2px solid #000;
-    width: 51px;
-    margin-left: 25px;
+    width: 55px;
+    height: 19px;
+    float: left;
+    position: absolute;
+    left: 160px;
 }
 
 .table-boleto .linha-digitavel {
-    font: bold 14px Arial;
-    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    float: left;
     width: 406px;
     text-align: right;
+    height: 27.55px;
+    position: absolute;
+    left: 257px;
+    padding-top: 10px;
 }
 
 .table-boleto .nopadding {
-    padding: 0px !important;
+    padding: 0 !important;
 }
 
 .table-boleto .caixa-gray-bg {
@@ -157,14 +173,15 @@ body{
 }
 
 .barcode div {
-    display: inline-block;
+    display: block;
     height: 100%;
+    float: left;
 }
 
 .barcode .black {
     border-color: #000;
     border-left-style: solid;
-    width: 0px;
+    width: 0;
 }
 
 .barcode .white {
