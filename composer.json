@@ -20,7 +20,8 @@
         }
     ],
     "require": {
-        "php": ">=7.0"
+        "php": ">=7.4",
+        "dompdf/dompdf": "^0.8.6"
     },
     "autoload": {
         "psr-4": {

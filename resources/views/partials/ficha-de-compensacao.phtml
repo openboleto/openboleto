@@ -21,25 +21,22 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
+<div class="border-none top">
+    <div class="logobanco">
+        <img src="<?php echo $logo_banco; ?>" alt="logotipo do banco">
+    </div>
+    <div class="codbanco"><?php echo $codigo_banco_com_dv ?></div>
+    <div class="linha-digitavel"><?php echo $linha_digitavel ?></div>
+</div>
+
 <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
     <tbody>
-    <tr>
-        <td valign="bottom" colspan="8" class="noborder nopadding">
-            <div class="logocontainer">
-                <div class="logobanco">
-                    <img src="<?php echo $logo_banco; ?>" alt="logotipo do banco">
-                </div>
-                <div class="codbanco"><?php echo $codigo_banco_com_dv ?></div>
-            </div>
-            <div class="linha-digitavel"><?php echo $linha_digitavel ?></div>
-        </td>
-    </tr>
     <tr>
         <td colspan="7">
             <div class="titulo">Local de pagamento</div>
             <div class="conteudo"><?php echo $local_pagamento ?></div>
         </td>
-        <td width="180">
+        <td width="138">
             <div class="titulo">Vencimento</div>
             <div class="conteudo rtl"><?php echo $data_vencimento ?></div>
         </td>
@@ -64,15 +61,15 @@
         </td>
     </tr>
     <tr>
-        <td width="110" colspan="2">
+        <td width="85" colspan="2">
             <div class="titulo">Data do documento</div>
             <div class="conteudo"><?php echo $data_documento ?></div>
         </td>
-        <td width="120" colspan="2">
+        <td width="92" colspan="2">
             <div class="titulo">Nº documento</div>
             <div class="conteudo"><?php echo $numero_documento ?></div>
         </td>
-        <td width="60">
+        <td width="46">
             <div class="titulo">Espécie doc.</div>
             <div class="conteudo"><?php echo $especie_doc ?></div>
         </td>
@@ -80,7 +77,7 @@
             <div class="titulo">Aceite</div>
             <div class="conteudo"><?php echo $aceite ?></div>
         </td>
-        <td width="110">
+        <td width="85">
             <div class="titulo">Data processamento</div>
             <div class="conteudo"><?php echo $data_processamento ?></div>
         </td>
@@ -117,7 +114,7 @@
             <div class="titulo">Quantidade</div>
             <div class="conteudo"><?php echo $quantidade ?></div>
         </td>
-        <td width="110">
+        <td width="85">
             <div class="titulo">Valor</div>
             <div class="conteudo"><?php echo $valor_unitario ?></div>
         </td>

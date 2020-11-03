@@ -60,3 +60,12 @@ $boleto = new Caixa(
 );
 
 echo $boleto->getOutput();
+
+set_time_limit(30);
+
+$pdf = new \Source\OpenBoleto\Files\Pdf("boleto" . time() . ".pdf");
+$file = $pdf->generateFile($boleto->getOutput());
+
+if (empty($file)) {
+    echo $pdf->message();
+}

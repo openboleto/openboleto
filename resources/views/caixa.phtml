@@ -23,7 +23,7 @@
 -->
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="charset=utf-8"/>
     <title><?php echo $cedente; ?></title>
     <style type="text/css">
         /* Embed the CSS content here */
@@ -33,7 +33,7 @@
 <body>
 
     <div style="width: 666px">
-    	<?php if ($imprime_instrucoes_impressao) :?>    
+    	<?php if ($imprime_instrucoes_impressao) :?>
         <div class="noprint info">
             <h2>Instruções de Impressão</h2>
             <ul>
@@ -60,37 +60,35 @@
         </div>
         <br>
 
+        <div class="border-none top">
+            <div class="logobanco">
+                <img src="<?php
+                echo $logo_banco; ?>" alt="logotipo do banco">
+            </div>
+            <div class="codbanco"><?php
+                echo $codigo_banco_com_dv ?></div>
+            <div class="linha-digitavel"><?php
+                echo $linha_digitavel ?></div>
+        </div>
+
         <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
             <tbody>
             <tr>
-                <td valign="bottom" colspan="8" class="noborder nopadding">
-                    <div class="billet-top">
-                        <div class="logocontainer">
-                            <div class="logobanco">
-                                <img src="<?php echo $logo_banco; ?>" alt="logotipo do banco">
-                            </div>
-                            <div class="codbanco"><?php echo $codigo_banco_com_dv ?></div>
-                        </div>
-                        <div class="linha-digitavel"><?php echo $linha_digitavel ?></div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td width="520" colspan="4">
+                <td colspan="4">
                     <div class="titulo">Pagador</div>
                     <div class="conteudo"><?php echo $sacado ?></div>
                 </td>
-                <td>
+                <td colspan="1">
                     <div class="titulo">CPF/CNPJ do Pagador</div>
                     <div class="conteudo rtl"><?php echo $sacado_documento ?></div>
                 </td>
             </tr>
             <tr>
-                <td width="130">
+                <td width="100">
                     <div class="titulo">Nosso Número</div>
                     <div class="conteudo"><?php echo $nosso_numero ?></div>
                 </td>
-                <td width="130">
+                <td width="90">
                     <div class="titulo">Nr. Documento</div>
                     <div class="conteudo"><?php echo $numero_documento ?></div>
                 </td>
@@ -98,7 +96,7 @@
                     <div class="titulo">Agência/Código do Beneficiário</div>
                     <div class="conteudo"><?php echo $agencia_codigo_cedente ?></div>
                 </td>
-                <td width="130" class="caixa-gray-bg">
+                <td width="55" class="caixa-gray-bg">
                     <div class="titulo">Vencimento</div>
                     <div class="conteudo rtl"><?php echo $data_vencimento ?></div>
                 </td>
@@ -112,7 +110,7 @@
                     <div class="titulo">CPF/CNPJ do Beneficiário</div>
                     <div class="conteudo"><?php echo $cedente_cpf_cnpj ?></div>
                 </td>
-                <td width="130" class="caixa-gray-bg">
+                <td width="85" class="caixa-gray-bg">
                     <div class="titulo">Valor do Documento</div>
                     <div class="conteudo rtl"><?php echo $valor_documento ?></div>
                 </td>
@@ -122,7 +120,7 @@
                     <div class="titulo">Endereço do Beneficiário</div>
                     <div class="conteudo"><?php echo $cedente_endereco1 ?> | <?php echo $cedente_endereco2 ?></div>
                 </td>
-                <td width="130">
+                <td width="85">
                     <div class="titulo">(-) Descontos / Abatimentos</div>
                     <div class="conteudo rtl"><?php echo $desconto_abatimento ?></div>
                 </td>
@@ -136,19 +134,19 @@
                     <div class="conteudo"><?php echo $demonstrativo[3] ?></div>
                     <div style="margin-bottom: 10px;" class="conteudo"><?php echo $demonstrativo[4] ?></div>
                 </td>
-                <td width="130">
+                <td width="85">
                     <div class="titulo">(-) Outras deduções</div>
                     <div class="conteudo rtl"><?php echo $outras_deducoes ?></div>
                 </td>
             </tr>
             <tr>
-                <td width="130">
+                <td width="85">
                     <div class="titulo">(+) Outros acréscimos</div>
                     <div class="conteudo rtl"><?php echo $outros_acrescimos ?></div>
                 </td>
             </tr>
             <tr>
-                <td width="130">
+                <td width="85">
                     <div class="titulo">(=) Valor cobrado</div>
                     <div class="conteudo rtl"><?php echo $valor_cobrado ?></div>
                 </td>
@@ -160,7 +158,7 @@
                     <b>Ouvidoria</b>: 0800 725 7474 <br>
                     <b>caixa.gov.br</b>
                 </td>
-                <td width="400" colspan="2" style="vertical-align: top;" class="bottomborder">
+                <td width="262" colspan="2" style="vertical-align: top;" class="bottomborder">
                     <div class="titulo"><center>Autenticação Mecânica - <b>Recibo do Pagador</b></center></div>
                     <div class="conteudo"></div>
                 </td>

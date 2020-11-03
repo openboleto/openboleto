@@ -21,19 +21,16 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
+<div class="border-none top">
+    <div class="logobanco">
+        <img src="<?php echo $logo_banco; ?>" alt="logotipo do banco">
+    </div>
+    <div class="codbanco"><?php echo $codigo_banco_com_dv ?></div>
+    <div class="linha-digitavel"><?php echo $linha_digitavel ?></div>
+</div>
+
 <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
     <tbody>
-    <tr>
-        <td valign="bottom" colspan="8" class="noborder nopadding">
-            <div class="logocontainer">
-                <div class="logobanco">
-                    <img src="<?php echo $logo_banco; ?>" alt="logotipo do banco">
-                </div>
-                <div class="codbanco"><?php echo $codigo_banco_com_dv ?></div>
-            </div>
-            <div class="linha-digitavel"><?php echo $linha_digitavel ?></div>
-        </td>
-    </tr>
     <tr>
         <td colspan="7">
             <div class="titulo">Local de pagamento</div>

@@ -25,6 +25,10 @@
     font-family: sans-serif;
 }
 
+@page {
+    margin: 0.5cm 2cm;
+}
+
 @media print {
     .noprint {
         display:none;
@@ -64,7 +68,8 @@ body{
 }
 
 .table-boleto .conteudo {
-    font: bold 10px Arial;
+    font-weight: bold;
+    font-size: 10px;
     height: 11.5px;
 }
 
@@ -77,19 +82,19 @@ body{
     padding: 1px 4px;
 }
 
-.table-boleto .noleftborder {
+.noleftborder {
     border-left: none !important;
 }
 
-.table-boleto .notopborder {
+.notopborder {
     border-top: none !important;
 }
 
-.table-boleto .norightborder {
+.norightborder {
     border-right: none !important;
 }
 
-.table-boleto .noborder {
+.noborder {
     border: none !important;
 }
 
@@ -101,47 +106,49 @@ body{
     text-align: right;
 }
 
-.table-boleto .logobanco {
+.logobanco {
     display: block;
     max-width: 150px;
     float: left;
 }
 
+.border-none {
+    border: none !important;
+}
+
+.top {
+    height: 38px;
+}
+
 .table-boleto .logocontainer {
     height: 27.55px;
     line-height: 100%;
-    width: 257px;
     float: left;
 }
 
-.table-boleto .logobanco img {
+.logobanco img {
     margin-bottom: -5px;
     height: 27px;
 }
 
-.table-boleto .codbanco {
+.codbanco {
     font-size: 20px;
     font-weight: bold;
-    padding: 10px 5px 0 5px;
+    padding: 5px 5px 0 5px;
     display: block;
     border-left: 2px solid #000;
     border-right: 2px solid #000;
-    width: 55px;
-    height: 19px;
+    height: 28px;
     float: left;
-    position: absolute;
-    left: 160px;
+    margin: 0 10px;
 }
 
-.table-boleto .linha-digitavel {
+.linha-digitavel {
     font-size: 14px;
     font-weight: bold;
     float: left;
-    width: 406px;
     text-align: right;
     height: 27.55px;
-    position: absolute;
-    left: 257px;
     padding-top: 10px;
 }
 
@@ -155,15 +162,16 @@ body{
 }
 
 .info {
-    font: 11px Arial;
+    font-size: 11px;
 }
 
 .info-empresa {
-    font: 11px Arial;
+    font-size: 11px;
 }
 
 .header {
-    font: bold 13px Arial;
+    font-weight: bold;
+    font-size: 13px;
     display: block;
     margin: 4px;
 }
@@ -174,7 +182,7 @@ body{
 
 .barcode div {
     display: block;
-    height: 100%;
+    height: 50px;
     float: left;
 }
 
