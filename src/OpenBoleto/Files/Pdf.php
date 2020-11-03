@@ -14,16 +14,21 @@ class Pdf
     /** @var string */
     protected string $filename;
 
+    /** @var string */
+    protected string $basePath;
+
     /** @var string|null */
     protected ?string $message = null;
 
     /**
      * Pdf constructor.
      * @param string $filename
+     * @param string $basePath
      */
-    public function __construct(string $filename)
+    public function __construct(string $filename, string $basePath = __DIR__)
     {
         $this->filename = $filename;
+        $this->basePath = $basePath;
     }
 
     /**
@@ -44,9 +49,9 @@ class Pdf
 
         $output = $pdf->output();
 
-        file_put_contents(__DIR__ . "/{$this->filename}", $output);
+        file_put_contents("{$this->basePath}/{$this->filename}", $output);
 
-        return __DIR__ . "/{$this->filename}";
+        return "{$this->basePath}/{$this->filename}";
     }
 
     /**
