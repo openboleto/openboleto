@@ -1,18 +1,26 @@
 {
-    "name": "kriansa/openboleto",
+    "name": "openboleto/openboleto",
     "type": "library",
     "description": "Biblioteca para geração de boletos bancários.",
     "keywords": ["boleto", "boleto bancario"],
-    "homepage": "http://github.com/kriansa/openboleto",
+    "homepage": "http://github.com/openboleto/openboleto",
     "license": "MIT",
     "authors": [
         {
+            "name": "José Frederico",
+            "email": "contato@livetechtecnologia.com.br"
+        },
+        {
             "name": "Daniel Garajau",
-            "email": "kriansa@facebook.com"
+            "email": "daniel@garajau.com.br"
+        },
+        {
+            "name": "Rogerio Muniz",
+            "email": "rogerio@quilhasoft.com.br"
         }
     ],
     "require": {
-        "php": ">=5.3.0"
+        "php": ">=5.6"
     },
     "autoload": {
         "psr-0": {"OpenBoleto\\": "src/"}

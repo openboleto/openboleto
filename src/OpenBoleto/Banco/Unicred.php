@@ -94,3 +94,4 @@ class Unicred extends BoletoAbstract
         return static::zeroFill($this->getAgencia(), 4) . ' / ' . static::zeroFill($this->getConta(), 10);
     }
 }
+

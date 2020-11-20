@@ -33,6 +33,7 @@
 <body>
 
     <div style="width: 666px">
+    	<?php if ($imprime_instrucoes_impressao) :?>
         <div class="noprint info">
             <h2>Instruções de Impressão</h2>
             <ul>
@@ -46,8 +47,9 @@
             <?php if ($valor_documento) : ?><span class="header">Valor: R$ <?php echo $valor_documento; ?></span><?php endif ?>
             <?php if ($pagamento_minimo) : ?><span class="header">Pagamento mínimo: R$ <?php echo $pagamento_minimo; ?></span><?php endif ?>
             <br>
-            <div class="linha-pontilhada" style="margin-bottom: 20px;">Recibo do sacado</div>
+            <div class="linha-pontilhada" style="margin-bottom: 20px;">Recibo do pagador</div>
         </div>
+        <?php endif ?>
 
         <div class="info-empresa">
             <?php if ($logotipo) : ?>
@@ -79,7 +81,7 @@
             </tr>
             <tr>
                 <td colspan="2" width="250">
-                    <div class="titulo">Cedente</div>
+                    <div class="titulo">Beneficiário</div>
                     <div class="conteudo"><?php echo $cedente ?></div>
                 </td>
                 <td>
@@ -87,7 +89,7 @@
                     <div class="conteudo"><?php echo $cedente_cpf_cnpj ?></div>
                 </td>
                 <td width="120">
-                    <div class="titulo">Agência/Código do Cedente</div>
+                    <div class="titulo">Agência/Código do Beneficiário</div>
                     <div class="conteudo rtl"><?php echo $agencia_codigo_cedente ?></div>
                 </td>
                 <td width="110">
@@ -97,7 +99,7 @@
             </tr>
             <tr>
                 <td colspan="3">
-                    <div class="titulo">Sacado</div>
+                    <div class="titulo">Pagador</div>
                     <div class="conteudo"><?php echo $sacado ?></div>
                 </td>
                 <td>

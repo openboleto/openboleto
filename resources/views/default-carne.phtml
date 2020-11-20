@@ -43,7 +43,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <div class="titulo">Agência/Código do Cedente</div>
+                        <div class="titulo">Agência/Código do Beneficiário</div>
                         <div class="conteudo"><?php echo $agencia_codigo_cedente ?></div>
                     </td>
                 </tr>
@@ -107,8 +107,20 @@
                         <div class="conteudo"><?php echo $valor_cobrado ?></div>
                     </td>
                 </tr>
+                <tr>
+                    <td class="bottomborder">
+                        <div class="titulo">CNPJ do Beneficiário</div>
+                        <div class="conteudo"><?php echo $cedente_cpf_cnpj ?></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bottomborder">
+                        <div class="titulo">Endereço do Beneficiário</div>
+                        <div class="conteudo"><?php echo $cedente_endereco1 ?></div>
+                    </td>
+                </tr>
             </table>
-        <span class="header">Recibo do Sacado</span>
+        <span class="header">Recibo do Pagador</span>
         </div>
         <div style="float: left; margin-left: 15px">
             <!-- Ficha de compensação -->

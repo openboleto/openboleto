@@ -3,7 +3,8 @@
 namespace Tests\OpenBoleto\Banco;
 use OpenBoleto\Banco\Brb;
 
-class BrbTest extends \PHPUnit_Framework_TestCase
+
+class BrbTest extends KernelTestCaseAncestor
 {
     public function testInstantiateWithoutArgumentsShouldWork()
     {

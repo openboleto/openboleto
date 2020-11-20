@@ -65,7 +65,7 @@ class Bradesco extends BoletoAbstract
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array('3', '6', '9');
+    protected $carteiras = array('3', '6', '9', '26');
 
     /**
      * Trata-se de código utilizado para identificar mensagens especificas ao cedente, sendo
@@ -77,13 +77,42 @@ class Bradesco extends BoletoAbstract
     protected $cip = '000';
 
     /**
-     * Gera o Nosso Número.
-     *
-     * @return string
-     */
+     * Digito de Auto Conferencia do Número Bancário.
+     * 1 posicao
+     * @var int
+    */
+    protected $digitoAutoConferencia;
+    
+    /**
+    * Linha de local de pagamento
+    * @var string
+    */
+    protected $localPagamento = 'Pagável preferencialmente na Rede Bradesco ou Bradesco Expresso';
+
+    /**
+    * Gera o Nosso Número.
+    *
+    * @return string
+    */
     protected function gerarNossoNumero()
     {
-        return $this->getSequencial();
+        $numero = static::zeroFill($this->sequencial, 11);
+        $cateira = static::zeroFill($this->carteira, 2);
+        $dv = $this->modulo11($cateira.$numero,7);
+        switch ($dv['resto']){
+            case 1 :
+                $this->digitoAutoConferencia = 'P';    
+                break;
+            case 0 :
+                $this->digitoAutoConferencia = "0";
+                break;
+            default:
+                $this->digitoAutoConferencia = $dv['digito'];
+        }
+
+        //$this->digitoAutoConferencia = $dv['digito'] <= 1 ? 'P': $dv['digito'];
+
+        return $numero;
     }
 
     /**
@@ -132,6 +161,17 @@ class Bradesco extends BoletoAbstract
         return array(
             'cip' => self::zeroFill($this->getCip(), 3),
             'mostra_cip' => true,
+            'nosso_numero' =>
+                str_pad( $this->getCarteira(), 2, 0, STR_PAD_LEFT ) . '/' .
+                str_pad( $this->getNossoNumero(), 11, 0, STR_PAD_LEFT ) . '-' .
+                $this->digitoAutoConferencia
         );
     }
+
+    public function setSequencial( $sequencial )
+    {
+        $this->sequencial = $sequencial;
+        return $this;
+    }
+
 }

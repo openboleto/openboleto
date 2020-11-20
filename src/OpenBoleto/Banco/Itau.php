@@ -66,6 +66,7 @@ class Itau extends BoletoAbstract
         '148', '149', '153', '108', '180', '121', '150', '109', '191', '116', '117', '119',
         '134', '135', '136', '104', '188', '147', '112', '115', '177', '172', '107', '204',
         '205', '206', '173', '196', '103', '102', '174', '198', '167', '202', '203', '175',
+        '157',
     );
 
     /**
@@ -79,6 +80,12 @@ class Itau extends BoletoAbstract
      * @var int
      */
     protected $carteiraDv;
+
+    /**
+     * Dígito de auto-conferência do nosso número
+     * @var int
+     */
+    protected $dacNossoNumero;
 
     /**
      * Cache do campo livre para evitar processamento desnecessário.
@@ -116,11 +123,32 @@ class Itau extends BoletoAbstract
      */
     protected function gerarNossoNumero()
     {
-        $this->getCampoLivre(); // Força o calculo do DV.
+        $this->gerarDacNossoNumero(); // Força o calculo do DV.
         $numero = self::zeroFill($this->getCarteira(), 3) . '/' . self::zeroFill($this->getSequencial(), 8);
-        $numero .= '-' . $this->carteiraDv;
+        $numero .= '-' . $this->dacNossoNumero;
 
         return $numero;
+    }
+
+    /**
+     * Gera o DAC do Nosso Número
+     * Anexo 4 – Cálculo do DAC do campo “Nosso Número”, em boletos emitidos pelo próprio cliente.
+     * Para a grande maioria das carteiras, são considerados para a obtenção do DAC, os dados “AGÊNCIA / CONTA
+     * (sem DAC) / CARTEIRA / NOSSO NÚMERO”, calculado pelo critério do Módulo 10 (conforme Anexo 3).
+     * À exceção, estão as carteiras 126 - 131 - 146 - 150 e 168 cuja obtenção está baseada apenas nos dados
+     * “CARTEIRA/NOSSO NÚMERO” da operação
+     */
+    protected function gerarDacNossoNumero()
+    {
+        $carteira = self::zeroFill($this->getCarteira(), 3);
+        $sequencial = self::zeroFill($this->getSequencial(), 8);
+        if (in_array($this->getCarteira(), array('126', '131', '146', '150', '168'))) {
+            $this->dacNossoNumero = static::modulo10($carteira . $sequencial);
+        } else {
+            $agencia = self::zeroFill($this->getAgencia(), 4);
+            $conta = self::zeroFill($this->getConta(), 5);
+            $this->dacNossoNumero = static::modulo10($agencia . $conta . $carteira . $sequencial);
+        }
     }
 
     /**
@@ -175,7 +203,7 @@ class Itau extends BoletoAbstract
     public function getViewVars()
     {
         return array(
-            'carteira' => null, // Campo não utilizado pelo Itaú
+            'carteira' => $this->getCarteira(), // Campo não utilizado pelo Itaú
         );
     }
 }

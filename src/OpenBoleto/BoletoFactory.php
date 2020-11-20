@@ -47,11 +47,16 @@ class BoletoFactory
      */
     protected static $classMap = array(
         1 => 'BancoDoBrasil',
+        4 => 'BancoDoNordeste',
         33 => 'Santander',
+        41 => 'Banrisul',
         70 => 'Brb',
         90 => 'Unicred',
+        104 => 'Caixa',
         237 => 'Bradesco',
         341 => 'Itau',
+        399 => 'HSBC',
+        84 => 'Uniprime'
     );
 
     /**

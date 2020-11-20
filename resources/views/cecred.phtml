@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<!--
+ * OpenBoleto - Geração de boletos bancários em PHP
+ *
+ * LICENSE: The MIT License (MIT)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this
+ * software and associated documentation files (the "Software"), to deal in the Software
+ * without restriction, including without limitation the rights to use, copy, modify,
+ * merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following
+ * conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies
+ * or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title><?php echo $cedente; ?></title>
+    <style type="text/css">
+        /* Embed the CSS content here */
+        <?php include $resource_path . '/css/styles.css' ?>
+        <?php include $resource_path . '/css/cecred.css' ?>
+    </style>
+</head>
+<body>
+
+    <div style="width: 666px">
+        <?php if ($imprime_instrucoes_impressao) :?>    
+        <div class="noprint info">
+            <h2>Instruções de Impressão</h2>
+            <ul>
+                <li>Imprima em impressora jato de tinta (ink jet) ou laser em qualidade normal ou alta (Não use modo econômico).</li>
+                <li>Utilize folha A4 (210 x 297 mm) ou Carta (216 x 279 mm) e margens mínimas à esquerda e à direita do formulário.</li>
+                <li>Corte na linha indicada. Não rasure, risque, fure ou dobre a região onde se encontra o código de barras.</li>
+                <li>Caso não apareça o código de barras no final, pressione F5 para atualizar esta tela.</li>
+                <li>Caso tenha problemas ao imprimir, copie a sequencia numérica abaixo e pague no caixa eletrônico ou no internet banking:</li>
+            </ul>
+        </div>
+        <span class="header">Linha digitável para ser utilizada em seu Internet Banking:</span>
+        <span class="header" style="font-weight: normal;"><?php echo $linha_digitavel; ?></span>
+        <?php endif ?>
+
+        <div class="info-empresa">
+            <?php if ($logotipo) : ?>
+            <div style="display: inline-block;">
+                <img alt="logotipo" src="<?php echo $logotipo; ?>" />
+            </div>
+            <?php endif ?>
+        </div>
+        <br/>
+
+        <table class="table-boleto table-boleto-header" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td valign="bottom" class="noborder nopadding">
+                    <div class="logocontainer">
+                        <div class="logobanco">
+                            <img src="<?php echo $logo_banco; ?>" alt="logotipo do banco"/>
+                        </div>
+                        <div class="codbanco"><?php echo $codigo_banco_com_dv ?></div>
+                    </div>
+                    <div class="linha-digitavel">RECIBO DO PAGADOR</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td width="291">
+                    <div class="titulo">Beneficiário</div>
+                    <div class="conteudo"><?php echo $cedente ?></div>
+                </td>
+                <td width="120">
+                    <div class="titulo">Agência/Código do Beneficiário</div>
+                    <div class="conteudo rtl"><?php echo $agencia_codigo_cedente ?></div>
+                </td>
+                <td width="29">
+                    <div class="titulo">Espécie</div>
+                    <div class="conteudo center"><?php echo $especie ?></div>
+                </td>
+                <td width="47">
+                    <div class="titulo">Quantidade</div>
+                    <div class="conteudo"></div>
+                </td>
+                <td class="norightborder">
+                    <div class="titulo">Nosso Número</div>
+                    <div class="conteudo rtl"><?php echo $nosso_numero ?></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td width="107">
+                    <div class="titulo">Número do documento</div>
+                    <div class="conteudo"><?php echo $numero_documento ?></div>
+                </td>
+                <td width="66">
+                    <div class="titulo">Contrato</div>
+                    <div class="conteudo"></div>
+                </td>
+                <td width="126">
+                    <div class="titulo">CPF/CNPJ do Pagador</div>
+                    <div class="conteudo"><?php echo $cedente_cpf_cnpj ?></div>
+                </td>
+                <td>
+                    <div class="titulo">Vencimento</div>
+                    <div class="conteudo center"><?php echo $data_vencimento ?></div>
+                </td>
+                <td width="173" class="norightborder">
+                    <div class="titulo">Valor do Documento</div>
+                    <div class="conteudo rtl"><?php echo $valor_documento ?></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td width="107">
+                    <div class="titulo">(-) Descontos / Abatimentos</div>
+                    <div class="conteudo rtl"><?php echo $desconto_abatimento ?></div>
+                </td>
+                <td width="107">
+                    <div class="titulo">(-) Outras deduções</div>
+                    <div class="conteudo rtl"><?php echo $outras_deducoes ?></div>
+                </td>
+                <td>
+                    <div class="titulo">(+) Mora / Multa</div>
+                    <div class="conteudo rtl"><?php echo $mora_multa ?></div>
+                </td>
+                <td width="107">
+                    <div class="titulo">(+) Outros acréscimos</div>
+                    <div class="conteudo rtl"><?php echo $outros_acrescimos ?></div>
+                </td>
+                <td width="173" class="norightborder">
+                    <div class="titulo">(=) Valor cobrado</div>
+                    <div class="conteudo rtl"><?php echo $valor_cobrado ?></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td class="norightborder">
+                    <div class="titulo">Pagador</div>
+                    <div class="conteudo"><?php echo $sacado; ?></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td style="vertical-align: top;" class="norightborder">
+                    <div class="titulo"><strong>Informações</strong><div style="float: right;"><strong>NÃO COBRAR QUALQUER TARIFA DE EMISSÃO DE CARNÊ/BOLETO OU OUTRA TAXA ASSEMELHADA</strong></div></div>
+                    <div class="conteudo"><?php echo $demonstrativo[0] ?></div>
+                    <div class="conteudo"><?php echo $demonstrativo[1] ?></div>
+                    <div class="conteudo"><?php echo $demonstrativo[2] ?></div>
+                    <div class="conteudo"><?php echo $demonstrativo[3] ?></div>
+                    <div class="conteudo"><?php echo $demonstrativo[4] ?></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td class="noborder">
+                    <div class="titulo rtl">Autenticação Mecânica</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br/>
+        <div class="linha-pontilhada">Corte na linha pontilhada</div>
+        <br/>
+
+        <!-- Ficha de compensação -->
+        <table class="table-boleto table-boleto-header" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td valign="bottom" class="noborder nopadding">
+                    <div class="logocontainer">
+                        <div class="logobanco">
+                            <img src="<?php echo $logo_banco; ?>" alt="logotipo do banco">
+                        </div>
+                        <div class="codbanco"><?php echo $codigo_banco_com_dv ?></div>
+                    </div>
+                    <div class="linha-digitavel"><?php echo $linha_digitavel ?></div>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+
+        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td>
+                    <div class="titulo">Local de pagamento</div>
+                    <div class="conteudo"><?php echo $local_pagamento ?></div>
+                </td>
+                <td width="173" class="norightborder">
+                    <div class="titulo">Vencimento</div>
+                    <div class="conteudo rtl"><?php echo $data_vencimento ?></div>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+
+        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td>
+                    <div class="titulo">Beneficiário</div>
+                    <div class="conteudo"><?php echo $cedente ?></div>
+                </td>
+                <td width="173" class="norightborder">
+                    <div class="titulo">Agência/Código Benefíciário</div>
+                    <div class="conteudo rtl"><?php echo $agencia_codigo_cedente ?></div>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+
+        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td width="80">
+                    <div class="titulo">Data do documento</div>
+                    <div class="conteudo center"><?php echo $data_documento ?></div>
+                </td>
+                <td>
+                    <div class="titulo">Nº documento</div>
+                    <div class="conteudo"><?php echo $numero_documento ?></div>
+                </td>
+                <td width="60">
+                    <div class="titulo">Espécie doc.</div>
+                    <div class="conteudo center"><?php echo $especie_doc ?></div>
+                </td>
+                <td width="80">
+                    <div class="titulo">Aceite</div>
+                    <div class="conteudo center"><?php echo $aceite ?></div>
+                </td>
+                <td width="60">
+                    <div class="titulo">Data process.</div>
+                    <div class="conteudo"><?php echo $data_processamento ?></div>
+                </td>
+                <td width="173" class="norightborder">
+                    <div class="titulo">Nosso número</div>
+                    <div class="conteudo rtl"><?php echo $nosso_numero ?></div>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+
+        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <?php if (!$esconde_uso_banco) : ?>
+                    <td width="80">
+                        <div class="titulo">Uso do banco</div>
+                        <div class="conteudo"><?php echo $uso_banco ?></div>
+                    </td>
+                <?php endif; ?>
+
+                <?php if ($mostra_cip) : ?>
+                    <!-- Campo exclusivo do Bradesco -->
+                    <td width="20">
+                        <div class="titulo">CIP</div>
+                        <div class="conteudo"><?php echo $cip ?></div>
+                    </td>
+                <?php endif ?>
+
+                <td>
+                    <div class="titulo">Carteira</div>
+                    <div class="conteudo center"><?php echo $carteira ?></div>
+                </td>
+                <td width="35">
+                    <div class="titulo">Espécie</div>
+                    <div class="conteudo center"><?php echo $especie ?></div>
+                </td>
+                <td width="120">
+                    <div class="titulo">Quantidade</div>
+                    <div class="conteudo"><?php echo $quantidade ?></div>
+                </td>
+                <td width="60">
+                    <div class="titulo">Valor</div>
+                    <div class="conteudo"><?php echo $valor_unitario ?></div>
+                </td>
+                <td width="173" class="norightborder">
+                    <div class="titulo">(=) Valor do Documento</div>
+                    <div class="conteudo rtl"><?php echo $valor_documento ?></div>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+
+        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td class="noborder">
+                    <div class="titulo"><strong>NÃO COBRAR QUALQUER TARIFA DE EMISSÃO DE CARNÊ/BOLETO OU OUTRA TAXA ASSEMELHADA</strong></div>
+                    <div class="titulo">Instruções (Texto de responsabilidade do Benefíciário)</div>
+                </td>
+                <td width="173" class="norightborder">
+                    <div class="titulo">(-) Descontos / Abatimentos</div>
+                    <div class="conteudo rtl"><?php echo $desconto_abatimento ?></div>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+
+        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td class="noborder">
+                    <div class="conteudo"><?php echo $instrucoes[0]; ?></div>
+                    <div class="conteudo"><?php echo $instrucoes[1]; ?></div>
+                </td>
+                <td width="173" class="norightborder">
+                    <div class="titulo">(-) Outras deduções</div>
+                    <div class="conteudo rtl"><?php echo $outras_deducoes ?></div>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+
+        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td class="noborder">
+                    <div class="conteudo"><?php echo $instrucoes[2]; ?></div>
+                    <div class="conteudo"><?php echo $instrucoes[3]; ?></div>
+                </td>
+                <td width="173" class="norightborder">
+                    <div class="titulo">(+) Mora / Multa</div>
+                    <div class="conteudo rtl"><?php echo $mora_multa ?></div>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+
+        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td class="noborder">
+                    <div class="conteudo"><?php echo $instrucoes[4]; ?></div>
+                    <div class="conteudo"><?php echo $instrucoes[5]; ?></div>
+                </td>
+                <td width="173" class="norightborder">
+                    <div class="titulo">(+) Outros acréscimos</div>
+                    <div class="conteudo rtl"><?php echo $outros_acrescimos ?></div>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+
+        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td class="noleftborder">
+                    <div class="conteudo"><?php echo $instrucoes[6]; ?></div>
+                    <div class="conteudo"><?php echo $instrucoes[7]; ?></div>
+                </td>
+                <td width="173" class="norightborder">
+                    <div class="titulo">(=) Valor cobrado</div>
+                    <div class="conteudo rtl"><?php echo $valor_cobrado ?></div>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+
+        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td class="nobottomborder norightborder">
+                    <div class="titulo">Pagador</div>
+                    <div class="conteudo"><?php echo $sacado ?> - CPF:CNPJ: <?php echo $sacado_documento; ?></div>
+                    <div class="conteudo"><?php echo $sacado_endereco1 ?></div>
+                    <div class="conteudo"><?php echo $sacado_endereco2 ?></div>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+
+        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td>
+                    <div class="titulo">Sacador/Avalista <div class="conteudo sacador"><?php echo $sacador_avalista; ?></div></div>
+                </td>
+                <td width="173" class="norightborder">
+                    <div class="titulo">Cód. Baixa</div>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+
+        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td class="noborder">
+                    <?php echo $codigo_barras ?>
+                </td>
+                <td class="noborder">
+                    <div class="titulo">Ficha de Compensação<br/>Autenticação mecânica</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <br/>
+        <div class="linha-pontilhada">Corte na linha pontilhada</div>
+        <br/>
+
+    </div>
+</body>
+</html>

@@ -61,7 +61,7 @@ body{
 
 .table-boleto .conteudo {
     font: bold 10px Arial;
-    height: 13px;
+    height: 11.5px;
 }
 
 .table-boleto .sacador {
@@ -109,6 +109,7 @@ body{
 
 .table-boleto .logobanco img {
     margin-bottom: -5px;
+    height: 27px;
 }
 
 .table-boleto .codbanco {
@@ -130,6 +131,11 @@ body{
 
 .table-boleto .nopadding {
     padding: 0px !important;
+}
+
+.table-boleto .caixa-gray-bg {
+    font-weight: bold;
+    background: #ccc;
 }
 
 .info {
@@ -179,4 +185,17 @@ body{
 
 .barcode .large.white {
     width: 3px;
+}
+
+.float_left{
+    float:left;
+}
+
+.center {
+    text-align: center;
+}
+
+.conteudo.cpf_cnpj{
+    float:right;
+    width:24%;
 }
