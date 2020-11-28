@@ -69,23 +69,37 @@ class Agente
     protected $documento;
 
     /**
+     * @var string|null
+     */
+    protected ?string $complementaryInformation = null;
+
+    /**
      * Construtor
      *
      * @param string $nome
      * @param string $documento
-     * @param string $endereco
-     * @param string $cep
-     * @param string $cidade
-     * @param string $uf
+     * @param null $endereco
+     * @param null $cep
+     * @param null $cidade
+     * @param null $uf
+     * @param string|null $complementaryInformation
      */
-    public function __construct($nome, $documento, $endereco = null, $cep = null, $cidade = null, $uf = null)
-    {
+    public function __construct(
+        $nome,
+        $documento,
+        $endereco = null,
+        $cep = null,
+        $cidade = null,
+        $uf = null,
+        ?string $complementaryInformation = null
+    ) {
         $this->setNome($nome);
         $this->setDocumento($documento);
         $endereco and $this->setEndereco($endereco);
         $cep and $this->setCep($cep);
         $cidade and $this->setCidade($cidade);
         $uf and $this->setUf($uf);
+        $this->setComplementaryInformation($complementaryInformation);
     }
 
     /**
@@ -233,8 +247,10 @@ class Agente
 
         if (preg_match('/^[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}$/', $documento)) {
             return 'CPF';
-        } else if (preg_match('#^[0-9]{2}\.[0-9]{3}\.[0-9]{3}/[0-9]{4}-[0-9]{2}$#', $documento)) {
-            return 'CNPJ';
+        } else {
+            if (preg_match('#^[0-9]{2}\.[0-9]{3}\.[0-9]{3}/[0-9]{4}-[0-9]{2}$#', $documento)) {
+                return 'CNPJ';
+            }
         }
 
         return 'Documento';
@@ -251,5 +267,21 @@ class Agente
     {
         $dados = array_filter(array($this->getCep(), $this->getCidade(), $this->getUf()));
         return implode(' - ', $dados);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getComplementaryInformation(): ?string
+    {
+        return $this->complementaryInformation;
+    }
+
+    /**
+     * @param string|null $complementaryInformation
+     */
+    public function setComplementaryInformation(?string $complementaryInformation): void
+    {
+        $this->complementaryInformation = $complementaryInformation;
     }
 }

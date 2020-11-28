@@ -1286,6 +1286,7 @@ abstract class BoletoAbstract
             'sacado_documento' => $this->getSacado()->getDocumento(),
             'sacado_endereco1' => $this->getSacado()->getEndereco(),
             'sacado_endereco2' => $this->getSacado()->getCepCidadeUf(),
+            'sacado_complement' => $this->getSacado()->getComplementaryInformation() ?? "",
             'demonstrativo' => (array) $this->getDescricaoDemonstrativo() + array(null, null, null, null, null), // Max: 5 linhas
             'instrucoes' => (array) $this->getInstrucoes() + array(null, null, null, null, null, null, null, null), // Max: 8 linhas
             'local_pagamento' => $this->getLocalPagamento(),

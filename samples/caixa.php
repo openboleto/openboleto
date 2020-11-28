@@ -5,7 +5,7 @@ require __DIR__ . "/../vendor/autoload.php";
 use Source\OpenBoleto\Banco\Caixa;
 use Source\OpenBoleto\Agente;
 
-$sacado = new Agente('Fernando Maia', '023.434.234-34', 'ABC 302 Bloco N', '72000-000', 'Brasília', 'DF');
+$sacado = new Agente('Fernando Maia', '023.434.234-34', 'ABC 302 Bloco N', '72000-000', 'Brasília', 'DF', 'testando informações');
 $cedente = new Agente(
     'Empresa de cosméticos LTDA', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF'
 );
