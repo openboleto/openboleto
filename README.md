@@ -71,7 +71,7 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
  <tr>
  <td>Banco do Brasil</td>
  <td>Homologado</td>
-  <td>Beta</td>
+  <td>Homologado</td>
  </tr>
  <tr>
   <td>Banco do Nordeste</td>
