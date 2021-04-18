@@ -138,6 +138,12 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
  <td>Beta</td>
  <td>Beta</td>
  </tr>
+  <tr>
+ <td>C6 Bank</td>
+ <td>Homologado</td>
+ <td>Homologado</td>
+ </tr>
+ 
  </table>
 
 ### API Banco Inter
