@@ -47,6 +47,13 @@ class Bradesco extends BoletoAbstract
     protected $codigoBanco = '237';
 
     /**
+     * @var array Nome espécie das moedas
+     */
+    protected static $especie = array(
+        self::MOEDA_REAL => 'R$'
+    );
+
+    /**
      * Localização do logotipo do banco, referente ao diretório de imagens
      * @var string
      */
