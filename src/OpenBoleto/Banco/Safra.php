@@ -34,7 +34,7 @@ use OpenBoleto\Exception;
  * Classe boleto Safra.
  *
  * @package    OpenBoleto
- * @author     Pedro Morgado
+ * @author     GBBS 
  * @copyright  Copyright (c) 2021 GBBS (http://www.gbbs.com.br)
  * @license    MIT License
  * @version    1.0
@@ -153,7 +153,7 @@ class Safra extends BoletoAbstract {
 
     public function getViewVars() {
         return array(
-            'carteira' => $this->getCarteira(), // Campo não utilizado pelo Itaú
+            'carteira' => $this->getCarteira(),
         );
     }
 
