@@ -56,7 +56,8 @@ class BoletoFactory
         237 => 'Bradesco',
         341 => 'Itau',
         399 => 'HSBC',
-        84 => 'Uniprime'
+        84 => 'Uniprime',
+        422 => 'Safra',
     );
 
     /**
