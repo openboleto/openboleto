@@ -63,7 +63,7 @@ class Santander extends BoletoAbstract
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array('101', '102', '201');
+    protected $carteiras = array('101', '102','104', '201');
 
     /**
      * Define os nomes das carteiras para exibição no boleto
