@@ -63,13 +63,13 @@ class Santander extends BoletoAbstract
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array('101', '102', '201');
+    protected $carteiras = array('101', '102','104', '201');
 
     /**
      * Define os nomes das carteiras para exibição no boleto
      * @var array
      */
-    protected $carteirasNomes = array('101' => 'Cobrança Simples ECR', '102' => 'Cobrança Simples CSR');
+    protected $carteirasNomes = array('101' => 'Cobrança Simples ECR', '102' => 'Cobrança Simples CSR', '104' => );
 
     /**
      * Define o valor do IOS - Seguradoras (Se 7% informar 7. Limitado a 9%) - Demais clientes usar 0 (zero)
