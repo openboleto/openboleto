@@ -17,11 +17,11 @@ $boleto = new Unicred(array(
     'agencia' => 3302, // Até 4 dígitos
     'carteira' => 51, // 11, 21, 31, 41 ou 51
     'conta' => 2259, // Até 10 dígitos
+    'contaDv' => 2,
     'sequencial' => '13951', // Até 10 dígitos
 
     // Parâmetros recomendáveis
     //'logoPath' => 'http://empresa.com.br/logo.jpg', // Logo da sua empresa
-    // 'contaDv' => 2,
     // 'agenciaDv' => 1,
     'descricaoDemonstrativo' => array( // Até 5
         'Compra de materiais cosméticos',

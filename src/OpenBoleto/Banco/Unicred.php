@@ -81,7 +81,8 @@ class Unicred extends BoletoAbstract
      */
     public function getCampoLivre()
     {
-        return self::zeroFill($this->getAgencia(), 4) . self::zeroFill($this->getConta(), 10) . self::zeroFill($this->getNossoNumero(false), 11);
+        $contaComDv = $this->getContaDv() !== null ? $this->getConta() . $this->getContaDv() : $this->getConta();
+        return self::zeroFill($this->getAgencia(), 4) . self::zeroFill($contaComDv, 10) . self::zeroFill($this->getNossoNumero(false), 11);
     }
 
     /**
@@ -91,7 +92,8 @@ class Unicred extends BoletoAbstract
      */
     public function getAgenciaCodigoCedente()
     {
-        return static::zeroFill($this->getAgencia(), 4) . ' / ' . static::zeroFill($this->getConta(), 10);
+        $contaComDv = $this->getConta() .'-'. static::getContaDv();
+        return static::zeroFill($this->getAgencia(), 4) . ' / ' . static::zeroFill($contaComDv, 10);
     }
 }
 
