@@ -19,6 +19,8 @@ $boleto = new Unicred(array(
     'conta' => 2259, // Até 10 dígitos
     'contaDv' => 2,
     'sequencial' => '13951', // Até 10 dígitos
+    'especieDoc' => 'DM', //DM-Duplicata Mercantil, DS-Duplicata de Serviços, NP-Nota Promissória, etc., conforme documentação da Unicred.
+    'numeroDocumento' => '1234567890', // Até 10 dígitos. Este identificador deve ser único.
 
     // Parâmetros recomendáveis
     //'logoPath' => 'http://empresa.com.br/logo.jpg', // Logo da sua empresa
