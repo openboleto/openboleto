@@ -120,7 +120,7 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
  </tr>
 <tr>
  <td>Unicred</td>
- <td>Beta</td>
+ <td>Homologado</td>
  <td>Beta</td>
  </tr>
 <tr>
