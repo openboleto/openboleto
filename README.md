@@ -143,6 +143,11 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
  <td>Homologado</td>
  <td>Homologado</td>
  </tr>
+  <tr>
+ <td>ABC</td>
+ <td>Homologado</td>
+ <td>Homologado</td>
+ </tr>
  
  </table>
 
