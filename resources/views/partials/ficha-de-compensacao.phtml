@@ -90,14 +90,14 @@
         </td>
     </tr>
     <tr>
-        <?php if (!$esconde_uso_banco) : ?>
+        <?php if (isset($esconde_uso_banco) && !$esconde_uso_banco) : ?>
             <td<?php if (!$mostra_cip) : ?> colspan="2"<?php endif ?>>
                 <div class="titulo">Uso do banco</div>
                 <div class="conteudo"><?php echo $uso_banco ?></div>
             </td>
         <?php endif; ?>
 
-        <?php if ($mostra_cip) : ?>
+        <?php if (isset($mostra_cip) && $mostra_cip) : ?>
             <!-- Campo exclusivo do Bradesco -->
             <td width="20">
                 <div class="titulo">CIP</div>
@@ -105,7 +105,7 @@
             </td>
         <?php endif ?>
 
-        <td<?php if ($esconde_uso_banco) : ?> colspan="3"<?php endif; ?>>
+        <td<?php if (isset($esconde_uso_banco) && $esconde_uso_banco) : ?> colspan="3"<?php endif; ?>>
             <div class="titulo">Carteira</div>
             <div class="conteudo"><?php echo $carteira ?></div>
         </td>
