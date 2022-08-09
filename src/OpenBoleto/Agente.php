@@ -46,6 +46,11 @@ class Agente
     /**
      * @var string
      */
+    protected $documento;
+
+    /**
+     * @var string
+     */
     protected $endereco;
 
     /**
@@ -62,11 +67,6 @@ class Agente
      * @var string
      */
     protected $cidade;
-
-    /**
-     * @var string
-     */
-    protected $documento;
 
     /**
      * Construtor
@@ -231,9 +231,9 @@ class Agente
     {
         $documento = trim($this->getDocumento());
 
-        if (preg_match('/^[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}$/', $documento)) {
+        if (preg_match('/^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/', $documento)) {
             return 'CPF';
-        } else if (preg_match('#^[0-9]{2}\.[0-9]{3}\.[0-9]{3}/[0-9]{4}-[0-9]{2}$#', $documento)) {
+        } else if (preg_match('/^(([0-9]{2}.[0-9]{3}.[0-9]{3}\/[0-9]{4}-[0-9]{2})|([0-9]{14}))$/', $documento)) {
             return 'CNPJ';
         }
 
