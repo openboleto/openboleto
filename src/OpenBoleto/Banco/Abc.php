@@ -129,7 +129,7 @@ class Abc extends BoletoAbstract
         
         $agencia = $this->getAgencia();
         $carteira = $this->getCarteira();
-        $numeroSemDigito = $this->getNossoNumero();
+        $numeroSemDigito = $this->getSequencial();
 
         $modulo = self::modulo10($agencia . $carteira . $numeroSemDigito);
 
