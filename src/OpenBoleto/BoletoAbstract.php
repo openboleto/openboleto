@@ -1261,6 +1261,8 @@ abstract class BoletoAbstract
             'valor_cobrado' => static::formataDinheiro($this->getValorCobrado()),
             'valor_unitario' => static::formataDinheiro($this->getValorUnitario()),
             'sacador_avalista' => $this->getSacadorAvalista() ? $this->getSacadorAvalista()->getNomeDocumento() : null,
+            'sacador_avalista_endereco1' => $this->getSacadorAvalista() ? $this->getSacadorAvalista()->getEndereco() : null,
+            'sacador_avalista_endereco2' => $this->getSacadorAvalista() ? $this->getSacadorAvalista()->getCepCidadeUf() : null,
             'sacado' => $this->getSacado()->getNome(),
             'sacado_documento' => $this->getSacado()->getDocumento(),
             'sacado_endereco1' => $this->getSacado()->getEndereco(),
