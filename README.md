@@ -150,7 +150,7 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
  </tr>
  <tr>
  <td>BV</td>
- <td>BETA</td>
+ <td>--</td>
  <td>BETA</td>
  </tr>
  
