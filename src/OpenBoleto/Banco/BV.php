@@ -58,7 +58,7 @@ class BV extends BoletoAbstract
      * Linha de local de pagamento
      * @var string
      */
-    protected $localPagamento = 'PREFERENCIALMENTE NAS CASAS LOTÉRICAS ATÉ O VALOR LIMITE';
+    protected $localPagamento = 'Pagável em qualquer banco';
 
     /**
      * Define as carteiras disponíveis para este banco
