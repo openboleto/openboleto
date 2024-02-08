@@ -16,8 +16,6 @@ Se você já conhece o **Composer** (o que é extremamente recomendado), simples
 "openboleto/openboleto": "dev-master"
 ```
 
-# vamos mudar e o mínimo de php requerido para 2024 será 8.2, por questões de segurança, por isso já fica o alerta
-
 ### PSR-0 autoloader
 
 Hoje praticamente qualquer framework utiliza deste padrão, então você deve [baixar](https://github.com/fredroo/openboleto/archive/master.zip) o OpenBoleto, colocar em uma pasta específica (geralmente _lib_ ou _vendor_) e procurar na documentação do seu framework para fazer com que o seu autoloader aponte o namespace **OpenBoleto** para a pasta **src** do OpenBoleto.
