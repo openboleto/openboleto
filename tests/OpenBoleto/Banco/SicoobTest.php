@@ -2,8 +2,9 @@
 namespace Tests\OpenBoleto\Banco;
 
 use OpenBoleto\Banco\Sicoob;
+use PHPUnit\Framework\TestCase;
 
-class SicoobTest extends KernelTestCaseAncestor
+class SicoobTest extends TestCase
 {
     public function testInstantiateWithoutArgumentsShouldWork()
     {

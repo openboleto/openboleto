@@ -16,14 +16,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: ["7.4", "8.0", "8.1", "8.2"]
+        php-version: ["7.4", "8.0", "8.1", "8.2", "8.3"]
 
     steps:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-          extensions: mbstring, intl, mysql, zlib, dom, openssl, soap, json, simplexml, libxml
 
       - name: checkout
         uses: actions/checkout@v4
@@ -33,8 +32,14 @@ jobs:
           composer install --no-progress -o --no-ansi --no-interaction
 
       - name: Análises estáticas
+        if: matrix.php-version != '7.4'
         run: |
           composer stan
+
+      - name: Análises estáticas PHP 7.4
+        if: matrix.php-version == '7.4'
+        run: | 
+          composer stan74
 
       - name: Rodando PHPUnit
         run: |

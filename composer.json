@@ -36,7 +36,8 @@
     },
     "scripts": {
         "test": "vendor/bin/phpunit",
-        "stan": "vendor/bin/phpstan analyse src/",
+        "stan": "vendor/bin/phpstan analyse",
+        "stan74": "vendor/bin/phpstan --configuration=phpstan-php74.neon analyse",
         "baseline": "vendor/bin/phpstan --generate-baseline"
     }
 }

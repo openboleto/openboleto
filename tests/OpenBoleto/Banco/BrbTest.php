@@ -2,9 +2,10 @@
 
 namespace Tests\OpenBoleto\Banco;
 use OpenBoleto\Banco\Brb;
+use PHPUnit\Framework\TestCase;
 
 
-class BrbTest extends KernelTestCaseAncestor
+class BrbTest extends TestCase
 {
     public function testInstantiateWithoutArgumentsShouldWork()
     {

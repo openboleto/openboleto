@@ -2,8 +2,9 @@
 
 namespace Tests\OpenBoleto;
 use OpenBoleto\BoletoFactory;
+use PHPUnit\Framework\TestCase;
 
-class FactoryTest extends KernelTestCaseAncestor
+class FactoryTest extends TestCase
 {
     public function testWhetherLoadByBankIdReturnsTheRightInstance()
     {

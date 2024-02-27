@@ -3,7 +3,9 @@
 namespace Tests\OpenBoleto;
 
 
-class BoletoAbstractTest extends KernelTestCaseAncestor
+use PHPUnit\Framework\TestCase;
+
+class BoletoAbstractTest extends TestCase
 {
     public function testInstantiateShouldSetDefaultResourcePath()
     {

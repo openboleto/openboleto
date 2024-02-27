@@ -2,16 +2,10 @@
 
 namespace Tests\OpenBoleto\Banco;
 use OpenBoleto\Banco\BancoDoBrasil;
-
-// Alias the PHPUnit 6.0 ancestor if available, else fall back to legacy ancestor
-if (class_exists('\PHPUnit\Framework\TestCase', true)) {
-  class KernelTestCaseAncestor extends \PHPUnit\Framework\TestCase {}
-} else {
-  class KernelTestCaseAncestor extends \PHPUnit_Framework_TestCase {}
-}
+use PHPUnit\Framework\TestCase;
 
 
-class BancoDoBrasilTest extends KernelTestCaseAncestor
+class BancoDoBrasilTest extends TestCase
 {
     public function testInstantiateWithoutArgumentsShouldWork()
     {
