@@ -152,10 +152,12 @@ class Cecred extends BoletoAbstract
      */
     protected function getDigitoVerificadorCampo1($campo)
     {
+        $numeros = [];
+        
         for ($i = strlen($campo); $i > 0; $i--) {
 
             // Pega cada numero isoladamente.
-            $numeros[$i] = substr($campo, $i - 1, 1);
+            $numeros[$i] = (int)substr($campo, $i - 1, 1);
 
             // Quando par, multiplica o numero por 1
             // Quando impar, multiplica o numero por 2
@@ -163,8 +165,8 @@ class Cecred extends BoletoAbstract
 
             // Se o numero mupltiplicado tiver 2 digitos
             // Soma o numero da primeira posição com o da segunda
-            if (strlen($numeros[$i]) == 2) {
-                $numeros[$i] = substr($numeros[$i], 0, 1) + substr($numeros[$i], 1, 1);
+            if (strlen((string)$numeros[$i]) == 2) {
+                $numeros[$i] = (int)substr((string)$numeros[$i], 0, 1) + (int)substr((string)$numeros[$i], 1, 1);
             }
         }
 

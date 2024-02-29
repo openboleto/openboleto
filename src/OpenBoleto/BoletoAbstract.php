@@ -1468,7 +1468,7 @@ abstract class BoletoAbstract
         // Draw dos dados
         while (strlen($codigo) > 0) {
 
-            $i = (int) round(self::caracteresEsquerda($codigo, 2));
+            $i = (int) round((float)self::caracteresEsquerda($codigo, 2));
             $codigo = self::caracteresDireita($codigo, strlen($codigo) - 2);
             $f = $barcodes[$i];
 
@@ -1562,13 +1562,14 @@ abstract class BoletoAbstract
      * Helper para Zerofill (0 à esqueda).
      * O valor não deve ter mais caracteres do que o número de dígitos especificados
      *
-     * @param int $valor
+     * @param int|string $valor
      * @param int $digitos
      * @return string
      * @throws Exception
      */
     protected static function zeroFill($valor, $digitos)
     {
+        $valor = (string)$valor;
         // TODO: Retirar isso daqui, e criar um método para validar os dados
         if (strlen($valor) > $digitos) {
             throw new Exception("O valor {$valor} possui mais de {$digitos} dígitos!");
@@ -1632,7 +1633,7 @@ abstract class BoletoAbstract
             //  Efetua multiplicacao do numero pelo (falor 10).
             $temp = $numeros[$i] * $fator;
             $temp0=0;
-            foreach (preg_split('// ',$temp,-1,PREG_SPLIT_NO_EMPTY) as $v){ $temp0+=$v; }
+            foreach (preg_split('// ', (string)$temp,-1,PREG_SPLIT_NO_EMPTY) as $v){ $temp0+=$v; }
             $parcial10[$i] = $temp0; // $numeros[$i] * $fator;
             //  Monta sequencia para soma dos digitos no (modulo 10).
             $numtotal10 += $parcial10[$i];
@@ -1657,7 +1658,7 @@ abstract class BoletoAbstract
     /**
      * Calcula e retorna o dígito verificador usando o algoritmo Modulo 11
      *
-     * @param string $num
+     * @param non-empty-string $num
      * @param int $base
      * @see Documentação em http://www.febraban.org.br/Acervo1.asp?id_texto=195&id_pagina=173&palavra=
      * @return array Retorna um array com as chaves 'digito' e 'resto'
@@ -1667,10 +1668,11 @@ abstract class BoletoAbstract
         $fator = 2;
 
         $soma  = 0;
+        $parcial = [];
         // Separacao dos numeros.
         for ($i = strlen($num); $i > 0; $i--) {
             //  Pega cada numero isoladamente.
-            $numeros[$i] = substr($num,$i-1,1);
+            $numeros[$i] = (int)substr($num,$i-1,1);
             //  Efetua multiplicacao do numero pelo falor.
             $parcial[$i] = $numeros[$i] * $fator;
             //  Soma dos digitos.
