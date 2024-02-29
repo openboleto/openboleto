@@ -171,11 +171,6 @@ parameters:
 			path: src/OpenBoleto/Banco/Uniprime.php
 
 		-
-			message: "#^Binary operation \"\\*\" between string and int\\<1, max\\> results in an error\\.$#"
-			count: 1
-			path: src/OpenBoleto/BoletoAbstract.php
-
-		-
 			message: "#^Method OpenBoleto\\\\BoletoAbstract\\:\\:getCarteira\\(\\) should return string but returns int\\.$#"
 			count: 1
 			path: src/OpenBoleto/BoletoAbstract.php
