@@ -72,7 +72,7 @@ abstract class BoletoAbstract
     
     /**
      * Imprime valor?
-     * @var float
+     * @var bool
      */
     protected $imprimeValor = true;
     
