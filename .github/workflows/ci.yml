@@ -31,14 +31,8 @@ jobs:
           composer install --no-progress -o --no-ansi --no-interaction
 
       - name: Análises estáticas
-        if: matrix.php-version != '7.4'
         run: |
           composer stan
-
-      - name: Análises estáticas PHP 7.4
-        if: matrix.php-version == '7.4'
-        run: | 
-          composer stan74
 
       - name: Rodando PHPUnit
         run: |

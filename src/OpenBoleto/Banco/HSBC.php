@@ -77,14 +77,16 @@ class HSBC extends BoletoAbstract
 
         for($i = strlen ( $num ); $i > 0; $i --)
         {
-            $soma += substr ( $num, $i - 1, 1 ) * $fator;
-            if (-- $fator < $ftini)
+            $soma += (int)substr( $num, $i - 1, 1 ) * $fator;
+            if (-- $fator < $ftini) {
                 $fator = $ftfim;
+            }
         }
 
         $digito = $soma % 11;
-        if ($digito > 9)
+        if ($digito > 9) {
             $digito = 0;
+        }
 
         return $digito;
     }
@@ -121,7 +123,7 @@ class HSBC extends BoletoAbstract
         $dataf = strtotime($data->format('Y/m/d'));
         $datai = strtotime(($ano - 1) . '/12/31');
         $dias = (int) (($dataf - $datai) / (60 * 60 * 24));
-        return str_pad($dias, 3, '0', STR_PAD_LEFT) . substr($ano, 3, 1);
+        return str_pad((string)$dias, 3, '0', STR_PAD_LEFT) . substr($ano, 3, 1);
     }
 
     /**
