@@ -73,14 +73,14 @@ class Uniprime extends BoletoAbstract
     * que o mesmo consta no cadastro do Banco, quando não houver código cadastrado preencher
     * com zeros "000".
     *
-    * @var int
+    * @var string
     */
     protected $cip = '000';
 
     /**
     * Digito de Auto Conferencia do Número Bancário.
     * 1 posicao
-    * @var int
+    * @var string
     */
     protected $digitoAutoConferencia;
 
@@ -135,19 +135,19 @@ class Uniprime extends BoletoAbstract
     /**
     * Define o campo CIP do boleto
     *
-    * @param int $cip
-    * @return Bradesco
+    * @param int|string $cip
+    * @return self
     */
     public function setCip($cip)
     {
-        $this->cip = $cip;
+        $this->cip = (string)$cip;
         return $this;
     }
 
     /**
     * Retorna o campo CIP do boleto
     *
-    * @return int
+    * @return string
     */
     public function getCip()
     {
@@ -165,8 +165,8 @@ class Uniprime extends BoletoAbstract
             'cip' => self::zeroFill($this->getCip(), 3),
             'mostra_cip' => true,
             'nosso_numero' =>
-            str_pad( $this->getCarteira(), 2, 0, STR_PAD_LEFT ) . '/' .
-            str_pad( $this->getNossoNumero(), 11, 0, STR_PAD_LEFT ) . '-' .
+            str_pad( $this->getCarteira(), 2, "0", STR_PAD_LEFT ) . '/' .
+            str_pad( $this->getNossoNumero(), 11, "0", STR_PAD_LEFT ) . '-' .
             $this->digitoAutoConferencia
         );
     }
@@ -175,7 +175,7 @@ class Uniprime extends BoletoAbstract
     {
         $this->sequencial = $sequencial;
 
-        return $sequencial;    
+        return $this;    
     }
 
 }

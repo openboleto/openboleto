@@ -1,31 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Access to an undefined property OpenBoleto\\\\Banco\\\\Abc\\:\\:\\$convenio\\.$#"
-			count: 2
-			path: src/OpenBoleto/Banco/Abc.php
-
-		-
-			message: "#^Property OpenBoleto\\\\BoletoAbstract\\:\\:\\$conta \\(int\\) does not accept string\\.$#"
-			count: 1
-			path: src/OpenBoleto/Banco/Abc.php
-
-		-
-			message: "#^Access to an undefined property OpenBoleto\\\\Banco\\\\BV\\:\\:\\$convenio\\.$#"
-			count: 2
-			path: src/OpenBoleto/Banco/BV.php
-
-		-
-			message: "#^Parameter \\#1 \\$num of static method OpenBoleto\\\\BoletoAbstract\\:\\:modulo10\\(\\) expects string, int given\\.$#"
-			count: 1
-			path: src/OpenBoleto/Banco/BV.php
-
-		-
-			message: "#^Property OpenBoleto\\\\BoletoAbstract\\:\\:\\$conta \\(int\\) does not accept string\\.$#"
-			count: 1
-			path: src/OpenBoleto/Banco/BV.php
-
-		-
 			message: "#^Parameter \\#1 \\$string of function strlen expects string, int given\\.$#"
 			count: 1
 			path: src/OpenBoleto/Banco/BancoDoBrasil.php
@@ -86,16 +61,6 @@ parameters:
 			path: src/OpenBoleto/Banco/C6Bank.php
 
 		-
-			message: "#^Property OpenBoleto\\\\BoletoAbstract\\:\\:\\$conta \\(int\\) does not accept string\\.$#"
-			count: 1
-			path: src/OpenBoleto/Banco/Caixa.php
-
-		-
-			message: "#^Property OpenBoleto\\\\BoletoAbstract\\:\\:\\$conta \\(int\\) does not accept string\\.$#"
-			count: 1
-			path: src/OpenBoleto/Banco/CaixaSICOB.php
-
-		-
 			message: "#^Method OpenBoleto\\\\Banco\\\\Cecred\\:\\:setConvenio\\(\\) should return OpenBoleto\\\\Banco\\\\BancoDoBrasil but returns \\$this\\(OpenBoleto\\\\Banco\\\\Cecred\\)\\.$#"
 			count: 1
 			path: src/OpenBoleto/Banco/Cecred.php
@@ -144,88 +109,3 @@ parameters:
 			message: "#^PHPDoc tag @param references unknown parameter\\: \\$cip$#"
 			count: 1
 			path: src/OpenBoleto/Banco/Sicredi.php
-
-		-
-			message: "#^Method OpenBoleto\\\\Banco\\\\Uniprime\\:\\:setCip\\(\\) should return OpenBoleto\\\\Banco\\\\Bradesco but returns \\$this\\(OpenBoleto\\\\Banco\\\\Uniprime\\)\\.$#"
-			count: 1
-			path: src/OpenBoleto/Banco/Uniprime.php
-
-		-
-			message: "#^Method OpenBoleto\\\\Banco\\\\Uniprime\\:\\:setSequencial\\(\\) should return OpenBoleto\\\\BoletoAbstract but returns int\\.$#"
-			count: 1
-			path: src/OpenBoleto/Banco/Uniprime.php
-
-		-
-			message: "#^Parameter \\#3 \\$pad_string of function str_pad expects string, int given\\.$#"
-			count: 2
-			path: src/OpenBoleto/Banco/Uniprime.php
-
-		-
-			message: "#^Property OpenBoleto\\\\Banco\\\\Uniprime\\:\\:\\$cip \\(int\\) does not accept default value of type string\\.$#"
-			count: 1
-			path: src/OpenBoleto/Banco/Uniprime.php
-
-		-
-			message: "#^Property OpenBoleto\\\\Banco\\\\Uniprime\\:\\:\\$digitoAutoConferencia \\(int\\) does not accept string\\.$#"
-			count: 2
-			path: src/OpenBoleto/Banco/Uniprime.php
-
-		-
-			message: "#^Method OpenBoleto\\\\BoletoAbstract\\:\\:getCarteira\\(\\) should return string but returns int\\.$#"
-			count: 1
-			path: src/OpenBoleto/BoletoAbstract.php
-
-		-
-			message: "#^Method OpenBoleto\\\\BoletoAbstract\\:\\:getFatorVencimento\\(\\) should return string but returns int\\|false\\.$#"
-			count: 1
-			path: src/OpenBoleto/BoletoAbstract.php
-
-		-
-			message: "#^Method OpenBoleto\\\\BoletoAbstract\\:\\:getImprimeInstrucoesImpressao\\(\\) should return bool but returns array\\.$#"
-			count: 1
-			path: src/OpenBoleto/BoletoAbstract.php
-
-		-
-			message: "#^PHPDoc tag @return has invalid value \\(\\)\\: Unexpected token \"\\\\r\\\\n     \", expected type at offset 69$#"
-			count: 1
-			path: src/OpenBoleto/BoletoAbstract.php
-
-		-
-			message: "#^PHPDoc tag @return has invalid value \\(\\)\\: Unexpected token \"\\\\r\\\\n     \", expected type at offset 72$#"
-			count: 1
-			path: src/OpenBoleto/BoletoAbstract.php
-
-		-
-			message: "#^PHPDoc tag @return has invalid value \\(\\)\\: Unexpected token \"\\\\r\\\\n     \", expected type at offset 75$#"
-			count: 1
-			path: src/OpenBoleto/BoletoAbstract.php
-
-		-
-			message: "#^PHPDoc tag @var has invalid value \\(\\)\\: Unexpected token \"\\\\r\\\\n     \", expected type at offset 38$#"
-			count: 1
-			path: src/OpenBoleto/BoletoAbstract.php
-
-		-
-			message: "#^PHPDoc tag @var has invalid value \\(\\)\\: Unexpected token \"\\\\r\\\\n     \", expected type at offset 41$#"
-			count: 1
-			path: src/OpenBoleto/BoletoAbstract.php
-
-		-
-			message: "#^PHPDoc tag @var has invalid value \\(\\)\\: Unexpected token \"\\\\r\\\\n     \", expected type at offset 46$#"
-			count: 1
-			path: src/OpenBoleto/BoletoAbstract.php
-
-		-
-			message: "#^Property OpenBoleto\\\\BoletoAbstract\\:\\:\\$carteira \\(int\\) does not accept string\\.$#"
-			count: 1
-			path: src/OpenBoleto/BoletoAbstract.php
-
-		-
-			message: "#^Property OpenBoleto\\\\BoletoAbstract\\:\\:\\$imprimeInstrucoesImpressao \\(array\\) does not accept bool\\.$#"
-			count: 1
-			path: src/OpenBoleto/BoletoAbstract.php
-
-		-
-			message: "#^Property OpenBoleto\\\\BoletoAbstract\\:\\:\\$imprimeInstrucoesImpressao \\(array\\) does not accept default value of type true\\.$#"
-			count: 1
-			path: src/OpenBoleto/BoletoAbstract.php
