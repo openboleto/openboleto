@@ -74,8 +74,9 @@ class Banrisul extends BoletoAbstract
 
     /**
      * @param int $tipoCobranca
+     * @return void
      */
-    public function setTipoCobranca(int $tipoCobranca)
+    public function setTipoCobranca($tipoCobranca)
     {
         $this->tipoCobranca = $tipoCobranca;
     }

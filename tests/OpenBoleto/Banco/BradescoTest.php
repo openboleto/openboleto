@@ -6,11 +6,17 @@ use PHPUnit\Framework\TestCase;
 
 class BradescoTest extends TestCase
 {
+    /**
+     * @return void
+     */
     public function testInstantiateWithoutArgumentsShouldWork()
     {
-        $this->assertInstanceOf('OpenBoleto\\Banco\\Bradesco', new Bradesco());
+        $this->assertInstanceOf(\OpenBoleto\Banco\Bradesco::class, new Bradesco());
     }
 
+    /**
+     * @return void
+     */
     public function testInstantiateShouldWork()
     {
         $instance = new Bradesco(array(
@@ -23,7 +29,7 @@ class BradescoTest extends TestCase
             'conta' => 403005, // Até 7 dígitos
         ));
 
-        $this->assertInstanceOf('OpenBoleto\\Banco\\Bradesco', $instance);
+        $this->assertInstanceOf(\OpenBoleto\Banco\Bradesco::class, $instance);
         $this->assertEquals('23791.17209 60012.345678 89040.300504 8 55650000001050', $instance->getLinhaDigitavel());
 
         $this->assertSame('00123456789', (string) $instance->getNossoNumero());

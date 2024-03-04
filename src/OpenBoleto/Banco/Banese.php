@@ -75,6 +75,10 @@ class Banese extends BoletoAbstract
         return $sequencial . '-' . $this->gerarDigitoVerificadorNossoNumero();
     }
 
+    /**
+     * @return int
+     * @throws \OpenBoleto\Exception
+     */
     protected function gerarDigitoVerificadorNossoNumero() {
         $sequencial = $this->getAgencia() . self::zeroFill($this->getSequencial(), 8);
         $digitoVerificador = static::modulo11($sequencial);
@@ -87,7 +91,7 @@ class Banese extends BoletoAbstract
      * 
      * (Cálculo do duplo dígito verificador da Chave ASBACE)
      * (BANESE_Manual_do_Bloqueto_BANESE_20061219.pdf - Página 7)
-     * 
+     * @param string $chave
      * @return string
      */
     protected function gerarDuploDigito($chave) {
@@ -96,7 +100,7 @@ class Banese extends BoletoAbstract
         $pesos = '21212121212121212121212';
         $somatorio = 0;
         for($indice = 0; $indice < 23; $indice++) {
-            $resultado = $chave[$indice] * $pesos[$indice];
+            $resultado = (int)$chave[$indice] * (int)$pesos[$indice];
             if($resultado > 9) {
                 $somatorio += ($resultado - 9);
             }
