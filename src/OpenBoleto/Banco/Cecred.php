@@ -89,7 +89,7 @@ class Cecred extends BoletoAbstract
      * Define o número do convênio. Sempre use string pois a quantidade de caracteres é validada.
      *
      * @param string $convenio
-     * @return BancoDoBrasil
+     * @return \OpenBoleto\Banco\Cecred
      */
     public function setConvenio($convenio)
     {

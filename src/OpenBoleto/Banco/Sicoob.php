@@ -60,7 +60,7 @@ class Sicoob extends BoletoAbstract
 
     /**
      * Convênio utilizado pelo Sacado
-     * @var integer
+     * @var string
      */
     protected $convenio = '12345';
 
@@ -81,6 +81,11 @@ class Sicoob extends BoletoAbstract
      * @var array
      */
     protected $modalidades = array('01','02','05');
+
+    /**
+     * @var string
+     */
+    protected $modalidade;
     
     /**
      * Gera o Nosso Número.
@@ -112,7 +117,7 @@ class Sicoob extends BoletoAbstract
                 $constante = 7;
                 $cont = 0;
             }
-            $calculoDv = (int)$calculoDv + ((int)substr($sequencia, $num, 1) * $constante);
+            $calculoDv = (int)$calculoDv + ((int)substr($sequencia, $num, 1) * $constante); //@phpstan-ignore-line
         }
         // c) Multiplicar cada componente da seqüência com o seu correspondente da constante e somar os resultados.
         $resto = $calculoDv % 11;
@@ -153,7 +158,7 @@ class Sicoob extends BoletoAbstract
     /**
      * Define a modalidade da carteira
      *
-     * @param type $modalidade
+     * @param string $modalidade
      * @return \OpenBoleto\Banco\Sicoob
      * @throws Exception
      */
@@ -171,11 +176,11 @@ class Sicoob extends BoletoAbstract
     /**
      * seta o convênio a ser utilizado pelo Sacado
      *
-     * @param integer $convenio Convẽnio do sacado
+     * @param string|int $convenio Convẽnio do sacado
      * @return \OpenBoleto\Banco\Sicoob
      */
     public function setConvenio($convenio) {
-        $this->convenio = $convenio;
+        $this->convenio = (string)$convenio;
 
         return $this;
     }
@@ -213,7 +218,7 @@ class Sicoob extends BoletoAbstract
     /**
      * Retorna o convênio do Sacado
      *
-     * @return integer
+     * @return string
      */
     public function getConvenio()
     {

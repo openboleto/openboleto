@@ -60,7 +60,7 @@ class C6Bank extends BoletoAbstract
 
     /**
      * Convênio utilizado pelo Sacado
-     * @var integer
+     * @var string
      */
     protected $convenio = '12345';
 
@@ -81,6 +81,11 @@ class C6Bank extends BoletoAbstract
      * @var array
      */
     protected $modalidades = array('01', '02', '05');
+
+    /**
+     * @var string
+     */
+    protected $modalidade;
 
     /**
      * Gera o Nosso Número.
@@ -124,8 +129,8 @@ class C6Bank extends BoletoAbstract
     /**
      * Define a modalidade da carteira
      *
-     * @param type $modalidade
-     * @return \OpenBoleto\Banco\Sicoob
+     * @param string $modalidade
+     * @return \OpenBoleto\Banco\C6Bank
      * @throws Exception
      */
     public function setModalidade($modalidade)
@@ -142,12 +147,12 @@ class C6Bank extends BoletoAbstract
     /**
      * seta o convênio a ser utilizado pelo Sacado
      *
-     * @param integer $convenio Convẽnio do sacado
-     * @return \OpenBoleto\Banco\Sicoob
+     * @param int|string $convenio Convẽnio do sacado
+     * @return \OpenBoleto\Banco\C6Bank
      */
     public function setConvenio($convenio)
     {
-        $this->convenio = $convenio;
+        $this->convenio = (string)$convenio;
 
         return $this;
     }
@@ -185,7 +190,7 @@ class C6Bank extends BoletoAbstract
     /**
      * Retorna o convênio do Sacado
      *
-     * @return integer
+     * @return string
      */
     public function getConvenio()
     {
