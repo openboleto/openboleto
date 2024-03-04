@@ -80,11 +80,16 @@ class BV extends BoletoAbstract
     protected $layout = 'caixa.phtml';
 
     /**
+     * @var string
+     */
+    protected $convenio;
+
+    /**
      * Define o número da conta
      *
      * Overrided porque o cedente da Caixa TEM QUE TER 6 posições, senão não é válido
      *
-     * @param int $conta
+     * @param int|string $conta
      * @return BoletoAbstract
      */
     public function setConta($conta)
@@ -115,7 +120,7 @@ class BV extends BoletoAbstract
 
         // As 15 próximas posições no nosso número são a critério do beneficiário, utilizando o sequencial
         // Depois, calcula-se o código verificador por módulo 11
-        $modulo = self::modulo10($sequencial);
+        $modulo = self::modulo10((string)$sequencial);
         $numero = self::zeroFill($sequencial, 9) . '-' . $modulo;
 
         return $numero;

@@ -109,19 +109,19 @@ abstract class BoletoAbstract
 
     /**
      * Valor cobrado
-     * @var
+     * @var float
      */
     protected $valorCobrado;
 
     /**
      * Campo valor do boleto
-     * @var
+     * @var float
      */
     protected $valorUnitario;
 
     /**
      * Campo quantidade
-     * @var
+     * @var int
      */
     protected $quantidade;
 
@@ -200,7 +200,7 @@ abstract class BoletoAbstract
 
     /**
      * Conta
-     * @var int
+     * @var int|string
      */
     protected $conta;
 
@@ -212,7 +212,7 @@ abstract class BoletoAbstract
 
     /**
      * Modalidade de cobrança do cliente, geralmente Cobrança Simples ou Registrada
-     * @var int
+     * @var string
      */
     protected $carteira;
 
@@ -230,19 +230,19 @@ abstract class BoletoAbstract
 
     /**
      * Entidade cedente (quem emite o boleto)
-     * @var Agente
+     * @var \OpenBoleto\Agente
      */
     protected $cedente;
     
     /**
      * Entidade sacada (de quem se cobra o boleto)
-     * @var Agente
+     * @var \OpenBoleto\Agente
      */
     protected $sacado;
 
     /**
      * Entidade sacador avalista
-     * @var Agente
+     * @var \OpenBoleto\Agente
      */
     protected $sacadorAvalista;
 
@@ -296,7 +296,7 @@ abstract class BoletoAbstract
 
     /**
      * Imprime ou não as instruções de impressão
-     * @var array
+     * @var bool
      */
     protected $imprimeInstrucoesImpressao = true;
     
@@ -384,7 +384,7 @@ abstract class BoletoAbstract
     /**
      * Define o código da carteira (Com ou sem registro)
      *
-     * @param string $carteira
+     * @param string|int $carteira
      * @return BoletoAbstract
      * @throws Exception
      */
@@ -394,7 +394,7 @@ abstract class BoletoAbstract
             throw new Exception("Carteira não disponível!");
         }
 
-        $this->carteira = $carteira;
+        $this->carteira = (string)$carteira;
         return $this;
     }
 
@@ -951,7 +951,7 @@ abstract class BoletoAbstract
     /**
      * Define o campo quantidade do boleto
      *
-     * @param  $quantidade
+     * @param int $quantidade
      * @return BoletoAbstract
      */
     public function setQuantidade($quantidade)
@@ -963,7 +963,7 @@ abstract class BoletoAbstract
     /**
      * Retorna o campo quantidade do boleto
      *
-     * @return
+     * @return int
      */
     public function getQuantidade()
     {
@@ -985,7 +985,7 @@ abstract class BoletoAbstract
     /**
      * Retorna o campo valor cobrado do boleto
      *
-     * @return
+     * @return float
      */
     public function getValorCobrado()
     {
@@ -1007,7 +1007,7 @@ abstract class BoletoAbstract
     /**
      * Retorna o campo "valor" do boleto
      *
-     * @return
+     * @return float
      */
     public function getValorUnitario()
     {
@@ -1533,7 +1533,7 @@ abstract class BoletoAbstract
     {
         if (!$this->getContraApresentacao()) {
             $date = new DateTime('1997-10-07');
-            return $date->diff($this->getDataVencimento())->days;
+            return (string)$date->diff($this->getDataVencimento())->days;
         } else {
             return '0000';
         }
