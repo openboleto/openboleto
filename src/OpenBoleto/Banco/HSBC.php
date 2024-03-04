@@ -100,12 +100,18 @@ class HSBC extends BoletoAbstract
     {
         $numero = $this->sequencial;
         if ($semDv) {
-            return (int) $numero;
+            return (string)$numero;
         }
 
+        /** @var numeric-string $venc */
         $venc = $this->dataVencimento->format('dmy');
+        
+        /** @var numeric-string $cedente */
         $cedente = static::zeroFill($this->conta, 7);
+        
+        /** @var numeric-string $numero */
         $numero = $numero . $this->modulo11Invertido($numero) . 4;
+        
         $res = $numero + $cedente + $venc;
 
         return $numero . $this->modulo11Invertido($res);
@@ -134,8 +140,8 @@ class HSBC extends BoletoAbstract
      */
     public function getCampoLivre()
     {
-        return self::zeroFill(substr($this->getConta(), 0, 4), 4) .
-            str_pad(substr($this->getConta(), 4), 7, '0', STR_PAD_RIGHT) .
+        return self::zeroFill(substr((string)$this->getConta(), 0, 4), 4) .
+            str_pad(substr((string)$this->getConta(), 4), 7, '0', STR_PAD_RIGHT) .
             self::zeroFill($this->getContaDv(), 1) .
             self::zeroFill($this->gerarNossoNumero(true), 8) .
             self::zeroFill($this->getDataVencJuliana(), 4) .

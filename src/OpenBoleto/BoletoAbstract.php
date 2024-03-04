@@ -169,7 +169,7 @@ abstract class BoletoAbstract
 
     /**
      * Número da parcelas
-     * @var int
+     * @var string
      */
     protected $numParcelas;
 
@@ -620,13 +620,13 @@ abstract class BoletoAbstract
     /**
      * Define o Número da parcela
      *
-     * @param int $numParcelas
+     * @param int|string $numParcelas
      * @return BoletoAbstract
      */
     public function setNumParcelas($numParcelas)
     {
         //echo $numParcelas;
-        $this->numParcelas = $numParcelas;
+        $this->numParcelas = (string)$numParcelas;
         return $this;
     }
 

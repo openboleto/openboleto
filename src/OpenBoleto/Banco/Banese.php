@@ -127,7 +127,7 @@ class Banese extends BoletoAbstract
      * @throws \OpenBoleto\Exception
      */
     public function getCampoLivre() {
-        $chave = self::caracteresDireita($this->getAgencia(), 2) .
+        $chave = self::caracteresDireita((string)$this->getAgencia(), 2) .
             self::zeroFill($this->getConta(), 8) . $this->getContaDv() .
             self::zeroFill($this->getSequencial(), 8) .
             $this->gerarDigitoVerificadorNossoNumero() .
