@@ -7,11 +7,17 @@ use PHPUnit\Framework\TestCase;
 
 class ItauTest extends TestCase
 {
+    /**
+     * @return void
+     */
     public function testInstantiateWithoutArgumentsShouldWork()
     {
-        $this->assertInstanceOf('OpenBoleto\\Banco\\Itau', new Itau());
+        $this->assertInstanceOf(\OpenBoleto\Banco\Itau::class, new Itau());
     }
 
+    /**
+     * @return void
+     */
     public function testInstantiateShouldWork()
     {
         $instance = new Itau(array(
@@ -29,11 +35,14 @@ class ItauTest extends TestCase
             'numeroDocumento' => 1234567, // 7 dígitos
         ));
 
-        $this->assertInstanceOf('OpenBoleto\\Banco\\Itau', $instance);
+        $this->assertInstanceOf(\OpenBoleto\Banco\Itau::class, $instance);
         $this->assertEquals('34191.12127 34567.881726 41234.580003 1 55650000001050', $instance->getLinhaDigitavel());
         $this->assertSame('112/12345678-8', (string) $instance->getNossoNumero());
     }
 
+    /**
+     * @return void
+     */
     public function testInstantiateWithCarteira107ShouldWork()
     {
         $instance = new Itau(array(
@@ -51,7 +60,7 @@ class ItauTest extends TestCase
             'numeroDocumento' => 1234567, // 7 dígitos
         ));
 
-        $this->assertInstanceOf('OpenBoleto\\Banco\\Itau', $instance);
+        $this->assertInstanceOf(\OpenBoleto\Banco\Itau::class, $instance);
         $this->assertEquals('34191.07127 34567.812341 56766.677001 9 55650000001050', $instance->getLinhaDigitavel());
         $this->assertSame('107/12345678-8', (string) $instance->getNossoNumero());
     }

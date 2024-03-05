@@ -84,6 +84,10 @@ class Safra extends BoletoAbstract {
      * @var int
      */
     protected $carteiraDv;
+
+    /**
+     * @var string
+     */
     protected $campoLivre;
 
     /**
@@ -119,6 +123,10 @@ class Safra extends BoletoAbstract {
         return $numero;
     }
 
+    /**
+     * @return int
+     * @throws \OpenBoleto\Exception
+     */
     protected function gerarDigitoVerificadorNossoNumero() {
         $sequencial = self::zeroFill($this->getSequencial(), 8);
         $digitoVerificador = static::modulo11($sequencial);

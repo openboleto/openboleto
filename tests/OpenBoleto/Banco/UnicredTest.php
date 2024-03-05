@@ -6,11 +6,17 @@ use PHPUnit\Framework\TestCase;
 
 class UnicredTest extends TestCase
 {
+    /**
+     * @return void
+     */
     public function testInstantiateWithoutArgumentsShouldWork()
     {
-        $this->assertInstanceOf('OpenBoleto\\Banco\\Unicred', new Unicred());
+        $this->assertInstanceOf(\OpenBoleto\Banco\Unicred::class, new Unicred());
     }
 
+    /**
+     * @return void
+     */
     public function testInstantiateShouldWork()
     {
         $instance = new Unicred(array(
@@ -23,7 +29,7 @@ class UnicredTest extends TestCase
             'sequencial' => 13951, // Até 10 dígitos
         ));
 
-        $this->assertInstanceOf('OpenBoleto\\Banco\\Unicred', $instance);
+        $this->assertInstanceOf(\OpenBoleto\Banco\Unicred::class, $instance);
         $this->assertEquals('13693.30202 00000.225904 00001.395136 9 55650000001050', $instance->getLinhaDigitavel());
         $this->assertSame('0000013951-3', (string) $instance->getNossoNumero());
     }

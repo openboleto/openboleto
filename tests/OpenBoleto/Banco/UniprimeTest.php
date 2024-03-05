@@ -6,11 +6,17 @@ use PHPUnit\Framework\TestCase;
 
 class UniprimeTest extends TestCase
 {
+    /**
+     * @return void
+     */
     public function testInstantiateWithoutArgumentsShouldWork()
     {
-        $this->assertInstanceOf('OpenBoleto\\Banco\\Uniprime', new Uniprime());
+        $this->assertInstanceOf(\OpenBoleto\Banco\Uniprime::class, new Uniprime());
     }
 
+    /**
+     * @return void
+     */
     public function testInstantiateShouldWork()
     {
         $instance = new Uniprime(array(
@@ -26,7 +32,7 @@ class UniprimeTest extends TestCase
             'convenio' => 1234567, // 4, 6 ou 7 dígitos
         ));
 
-        $this->assertInstanceOf('OpenBoleto\\Banco\\Uniprime', $instance);
+        $this->assertInstanceOf(\OpenBoleto\Banco\Uniprime::class, $instance);
         $this->assertEquals('08491.17205 90012.345675 89040.300504 3 55650000001050', $instance->getLinhaDigitavel());
 
         $this->assertSame('00123456789', (string) $instance->getNossoNumero());

@@ -973,7 +973,7 @@ abstract class BoletoAbstract
     /**
      * Define o campo valor cobrado do boleto
      *
-     * @param  $valorCobrado
+     * @param float $valorCobrado
      * @return BoletoAbstract
      */
     public function setValorCobrado($valorCobrado)
@@ -995,7 +995,7 @@ abstract class BoletoAbstract
     /**
      * Define o campo "valor" do boleto
      *
-     * @param  $valorUnitario
+     * @param float $valorUnitario
      * @return BoletoAbstract
      */
     public function setValorUnitario($valorUnitario)
@@ -1170,6 +1170,7 @@ abstract class BoletoAbstract
      * Mostra exception ao erroneamente tentar setar o nosso número
      *
      * @throws Exception
+     * @return never-return
      */
     public final function setNossoNumero()
     {

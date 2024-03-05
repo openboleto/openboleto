@@ -92,6 +92,7 @@ class Agente
      * Define o CEP
      *
      * @param string $cep
+     * @return void
      */
     public function setCep($cep)
     {
@@ -112,6 +113,7 @@ class Agente
      * Define a cidade
      *
      * @param string $cidade
+     * @return void
      */
     public function setCidade($cidade)
     {
@@ -132,6 +134,7 @@ class Agente
      * Define o documento (CPF ou CNPJ)
      *
      * @param string $documento
+     * @return void
      */
     public function setDocumento($documento)
     {
@@ -152,6 +155,7 @@ class Agente
      * Define o endereço
      *
      * @param string $endereco
+     * @return void
      */
     public function setEndereco($endereco)
     {
@@ -172,6 +176,7 @@ class Agente
      * Define o nome
      *
      * @param string $nome
+     * @return void
      */
     public function setNome($nome)
     {
@@ -192,6 +197,7 @@ class Agente
      * Define a UF
      *
      * @param string $uf
+     * @return void
      */
     public function setUf($uf)
     {
