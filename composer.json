@@ -23,7 +23,7 @@
         }
     ],
     "require": {
-        "php": ">=8.2",
+        "php": ">=7.4",
         "mpdf/qrcode": "^1.2"
     },
     "autoload": {
