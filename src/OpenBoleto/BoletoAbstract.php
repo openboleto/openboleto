@@ -69,13 +69,12 @@ abstract class BoletoAbstract
      * @var float
      */
     protected $valor;
-    
+
     /**
      * Imprime valor?
      * @var bool
      */
     protected $imprimeValor = true;
-    
 
     /**
      * Valor para pagamento mínimo em boletos de contra apresentação
@@ -233,7 +232,7 @@ abstract class BoletoAbstract
      * @var \OpenBoleto\Agente
      */
     protected $cedente;
-    
+
     /**
      * Entidade sacada (de quem se cobra o boleto)
      * @var \OpenBoleto\Agente
@@ -287,11 +286,11 @@ abstract class BoletoAbstract
      * @var string
      */
     protected $logoBanco;
-    
+
     /**
-    * Array que sera exportada pelo metodo getData
-    * @var array
-    */
+     * Array que sera exportada pelo metodo getData
+     * @var array
+     */
     protected $data;
 
     /**
@@ -299,17 +298,22 @@ abstract class BoletoAbstract
      * @var bool
      */
     protected $imprimeInstrucoesImpressao = true;
-    
-    
+
+    /**
+     * QrCode do boleto
+     * @var string|null
+     */
+    protected $qrCode = null;
+
+
     /**
      * Construtor
      *
      * @param array $params Parâmetros iniciais para construção do objeto
      */
-    public function  __construct($params = array())
+    public function __construct($params = array())
     {
-        foreach ($params as $param => $value)
-        {
+        foreach ($params as $param => $value) {
             if (method_exists($this, 'set' . $param)) {
                 $this->{'set' . $param}($value);
             }
@@ -394,7 +398,7 @@ abstract class BoletoAbstract
             throw new Exception("Carteira não disponível!");
         }
 
-        $this->carteira = (string)$carteira;
+        $this->carteira = (string) $carteira;
         return $this;
     }
 
@@ -616,7 +620,7 @@ abstract class BoletoAbstract
         $this->numeroDocumento = $numeroDocumento;
         return $this;
     }
-    
+
     /**
      * Define o Número da parcela
      *
@@ -626,7 +630,7 @@ abstract class BoletoAbstract
     public function setNumParcelas($numParcelas)
     {
         //echo $numParcelas;
-        $this->numParcelas = (string)$numParcelas;
+        $this->numParcelas = (string) $numParcelas;
         return $this;
     }
 
@@ -1081,7 +1085,7 @@ abstract class BoletoAbstract
     {
         return $this->resourcePath;
     }
-    
+
     /**
      * Define se imprime ou não as instruções de impressão
      *
@@ -1093,7 +1097,7 @@ abstract class BoletoAbstract
         $this->imprimeInstrucoesImpressao = $imprimeInstrucoesImpressao;
         return $this;
     }
-    
+
     /**
      * Retorna se imprime ou não as instruções de impressão
      *
@@ -1127,6 +1131,28 @@ abstract class BoletoAbstract
     }
 
     /**
+     * Define o QrCode do boleto
+     *
+     * @param string|null $qrCode
+     * @return BoletoAbstract
+     */
+    public function setQrCode($qrCode)
+    {
+        $this->qrCode = $qrCode;
+        return $this;
+    }
+
+    /**
+     * Retorna o QrCode do boleto
+     *
+     * @return string|null
+     */
+    public function getQrCode()
+    {
+        return $this->qrCode;
+    }
+
+    /**
      * Retorna o logotipo do banco em Base64, pronto para ser inserido na página
      *
      * @return string
@@ -1137,7 +1163,7 @@ abstract class BoletoAbstract
 
         $logoData or $logoData = 'data:image/' . pathinfo($this->getLogoBanco(), PATHINFO_EXTENSION) .
             ';base64,' . base64_encode(file_get_contents($this->getResourcePath() .
-            '/images/' . $this->getLogoBanco()));
+                '/images/' . $this->getLogoBanco()));
 
         return $logoData;
     }
@@ -1196,7 +1222,7 @@ abstract class BoletoAbstract
 
         return $numero;
     }
-    
+
     /**
      * Define se o layout deve imprimir o valor ou não
      *
@@ -1205,20 +1231,20 @@ abstract class BoletoAbstract
      */
     public final function setImprimeValor($imprimeValor)
     {
-    	$this->imprimeValor = $imprimeValor;
-    	return $this;
+        $this->imprimeValor = $imprimeValor;
+        return $this;
     }
-    
+
     /**
      * Retorna se imprime o valor ou não
      *
      * @return bool
      */
-    public function getImprimeValor()
+    public function getImprimeValor(): bool
     {
-    	return $this->imprimeValor;
-    }    
-    
+        return $this->imprimeValor;
+    }
+
     /**
      * Método onde o Boleto deverá gerar o Nosso Número.
      *
@@ -1269,6 +1295,7 @@ abstract class BoletoAbstract
         ob_start();
 
         $this->data = array(
+            'qr_code' => $this->getQrCode(),
             'linha_digitavel' => $this->getLinhaDigitavel(),
             'cedente' => $this->getCedente()->getNome(),
             'cedente_cpf_cnpj' => $this->getCedente()->getDocumento(),
@@ -1280,7 +1307,7 @@ abstract class BoletoAbstract
             'especie' => static::$especie[$this->getMoeda()],
             'quantidade' => $this->getQuantidade(),
             'data_vencimento' => $this->getContraApresentacao() ? 'Contra Apresenta&ccedil;&atilde;o' : $this->getDataVencimento()->format('d/m/Y'),
-            'data_processamento'  => $this->getDataProcessamento()->format('d/m/Y'),
+            'data_processamento' => $this->getDataProcessamento()->format('d/m/Y'),
             'data_documento' => $this->getDataDocumento()->format('d/m/Y'),
             'pagamento_minimo' => static::formataDinheiro($this->getPagamentoMinimo()),
             'valor_documento' => static::formataDinheiro($this->getValor()),
@@ -1301,7 +1328,7 @@ abstract class BoletoAbstract
             'instrucoes' => (array) $this->getInstrucoes() + array(null, null, null, null, null, null, null, null), // Max: 8 linhas
             'local_pagamento' => $this->getLocalPagamento(),
             'numero_documento' => $this->getNumeroDocumento(),
-            'agencia_codigo_cedente'=> $this->getAgenciaCodigoCedente(),
+            'agencia_codigo_cedente' => $this->getAgenciaCodigoCedente(),
             'nosso_numero' => $this->getNossoNumero(),
             'especie_doc' => $this->getEspecieDoc(),
             'aceite' => $this->getAceite(),
@@ -1311,13 +1338,13 @@ abstract class BoletoAbstract
             'resource_path' => $this->getResourcePath(),
             'numero_febraban' => $this->getNumeroFebraban(),
             'imprime_instrucoes_impressao' => $this->getImprimeInstrucoesImpressao(),
-        	'imprime_valor' => $this->getImprimeValor()
+            'imprime_valor' => $this->getImprimeValor()
         );
-        
-        
-        
-        $this->data = array_merge($this->data,$this->getViewVars());
-        
+
+
+
+        $this->data = array_merge($this->data, $this->getViewVars());
+
         extract($this->data);
 
         // Ignore errors inside the template
@@ -1404,7 +1431,7 @@ abstract class BoletoAbstract
 
         // Concatenates bankCode + currencyCode + first block of 5 characters +
         // checkDigit.
-        $part1 = $this->getCodigoBanco(). $this->getMoeda() . $blocks['20-24'] . $check_digit;
+        $part1 = $this->getCodigoBanco() . $this->getMoeda() . $blocks['20-24'] . $check_digit;
 
         // Calculates part2 check digit from 2nd block of 10 characters.
         $check_digit = static::modulo10($blocks['25-34']);
@@ -1424,7 +1451,7 @@ abstract class BoletoAbstract
         $cd = $this->getDigitoVerificador();
 
         // Put part4 together.
-        $part4  = $this->getFatorVencimento() . $this->getValorZeroFill();
+        $part4 = $this->getFatorVencimento() . $this->getValorZeroFill();
 
         // Now put everything together.
         return "$part1 $part2 $part3 $cd $part4";
@@ -1457,10 +1484,10 @@ abstract class BoletoAbstract
 
         // Guarda inicial
         $retorno = '<div class="barcode">' .
-        '<div class="black thin"></div>' .
-        '<div class="white thin"></div>' .
-        '<div class="black thin"></div>' .
-        '<div class="white thin"></div>';
+            '<div class="black thin"></div>' .
+            '<div class="white thin"></div>' .
+            '<div class="black thin"></div>' .
+            '<div class="white thin"></div>';
 
         if (strlen($codigo) % 2 != 0) {
             $codigo = "0" . $codigo;
@@ -1469,7 +1496,7 @@ abstract class BoletoAbstract
         // Draw dos dados
         while (strlen($codigo) > 0) {
 
-            $i = (int) round((float)self::caracteresEsquerda($codigo, 2));
+            $i = (int) round((float) self::caracteresEsquerda($codigo, 2));
             $codigo = self::caracteresDireita($codigo, strlen($codigo) - 2);
             $f = $barcodes[$i];
 
@@ -1495,23 +1522,22 @@ abstract class BoletoAbstract
 
         // Final
         return $retorno . '<div class="black large"></div>' .
-        '<div class="white thin"></div>' .
-        '<div class="black thin"></div>' .
-        '</div>';
+            '<div class="white thin"></div>' .
+            '<div class="black thin"></div>' .
+            '</div>';
     }
-    
+
     /**
-    * Retorna os dados do boleto em um array para ser usado externamente
-    *
-    * @return array
-    */
+     * Retorna os dados do boleto em um array para ser usado externamente
+     *
+     * @return array
+     */
     public function getData()
     {
-        if(empty($this->data))
-        {
-            $this->getOutput();  
-        }  
-        return $this->data;               
+        if (empty($this->data)) {
+            $this->getOutput();
+        }
+        return $this->data;
     }
 
     /**
@@ -1534,7 +1560,7 @@ abstract class BoletoAbstract
     {
         if (!$this->getContraApresentacao()) {
             $date = new DateTime('1997-10-07');
-            return (string)$date->diff($this->getDataVencimento())->days;
+            return (string) $date->diff($this->getDataVencimento())->days;
         } else {
             return '0000';
         }
@@ -1570,7 +1596,7 @@ abstract class BoletoAbstract
      */
     protected static function zeroFill($valor, $digitos)
     {
-        $valor = (string)$valor;
+        $valor = (string) $valor;
         // TODO: Retirar isso daqui, e criar um método para validar os dados
         if (strlen($valor) > $digitos) {
             throw new Exception("O valor {$valor} possui mais de {$digitos} dígitos!");
@@ -1612,7 +1638,7 @@ abstract class BoletoAbstract
      */
     protected static function caracteresDireita($string, $num)
     {
-        return substr($string, strlen($string)-$num, $num);
+        return substr($string, strlen($string) - $num, $num);
     }
 
     /**
@@ -1630,24 +1656,25 @@ abstract class BoletoAbstract
         //  Separacao dos numeros.
         for ($i = strlen($num); $i > 0; $i--) {
             //  Pega cada numero isoladamente.
-            $numeros[$i] = (int)substr($num,$i-1,1);
+            $numeros[$i] = (int) substr($num, $i - 1, 1);
             //  Efetua multiplicacao do numero pelo (falor 10).
             $temp = $numeros[$i] * $fator;
-            $temp0=0;
-            foreach (preg_split('// ', (string)$temp,-1,PREG_SPLIT_NO_EMPTY) as $v){ $temp0+=$v; }
+            $temp0 = 0;
+            foreach (preg_split('// ', (string) $temp, -1, PREG_SPLIT_NO_EMPTY) as $v) {
+                $temp0 += $v;
+            }
             $parcial10[$i] = $temp0; // $numeros[$i] * $fator;
             //  Monta sequencia para soma dos digitos no (modulo 10).
             $numtotal10 += $parcial10[$i];
             if ($fator == 2) {
                 $fator = 1;
-            }
-            else {
+            } else {
                 // Intercala fator de multiplicacao (modulo 10).
                 $fator = 2;
             }
         }
 
-        $remainder  = $numtotal10 % 10;
+        $remainder = $numtotal10 % 10;
         $digito = 10 - $remainder;
 
         // Make it zero if check digit is 10.
@@ -1664,16 +1691,16 @@ abstract class BoletoAbstract
      * @see Documentação em http://www.febraban.org.br/Acervo1.asp?id_texto=195&id_pagina=173&palavra=
      * @return array Retorna um array com as chaves 'digito' e 'resto'
      */
-    protected static function modulo11($num, $base=9)
+    protected static function modulo11($num, $base = 9)
     {
         $fator = 2;
 
-        $soma  = 0;
+        $soma = 0;
         $parcial = [];
         // Separacao dos numeros.
         for ($i = strlen($num); $i > 0; $i--) {
             //  Pega cada numero isoladamente.
-            $numeros[$i] = (int)substr($num,$i-1,1);
+            $numeros[$i] = (int) substr($num, $i - 1, 1);
             //  Efetua multiplicacao do numero pelo falor.
             $parcial[$i] = $numeros[$i] * $fator;
             //  Soma dos digitos.
@@ -1687,9 +1714,9 @@ abstract class BoletoAbstract
         $result = array(
             'digito' => ($soma * 10) % 11,
             // Remainder.
-            'resto'  => $soma % 11,
+            'resto' => $soma % 11,
         );
-        if ($result['digito'] == 10){
+        if ($result['digito'] == 10) {
             $result['digito'] = 0;
         }
         return $result;

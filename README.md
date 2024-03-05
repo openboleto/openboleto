@@ -20,8 +20,6 @@ Se você já conhece o **Composer** (o que é extremamente recomendado), simples
 "openboleto/openboleto": "dev-master"
 ```
 
-# vamos mudar e o mínimo de php requerido para 2024 será 8.2, por questões de segurança, por isso já fica o alerta
-
 ### PSR-0 autoloader
 
 Hoje praticamente qualquer framework utiliza deste padrão, então você deve [baixar](https://github.com/fredroo/openboleto/archive/master.zip) o OpenBoleto, colocar em uma pasta específica (geralmente _lib_ ou _vendor_) e procurar na documentação do seu framework para fazer com que o seu autoloader aponte o namespace **OpenBoleto** para a pasta **src** do OpenBoleto.
@@ -52,10 +50,15 @@ $boleto = new BancoDoBrasil(array(
     'carteira' => 18,
     'conta' => 10403005, // Até 8 dígitos
     'convenio' => 1234, // 4, 6 ou 7 dígitos
+    'qrCode' => 'otpauth://totp/test?secret=B3JX4VCVJDVNXNZ5&issuer=chillerlan.net', // Caso o Boleto tenha registro para uso de QrCode Pix
 ));
 
 echo $boleto->getOutput();
 ```
+## Como adiquirir o QrCode Pix
+
+O uso padrão do PIX não pode ser usado no boleto, à instituição bancária tem um serviço da qual você passa o boleto registrado e solicita a PIX, o banco vai te retornar uma string na qual é o PIX que identifica o boleto, para quando realizar o pagamento via PIX, tenha referência do boleto para ser baixado.
+
 
 Sim, só isso! Lembre-se de que cada banco possui alguma particularidade, mas em geral são estes parâmetros os obrigatórios. Na pasta **samples** existe um exemplo funcional de cada banco, você pode verificar lá quais são os parâmetros necessários para cada banco.
 
