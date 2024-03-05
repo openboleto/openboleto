@@ -2,8 +2,9 @@
 
 namespace OpenBoleto;
 
-use chillerlan\QRCode\QRCode;
-
+use chillerlan\QRCode\Data\QRMatrix;
+use chillerlan\QRCode\Output\QRMarkupSVG;
+use chillerlan\QRCode\{QRCode, QROptions};
 
 class QrCodePix
 {
@@ -12,6 +13,7 @@ class QrCodePix
         if (empty($qrCode)) {
             return '';
         }
-        return(new QRCode)->render($qrCode);
+
+        return(new QRCode())->render($qrCode);
     }
 }

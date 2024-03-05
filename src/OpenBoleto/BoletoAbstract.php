@@ -71,6 +71,12 @@ abstract class BoletoAbstract
     protected $valor;
 
     /**
+     * Imprime valor?
+     * @var bool
+     */
+    protected $imprimeValor = true;
+
+    /**
      * Valor para pagamento mínimo em boletos de contra apresentação
      * @var float
      */
@@ -1235,7 +1241,7 @@ abstract class BoletoAbstract
      *
      * @return bool
      */
-    public function getImprimeValor()
+    public function getImprimeValor(): bool
     {
         return $this->imprimeValor;
     }
