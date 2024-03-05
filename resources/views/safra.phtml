@@ -30,7 +30,7 @@ use OpenBoleto\QrCodePix;
 
    <head>
       <meta charset="UTF-8">
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
       <title>
          <?php echo $cedente; ?>
       </title>
@@ -44,7 +44,7 @@ use OpenBoleto\QrCodePix;
 
       <div style="width: 666px">
          <?php if ($imprime_instrucoes_impressao): ?>
-         <div class="noprint info">
+             <div class="noprint info">
             <h2>Instruções de Impressão</h2>
             <ul>
                <li>Imprima em impressora jato de tinta (ink jet) ou laser em qualidade normal ou alta (Não use modo
@@ -60,26 +60,26 @@ use OpenBoleto\QrCodePix;
             <span class="header">Linha Digitável:
                <?php echo $linha_digitavel; ?>
             </span>
-            <?php if ($valor_documento): ?><span class="header">Valor: R$
-               <?php echo $valor_documento; ?>
-            </span>
-            <?php endif ?>
-            <?php if ($pagamento_minimo): ?><span class="header">Pagamento mínimo: R$
-               <?php echo $pagamento_minimo; ?>
-            </span>
-            <?php endif ?>
-            <br>
+                 <?php if ($valor_documento): ?><span class="header">Valor: R$
+                     <?php echo $valor_documento; ?>
+                     </span>
+                 <?php endif ?>
+                 <?php if ($pagamento_minimo): ?><span class="header">Pagamento mínimo: R$
+                     <?php echo $pagamento_minimo; ?>
+                     </span>
+                 <?php endif ?>
+                 <br>
             <div class="linha-pontilhada" style="margin-bottom: 20px;">Recibo do pagador</div>
          </div>
          <?php endif ?>
 
-         <div class="info-empresa">
+          <div class="info-empresa">
             <?php if ($logotipo): ?>
-            <div style="display: inline-block;">
-               <img alt="logotipo" src="<?php echo $logotipo; ?>" />
+                <div style="display: inline-block;">
+               <img alt="logotipo" src="<?php echo $logotipo; ?>"/>
             </div>
             <?php endif ?>
-            <div style="display: inline-block; vertical-align: super;">
+              <div style="display: inline-block; vertical-align: super;">
                <div><strong>
                      <?php echo $cedente; ?>
                   </strong></div>
@@ -232,7 +232,7 @@ use OpenBoleto\QrCodePix;
                <tr>
                   <td colspan="4" class="notopborder">
                      <table style="width: 100%;" cellpadding="0" cellspacing="0" border="0"
-                        style="margin:0; padding:0;">
+                            style="margin:0; padding:0;">
                         <tbody style="margin:0; padding:0;">
                            <tr style="margin:0; padding:0;">
                               <td style="margin:0; padding:0;" class="noborder">
@@ -266,7 +266,9 @@ use OpenBoleto\QrCodePix;
                      </table>
                   </td>
                   <td class="notopborder nobottomborder noleftborder" style="text-align:center">
-                     <img src="<?php echo QrCodePix::image($qr_code); ?>" alt="QR Code" />
+                      <?php if (isset($qr_code) && !empty($qr_code)): ?>
+                          <img src="<?php echo QrCodePix::image($qr_code); ?>" alt="QR Code"/>
+                      <?php endif; ?>
                   </td>
                </tr>
             </tbody>
@@ -275,8 +277,8 @@ use OpenBoleto\QrCodePix;
          <div class="linha-pontilhada">Corte na linha pontilhada</div>
          <br>
 
-         <!-- Ficha de compensação -->
-         <?php include('partials/ficha-de-compensacao-safra.phtml') ?>
+          <!-- Ficha de compensação -->
+          <?php include('partials/ficha-de-compensacao-safra.phtml') ?>
       </div>
    </body>
 
