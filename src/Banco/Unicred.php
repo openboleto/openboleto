@@ -28,58 +28,48 @@
 namespace OpenBoleto\Banco;
 
 use OpenBoleto\BoletoAbstract;
-use OpenBoleto\Exception;
 
 /**
- * Classe boleto Banco Do Nordeste
+ * Classe boleto Unicred.
  *
  * @package    OpenBoleto
- * @author     Rauye Rogiski <http://github.com/rauye>
+ * @author     Daniel Garajau <http://github.com/kriansa>
+ * @copyright  Copyright (c) 2013 Estrada Virtual (http://www.estradavirtual.com.br)
  * @license    MIT License
  * @version    1.0
  */
-class BancoDoNordeste extends BoletoAbstract
+class Unicred extends BoletoAbstract
 {
     /**
      * Código do banco
      * @var string
      */
-    protected $codigoBanco = '004';
+    protected $codigoBanco = '136';
 
     /**
      * Localização do logotipo do banco, referente ao diretório de imagens
      * @var string
      */
-    protected $logoBanco = 'bnb.jpg';
-
-    /**
-     * Linha de local de pagamento
-     * @var string
-     */
-    protected $localPagamento = 'Pagável preferencialmente no Banco do Nordeste até o vencimento';
+    protected $logoBanco = 'unicred.jpg';
 
     /**
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array('47','45','46','50','45','46','04','48','97','51','49','52','58','95','63','53','54','55','57','59','61');
+    protected $carteiras = array('11', '21', '31', '41', '51');
 
     /**
-     * Gera o Nosso Número com o dígito verificador
+     * Gera o Nosso Número.
      *
      * @return string
      */
     protected function gerarNossoNumero()
     {
-        $numero = static::zeroFill($this->sequencial, 7);
-        $resto = static::modulo11($numero, 8)['resto'];
-        $dv = 0;
+        $numero = self::zeroFill($this->getSequencial(), 10);
+        $dv = static::modulo11($numero);
+        $numero .= '-' . $dv['digito'];
 
-        if ($resto > 1) {
-            $dv = 11 - $resto;
-        }
-
-        return $numero . '-' . $dv;
+        return $numero;
     }
 
     /**
@@ -90,11 +80,19 @@ class BancoDoNordeste extends BoletoAbstract
      */
     public function getCampoLivre()
     {
-        return self::zeroFill($this->getAgencia(), 4) .
-            self::zeroFill($this->getConta(), 7) .
-            self::zeroFill($this->getContaDv(), 1) .
-            self::zeroFill($this->getNossoNumero(false), 8) .
-            self::zeroFill($this->getCarteira(), 2) .
-            '000';
+        $contaComDv = $this->getContaDv() !== null ? $this->getConta() . $this->getContaDv() : $this->getConta();
+        return self::zeroFill($this->getAgencia(), 4) . self::zeroFill($contaComDv, 10) . self::zeroFill($this->getNossoNumero(false), 11);
+    }
+
+    /**
+     * Retorna o campo Agência/Cedente do boleto
+     *
+     * @return string
+     */
+    public function getAgenciaCodigoCedente()
+    {
+        $contaComDv = $this->getConta() .'-'. static::getContaDv();
+        return static::zeroFill($this->getAgencia(), 4) . ' / ' . static::zeroFill($contaComDv, 10);
     }
 }
+

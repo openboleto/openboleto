@@ -28,7 +28,6 @@
 namespace OpenBoleto\Banco;
 
 use OpenBoleto\BoletoAbstract;
-use OpenBoleto\Exception;
 
 /**
  * Classe boleto Banco Do Nordeste
@@ -108,13 +107,13 @@ class HSBC extends BoletoAbstract
 
         /** @var numeric-string $venc */
         $venc = $this->dataVencimento->format('dmy');
-        
+
         /** @var numeric-string $cedente */
         $cedente = static::zeroFill($this->conta, 7);
-        
+
         /** @var numeric-string $numero */
         $numero = $numero . $this->modulo11Invertido($numero) . 4;
-        
+
         $res = $numero + $cedente + $venc;
 
         return $numero . $this->modulo11Invertido($res);

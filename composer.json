@@ -27,13 +27,13 @@
         "chillerlan/php-qrcode": "^5.0"
     },
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "OpenBoleto\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\OpenBoleto\\": "tests/"
         }
     },
     "require-dev": {

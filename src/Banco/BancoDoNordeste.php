@@ -28,98 +28,57 @@
 namespace OpenBoleto\Banco;
 
 use OpenBoleto\BoletoAbstract;
-use OpenBoleto\Exception;
 
 /**
- * Classe boleto Banrisul
+ * Classe boleto Banco Do Nordeste
  *
  * @package    OpenBoleto
  * @author     Rauye Rogiski <http://github.com/rauye>
  * @license    MIT License
  * @version    1.0
  */
-class Banrisul extends BoletoAbstract
+class BancoDoNordeste extends BoletoAbstract
 {
     /**
      * Código do banco
      * @var string
      */
-    protected $codigoBanco = '041';
+    protected $codigoBanco = '004';
 
     /**
      * Localização do logotipo do banco, referente ao diretório de imagens
      * @var string
      */
-    protected $logoBanco = 'banrisul.jpg';
+    protected $logoBanco = 'bnb.jpg';
 
     /**
      * Linha de local de pagamento
      * @var string
      */
-    protected $localPagamento = 'Pagável preferencialmente no Banrisul até o vencimento';
+    protected $localPagamento = 'Pagável preferencialmente no Banco do Nordeste até o vencimento';
 
     /**
-     * Define o tipo da cobrança: 1 Cobrança Normal, Fichário emitido pelo BANRISUL; 2 Cobrança Direta, Fichário emitido pelo CLIENTE
-     * @var int
+     * Define as carteiras disponíveis para este banco
+     * @var array
      */
-    protected $tipoCobranca = 2;
+    protected $carteiras = array('47','45','46','50','45','46','04','48','97','51','49','52','58','95','63','53','54','55','57','59','61');
 
     /**
-     * @return int
-     */
-    public function getTipoCobranca(): int
-    {
-        return $this->tipoCobranca;
-    }
-
-    /**
-     * @param int $tipoCobranca
-     * @return void
-     */
-    public function setTipoCobranca($tipoCobranca)
-    {
-        $this->tipoCobranca = $tipoCobranca;
-    }
-
-    /**
-     * Gera o Nosso Número.
+     * Gera o Nosso Número com o dígito verificador
      *
      * @return string
      */
     protected function gerarNossoNumero()
     {
-        return self::zeroFill($this->getSequencial(), 8);
-    }
+        $numero = static::zeroFill($this->sequencial, 7);
+        $resto = static::modulo11($numero, 8)['resto'];
+        $dv = 0;
 
-    /**
-     * Gera o dígito verificador duplo
-     *
-     * @return string
-     */
-    protected function gerarDigitoVerificadorDuplo()
-    {
-        $sequencial = self::zeroFill($this->getSequencial(), 8);
-
-        $dv1 = static::modulo10($sequencial);
-        $resto2 = static::modulo11($sequencial . $dv1, 7)['resto'];
-
-        if ($resto2 == 1) {
-            $dv1++;
-            if ($dv1 == 10) {
-                $dv1 = '0';
-            }
-            $resto2 = static::modulo11($sequencial . $dv1,7)['resto'];
+        if ($resto > 1) {
+            $dv = 11 - $resto;
         }
 
-        $digito = 11 - $resto2;
-
-        if ($digito > 9) {
-            $dv2 = 0;
-        } else {
-            $dv2 = $digito;
-        }
-
-        return $dv1 . $dv2;
+        return $numero . '-' . $dv;
     }
 
     /**
@@ -130,12 +89,11 @@ class Banrisul extends BoletoAbstract
      */
     public function getCampoLivre()
     {
-        return self::zeroFill($this->getTipoCobranca(), 1) .
-            1 .
-            self::zeroFill($this->getAgencia(), 4) .
+        return self::zeroFill($this->getAgencia(), 4) .
             self::zeroFill($this->getConta(), 7) .
-            self::zeroFill($this->getNossoNumero(), 8) .
-            40 .
-            self::zeroFill($this->gerarDigitoVerificadorDuplo(), 2);
+            self::zeroFill($this->getContaDv(), 1) .
+            self::zeroFill($this->getNossoNumero(false), 8) .
+            self::zeroFill($this->getCarteira(), 2) .
+            '000';
     }
 }

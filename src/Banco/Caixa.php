@@ -29,7 +29,6 @@ namespace OpenBoleto\Banco;
 
 use OpenBoleto\BoletoAbstract;
 use OpenBoleto\Exception;
-use OpenBoleto\Agente;
 
 /**
  * Classe boleto Caixa Economica Federal - Modelo SIGCB.
@@ -124,23 +123,23 @@ class Caixa extends BoletoAbstract
 
     /**
      * Método para gerar o código da posição de 20 a 44
-     * 
+     *
      * O campo livre da Caixa é cheio de nove horas. Transcrição do manual:
-     * O Campo Livre contém 25 posições dispostas da seguinte forma:  
-     * 
-     * Descrição -------------------- Posição no Código de Barras --- Observação 
-     * 
-     * Código do Beneficiário ------- Posição: 20-25 
-     * DV do Código do Beneficiário - Posição: 26-26 ---------------- ANEXO VI 
-     * Nosso Número – Seqüência 1 --- Posição: 27-29 ---------------- 3ª a 5ª posição do Nosso Número 
-     * Constante 1 ------------------ Posição: 30-30 ---------------- 1ª posição do Nosso Numero: 
-     *                                                                (1-Registrada / 2-Sem Registro) 
-     * Nosso Número – Seqüência 2 --- Posição: 31-33 ---------------- 6ª a 8ª posição do Nosso Número 
-     * Constante 2 ------------------ Posição: 34-34 ---------------- 2ª posição do Nosso Número: 
-     *                                                                Ident da Emissão do Boleto (4-Beneficiário) 
-     * Nosso Número – Seqüência 3 --- Posição: 35-43 ---------------- 9ª a 17ª posição do Nosso Número 
-     * DV do Campo Livre ------------ Posição: 44-44 ---------------- Item 5.3.1 (abaixo) 
-     * 
+     * O Campo Livre contém 25 posições dispostas da seguinte forma:
+     *
+     * Descrição -------------------- Posição no Código de Barras --- Observação
+     *
+     * Código do Beneficiário ------- Posição: 20-25
+     * DV do Código do Beneficiário - Posição: 26-26 ---------------- ANEXO VI
+     * Nosso Número – Seqüência 1 --- Posição: 27-29 ---------------- 3ª a 5ª posição do Nosso Número
+     * Constante 1 ------------------ Posição: 30-30 ---------------- 1ª posição do Nosso Numero:
+     *                                                                (1-Registrada / 2-Sem Registro)
+     * Nosso Número – Seqüência 2 --- Posição: 31-33 ---------------- 6ª a 8ª posição do Nosso Número
+     * Constante 2 ------------------ Posição: 34-34 ---------------- 2ª posição do Nosso Número:
+     *                                                                Ident da Emissão do Boleto (4-Beneficiário)
+     * Nosso Número – Seqüência 3 --- Posição: 35-43 ---------------- 9ª a 17ª posição do Nosso Número
+     * DV do Campo Livre ------------ Posição: 44-44 ---------------- Item 5.3.1 (abaixo)
+     *
      * @return string
      * @throws \OpenBoleto\Exception
      */
@@ -162,13 +161,13 @@ class Caixa extends BoletoAbstract
         }
         $campoLivre .= substr($nossoNumero, 2, 3) . $constante;
 
-        // Sequencia 2 (posições 6-8 NN) + Constante 2 (4-Beneficiário) 
+        // Sequencia 2 (posições 6-8 NN) + Constante 2 (4-Beneficiário)
         $campoLivre .= substr($nossoNumero, 5, 3) . '4';
 
         // Sequencia 3 (posições 9-17 NN)
         $campoLivre .= substr($nossoNumero, 8, 9);
 
-        // DV do Campo Livre 
+        // DV do Campo Livre
         $modulo = self::modulo11($campoLivre);
         $campoLivre .= $modulo['digito'];
 

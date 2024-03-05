@@ -28,7 +28,6 @@
 namespace OpenBoleto\Banco;
 
 use OpenBoleto\BoletoAbstract;
-use OpenBoleto\Exception;
 
 /**
  * Classe boleto Sicredi.
@@ -107,7 +106,7 @@ class Sicredi extends BoletoAbstract {
      */
     public function setCodigoCliente($codigoCliente) {
         $this->codigoCliente = (string)$codigoCliente;
-        
+
         return $this;
     }
 
@@ -200,7 +199,7 @@ class Sicredi extends BoletoAbstract {
 
     /**
      * Retorna o bytecode do boleto
-     * 
+     *
      * @return int
      */
     public function getBytecode()
@@ -210,7 +209,7 @@ class Sicredi extends BoletoAbstract {
 
     /**
      * Define o bycode do boleto
-     * 
+     *
      * @param int $bytecode
      * @return Sicredi
      */
@@ -222,7 +221,7 @@ class Sicredi extends BoletoAbstract {
 
     /**
      * Retorna o tipo de cobrança
-     * 
+     *
      * @return int
      */
     public function getTipoCobranca()
@@ -232,7 +231,7 @@ class Sicredi extends BoletoAbstract {
 
     /**
      * Define o tipo de cobrança
-     * 
+     *
      * @param int $tipoCobranca
      * @return Sicredi
      */

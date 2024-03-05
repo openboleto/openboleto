@@ -28,13 +28,12 @@
 namespace OpenBoleto\Banco;
 
 use OpenBoleto\BoletoAbstract;
-use OpenBoleto\Exception;
 
 /**
  * Classe boleto Safra.
  *
  * @package    OpenBoleto
- * @author     GBBS 
+ * @author     GBBS
  * @copyright  Copyright (c) 2021 GBBS (http://www.gbbs.com.br)
  * @license    MIT License
  * @version    1.0

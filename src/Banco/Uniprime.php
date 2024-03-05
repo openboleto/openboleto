@@ -28,7 +28,6 @@
 namespace OpenBoleto\Banco;
 
 use OpenBoleto\BoletoAbstract;
-use OpenBoleto\Exception;
 
 /**
 * Classe boleto Bradesco S/A.
@@ -104,7 +103,7 @@ class Uniprime extends BoletoAbstract
         $dv = $this->modulo11($cateira.$numero,7);
         switch ($dv['resto']){
             case 1 :
-                $this->digitoAutoConferencia = 'P';    
+                $this->digitoAutoConferencia = 'P';
                 break;
             case 0 :
                 $this->digitoAutoConferencia = "0";
@@ -175,7 +174,7 @@ class Uniprime extends BoletoAbstract
     {
         $this->sequencial = $sequencial;
 
-        return $this;    
+        return $this;
     }
 
 }
