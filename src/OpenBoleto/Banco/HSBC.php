@@ -77,14 +77,16 @@ class HSBC extends BoletoAbstract
 
         for($i = strlen ( $num ); $i > 0; $i --)
         {
-            $soma += substr ( $num, $i - 1, 1 ) * $fator;
-            if (-- $fator < $ftini)
+            $soma += (int)substr( $num, $i - 1, 1 ) * $fator;
+            if (-- $fator < $ftini) {
                 $fator = $ftfim;
+            }
         }
 
         $digito = $soma % 11;
-        if ($digito > 9)
+        if ($digito > 9) {
             $digito = 0;
+        }
 
         return $digito;
     }
@@ -98,12 +100,18 @@ class HSBC extends BoletoAbstract
     {
         $numero = $this->sequencial;
         if ($semDv) {
-            return (int) $numero;
+            return (string)$numero;
         }
 
+        /** @var numeric-string $venc */
         $venc = $this->dataVencimento->format('dmy');
+        
+        /** @var numeric-string $cedente */
         $cedente = static::zeroFill($this->conta, 7);
+        
+        /** @var numeric-string $numero */
         $numero = $numero . $this->modulo11Invertido($numero) . 4;
+        
         $res = $numero + $cedente + $venc;
 
         return $numero . $this->modulo11Invertido($res);
@@ -121,7 +129,7 @@ class HSBC extends BoletoAbstract
         $dataf = strtotime($data->format('Y/m/d'));
         $datai = strtotime(($ano - 1) . '/12/31');
         $dias = (int) (($dataf - $datai) / (60 * 60 * 24));
-        return str_pad($dias, 3, '0', STR_PAD_LEFT) . substr($ano, 3, 1);
+        return str_pad((string)$dias, 3, '0', STR_PAD_LEFT) . substr($ano, 3, 1);
     }
 
     /**
@@ -132,8 +140,8 @@ class HSBC extends BoletoAbstract
      */
     public function getCampoLivre()
     {
-        return self::zeroFill(substr($this->getConta(), 0, 4), 4) .
-            str_pad(substr($this->getConta(), 4), 7, '0', STR_PAD_RIGHT) .
+        return self::zeroFill(substr((string)$this->getConta(), 0, 4), 4) .
+            str_pad(substr((string)$this->getConta(), 4), 7, '0', STR_PAD_RIGHT) .
             self::zeroFill($this->getContaDv(), 1) .
             self::zeroFill($this->gerarNossoNumero(true), 8) .
             self::zeroFill($this->getDataVencJuliana(), 4) .

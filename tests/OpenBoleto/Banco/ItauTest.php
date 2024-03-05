@@ -2,9 +2,10 @@
 
 namespace Tests\OpenBoleto\Banco;
 use OpenBoleto\Banco\Itau;
+use PHPUnit\Framework\TestCase;
 
 
-class ItauTest extends KernelTestCaseAncestor
+class ItauTest extends TestCase
 {
     public function testInstantiateWithoutArgumentsShouldWork()
     {

@@ -2,9 +2,10 @@
 
 namespace Tests\OpenBoleto\Banco;
 use OpenBoleto\Banco\Santander;
+use PHPUnit\Framework\TestCase;
 
 
-class SantanderTest extends KernelTestCaseAncestor
+class SantanderTest extends TestCase
 {
     public function testInstantiateWithoutArgumentsShouldWork()
     {

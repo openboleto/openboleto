@@ -150,7 +150,7 @@ class Caixa extends BoletoAbstract
         $beneficiario = $this->getConta();
 
         // Código do beneficiário + DV]
-        $modulo = self::modulo11($beneficiario);
+        $modulo = self::modulo11((string)$beneficiario);
         $campoLivre = $beneficiario . $modulo['digito'];
 
         // Sequencia 1 (posições 3-5 NN) + Constante 1 (1 => registrada, 2 => sem registro)

@@ -65,21 +65,21 @@ class Bradesco extends BoletoAbstract
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array('3', '6', '9', '26');
+    protected $carteiras = array('3', '4', '6', '9', '26');
 
     /**
      * Trata-se de código utilizado para identificar mensagens especificas ao cedente, sendo
      * que o mesmo consta no cadastro do Banco, quando não houver código cadastrado preencher
      * com zeros "000".
      *
-     * @var int
+     * @var string
      */
     protected $cip = '000';
 
     /**
      * Digito de Auto Conferencia do Número Bancário.
      * 1 posicao
-     * @var int
+     * @var string
     */
     protected $digitoAutoConferencia;
     
@@ -132,19 +132,19 @@ class Bradesco extends BoletoAbstract
     /**
      * Define o campo CIP do boleto
      *
-     * @param int $cip
+     * @param int|string $cip
      * @return Bradesco
      */
     public function setCip($cip)
     {
-        $this->cip = $cip;
+        $this->cip = (string)$cip;
         return $this;
     }
 
     /**
      * Retorna o campo CIP do boleto
      *
-     * @return int
+     * @return string
      */
     public function getCip()
     {
@@ -162,8 +162,8 @@ class Bradesco extends BoletoAbstract
             'cip' => self::zeroFill($this->getCip(), 3),
             'mostra_cip' => true,
             'nosso_numero' =>
-                str_pad( $this->getCarteira(), 2, 0, STR_PAD_LEFT ) . '/' .
-                str_pad( $this->getNossoNumero(), 11, 0, STR_PAD_LEFT ) . '-' .
+                str_pad( $this->getCarteira(), 2, "0", STR_PAD_LEFT ) . '/' .
+                str_pad( $this->getNossoNumero(), 11, "0", STR_PAD_LEFT ) . '-' .
                 $this->digitoAutoConferencia
         );
     }

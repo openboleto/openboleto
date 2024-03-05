@@ -1,0 +1,39 @@
+name: Pipeline
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  testsuite:
+    name: Testes Automatizados
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ["7.4", "8.0", "8.1", "8.2", "8.3"]
+
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: Composer Install
+        run: |
+          composer install --no-progress -o --no-ansi --no-interaction
+
+      - name: Análises estáticas
+        run: |
+          composer stan
+
+      - name: Rodando PHPUnit
+        run: |
+          composer test

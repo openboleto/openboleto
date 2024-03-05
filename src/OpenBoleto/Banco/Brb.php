@@ -97,6 +97,7 @@ class Brb extends BoletoAbstract
         CalculaD2:
         $modulo = static::modulo11($chave . $d1, 7);
 
+        $d2 = "";
         if ($modulo['resto'] == 0) {
             $d2 = 0;
         } else if ($modulo['resto'] > 1) {

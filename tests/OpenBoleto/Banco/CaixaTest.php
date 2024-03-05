@@ -2,8 +2,9 @@
 
 namespace Tests\OpenBoleto\Banco;
 use OpenBoleto\Banco\Caixa;
+use PHPUnit\Framework\TestCase;
 
-class CaixaTest extends KernelTestCaseAncestor
+class CaixaTest extends TestCase
 {
     public function testInstantiateWithoutArgumentsShouldWork()
     {

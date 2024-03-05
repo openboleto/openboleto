@@ -2,10 +2,10 @@
 
 namespace Tests\OpenBoleto\Banco;
 use OpenBoleto\Banco\CaixaSICOB;
+use PHPUnit\Framework\TestCase;
 
 
-
-class CaixaSICOBTest extends KernelTestCaseAncestor
+class CaixaSICOBTest extends TestCase
 {
     public function testInstantiateWithoutArgumentsShouldWork()
     {

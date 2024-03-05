@@ -175,7 +175,7 @@ class Sicredi extends BoletoAbstract {
     /**
      * Define o campo Posto do boleto
      *
-     * @param int $cip
+     * @param string $posto
      * @return Sicredi
      */
     public function setPosto($posto) {

@@ -2,8 +2,9 @@
 
 namespace Tests\OpenBoleto\Banco;
 use OpenBoleto\Banco\Unicred;
+use PHPUnit\Framework\TestCase;
 
-class UnicredTest extends KernelTestCaseAncestor
+class UnicredTest extends TestCase
 {
     public function testInstantiateWithoutArgumentsShouldWork()
     {

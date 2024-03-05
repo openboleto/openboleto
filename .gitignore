@@ -10,5 +10,7 @@ desktop.ini
 build
 nbproject/
 .idea
-vendor
+.phpunit.cache/
 vendor/
+
+.phpunit.result.cache

@@ -80,11 +80,16 @@ class Abc extends BoletoAbstract
     protected $layout = 'jasper.phtml';
 
     /**
+     * @var string
+     */
+    protected $convenio;
+
+    /**
      * Define o número da conta
      *
      * Overrided porque o cedente da Caixa TEM QUE TER 6 posições, senão não é válido
      *
-     * @param int $conta
+     * @param int|string $conta
      * @return BoletoAbstract
      */
     public function setConta($conta)
