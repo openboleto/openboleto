@@ -336,7 +336,7 @@ abstract class BoletoAbstract
 
         // Marca a pasta de resources padrão, caso não seja especificado
         if (!$this->getResourcePath()) {
-            $this->setResourcePath(__DIR__ . '/../../resources');
+            $this->setResourcePath(__DIR__ . '/../resources');
         }
     }
 

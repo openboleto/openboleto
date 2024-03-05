@@ -29,7 +29,6 @@ namespace OpenBoleto\Banco;
 
 use OpenBoleto\BoletoAbstract;
 use OpenBoleto\Exception;
-use OpenBoleto\Agente;
 
 /**
  * Classe boleto Caixa Economica Federal - Modelo SICOB.
@@ -88,7 +87,7 @@ class CaixaSICOB extends Caixa
 
     /**
      * Método para gerar o código da posição de 20 a 44
-     * 
+     *
      * @return string
      * @throws \OpenBoleto\Exception
      */

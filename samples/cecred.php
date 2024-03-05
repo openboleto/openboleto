@@ -2,10 +2,10 @@
 
     require '../autoloader.php';
 
-    use OpenBoleto\Banco\Cecred;
-    use OpenBoleto\Agente;
+use OpenBoleto\Agente;
+use OpenBoleto\Banco\Cecred;
 
-    $sacado = new Agente(
+$sacado = new Agente(
         'Nome do Pagador',
         '000.000.000-00',
         'Endereço do Pagador',

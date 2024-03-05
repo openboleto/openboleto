@@ -27,7 +27,6 @@
 namespace OpenBoleto\Banco;
 
 use OpenBoleto\BoletoAbstract;
-use OpenBoleto\Exception;
 
 /**
  * Classe boleto Itaú S/A
@@ -137,7 +136,7 @@ class Itau extends BoletoAbstract
      * (sem DAC) / CARTEIRA / NOSSO NÚMERO”, calculado pelo critério do Módulo 10 (conforme Anexo 3).
      * À exceção, estão as carteiras 126 - 131 - 146 - 150 e 168 cuja obtenção está baseada apenas nos dados
      * “CARTEIRA/NOSSO NÚMERO” da operação
-     * 
+     *
      * @return void
      */
     protected function gerarDacNossoNumero()

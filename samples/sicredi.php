@@ -2,14 +2,14 @@
 
 require '../autoloader.php';
 
-use OpenBoleto\Banco\Sicredi;
 use OpenBoleto\Agente;
+use OpenBoleto\Banco\Sicredi;
 
 $sacado = new Agente('Fernando Maia', '023.434.234-34', 'ABC 302 Bloco N', '72000-000', 'Brasília', 'DF');
 $cedente = new Agente('Empresa de cosméticos LTDA', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF');
 
 $boleto = new Sicredi(array(
-    // Parâmetros obrigatórios    
+    // Parâmetros obrigatórios
     'valor' => 27.00,
     'sequencial' => 12345, // 5 dígitos
     'sacado' => $sacado,
@@ -18,9 +18,9 @@ $boleto = new Sicredi(array(
     'carteira' => 'A', // 3 dígitos
     'conta' => 10295, // 5 dígitos
     'contaDv' => 3,
-    'numeroDocumento' => 12345, // 7 dígitos    
+    'numeroDocumento' => 12345, // 7 dígitos
     // Parâmetros recomendáveis
-    //'logoPath' => 'http://empresa.com.br/logo.jpg', // Logo da sua empresa        
+    //'logoPath' => 'http://empresa.com.br/logo.jpg', // Logo da sua empresa
     'descricaoDemonstrativo' => array( // Até 5
         'Compra de materiais cosméticos',
         'Compra de alicate',

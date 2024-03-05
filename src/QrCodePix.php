@@ -2,9 +2,7 @@
 
 namespace OpenBoleto;
 
-use chillerlan\QRCode\Data\QRMatrix;
-use chillerlan\QRCode\Output\QRMarkupSVG;
-use chillerlan\QRCode\{QRCode, QROptions};
+use chillerlan\QRCode\{QRCode};
 
 class QrCodePix
 {

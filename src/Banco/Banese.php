@@ -28,7 +28,6 @@
 namespace OpenBoleto\Banco;
 
 use OpenBoleto\BoletoAbstract;
-use OpenBoleto\Exception;
 
 /**
  * Classe boleto Banese
@@ -82,13 +81,13 @@ class Banese extends BoletoAbstract
     protected function gerarDigitoVerificadorNossoNumero() {
         $sequencial = $this->getAgencia() . self::zeroFill($this->getSequencial(), 8);
         $digitoVerificador = static::modulo11($sequencial);
-        
+
         return $digitoVerificador['digito'];
     }
 
     /**
      * Gera o Dúplo Dígito.
-     * 
+     *
      * (Cálculo do duplo dígito verificador da Chave ASBACE)
      * (BANESE_Manual_do_Bloqueto_BANESE_20061219.pdf - Página 7)
      * @param string $chave
@@ -120,10 +119,10 @@ class Banese extends BoletoAbstract
         $digito2 = strval($resultado['digito']);
         return $digito1 . $digito2;
     }
-    
+
     /**
      * Método para gerar o código da posição de 20 a 44 liberado pela FEBRABAN.
-     * 
+     *
      * (Chave ASBACE)
      * (BANESE_Manual_do_Bloqueto_BANESE_20061219.pdf - Página 6)
      *

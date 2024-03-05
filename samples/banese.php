@@ -2,8 +2,8 @@
 
 require '../autoloader.php';
 
-use OpenBoleto\Banco\Banese;
 use OpenBoleto\Agente;
+use OpenBoleto\Banco\Banese;
 
 $sacado = new Agente('Fernando Maia', '023.434.234-34', 'ABC 302 Bloco N', '72000-000', 'Brasília', 'DF');
 $cedente = new Agente('Empresa de cosméticos LTDA', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF');

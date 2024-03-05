@@ -28,7 +28,6 @@
 namespace OpenBoleto\Banco;
 
 use OpenBoleto\BoletoAbstract;
-use OpenBoleto\Exception;
 
 /**
  * Classe boleto Santander
@@ -117,10 +116,10 @@ class Santander extends BoletoAbstract
     protected function gerarDigitoVerificadorNossoNumero() {
         $sequencial = self::zeroFill($this->getSequencial(), 12);
         $digitoVerificador = static::modulo11($sequencial);
-        
+
         return $digitoVerificador['digito'];
     }
-    
+
     /**
      * Método para gerar o código da posição de 20 a 44
      *
@@ -131,7 +130,7 @@ class Santander extends BoletoAbstract
     {
         return '9' . self::zeroFill($this->getConta(), 7) .
             self::zeroFill($this->getSequencial(), 12) .
-            self::zeroFill($this->gerarDigitoVerificadorNossoNumero(), 1) .            
+            self::zeroFill($this->gerarDigitoVerificadorNossoNumero(), 1) .
             self::zeroFill($this->getIos(), 1) .
             self::zeroFill($this->getCarteira(), 3);
     }
