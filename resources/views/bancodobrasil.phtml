@@ -246,7 +246,9 @@ use OpenBoleto\QrCodePix;
                      </table>
                   </td>
                   <td class="notopborder nobottomborder noleftborder" style="text-align:center">
-                     <img src="<?php echo QrCodePix::image($qr_code); ?>" alt="QR Code" />
+                      <?php if (isset($qr_code) && !empty($qr_code)): ?>
+                        <img src="<?php echo QrCodePix::image($qr_code); ?>" alt="QR Code" />
+                      <?php endif; ?>
                   </td>
                </tr>
                <tr>
