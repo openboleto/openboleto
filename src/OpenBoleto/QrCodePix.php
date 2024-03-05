@@ -8,7 +8,7 @@ use chillerlan\QRCode\{QRCode, QROptions};
 
 class QrCodePix
 {
-    public static function image($qrCode = null)
+    public static function image($qrCode = null): string
     {
         if (empty($qrCode)) {
             return '';
