@@ -299,7 +299,7 @@ abstract class BoletoAbstract
      */
     protected $imprimeInstrucoesImpressao = true;
 
-    protected ?string $qrCote = null;
+    protected ?string $qrCode = null;
 
 
     /**
