@@ -1126,13 +1126,13 @@ abstract class BoletoAbstract
         return $this->logoBanco;
     }
 
-    public function setQrCode(?string $qrCode): static
+    public function setQrCode($qrCode)
     {
         $this->qrCode = $qrCode;
         return $this;
     }
 
-    public function getQrCode(): ?string
+    public function getQrCode()
     {
         return $this->qrCode;
     }
