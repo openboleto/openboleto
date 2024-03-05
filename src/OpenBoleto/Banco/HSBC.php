@@ -66,10 +66,12 @@ class HSBC extends BoletoAbstract
 
     /**
      * Calculo de Modulo 11 "Invertido" (com pesos de 9 a 2 e não de 2 a 9)
+     * @param string|int $num
      * @return int
      */
     protected function modulo11Invertido($num)
     {
+        $num = (string)$num;
         $ftini = 2;
         $ftfim = 9;
         $fator = $ftfim;
@@ -94,6 +96,7 @@ class HSBC extends BoletoAbstract
     /**
      * Gera o Nosso Número
      *
+     * @param bool $semDv
      * @return string
      */
     protected function gerarNossoNumero($semDv = false)

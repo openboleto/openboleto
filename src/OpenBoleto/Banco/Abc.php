@@ -98,11 +98,18 @@ class Abc extends BoletoAbstract
         return $this;
     }
 
+    /**
+     * @param string|int $convenio
+     * @return void
+     */
     public function setConvenio($convenio)
     {
-        $this->convenio = $convenio;
+        $this->convenio = (string)$convenio;
     }
 
+    /**
+     * @return string
+     */
     public function getConvenio()
     {
         return $this->convenio;

@@ -82,6 +82,7 @@ class Santander extends BoletoAbstract
      * Define o valor do IOS
      *
      * @param int $ios
+     * @return void
      */
     public function setIos($ios)
     {
@@ -109,6 +110,10 @@ class Santander extends BoletoAbstract
         return $sequencial . '-' . $this->gerarDigitoVerificadorNossoNumero();
     }
 
+    /**
+     * @return int
+     * @throws \OpenBoleto\Exception
+     */
     protected function gerarDigitoVerificadorNossoNumero() {
         $sequencial = self::zeroFill($this->getSequencial(), 12);
         $digitoVerificador = static::modulo11($sequencial);

@@ -148,6 +148,7 @@ class Cecred extends BoletoAbstract
     /**
      * Retorna o dígito verificador para o campo 1 conforme os padrões da CECRED
      *
+     * @param string $campo
      * @return int
      */
     protected function getDigitoVerificadorCampo1($campo)

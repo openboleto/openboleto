@@ -7,11 +7,17 @@ use PHPUnit\Framework\TestCase;
 
 class SantanderTest extends TestCase
 {
+    /**
+     * @return void
+     */
     public function testInstantiateWithoutArgumentsShouldWork()
     {
-        $this->assertInstanceOf('OpenBoleto\\Banco\\Santander', new Santander());
+        $this->assertInstanceOf(\OpenBoleto\Banco\Santander::class, new Santander());
     }
 
+    /**
+     * @return void
+     */
     public function testInstantiateShouldWork()
     {
         $instance = new Santander(array(
@@ -27,7 +33,7 @@ class SantanderTest extends TestCase
             'ios' => '0', // Apenas para o Santander
         ));
 
-        $this->assertInstanceOf('OpenBoleto\\Banco\\Santander', $instance);
+        $this->assertInstanceOf(\OpenBoleto\Banco\Santander::class, $instance);
         $this->assertEquals('03399.12347 56701.234561 78901.001020 2 55650000002300', $instance->getLinhaDigitavel()); 
         $this->assertSame('012345678901-0', (string) $instance->getNossoNumero());
     }

@@ -63,7 +63,7 @@ class Sicredi extends BoletoAbstract {
 
     /**
      * Campo obrigatório para emissão de boletos com carteira 198 fornecido pelo Banco com 5 dígitos
-     * @var int
+     * @var string
      */
     protected $codigoCliente;
 
@@ -78,13 +78,14 @@ class Sicredi extends BoletoAbstract {
      * @var int
      */
     protected $carteiraDv;
+
+    /**
+     * @var string
+     */
     protected $campoLivre;
 
     /**
-     * Define o código do cliente
-     *
-     * @param int $codigoCliente
-     * @return $this
+     * @var string
      */
     protected $posto;
 
@@ -100,15 +101,20 @@ class Sicredi extends BoletoAbstract {
      */
     protected $tipoCobranca = 3;
 
+    /**
+     * @param string|int $codigoCliente
+     * @return $this
+     */
     public function setCodigoCliente($codigoCliente) {
-        $this->codigoCliente = $codigoCliente;
+        $this->codigoCliente = (string)$codigoCliente;
+        
         return $this;
     }
 
     /**
      * Retorna o código do cliente
      *
-     * @return int
+     * @return string
      */
     public function getCodigoCliente() {
         return $this->codigoCliente;
@@ -186,7 +192,7 @@ class Sicredi extends BoletoAbstract {
     /**
      * Retorna o campo Posto do boleto
      *
-     * @return int
+     * @return string
      */
     public function getPosto() {
         return $this->posto;
