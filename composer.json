@@ -33,7 +33,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\OpenBoleto\\": "tests/"
         }
     },
     "require-dev": {
