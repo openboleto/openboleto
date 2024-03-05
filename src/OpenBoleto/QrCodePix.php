@@ -8,6 +8,12 @@ use chillerlan\QRCode\{QRCode, QROptions};
 
 class QrCodePix
 {
+    /**
+     * Generate a QR Code for Pix
+     *
+     * @param string|null $qrCode
+     * @return string
+     */
     public static function image($qrCode = null)
     {
         if (empty($qrCode)) {

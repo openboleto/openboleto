@@ -299,7 +299,11 @@ abstract class BoletoAbstract
      */
     protected $imprimeInstrucoesImpressao = true;
 
-    protected ?string $qrCode = null;
+    /**
+     * QrCode do boleto
+     * @var string|null
+     */
+    protected $qrCode = null;
 
 
     /**
@@ -1126,12 +1130,23 @@ abstract class BoletoAbstract
         return $this->logoBanco;
     }
 
+    /**
+     * Define o QrCode do boleto
+     *
+     * @param string|null $qrCode
+     * @return BoletoAbstract
+     */
     public function setQrCode($qrCode)
     {
         $this->qrCode = $qrCode;
         return $this;
     }
 
+    /**
+     * Retorna o QrCode do boleto
+     *
+     * @return string|null
+     */
     public function getQrCode()
     {
         return $this->qrCode;
