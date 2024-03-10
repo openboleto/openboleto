@@ -1,4 +1,4 @@
-# OpenBoleto [![Build Status](https://travis-ci.org/openboleto/openboleto.png)](https://travis-ci.org/openboleto/openboleto)
+# OpenBoleto
 
 O OpenBoleto é uma biblioteca de código aberto para geração de boletos bancários, um meio de pagamento muito comum no Brasil. O foco é ser simples e ter uma arquitetura compatível com os recursos mais modernos do PHP.
 
