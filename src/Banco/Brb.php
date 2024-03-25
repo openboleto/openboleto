@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -88,10 +88,10 @@ class Brb extends BoletoAbstract
     public function getCampoLivre()
     {
         $chave = '000' . static::zeroFill($this->getAgencia(), 3) .
-                 static::zeroFill($this->getConta() . $this->getContaDv(), 7) .
-                 $this->getCarteira() .
-                 static::zeroFill($this->getSequencial(), 6) .
-                 $this->getCodigoBanco();
+            static::zeroFill($this->getConta() . $this->getContaDv(), 7) .
+            $this->getCarteira() .
+            static::zeroFill($this->getSequencial(), 6) .
+            $this->getCodigoBanco();
         $d1 = static::modulo10($chave);
 
         CalculaD2:

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -71,22 +72,22 @@ class Sicoob extends BoletoAbstract
     protected $numParcelas = '001';
 
     /**
-    * Linha de local de pagamento
-    * @var string
-    */
+     * Linha de local de pagamento
+     * @var string
+     */
     protected $localPagamento = 'Pagável preferencialmente no Sicoob';
 
     /**
      * Opções de modalidade aceitas pelo banco
      * @var array
      */
-    protected $modalidades = array('01','02','05');
+    protected $modalidades = array('01', '02', '05');
 
     /**
      * @var string
      */
     protected $modalidade;
-    
+
     /**
      * Gera o Nosso Número.
      *
@@ -97,7 +98,7 @@ class Sicoob extends BoletoAbstract
         $numero = self::zeroFill($this->getSequencial(), 7);
         $sequencia = $this->getAgencia() . self::zeroFill($this->getConvenio(), 10) . $numero;
 
-        $cont=0;
+        $cont = 0;
         $calculoDv = '';
         // Constante para cálculo  = 3197
         // c) Multiplicar cada componente da seqüência com o seu correspondente da constante e somar os resultados.
@@ -117,20 +118,20 @@ class Sicoob extends BoletoAbstract
                 $constante = 7;
                 $cont = 0;
             }
-            $calculoDv = (int)$calculoDv + ((int)substr($sequencia, $num, 1) * $constante); //@phpstan-ignore-line
+            $calculoDv = (int) $calculoDv + ((int) substr($sequencia, $num, 1) * $constante); //@phpstan-ignore-line
         }
         // c) Multiplicar cada componente da seqüência com o seu correspondente da constante e somar os resultados.
         $resto = $calculoDv % 11;
 
-        // e) O resto da divisão deverá ser subtraído de 11 achando assim o DV (Se o Resto for igual a 0 ou 1 então o DV é igual a 0).        
-        if ( ($resto == 0) || ($resto == 1) ) {
+        // e) O resto da divisão deverá ser subtraído de 11 achando assim o DV (Se o Resto for igual a 0 ou 1 então o DV é igual a 0).
+        if (($resto == 0) || ($resto == 1)) {
             $dv = 0;
         } else {
             $dv = 11 - $resto;
         }
 
-        return $numero .'-'. $dv;
-        
+        return $numero . '-' . $dv;
+
     }
 
     /**
@@ -141,8 +142,8 @@ class Sicoob extends BoletoAbstract
      */
     public function getCampoLivre()
     {
-        return $this->getCarteira(). $this->getAgencia() . self::zeroFill($this->getCarteira(),2) . self::zeroFill($this->getConvenio(), 7) .
-               $this->getNossoNumero(false) . self::zeroFill($this->getNumParcelas(), 3);
+        return $this->getCarteira() . $this->getAgencia() . self::zeroFill($this->getCarteira(), 2) . self::zeroFill($this->getConvenio(), 7) .
+            $this->getNossoNumero(false) . self::zeroFill($this->getNumParcelas(), 3);
     }
 
     /**
@@ -179,8 +180,9 @@ class Sicoob extends BoletoAbstract
      * @param string|int $convenio Convẽnio do sacado
      * @return \OpenBoleto\Banco\Sicoob
      */
-    public function setConvenio($convenio) {
-        $this->convenio = (string)$convenio;
+    public function setConvenio($convenio)
+    {
+        $this->convenio = (string) $convenio;
 
         return $this;
     }

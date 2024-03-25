@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -71,7 +71,7 @@ class CaixaSICOB extends Caixa
         // se futuramente o projeto permitir a geração de lotes para inclusão, o tipo registrado pode ser útil
         // 9 => registrada, 8 => sem registro.
         $carteira = $this->getCarteira();
-        if ($carteira == 'SR'){
+        if ($carteira == 'SR') {
             $numero = '80';
         } else {
             $numero = '9';
@@ -79,7 +79,7 @@ class CaixaSICOB extends Caixa
 
         // As 8 próximas posições no nosso número são a critério do beneficiário, utilizando o sequencial
         // Depois, calcula-se o código verificador por módulo 11
-        $modulo = self::modulo11($numero.self::zeroFill($sequencial, 8));
+        $modulo = self::modulo11($numero . self::zeroFill($sequencial, 8));
         $numero .= self::zeroFill($sequencial, 8) . '-' . $modulo['digito'];
 
         return $numero;

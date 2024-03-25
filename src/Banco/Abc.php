@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -103,7 +103,7 @@ class Abc extends BoletoAbstract
      */
     public function setConvenio($convenio)
     {
-        $this->convenio = (string)$convenio;
+        $this->convenio = (string) $convenio;
     }
 
     /**

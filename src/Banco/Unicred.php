@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -91,8 +91,7 @@ class Unicred extends BoletoAbstract
      */
     public function getAgenciaCodigoCedente()
     {
-        $contaComDv = $this->getConta() .'-'. static::getContaDv();
+        $contaComDv = $this->getConta() . '-' . static::getContaDv();
         return static::zeroFill($this->getAgencia(), 4) . ' / ' . static::zeroFill($contaComDv, 10);
     }
 }
-
