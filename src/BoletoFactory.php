@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -72,7 +72,7 @@ class BoletoFactory
     {
         $codBanco = (int) $codBanco;
 
-        if (! isset(static::$classMap[$codBanco])) {
+        if (!isset (static::$classMap[$codBanco])) {
             throw new Exception(sprintf('O banco de código "%s" não é surportado.', $codBanco));
         }
 
@@ -91,7 +91,7 @@ class BoletoFactory
     {
         $class = __NAMESPACE__ . '\\Banco\\' . $nome;
 
-        if (! class_exists($class)) {
+        if (!class_exists($class)) {
             throw new Exception(sprintf('A classe "%s" não existe.', $class));
         }
 

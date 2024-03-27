@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -1217,10 +1217,10 @@ abstract class BoletoAbstract
 
         // Remove a formatação, caso especificado
         if (!$incluirFormatacao) {
-            return str_replace(array('.', '/', ' ', '-'), '', $numero);
+            return (string) str_replace(array('.', '/', ' ', '-'), '', $numero);
         }
 
-        return $numero;
+        return (string) $numero;
     }
 
     /**
@@ -1379,7 +1379,7 @@ abstract class BoletoAbstract
      */
     public function getCarteiraNome()
     {
-        return isset($this->carteirasNomes[$this->getCarteira()]) ? $this->carteirasNomes[$this->getCarteira()] : $this->getCarteira();
+        return isset ($this->carteirasNomes[$this->getCarteira()]) ? $this->carteirasNomes[$this->getCarteira()] : $this->getCarteira();
     }
 
     /**
@@ -1389,7 +1389,7 @@ abstract class BoletoAbstract
      */
     public function getNumeroFebraban()
     {
-        return self::zeroFill($this->getCodigoBanco(), 3) . $this->getMoeda() . $this->getDigitoVerificador() . $this->getFatorVencimento() . $this->getValorZeroFill() . $this->getCampoLivre();
+        return (string) self::zeroFill($this->getCodigoBanco(), 3) . $this->getMoeda() . $this->getDigitoVerificador() . $this->getFatorVencimento() . $this->getValorZeroFill() . $this->getCampoLivre();
     }
 
     /**
@@ -1534,7 +1534,7 @@ abstract class BoletoAbstract
      */
     public function getData()
     {
-        if (empty($this->data)) {
+        if (empty ($this->data)) {
             $this->getOutput();
         }
         return $this->data;

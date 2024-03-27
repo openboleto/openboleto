@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace OpenBoleto;
 
@@ -14,10 +15,10 @@ class QrCodePix
      */
     public static function image($qrCode = null)
     {
-        if (empty($qrCode)) {
+        if (empty ($qrCode)) {
             return '';
         }
 
-        return(new QRCode())->render($qrCode);
+        return (new QRCode())->render($qrCode);
     }
 }

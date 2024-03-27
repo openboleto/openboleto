@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -63,7 +63,7 @@ class Caixa extends BoletoAbstract
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array('SR','CR', 'RG');
+    protected $carteiras = array('SR', 'CR', 'RG');
 
     /**
      * Nome do arquivo de template a ser usado
@@ -107,7 +107,7 @@ class Caixa extends BoletoAbstract
         // se futuramente o projeto permitir a geração de lotes para inclusão, o tipo registrado pode ser útil
         // 1 => registrada, 2 => sem registro. O número 4 indica que é o beneficiário que está gerando o boleto
         $carteira = $this->getCarteira();
-        if ($carteira == 'SR'){
+        if ($carteira == 'SR') {
             $numero = '24';
         } else {
             $numero = '14';
@@ -115,7 +115,7 @@ class Caixa extends BoletoAbstract
 
         // As 15 próximas posições no nosso número são a critério do beneficiário, utilizando o sequencial
         // Depois, calcula-se o código verificador por módulo 11
-        $modulo = self::modulo11($numero.self::zeroFill($sequencial, 15));
+        $modulo = self::modulo11($numero . self::zeroFill($sequencial, 15));
         $numero .= self::zeroFill($sequencial, 15) . '-' . $modulo['digito'];
 
         return $numero;
@@ -149,12 +149,12 @@ class Caixa extends BoletoAbstract
         $beneficiario = $this->getConta();
 
         // Código do beneficiário + DV]
-        $modulo = self::modulo11((string)$beneficiario);
+        $modulo = self::modulo11((string) $beneficiario);
         $campoLivre = $beneficiario . $modulo['digito'];
 
         // Sequencia 1 (posições 3-5 NN) + Constante 1 (1 => registrada, 2 => sem registro)
         $carteira = $this->getCarteira();
-        if ($carteira == 'SR'){
+        if ($carteira == 'SR') {
             $constante = '2';
         } else {
             $constante = '1';
@@ -171,7 +171,7 @@ class Caixa extends BoletoAbstract
         $modulo = self::modulo11($campoLivre);
         $campoLivre .= $modulo['digito'];
 
-       return $campoLivre;
+        return $campoLivre;
     }
 
 }

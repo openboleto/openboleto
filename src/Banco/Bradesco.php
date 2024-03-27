@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -80,30 +80,30 @@ class Bradesco extends BoletoAbstract
      * Digito de Auto Conferencia do Número Bancário.
      * 1 posicao
      * @var string
-    */
+     */
     protected $digitoAutoConferencia;
-    
+
     /**
-    * Linha de local de pagamento
-    * @var string
-    */
+     * Linha de local de pagamento
+     * @var string
+     */
     protected $localPagamento = 'Pagável preferencialmente na Rede Bradesco ou Bradesco Expresso';
 
     /**
-    * Gera o Nosso Número.
-    *
-    * @return string
-    */
+     * Gera o Nosso Número.
+     *
+     * @return string
+     */
     protected function gerarNossoNumero()
     {
         $numero = static::zeroFill($this->sequencial, 11);
         $cateira = static::zeroFill($this->carteira, 2);
-        $dv = $this->modulo11($cateira.$numero,7);
-        switch ($dv['resto']){
-            case 1 :
-                $this->digitoAutoConferencia = 'P';    
+        $dv = $this->modulo11($cateira . $numero, 7);
+        switch ($dv['resto']) {
+            case 1:
+                $this->digitoAutoConferencia = 'P';
                 break;
-            case 0 :
+            case 0:
                 $this->digitoAutoConferencia = "0";
                 break;
             default:
@@ -137,7 +137,7 @@ class Bradesco extends BoletoAbstract
      */
     public function setCip($cip)
     {
-        $this->cip = (string)$cip;
+        $this->cip = (string) $cip;
         return $this;
     }
 
@@ -162,13 +162,13 @@ class Bradesco extends BoletoAbstract
             'cip' => self::zeroFill($this->getCip(), 3),
             'mostra_cip' => true,
             'nosso_numero' =>
-                str_pad( $this->getCarteira(), 2, "0", STR_PAD_LEFT ) . '/' .
-                str_pad( $this->getNossoNumero(), 11, "0", STR_PAD_LEFT ) . '-' .
+                str_pad($this->getCarteira(), 2, "0", STR_PAD_LEFT) . '/' .
+                str_pad($this->getNossoNumero(), 11, "0", STR_PAD_LEFT) . '-' .
                 $this->digitoAutoConferencia
         );
     }
 
-    public function setSequencial( $sequencial )
+    public function setSequencial($sequencial)
     {
         $this->sequencial = $sequencial;
         return $this;

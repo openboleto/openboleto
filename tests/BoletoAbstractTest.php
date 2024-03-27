@@ -31,9 +31,11 @@ class BoletoAbstractTest extends TestCase
     public function testInvalidCarteiraExceptionsShouldBeThrown()
     {
         $this->expectException(\OpenBoleto\Exception::class);
-        new BancoMock(array(
-            'carteira' => 99,
-        ));
+        new BancoMock(
+            array(
+                'carteira' => 99,
+            )
+        );
     }
 
     /**
@@ -41,9 +43,11 @@ class BoletoAbstractTest extends TestCase
      */
     public function testValidCarteiraShouldWork()
     {
-        $instance = new BancoMock(array(
-            'carteira' => 10,
-        ));
+        $instance = new BancoMock(
+            array(
+                'carteira' => 10,
+            )
+        );
 
         $this->assertInstanceOf(\OpenBoleto\BoletoAbstract::class, $instance);
     }

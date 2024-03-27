@@ -35,8 +35,8 @@ use OpenBoleto\QrCodePix;
          <?php echo $cedente; ?>
       </title>
       <style type="text/css">
-      /* Embed the CSS content here */
-      <?php include $resource_path . '/css/styles.css'?>
+         /* Embed the CSS content here */
+         <?php include $resource_path . '/css/styles.css' ?>
       </style>
    </head>
 
@@ -44,40 +44,40 @@ use OpenBoleto\QrCodePix;
 
       <div style="width: 666px">
          <?php if ($imprime_instrucoes_impressao): ?>
-         <div class="noprint info">
-            <h2>Instruções de Impressão</h2>
-            <ul>
-               <li>Imprima em impressora jato de tinta (ink jet) ou laser em qualidade normal ou alta (Não use modo
-                  econômico).</li>
-               <li>Utilize folha A4 (210 x 297 mm) ou Carta (216 x 279 mm) e margens mínimas à esquerda e à direita
-                  do formulário.</li>
-               <li>Corte na linha indicada. Não rasure, risque, fure ou dobre a região onde se encontra o código de
-                  barras.</li>
-               <li>Caso não apareça o código de barras no final, pressione F5 para atualizar esta tela.</li>
-               <li>Caso tenha problemas ao imprimir, copie a sequencia numérica abaixo e pague no caixa eletrônico
-                  ou no internet banking:</li>
-            </ul>
-            <span class="header">Linha Digitável:
-               <?php echo $linha_digitavel; ?>
-            </span>
-            <?php if (($valor_documento) && ($imprime_valor)): ?><span class="header">Valor: R$
-               <?php echo $valor_documento; ?>
-            </span>
-            <?php endif ?>
-            <?php if ($pagamento_minimo): ?><span class="header">Pagamento mínimo: R$
-               <?php echo $pagamento_minimo; ?>
-            </span>
-            <?php endif ?>
-            <br>
-            <div class="linha-pontilhada" style="margin-bottom: 20px;">Recibo do pagador</div>
-         </div>
+               <div class="noprint info">
+                  <h2>Instruções de Impressão</h2>
+                  <ul>
+                     <li>Imprima em impressora jato de tinta (ink jet) ou laser em qualidade normal ou alta (Não use modo
+                        econômico).</li>
+                     <li>Utilize folha A4 (210 x 297 mm) ou Carta (216 x 279 mm) e margens mínimas à esquerda e à direita
+                        do formulário.</li>
+                     <li>Corte na linha indicada. Não rasure, risque, fure ou dobre a região onde se encontra o código de
+                        barras.</li>
+                     <li>Caso não apareça o código de barras no final, pressione F5 para atualizar esta tela.</li>
+                     <li>Caso tenha problemas ao imprimir, copie a sequencia numérica abaixo e pague no caixa eletrônico
+                        ou no internet banking:</li>
+                  </ul>
+                  <span class="header">Linha Digitável:
+                     <?php echo $linha_digitavel; ?>
+                  </span>
+                  <?php if (($valor_documento) && ($imprime_valor)): ?><span class="header">Valor: R$
+                           <?php echo $valor_documento; ?>
+                        </span>
+                  <?php endif ?>
+                  <?php if ($pagamento_minimo): ?><span class="header">Pagamento mínimo: R$
+                           <?php echo $pagamento_minimo; ?>
+                        </span>
+                  <?php endif ?>
+                  <br>
+                  <div class="linha-pontilhada" style="margin-bottom: 20px;">Recibo do pagador</div>
+               </div>
          <?php endif ?>
 
          <div class="info-empresa">
             <?php if ($logotipo): ?>
-            <div style="display: inline-block;">
-               <img alt="logotipo" src="<?php echo $logotipo; ?>" />
-            </div>
+                  <div style="display: inline-block;">
+                     <img alt="logotipo" class="logotipo" src="<?php echo $logotipo; ?>"  />
+                  </div>
             <?php endif ?>
             <div style="display: inline-block; vertical-align: super;">
                <div><strong>
@@ -264,9 +264,9 @@ use OpenBoleto\QrCodePix;
                      </table>
                   </td>
                   <td class="notopborder nobottomborder noleftborder" style="text-align:center">
-                      <?php if (isset($qr_code) && !empty($qr_code)): ?>
-                        <img src="<?php echo QrCodePix::image($qr_code); ?>" alt="QR Code" />
-                      <?php endif; ?>
+                     <?php if (isset ($qr_code) && !empty ($qr_code)): ?>
+                           <img src="<?php echo QrCodePix::image($qr_code); ?>" alt="QR Code" />
+                     <?php endif; ?>
                   </td>
                </tr>
             </tbody>
@@ -276,7 +276,7 @@ use OpenBoleto\QrCodePix;
          <br>
 
          <!-- Ficha de compensação -->
-         <?php include('partials/ficha-de-compensacao.phtml') ?>
+         <?php include ('partials/ficha-de-compensacao.phtml') ?>
       </div>
    </body>
 

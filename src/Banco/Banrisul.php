@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -107,7 +107,7 @@ class Banrisul extends BoletoAbstract
             if ($dv1 == 10) {
                 $dv1 = '0';
             }
-            $resto2 = static::modulo11($sequencial . $dv1,7)['resto'];
+            $resto2 = static::modulo11($sequencial . $dv1, 7)['resto'];
         }
 
         $digito = 11 - $resto2;

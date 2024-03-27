@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP *
  *
@@ -36,4 +36,6 @@ namespace OpenBoleto;
  * @license    MIT License
  * @version    1.0
  */
-class Exception extends \Exception {}
+class Exception extends \Exception
+{
+}

@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -62,7 +62,7 @@ class Santander extends BoletoAbstract
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array('101', '102','104', '201');
+    protected $carteiras = array('101', '102', '104', '201');
 
     /**
      * Define os nomes das carteiras para exibição no boleto
@@ -113,7 +113,8 @@ class Santander extends BoletoAbstract
      * @return int
      * @throws \OpenBoleto\Exception
      */
-    protected function gerarDigitoVerificadorNossoNumero() {
+    protected function gerarDigitoVerificadorNossoNumero()
+    {
         $sequencial = self::zeroFill($this->getSequencial(), 12);
         $digitoVerificador = static::modulo11($sequencial);
 

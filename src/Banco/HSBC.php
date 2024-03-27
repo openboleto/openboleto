@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -70,16 +70,15 @@ class HSBC extends BoletoAbstract
      */
     protected function modulo11Invertido($num)
     {
-        $num = (string)$num;
+        $num = (string) $num;
         $ftini = 2;
         $ftfim = 9;
         $fator = $ftfim;
         $soma = 0;
 
-        for($i = strlen ( $num ); $i > 0; $i --)
-        {
-            $soma += (int)substr( $num, $i - 1, 1 ) * $fator;
-            if (-- $fator < $ftini) {
+        for ($i = strlen($num); $i > 0; $i--) {
+            $soma += (int) substr($num, $i - 1, 1) * $fator;
+            if (--$fator < $ftini) {
                 $fator = $ftfim;
             }
         }
@@ -102,7 +101,7 @@ class HSBC extends BoletoAbstract
     {
         $numero = $this->sequencial;
         if ($semDv) {
-            return (string)$numero;
+            return (string) $numero;
         }
 
         /** @var numeric-string $venc */
@@ -131,7 +130,7 @@ class HSBC extends BoletoAbstract
         $dataf = strtotime($data->format('Y/m/d'));
         $datai = strtotime(($ano - 1) . '/12/31');
         $dias = (int) (($dataf - $datai) / (60 * 60 * 24));
-        return str_pad((string)$dias, 3, '0', STR_PAD_LEFT) . substr($ano, 3, 1);
+        return str_pad((string) $dias, 3, '0', STR_PAD_LEFT) . substr($ano, 3, 1);
     }
 
     /**
@@ -142,11 +141,11 @@ class HSBC extends BoletoAbstract
      */
     public function getCampoLivre()
     {
-        return self::zeroFill(substr((string)$this->getConta(), 0, 4), 4) .
-            str_pad(substr((string)$this->getConta(), 4), 7, '0', STR_PAD_RIGHT) .
+        return self::zeroFill(substr((string) $this->getConta(), 0, 4), 4) .
+            str_pad(substr((string) $this->getConta(), 4), 7, '0', STR_PAD_RIGHT) .
             self::zeroFill($this->getContaDv(), 1) .
             self::zeroFill($this->gerarNossoNumero(true), 8) .
             self::zeroFill($this->getDataVencJuliana(), 4) .
-            '2' ;
+            '2';
     }
 }

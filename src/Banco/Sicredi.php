@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -38,7 +38,8 @@ use OpenBoleto\BoletoAbstract;
  * @license    MIT License
  * @version    1.0
  */
-class Sicredi extends BoletoAbstract {
+class Sicredi extends BoletoAbstract
+{
 
     /**
      * Código do banco
@@ -104,8 +105,9 @@ class Sicredi extends BoletoAbstract {
      * @param string|int $codigoCliente
      * @return $this
      */
-    public function setCodigoCliente($codigoCliente) {
-        $this->codigoCliente = (string)$codigoCliente;
+    public function setCodigoCliente($codigoCliente)
+    {
+        $this->codigoCliente = (string) $codigoCliente;
 
         return $this;
     }
@@ -115,7 +117,8 @@ class Sicredi extends BoletoAbstract {
      *
      * @return string
      */
-    public function getCodigoCliente() {
+    public function getCodigoCliente()
+    {
         return $this->codigoCliente;
     }
 
@@ -124,15 +127,16 @@ class Sicredi extends BoletoAbstract {
      *
      * @return string
      */
-    protected function gerarNossoNumero() {
+    protected function gerarNossoNumero()
+    {
         $ano = date("y");
 
         $numero = self::zeroFill($this->getAgencia(), 4) .
-                self::zeroFill($this->getPosto(), 2) .
-                self::zeroFill($this->getConta(), 5) .
-                self::zeroFill($ano, 2) .
-                $this->bytecode .
-                self::zeroFill($this->getSequencial(), 5);
+            self::zeroFill($this->getPosto(), 2) .
+            self::zeroFill($this->getConta(), 5) .
+            self::zeroFill($ano, 2) .
+            $this->bytecode .
+            self::zeroFill($this->getSequencial(), 5);
 
         $dv = static::modulo11($numero);
 
@@ -145,15 +149,16 @@ class Sicredi extends BoletoAbstract {
      * @return string
      * @throws \OpenBoleto\Exception
      */
-    public function getCampoLivre() {
+    public function getCampoLivre()
+    {
         $numero = $this->tipoCobranca .
-                '1' .
-                self::zeroFill($this->getNossoNumero(false), 9) .
-                self::zeroFill($this->getAgencia(), 4) .
-                self::zeroFill($this->getPosto(), 2) .
-                self::zeroFill($this->getConta(), 5) .
-                '1' .
-                '0';
+            '1' .
+            self::zeroFill($this->getNossoNumero(false), 9) .
+            self::zeroFill($this->getAgencia(), 4) .
+            self::zeroFill($this->getPosto(), 2) .
+            self::zeroFill($this->getConta(), 5) .
+            '1' .
+            '0';
 
         $dv = static::modulo11($numero);
 
@@ -165,7 +170,8 @@ class Sicredi extends BoletoAbstract {
      *
      * @return string
      */
-    public function getAgenciaCodigoCedente() {
+    public function getAgenciaCodigoCedente()
+    {
         return static::zeroFill($this->getAgencia(), 4) . '.' . static::zeroFill($this->getPosto(), 2) . '.' . static::zeroFill($this->getConta(), 5);
     }
 
@@ -173,7 +179,8 @@ class Sicredi extends BoletoAbstract {
      * Retorna o código do Banco no cabeçalho do boleto seguindo o padrão estabelecido
      *
      */
-    public function getCodigoBancoComDv() {
+    public function getCodigoBancoComDv()
+    {
         return $this->getCodigoBanco() . '-X';
     }
 
@@ -183,7 +190,8 @@ class Sicredi extends BoletoAbstract {
      * @param string $posto
      * @return Sicredi
      */
-    public function setPosto($posto) {
+    public function setPosto($posto)
+    {
         $this->posto = $posto;
         return $this;
     }
@@ -193,7 +201,8 @@ class Sicredi extends BoletoAbstract {
      *
      * @return string
      */
-    public function getPosto() {
+    public function getPosto()
+    {
         return $this->posto;
     }
 
@@ -241,7 +250,8 @@ class Sicredi extends BoletoAbstract {
         return $this;
     }
 
-    public function getViewVars() {
+    public function getViewVars()
+    {
         return array(
             'carteira' => $this->getCarteira(), // Campo não utilizado pelo Itaú
         );

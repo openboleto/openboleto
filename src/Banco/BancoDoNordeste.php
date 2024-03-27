@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -61,7 +61,7 @@ class BancoDoNordeste extends BoletoAbstract
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array('47','45','46','50','45','46','04','48','97','51','49','52','58','95','63','53','54','55','57','59','61');
+    protected $carteiras = array('47', '45', '46', '50', '45', '46', '04', '48', '97', '51', '49', '52', '58', '95', '63', '53', '54', '55', '57', '59', '61');
 
     /**
      * Gera o Nosso Número com o dígito verificador

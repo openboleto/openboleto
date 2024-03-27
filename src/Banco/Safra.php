@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -38,7 +38,8 @@ use OpenBoleto\BoletoAbstract;
  * @license    MIT License
  * @version    1.0
  */
-class Safra extends BoletoAbstract {
+class Safra extends BoletoAbstract
+{
 
     /**
      * Código do banco
@@ -96,7 +97,8 @@ class Safra extends BoletoAbstract {
      * @return $this
      */
 
-    public function setCodigoCliente($codigoCliente) {
+    public function setCodigoCliente($codigoCliente)
+    {
         $this->codigoCliente = $codigoCliente;
         return $this;
     }
@@ -106,7 +108,8 @@ class Safra extends BoletoAbstract {
      *
      * @return int
      */
-    public function getCodigoCliente() {
+    public function getCodigoCliente()
+    {
         return $this->codigoCliente;
     }
 
@@ -115,7 +118,8 @@ class Safra extends BoletoAbstract {
      *
      * @return string
      */
-    protected function gerarNossoNumero() {
+    protected function gerarNossoNumero()
+    {
 
         $numero = self::zeroFill($this->getSequencial(), 8);
 
@@ -126,7 +130,8 @@ class Safra extends BoletoAbstract {
      * @return int
      * @throws \OpenBoleto\Exception
      */
-    protected function gerarDigitoVerificadorNossoNumero() {
+    protected function gerarDigitoVerificadorNossoNumero()
+    {
         $sequencial = self::zeroFill($this->getSequencial(), 8);
         $digitoVerificador = static::modulo11($sequencial);
 
@@ -139,11 +144,12 @@ class Safra extends BoletoAbstract {
      * @return string
      * @throws \OpenBoleto\Exception
      */
-    public function getCampoLivre() {
+    public function getCampoLivre()
+    {
 
-        $numero =   "7".self::zeroFill($this->getAgencia(), 4).
-                    ''.self::zeroFill($this->getAgenciaDv(), 1).''.self::zeroFill($this->getConta(), 8).''.self::zeroFill($this->getContaDV(), 1).
-                     self::zeroFill($this->getSequencial(), 9).''.'2';
+        $numero = "7" . self::zeroFill($this->getAgencia(), 4) .
+            '' . self::zeroFill($this->getAgenciaDv(), 1) . '' . self::zeroFill($this->getConta(), 8) . '' . self::zeroFill($this->getContaDV(), 1) .
+            self::zeroFill($this->getSequencial(), 9) . '' . '2';
 
 
         return $numero;
@@ -153,12 +159,14 @@ class Safra extends BoletoAbstract {
      * Retorna o código do Banco no cabeçalho do boleto seguindo o padrão estabelecido
      *
      */
-    public function getCodigoBancoComDv() {
-        return $this->getCodigoBanco().'-7';
+    public function getCodigoBancoComDv()
+    {
+        return $this->getCodigoBanco() . '-7';
     }
 
 
-    public function getViewVars() {
+    public function getViewVars()
+    {
         return array(
             'carteira' => $this->getCarteira(),
         );

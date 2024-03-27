@@ -23,11 +23,11 @@
 
 @media print {
     .noprint {
-        display:none;
+        display: none;
     }
 }
 
-body{
+body {
     background-color: #ffffff;
     margin-right: 0;
 }
@@ -187,15 +187,19 @@ body{
     width: 3px;
 }
 
-.float_left{
-    float:left;
+.float_left {
+    float: left;
 }
 
 .center {
     text-align: center;
 }
 
-.conteudo.cpf_cnpj{
-    float:right;
-    width:24%;
+.conteudo.cpf_cnpj {
+    float: right;
+    width: 24%;
+}
+
+.logotipo {
+    max-height: 50px;
 }

@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -96,7 +96,7 @@ class BancoDoBrasil extends BoletoAbstract
      */
     public function getConvenio()
     {
-        return $this->convenio;
+        return (string) $this->convenio;
     }
 
     /**
@@ -162,7 +162,7 @@ class BancoDoBrasil extends BoletoAbstract
 
         // Sequencial do cliente com 17 dígitos
         // Apenas para convênio com 6 dígitos, modalidade sem registro - carteira 16 e 18 (definida para 21)
-        if (strlen((string)$this->getSequencial()) > 10) {
+        if (strlen((string) $this->getSequencial()) > 10) {
             if ($length == 6 and $this->getCarteira() == 21) {
                 // Convênio (6) + Nosso número (17) + Carteira (2)
                 return self::zeroFill($this->getConvenio(), 6) . $nossoNumero . '21';

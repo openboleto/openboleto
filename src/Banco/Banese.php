@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -69,7 +69,8 @@ class Banese extends BoletoAbstract
      *
      * @return string
      */
-    protected function gerarNossoNumero() {
+    protected function gerarNossoNumero()
+    {
         $sequencial = self::zeroFill($this->getSequencial(), 8);
         return $sequencial . '-' . $this->gerarDigitoVerificadorNossoNumero();
     }
@@ -78,7 +79,8 @@ class Banese extends BoletoAbstract
      * @return int
      * @throws \OpenBoleto\Exception
      */
-    protected function gerarDigitoVerificadorNossoNumero() {
+    protected function gerarDigitoVerificadorNossoNumero()
+    {
         $sequencial = $this->getAgencia() . self::zeroFill($this->getSequencial(), 8);
         $digitoVerificador = static::modulo11($sequencial);
 
@@ -93,25 +95,24 @@ class Banese extends BoletoAbstract
      * @param string $chave
      * @return string
      */
-    protected function gerarDuploDigito($chave) {
+    protected function gerarDuploDigito($chave)
+    {
         $digito1 = null;
         $digito2 = 0;
         $pesos = '21212121212121212121212';
         $somatorio = 0;
-        for($indice = 0; $indice < 23; $indice++) {
-            $resultado = (int)$chave[$indice] * (int)$pesos[$indice];
-            if($resultado > 9) {
+        for ($indice = 0; $indice < 23; $indice++) {
+            $resultado = (int) $chave[$indice] * (int) $pesos[$indice];
+            if ($resultado > 9) {
                 $somatorio += ($resultado - 9);
-            }
-            else {
+            } else {
                 $somatorio += $resultado;
             }
         }
         $resto = $somatorio % 10;
-        if($resto == 0) {
+        if ($resto == 0) {
             $digito1 = 0;
-        }
-        else if($resto > 0) {
+        } else if ($resto > 0) {
             $digito1 = 10 - $resto;
         }
         $digito1 = strval($digito1);
@@ -129,8 +130,9 @@ class Banese extends BoletoAbstract
      * @return string
      * @throws \OpenBoleto\Exception
      */
-    public function getCampoLivre() {
-        $chave = self::caracteresDireita((string)$this->getAgencia(), 2) .
+    public function getCampoLivre()
+    {
+        $chave = self::caracteresDireita((string) $this->getAgencia(), 2) .
             self::zeroFill($this->getConta(), 8) . $this->getContaDv() .
             self::zeroFill($this->getSequencial(), 8) .
             $this->gerarDigitoVerificadorNossoNumero() .
