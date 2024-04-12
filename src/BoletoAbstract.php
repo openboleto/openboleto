@@ -1551,19 +1551,27 @@ abstract class BoletoAbstract
     }
 
     /**
-     * Retorna o número de dias de 07/10/1997 até a data de vencimento do boleto
+     * Retorna o número de dias de 07/10/1997 até a data de vencimento do boleto, 
+     * caso a data de vencimento seja posterior a 21/02/2025 será usado 21/02/2025
      * Ou 0000 caso não tenha data de vencimento (contra-apresentação)
      *
      * @return string
      */
     protected function getFatorVencimento()
     {
-        if (!$this->getContraApresentacao()) {
-            $date = new DateTime('1997-10-07');
-            return (string) $date->diff($this->getDataVencimento())->days;
-        } else {
+        if ($this->getContraApresentacao()) {
             return '0000';
         }
+        
+        $dataVencimento = $this->getDataVencimento();
+
+        $date = new DateTime('2025-02-21');
+        if ($dataVencimento > $date) {
+            return (string) $date->diff($dataVencimento)->days + '1000';
+        }
+
+        $date = new DateTime('1997-10-07');
+        return (string) $date->diff($dataVencimento)->days;
     }
 
     /**
