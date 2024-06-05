@@ -1,36 +1,44 @@
-
-# OpenBoleto [![Build Status](https://travis-ci.org/openboleto/openboleto.png)](https://travis-ci.org/openboleto/openboleto)
-
-
+# OpenBoleto
 
 O OpenBoleto é uma biblioteca de código aberto para geração de boletos bancários, um meio de pagamento muito comum no Brasil. O foco é ser simples e ter uma arquitetura compatível com os recursos mais modernos do PHP.
 
-## Ajude o Projeto a continuar, faça uma doação!
+Se esse projeto te auxiliou de alguma forma, você pode contribuir financeiramente para que eu possa continuar a desenvolver projetos open source. As contribuições podem ser:
 
+# Ajude o Projeto a continuar, faça uma doação no PIX!
 
-[![Pague com PagSeguro - é rápido, grátis e seguro!](https://stc.pagseguro.uol.com.br/public/img/botoes/doacoes/209x48-doar-assina.gif)](https://pag.ae/7UaL6CCHQ)
+    b230c7a8-8743-459f-bae5-541ea46a3533
+
+![302100763-dc530122-d9fb-41e4-9edf-dc9c32e74adc](https://github.com/fredroo/cnpj2sql/assets/6863089/1a6505e5-5039-4609-87af-ba84f03d4b08)
 
 ## Instalação
+
 ### Composer
-Se você já conhece o **Composer** (o que é extremamente recomendado), simplesmente adicione a dependência abaixo à diretiva *"require"* seu **composer.json**:
+
+Se você já conhece o **Composer** (o que é extremamente recomendado), simplesmente adicione a dependência abaixo à diretiva _"require"_ em seu **composer.json**:
+
 ```
 "openboleto/openboleto": "dev-master"
 ```
-###PSR-0 autoloader
-Hoje praticamente qualquer framework utiliza deste padrão, então você deve [baixar](https://github.com/fredroo/openboleto/archive/master.zip) o OpenBoleto, colocar em uma pasta específica (geralmente *lib* ou *vendor*) e procurar na documentação do seu framework para fazer com que o seu autoloader aponte o namespace **OpenBoleto** para a pasta **src** do OpenBoleto.
 
-###Stand-alone library
-Se você quer simplesmente baixar e dar um include, também é muito simples. Primeiro [baixe](https://github.com/fredroo/openboleto/archive/master.zip) (ou dê clone no repositório), e coloque em uma pasta específica. Depois, dê um include no arquivo **autoloader.php** e voilá!
+### PSR-0 autoloader
+
+Hoje praticamente qualquer framework utiliza deste padrão, então você deve [baixar](https://github.com/fredroo/openboleto/archive/master.zip) o OpenBoleto, colocar em uma pasta específica (geralmente _lib_ ou _vendor_) e procurar na documentação do seu framework para fazer com que o seu autoloader aponte o namespace **OpenBoleto** para a pasta **src** do OpenBoleto.
+
+### Stand-alone library
+
+Se você quer simplesmente baixar e dar um include, também é muito simples. Primeiro [baixe](https://github.com/fredroo/openboleto/archive/master.zip) (ou dê clone no repositório), e coloque em uma pasta específica. Depois, dê um include no arquivo **autoloader.php** e voilà!
 
 ## Gerando boletos
+
 Essa é a melhor parte. Não poderia ser mais simples, veja um exemplo básico:
+
 ```php
-use OpenBoleto\Banco\BancoDoBrasil;
 use OpenBoleto\Agente;
- 
+use OpenBoleto\Banco\BancoDoBrasil;
+
 $sacado = new Agente('Fernando Maia', '023.434.234-34', 'ABC 302 Bloco N', '72000-000', 'Brasília', 'DF');
 $cedente = new Agente('Empresa de cosméticos LTDA', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF');
- 
+
 $boleto = new BancoDoBrasil(array(
     // Parâmetros obrigatórios
     'dataVencimento' => new DateTime('2013-01-24'),
@@ -42,14 +50,20 @@ $boleto = new BancoDoBrasil(array(
     'carteira' => 18,
     'conta' => 10403005, // Até 8 dígitos
     'convenio' => 1234, // 4, 6 ou 7 dígitos
+    'qrCode' => 'otpauth://totp/test?secret=B3JX4VCVJDVNXNZ5&issuer=chillerlan.net', // Caso o Boleto tenha registro para uso de QrCode Pix
 ));
- 
+
 echo $boleto->getOutput();
 ```
+## Como adiquirir o QrCode Pix
 
-Sim, só isso! Lembre-se de que cada banco possui alguma particularidade, mas em geral são estes parâmetros os obrigatórios. Na pasta **samples** possui um exemplo funcional de cada banco, você pode verificar lá quais são os parâmetros necessários para cada banco.
+O uso padrão do PIX não pode ser usado no boleto, à instituição bancária tem um serviço da qual você passa o boleto registrado e solicita a PIX, o banco vai te retornar uma string na qual é o PIX que identifica o boleto, para quando realizar o pagamento via PIX, tenha referência do boleto para ser baixado.
+
+
+Sim, só isso! Lembre-se de que cada banco possui alguma particularidade, mas em geral são estes parâmetros os obrigatórios. Na pasta **samples** existe um exemplo funcional de cada banco, você pode verificar lá quais são os parâmetros necessários para cada banco.
 
 ## Bancos suportados
+
 Atualmente o OpenBoleto funciona com os bancos abaixo:
 
 <table>
@@ -66,7 +80,7 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
  <tr>
  <td>Banco do Brasil</td>
  <td>Homologado</td>
-  <td>Beta</td>
+  <td>Homologado</td>
  </tr>
  <tr>
   <td>Banco do Nordeste</td>
@@ -115,7 +129,7 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
  </tr>
 <tr>
  <td>Unicred</td>
- <td>Beta</td>
+ <td>Homologado</td>
  <td>Beta</td>
  </tr>
 <tr>
@@ -133,6 +147,22 @@ Atualmente o OpenBoleto funciona com os bancos abaixo:
  <td>Beta</td>
  <td>Beta</td>
  </tr>
+  <tr>
+ <td>C6 Bank</td>
+ <td>Homologado</td>
+ <td>Homologado</td>
+ </tr>
+  <tr>
+ <td>ABC</td>
+ <td>Homologado</td>
+ <td>Homologado</td>
+ </tr>
+ <tr>
+ <td>BV</td>
+ <td>--</td>
+ <td>BETA</td>
+ </tr>
+
  </table>
 
 ### API Banco Inter
@@ -153,4 +183,4 @@ https://github.com/QuilhaSoft/OpenCnabPHP
 
 ## Licença
 
-* MIT License
+- MIT License

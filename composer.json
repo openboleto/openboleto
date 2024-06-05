@@ -2,7 +2,10 @@
     "name": "openboleto/openboleto",
     "type": "library",
     "description": "Biblioteca para geração de boletos bancários.",
-    "keywords": ["boleto", "boleto bancario"],
+    "keywords": [
+        "boleto",
+        "boleto bancario"
+    ],
     "homepage": "http://github.com/openboleto/openboleto",
     "license": "MIT",
     "authors": [
@@ -20,9 +23,27 @@
         }
     ],
     "require": {
-        "php": ">=5.6"
+        "php": ">=7.4",
+        "chillerlan/php-qrcode": "^5.0"
     },
     "autoload": {
-        "psr-0": {"OpenBoleto\\": "src/"}
+        "psr-4": {
+            "OpenBoleto\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\OpenBoleto\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^8.5"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "stan": "vendor/bin/phpstan analyse",
+        "stan74": "vendor/bin/phpstan --configuration=phpstan-php74.neon analyse",
+        "baseline": "vendor/bin/phpstan --generate-baseline"
     }
 }

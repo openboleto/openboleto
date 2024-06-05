@@ -2,8 +2,8 @@
 
 require '../autoloader.php';
 
-use OpenBoleto\Banco\Unicred;
 use OpenBoleto\Agente;
+use OpenBoleto\Banco\Unicred;
 
 $sacado = new Agente('Fernando Maia', '023.434.234-34', 'ABC 302 Bloco N', '72000-000', 'Brasília', 'DF');
 $cedente = new Agente('Empresa de cosméticos LTDA', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF');
@@ -17,11 +17,13 @@ $boleto = new Unicred(array(
     'agencia' => 3302, // Até 4 dígitos
     'carteira' => 51, // 11, 21, 31, 41 ou 51
     'conta' => 2259, // Até 10 dígitos
+    'contaDv' => 2,
     'sequencial' => '13951', // Até 10 dígitos
+    'especieDoc' => 'DM', //DM-Duplicata Mercantil, DS-Duplicata de Serviços, NP-Nota Promissória, etc., conforme documentação da Unicred.
+    'numeroDocumento' => '1234567890', // Até 10 dígitos. Este identificador deve ser único.
 
     // Parâmetros recomendáveis
     //'logoPath' => 'http://empresa.com.br/logo.jpg', // Logo da sua empresa
-    // 'contaDv' => 2,
     // 'agenciaDv' => 1,
     'descricaoDemonstrativo' => array( // Até 5
         'Compra de materiais cosméticos',
