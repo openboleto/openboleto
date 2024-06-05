@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -103,7 +103,7 @@ class BV extends BoletoAbstract
      */
     public function setConvenio($convenio)
     {
-        $this->convenio = (string)$convenio;
+        $this->convenio = (string) $convenio;
     }
 
     /**
@@ -126,7 +126,7 @@ class BV extends BoletoAbstract
 
         // As 15 próximas posições no nosso número são a critério do beneficiário, utilizando o sequencial
         // Depois, calcula-se o código verificador por módulo 11
-        $modulo = self::modulo10((string)$sequencial);
+        $modulo = self::modulo10((string) $sequencial);
         $numero = self::zeroFill($sequencial, 9) . '-' . $modulo;
 
         return $numero;
@@ -161,12 +161,12 @@ class BV extends BoletoAbstract
 
         // Código do beneficiário + DV]
         //$modulo = self::modulo11($convenio);
-        $campoLivre = self::zeroFill($convenio,10) . '500';
+        $campoLivre = self::zeroFill($convenio, 10) . '500';
 
         // Sequencia 1 (posições 3-5 NN) + Constante 1 (1 => registrada, 2 => sem registro)
 
-        $campoLivre .= str_replace('-','',$nossoNumero). '00';
-       return $campoLivre;
+        $campoLivre .= str_replace('-', '', $nossoNumero) . '00';
+        return $campoLivre;
     }
 
 }

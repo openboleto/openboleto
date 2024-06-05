@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /*
  * OpenBoleto - Geração de boletos bancários em PHP
  *
@@ -113,7 +114,7 @@ class C6Bank extends BoletoAbstract
          */
         $layout = '4';
         return self::zeroFill($this->getConvenio(), 12) . self::zeroFill($this->getNossoNumero(false), 10) .
-               self::zeroFill($this->getCarteira(), 2) . $layout;
+            self::zeroFill($this->getCarteira(), 2) . $layout;
     }
 
     /**
@@ -152,7 +153,7 @@ class C6Bank extends BoletoAbstract
      */
     public function setConvenio($convenio)
     {
-        $this->convenio = (string)$convenio;
+        $this->convenio = (string) $convenio;
 
         return $this;
     }

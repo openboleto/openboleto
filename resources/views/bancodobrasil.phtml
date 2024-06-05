@@ -49,12 +49,14 @@ use OpenBoleto\QrCodePix;
             <ul>
                <li>Imprima em impressora jato de tinta (ink jet) ou laser em qualidade normal ou alta (Não use modo
                   econômico).</li>
-               <li>Utilize folha A4 (210 x 297 mm) ou Carta (216 x 279 mm) e margens mínimas à esquerda e à direita do
+               <li>Utilize folha A4 (210 x 297 mm) ou Carta (216 x 279 mm) e margens mínimas à esquerda e à direita
+                  do
                   formulário.</li>
                <li>Corte na linha indicada. Não rasure, risque, fure ou dobre a região onde se encontra o código de
                   barras.</li>
                <li>Caso não apareça o código de barras no final, pressione F5 para atualizar esta tela.</li>
-               <li>Caso tenha problemas ao imprimir, copie a sequencia numérica abaixo e pague no caixa eletrônico ou no
+               <li>Caso tenha problemas ao imprimir, copie a sequencia numérica abaixo e pague no caixa eletrônico
+                  ou no
                   internet banking:</li>
             </ul>
             <span class="header">Linha Digitável:
@@ -246,9 +248,9 @@ use OpenBoleto\QrCodePix;
                      </table>
                   </td>
                   <td class="notopborder nobottomborder noleftborder" style="text-align:center">
-                      <?php if (isset($qr_code) && !empty($qr_code)): ?>
-                        <img src="<?php echo QrCodePix::image($qr_code); ?>" alt="QR Code" />
-                      <?php endif; ?>
+                     <?php if (isset ($qr_code) && !empty ($qr_code)): ?>
+                     <img src="<?php echo QrCodePix::image($qr_code); ?>" alt="QR Code" />
+                     <?php endif; ?>
                   </td>
                </tr>
                <tr>
@@ -264,7 +266,7 @@ use OpenBoleto\QrCodePix;
          <br>
 
          <!-- Ficha de compensação -->
-         <?php include('partials/ficha-de-compensacao.phtml') ?>
+         <?php include ('partials/ficha-de-compensacao.phtml') ?>
       </div>
    </body>
 

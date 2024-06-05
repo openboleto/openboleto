@@ -24,7 +24,7 @@ class BancoMock extends BoletoAbstract
      * @return string
      */
     public function getCampoLivre()
-	{
+    {
         return str_repeat('1', 25);
-	}
+    }
 }

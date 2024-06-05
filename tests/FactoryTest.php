@@ -1,6 +1,7 @@
 <?php
 
 namespace Tests\OpenBoleto;
+
 use OpenBoleto\BoletoFactory;
 use PHPUnit\Framework\TestCase;
 
