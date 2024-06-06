@@ -1547,11 +1547,11 @@ abstract class BoletoAbstract
      */
     protected function getValorZeroFill()
     {
-        return str_pad(number_format($this->getValor(), 2, '', ''), 10, '0', STR_PAD_LEFT);
+        return str_pad(number_format((float) $this->getValor(), 2, '', ''), 10, '0', STR_PAD_LEFT);
     }
 
     /**
-     * Retorna o número de dias de 07/10/1997 até a data de vencimento do boleto, 
+     * Retorna o número de dias de 07/10/1997 até a data de vencimento do boleto,
      * caso a data de vencimento seja posterior a 21/02/2025 será usado 21/02/2025
      * Ou 0000 caso não tenha data de vencimento (contra-apresentação)
      *
@@ -1562,7 +1562,7 @@ abstract class BoletoAbstract
         if ($this->getContraApresentacao()) {
             return '0000';
         }
-        
+
         $dataVencimento = $this->getDataVencimento();
 
         $date = new DateTime('2025-02-22');
@@ -1622,7 +1622,7 @@ abstract class BoletoAbstract
      */
     protected static function formataDinheiro($valor, $mostrar_zero = false)
     {
-        return $valor ? number_format($valor, 2, ',', '.') : ($mostrar_zero ? '0,00' : '');
+        return $valor ? number_format((float) $valor, 2, ',', '.') : ($mostrar_zero ? '0,00' : '');
     }
 
     /**
