@@ -88,7 +88,7 @@ class Caixa extends BoletoAbstract
      */
     public function setConta($conta)
     {
-        $this->conta = self::zeroFill($conta, 6);
+        $this->conta = self::zeroFill($conta, 7);
         return $this;
     }
 
@@ -148,9 +148,25 @@ class Caixa extends BoletoAbstract
         $nossoNumero = $this->gerarNossoNumero();
         $beneficiario = $this->getConta();
 
-        // Código do beneficiário + DV]
-        $modulo = self::modulo11((string) $beneficiario);
-        $campoLivre = $beneficiario . $modulo['digito'];
+        /*
+         *   ▪ Para beneficiário com código entre as faixas 000001 e 999999, utilizar as posições 20
+         *   a 25 e calcular o DV do Código do Beneficiário, a ser informado na posição 26, através do
+         *   Modulo 11, conforme Anexo VI.
+         *   ▪ Para beneficiário com código a partir da faixa 1100000, utilizar as posições 20 a 26,
+         *   sem necessidade de cálculo do DV do Código do Beneficiário.
+         */
+        if ((int) $beneficiario > 999999 && (int) $beneficiario <= 1100000) {
+            throw new \Exception('Código do beneficiário fora da faixa permitida pela Caixa.');
+        }
+
+        $campoLivre = $beneficiario;
+
+        if ((int) $beneficiario <= 999999) {
+            // Código do beneficiário + DV]
+            $beneficiario = substr((string) $beneficiario, 1, 6);
+            $modulo = self::modulo11($beneficiario);
+            $campoLivre = $beneficiario . $modulo['digito'];
+        }
 
         // Sequencia 1 (posições 3-5 NN) + Constante 1 (1 => registrada, 2 => sem registro)
         $carteira = $this->getCarteira();
@@ -159,6 +175,7 @@ class Caixa extends BoletoAbstract
         } else {
             $constante = '1';
         }
+
         $campoLivre .= substr($nossoNumero, 2, 3) . $constante;
 
         // Sequencia 2 (posições 6-8 NN) + Constante 2 (4-Beneficiário)
