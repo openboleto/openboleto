@@ -1567,7 +1567,7 @@ abstract class BoletoAbstract
 
         $date = new DateTime('2025-02-22');
         if ($dataVencimento >= $date) {
-            return (string) $date->diff($dataVencimento)->days + '1000';
+            return (string) ($date->diff($dataVencimento)->days + 1000);
         }
 
         $date = new DateTime('1997-10-07');
