@@ -1,5 +1,5 @@
-1.0
+v2.0.0
 ===================
 
-* Número Sequencial é obrigatório e Nosso Número é somente leitura.
-* A classe de cada banco implementa o método getNossoNumero().
+* Início versionamento do projeto
+* Ajustado o cálculo do Fator de Vencimento, que estava concatenando o valor ao invés de somar
