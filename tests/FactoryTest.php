@@ -16,11 +16,12 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf(\OpenBoleto\Banco\BancoDoBrasil::class, BoletoFactory::loadByBankId(1));
         $this->assertInstanceOf(\OpenBoleto\Banco\Santander::class, BoletoFactory::loadByBankId(33));
         $this->assertInstanceOf(\OpenBoleto\Banco\Brb::class, BoletoFactory::loadByBankId(70));
-        $this->assertInstanceOf(\OpenBoleto\Banco\Unicred::class, BoletoFactory::loadByBankId(136));
+        $this->assertInstanceOf(\OpenBoleto\Banco\Unicred::class, BoletoFactory::loadByBankId(90));
         $this->assertInstanceOf(\OpenBoleto\Banco\Bradesco::class, BoletoFactory::loadByBankId(237));
         $this->assertInstanceOf(\OpenBoleto\Banco\Itau::class, BoletoFactory::loadByBankId(341));
         $this->assertInstanceOf(\OpenBoleto\Banco\Caixa::class, BoletoFactory::loadByBankId(104));
         $this->assertInstanceOf(\OpenBoleto\Banco\Uniprime::class, BoletoFactory::loadByBankId(84));
+        $this->assertInstanceOf(\OpenBoleto\Banco\Unicred::class, BoletoFactory::loadByBankId(136));
     }
 
     /**
