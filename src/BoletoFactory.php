@@ -51,8 +51,9 @@ class BoletoFactory
         33 => 'Santander',
         41 => 'Banrisul',
         70 => 'Brb',
-        90 => 'Unicred',
+        90 => 'Unicred', /** Mantido por compatibilidade */
         104 => 'Caixa',
+        136 => 'Unicred',
         237 => 'Bradesco',
         341 => 'Itau',
         399 => 'HSBC',

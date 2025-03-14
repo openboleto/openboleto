@@ -21,6 +21,7 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf(\OpenBoleto\Banco\Itau::class, BoletoFactory::loadByBankId(341));
         $this->assertInstanceOf(\OpenBoleto\Banco\Caixa::class, BoletoFactory::loadByBankId(104));
         $this->assertInstanceOf(\OpenBoleto\Banco\Uniprime::class, BoletoFactory::loadByBankId(84));
+        $this->assertInstanceOf(\OpenBoleto\Banco\Unicred::class, BoletoFactory::loadByBankId(136));
     }
 
     /**
