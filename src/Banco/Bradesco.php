@@ -161,6 +161,7 @@ class Bradesco extends BoletoAbstract
         return array(
             'cip' => self::zeroFill($this->getCip(), 3),
             'mostra_cip' => true,
+            'esconde_uso_banco' => false,
             'nosso_numero' =>
                 str_pad($this->getCarteira(), 2, "0", STR_PAD_LEFT) . '/' .
                 str_pad($this->getNossoNumero(), 11, "0", STR_PAD_LEFT) . '-' .
