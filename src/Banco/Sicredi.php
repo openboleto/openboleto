@@ -133,7 +133,7 @@ class Sicredi extends BoletoAbstract
 
         $numero = self::zeroFill($this->getAgencia(), 4) .
             self::zeroFill($this->getPosto(), 2) .
-            self::zeroFill($this->getConta(), 5) .
+            self::zeroFill($this->getCodigoCliente(), 5) .
             self::zeroFill($ano, 2) .
             $this->bytecode .
             self::zeroFill($this->getSequencial(), 5);
@@ -156,7 +156,7 @@ class Sicredi extends BoletoAbstract
             self::zeroFill($this->getNossoNumero(false), 9) .
             self::zeroFill($this->getAgencia(), 4) .
             self::zeroFill($this->getPosto(), 2) .
-            self::zeroFill($this->getConta(), 5) .
+            self::zeroFill($this->getCodigoCliente(), 5) .
             '1' .
             '0';
 
@@ -172,7 +172,7 @@ class Sicredi extends BoletoAbstract
      */
     public function getAgenciaCodigoCedente()
     {
-        return static::zeroFill($this->getAgencia(), 4) . '.' . static::zeroFill($this->getPosto(), 2) . '.' . static::zeroFill($this->getConta(), 5);
+        return static::zeroFill($this->getAgencia(), 4) . '.' . static::zeroFill($this->getPosto(), 2) . '.' . static::zeroFill($this->getCodigoCliente(), 5);
     }
 
     /**
