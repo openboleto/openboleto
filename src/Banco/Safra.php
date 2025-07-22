@@ -59,7 +59,7 @@ class Safra extends BoletoAbstract
      * Linha de local de pagamento
      * @var string
      */
-    protected $localPagamento = 'Pagável em qualquer Banco até o vencimento';
+    protected $localPagamento = 'Pagável em qualquer Banco do Sistema de Compensação';
 
     /**
      * Altera layout para o exigido pelo banco
@@ -77,7 +77,7 @@ class Safra extends BoletoAbstract
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array('1');
+    protected $carteiras = array('1','2');
 
     /**
      * Dígito verificador da carteira/nosso número para impressão no boleto
