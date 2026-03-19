@@ -131,25 +131,56 @@ class Sicredi extends BoletoAbstract
     {
         $ano = date("y");
 
-        $numero = self::zeroFill($this->getAgencia(), 4) .
-            self::zeroFill($this->getPosto(), 2) .
-            self::zeroFill($this->getCodigoCliente(), 5) .
-            self::zeroFill($ano, 2) .
+        $baseCalculo = self::zeroFill($this->getAgencia(), 4) .
+                    self::zeroFill($this->getPosto(), 2) .
+                    self::zeroFill($this->getCodigoCliente(), 5) .
+                    self::zeroFill($ano, 2) .
+                    $this->bytecode .
+                    self::zeroFill($this->getSequencial(), 5);
+
+        $dv = $this->calcularDvModulo11($baseCalculo);
+
+        return self::zeroFill($ano, 2) . '/' .
             $this->bytecode .
-            self::zeroFill($this->getSequencial(), 5);
-
-        $dv = static::modulo11($numero);
-
-        return self::zeroFill($ano, 2) . '/' . $this->bytecode . self::zeroFill($this->getSequencial(), 5) . '-' . $dv['digito'];
+            self::zeroFill($this->getSequencial(), 5) .
+            '-' . $dv;
     }
+    /**
+     * Calcula dígito verificador módulo 11
+     *
+     * @param string $numero Número base para cálculo
+     * @return int Dígito verificador calculado
+     */
+    protected function calcularDvModulo11(string $numero): int
+    {
+        $soma = 0;
+        $peso = 2;
 
+        for ($i = strlen($numero) - 1; $i >= 0; $i--) {
+            $soma += (int)$numero[$i] * $peso;
+            $peso++;
+            if ($peso > 9) {
+                $peso = 2;
+            }
+        }
+
+        $resto = $soma % 11;
+
+        if ($resto == 0 || $resto == 1) {
+            return 0;
+        }
+
+        $digito = 11 - $resto;
+
+        return ($digito == 10 || $digito == 11) ? 0 : $digito;
+    }
     /**
      * Método para gerar o código da posição de 20 a 44
      *
      * @return string
      * @throws \OpenBoleto\Exception
      */
-    public function getCampoLivre()
+    public function getCampoLivre(): string
     {
         $numero = $this->tipoCobranca .
             '1' .
@@ -160,9 +191,9 @@ class Sicredi extends BoletoAbstract
             '1' .
             '0';
 
-        $dv = static::modulo11($numero);
+        $dv = $this->calcularDvModulo11($numero);
 
-        return $numero . $dv['digito'];
+        return $numero . $dv;
     }
 
     /**

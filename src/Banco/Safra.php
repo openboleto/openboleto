@@ -300,7 +300,7 @@ class Safra extends BoletoAbstract
             return '1';
         }
 
-        return (11 - $resto);
+        return (string) (11 - $resto);
     }
 
     /**
@@ -341,8 +341,8 @@ class Safra extends BoletoAbstract
      */
     public function setConta($conta)
     {
-        $conta = preg_replace('/[^0-9]/', '', $conta);
-        $this->conta = $conta;
+        $conta = preg_replace('/[^0-9]/', '', (string) $conta);
+        $this->conta = (int) $conta;
         return $this;
     }
 
@@ -354,18 +354,18 @@ class Safra extends BoletoAbstract
      */
     public function setContaDv($contaDv)
     {
-        $this->contaDv = (string) $contaDv;
+        $this->contaDv = (int) $contaDv;
         return $this;
     }
 
     /**
      * Retorna o DV da conta
      *
-     * @return string
+     * @return int
      */
     public function getContaDV()
     {
-        return $this->contaDv ?? '0';
+        return $this->contaDv ?? 0;
     }
 
     /**
@@ -401,7 +401,7 @@ class Safra extends BoletoAbstract
             $fator = 1000 + ($fator % 1000);
         }
 
-        $this->fatorVencimento = str_pad($fator, 4, '0', STR_PAD_LEFT);
+        $this->fatorVencimento = str_pad((string) $fator, 4, '0', STR_PAD_LEFT);
         return $this;
     }
 
